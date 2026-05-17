@@ -1,0 +1,662 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.EntityFrameworkCore.Design.2.2.6\build\net461\Microsoft.EntityFrameworkCore.Design.props" Condition="Exists('..\packages\Microsoft.EntityFrameworkCore.Design.2.2.6\build\net461\Microsoft.EntityFrameworkCore.Design.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{36C8636D-794E-4AC9-A0E8-BB2B8BAA191E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>nomina</RootNamespace>
+    <AssemblyName>nomina</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.3.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.3.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore, Version=2.2.6.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.2.2.6\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Abstractions, Version=2.2.6.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Abstractions.2.2.6\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Design, Version=2.2.6.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Design.2.2.6\lib\net461\Microsoft.EntityFrameworkCore.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Relational, Version=2.2.6.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Relational.2.2.6\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Relational.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Memory.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Binder.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.2.2.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="MySqlConnector, Version=0.49.2.0, Culture=neutral, PublicKeyToken=d33d3e53aa5f8c92, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySqlConnector.0.49.2\lib\net461\MySqlConnector.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Pomelo.EntityFrameworkCore.MySql, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Pomelo.EntityFrameworkCore.MySql.2.2.0\lib\netstandard2.0\Pomelo.EntityFrameworkCore.MySql.dll</HintPath>
+    </Reference>
+    <Reference Include="Pomelo.JsonObject, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Pomelo.JsonObject.2.2.0\lib\netstandard2.0\Pomelo.JsonObject.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
+      <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Interactive.Async, Version=3.2.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Interactive.Async.3.2.0\lib\net46\System.Interactive.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BarraProgreso\frmBarraProgreso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BarraProgreso\frmBarraProgreso.Designer.cs">
+      <DependentUpon>frmBarraProgreso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Clases\Antecedentes\AntecedenteData.cs" />
+    <Compile Include="Clases\Antecedentes\AntedecenteConexion.cs" />
+    <Compile Include="Clases\Bitacora\BitacoraConexion.cs" />
+    <Compile Include="Clases\Bitacora\BitacoraData.cs" />
+    <Compile Include="Clases\ConexionManager\EncriptacionConexion.cs" />
+    <Compile Include="Clases\ConexionManager\Registro.cs" />
+    <Compile Include="Clases\EmpresasUsuario\EmpresaUsuarioConexion.cs" />
+    <Compile Include="Clases\EmpresasUsuario\EmpresaUsuarioData.cs" />
+    <Compile Include="Clases\Empresas\EmpresaConexion.cs" />
+    <Compile Include="Clases\Empresas\EmpresaData.cs" />
+    <Compile Include="Clases\GenerarPlanilla\PlanillaConexion.cs" />
+    <Compile Include="Clases\Movimientos\Ausencia\AusenciaConexion.cs" />
+    <Compile Include="Clases\Movimientos\Ausencia\AusenciaData.cs" />
+    <Compile Include="Clases\Categoria\CategoriaData.cs" />
+    <Compile Include="Clases\Categoria\CategoriaConexion.cs" />
+    <Compile Include="Clases\ConexionManager\Conexion.cs" />
+    <Compile Include="Clases\Departamento\DepartamentoData.cs" />
+    <Compile Include="Clases\Departamento\DepartamentoConexion.cs" />
+    <Compile Include="Clases\Descuentos\DescuentoConexion.cs" />
+    <Compile Include="Clases\Descuentos\DescuentoData.cs" />
+    <Compile Include="Clases\Empleado\EmpleadoConexion.cs" />
+    <Compile Include="Clases\Empleado\EmpleadoData.cs" />
+    <Compile Include="Clases\EstadoCivil\CEstadoCivil.cs" />
+    <Compile Include="Clases\Labores\LaboresConexion.cs" />
+    <Compile Include="Clases\Labores\LaboresData.cs" />
+    <Compile Include="Clases\Movimientos\HistorialAumento\HistorialConexion.cs" />
+    <Compile Include="Clases\Movimientos\HistorialAumento\HistorialData.cs" />
+    <Compile Include="Clases\Movimientos\MovimiendoDescuentos\MDescuentoConexion.cs" />
+    <Compile Include="Clases\Movimientos\MovimiendoDescuentos\MDescuentoData.cs" />
+    <Compile Include="Clases\Movimientos\MovimientoAumento\AumentoConexion.cs" />
+    <Compile Include="Clases\Movimientos\MovimientoAumento\AumentoData.cs" />
+    <Compile Include="Clases\Movimientos\MovimientoLabores\MLaboresConexion.cs" />
+    <Compile Include="Clases\Movimientos\MovimientoLabores\MLaboresData.cs" />
+    <Compile Include="Clases\Movimientos\MovimientoPrestamo\PrestamoConexion.cs" />
+    <Compile Include="Clases\Movimientos\MovimientoPrestamo\PrestamoData.cs" />
+    <Compile Include="Clases\Opciones\LOpciones.cs" />
+    <Compile Include="Clases\Parametro\ParametroConexion.cs" />
+    <Compile Include="Clases\Parametro\ParametroData.cs" />
+    <Compile Include="Clases\Seguridad\Encryptacion.cs" />
+    <Compile Include="Clases\TipoAumento\TipoAumentoConexion.cs" />
+    <Compile Include="Clases\TipoAumento\TipoAumentoData.cs" />
+    <Compile Include="Clases\TipoAusencia\TipoAusenciaConexion.cs" />
+    <Compile Include="Clases\TipoAusencia\TipoAusenciaData.cs" />
+    <Compile Include="Clases\TipoJornada\TipoJornadaData.cs" />
+    <Compile Include="Clases\TipoPagoPrestamo\TipoPagoPrestamoConexion.cs" />
+    <Compile Include="Clases\TipoPagoPrestamo\TipoPagoPrestamoData.cs" />
+    <Compile Include="Clases\TipoPago\TipoPagoConexion.cs" />
+    <Compile Include="Clases\TipoPago\TipoPagoData.cs" />
+    <Compile Include="Clases\UsuarioPermisos\PermisoUsuarioConexion.cs" />
+    <Compile Include="Clases\UsuarioPermisos\PermisoUsuarioData.cs" />
+    <Compile Include="Clases\Usuarios\UsuarioConexion.cs" />
+    <Compile Include="Clases\Usuarios\UsuarioData.cs" />
+    <Compile Include="Clases\Utilidades\Utilidad.cs" />
+    <Compile Include="Estructuras\ServidorData.cs" />
+    <Compile Include="Forms\Categoria\frmAddCategoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Categoria\frmAddCategoria.Designer.cs">
+      <DependentUpon>frmAddCategoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Categoria\frmCategoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Categoria\frmCategoria.Designer.cs">
+      <DependentUpon>frmCategoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Departamento\frmAddDepartamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Departamento\frmAddDepartamento.Designer.cs">
+      <DependentUpon>frmAddDepartamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Departamento\frmDepartamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Departamento\frmDepartamento.Designer.cs">
+      <DependentUpon>frmDepartamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Descuento\frmAddDescuento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Descuento\frmAddDescuento.Designer.cs">
+      <DependentUpon>frmAddDescuento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Descuento\frmDescuento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Descuento\frmDescuento.Designer.cs">
+      <DependentUpon>frmDescuento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Empleado\frmAddEmpleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Empleado\frmAddEmpleado.Designer.cs">
+      <DependentUpon>frmAddEmpleado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Empleado\frmAddAntecedente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Empleado\frmAddAntecedente.Designer.cs">
+      <DependentUpon>frmAddAntecedente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Empleado\frmAntecedente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Empleado\frmAntecedente.Designer.cs">
+      <DependentUpon>frmAntecedente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Empleado\frmEmpleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Empleado\frmEmpleado.Designer.cs">
+      <DependentUpon>frmEmpleado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Empleado\frmHistorialAumento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Empleado\frmHistorialAumento.Designer.cs">
+      <DependentUpon>frmHistorialAumento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EmpresaPrueba\frmEmpresaPrueba.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EmpresaPrueba\frmEmpresaPrueba.Designer.cs">
+      <DependentUpon>frmEmpresaPrueba.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EmpresaPrueba\prueba.cs" />
+    <Compile Include="Forms\Empresas\frmAddEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Empresas\frmAddEmpresa.Designer.cs">
+      <DependentUpon>frmAddEmpresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Empresas\frmEmpresas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Empresas\frmEmpresas.Designer.cs">
+      <DependentUpon>frmEmpresas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientoAumentos\frmAddAumento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientoAumentos\frmAddAumento.Designer.cs">
+      <DependentUpon>frmAddAumento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientoAusencia\frmAddAusencia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientoAusencia\frmAddAusencia.Designer.cs">
+      <DependentUpon>frmAddAusencia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientoAusencia\frmAusencias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientoAusencia\frmAusencias.Designer.cs">
+      <DependentUpon>frmAusencias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientoAumentos\frmMovimientoAumentos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientoAumentos\frmMovimientoAumentos.Designer.cs">
+      <DependentUpon>frmMovimientoAumentos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientoDescuentos\frmAddMovimientoDescuento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientoDescuentos\frmAddMovimientoDescuento.Designer.cs">
+      <DependentUpon>frmAddMovimientoDescuento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientoDescuentos\frmModificarMovimientoDescuento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientoDescuentos\frmModificarMovimientoDescuento.Designer.cs">
+      <DependentUpon>frmModificarMovimientoDescuento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientoDescuentos\frmMovimientoDescuento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientoDescuentos\frmMovimientoDescuento.Designer.cs">
+      <DependentUpon>frmMovimientoDescuento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientoPrestamos\frmAddMovimientoPrestamos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientoPrestamos\frmAddMovimientoPrestamos.Designer.cs">
+      <DependentUpon>frmAddMovimientoPrestamos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientoPrestamos\frmMovimientoPrestamos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientoPrestamos\frmMovimientoPrestamos.Designer.cs">
+      <DependentUpon>frmMovimientoPrestamos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientosLabores\frmAddMovimientoLabores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientosLabores\frmAddMovimientoLabores.Designer.cs">
+      <DependentUpon>frmAddMovimientoLabores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Labores\frmAddLabores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Labores\frmAddLabores.Designer.cs">
+      <DependentUpon>frmAddLabores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Labores\frmLabores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Labores\frmLabores.Designer.cs">
+      <DependentUpon>frmLabores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Login\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Login\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Main\FrmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientosLabores\frmModificarMovimientoLabor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientosLabores\frmModificarMovimientoLabor.Designer.cs">
+      <DependentUpon>frmModificarMovimientoLabor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientosLabores\frmMovimientoLabores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Movimientos\MovimientosLabores\frmMovimientoLabores.Designer.cs">
+      <DependentUpon>frmMovimientoLabores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Parametros\frmAddParametro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Parametros\frmAddParametro.Designer.cs">
+      <DependentUpon>frmAddParametro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Parametros\frmParametros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Parametros\frmParametros.Designer.cs">
+      <DependentUpon>frmParametros.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Planilla\frmPlanilla.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Planilla\frmPlanilla.Designer.cs">
+      <DependentUpon>frmPlanilla.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\bdPlanilla.cs">
+      <DependentUpon>bdPlanilla.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\bdPlanilla.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>bdPlanilla.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmReportePlanilla.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmReportePlanilla.Designer.cs">
+      <DependentUpon>frmReportePlanilla.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Servidor\frmServidor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Servidor\frmServidor.Designer.cs">
+      <DependentUpon>frmServidor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Usuarios\frmAddUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Usuarios\frmAddUsuario.Designer.cs">
+      <DependentUpon>frmAddUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Usuarios\frmAsignarEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Usuarios\frmAsignarEmpresa.Designer.cs">
+      <DependentUpon>frmAsignarEmpresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Usuarios\frmAsignarPermisos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Usuarios\frmAsignarPermisos.Designer.cs">
+      <DependentUpon>frmAsignarPermisos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Usuarios\frmUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Usuarios\frmUsuarios.Designer.cs">
+      <DependentUpon>frmUsuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Forms\Reportes\rptPlanilla.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPlanilla.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <EmbeddedResource Include="BarraProgreso\frmBarraProgreso.resx">
+      <DependentUpon>frmBarraProgreso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Categoria\frmAddCategoria.resx">
+      <DependentUpon>frmAddCategoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Categoria\frmCategoria.resx">
+      <DependentUpon>frmCategoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Departamento\frmAddDepartamento.resx">
+      <DependentUpon>frmAddDepartamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Departamento\frmDepartamento.resx">
+      <DependentUpon>frmDepartamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Descuento\frmAddDescuento.resx">
+      <DependentUpon>frmAddDescuento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Descuento\frmDescuento.resx">
+      <DependentUpon>frmDescuento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Empleado\frmAddEmpleado.resx">
+      <DependentUpon>frmAddEmpleado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Empleado\frmAddAntecedente.resx">
+      <DependentUpon>frmAddAntecedente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Empleado\frmAntecedente.resx">
+      <DependentUpon>frmAntecedente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Empleado\frmEmpleado.resx">
+      <DependentUpon>frmEmpleado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Empleado\frmHistorialAumento.resx">
+      <DependentUpon>frmHistorialAumento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EmpresaPrueba\frmEmpresaPrueba.resx">
+      <DependentUpon>frmEmpresaPrueba.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Empresas\frmAddEmpresa.resx">
+      <DependentUpon>frmAddEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Empresas\frmEmpresas.resx">
+      <DependentUpon>frmEmpresas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Movimientos\MovimientoAumentos\frmAddAumento.resx">
+      <DependentUpon>frmAddAumento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Movimientos\MovimientoAusencia\frmAddAusencia.resx">
+      <DependentUpon>frmAddAusencia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Movimientos\MovimientoAusencia\frmAusencias.resx">
+      <DependentUpon>frmAusencias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Movimientos\MovimientoAumentos\frmMovimientoAumentos.resx">
+      <DependentUpon>frmMovimientoAumentos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Movimientos\MovimientoDescuentos\frmAddMovimientoDescuento.resx">
+      <DependentUpon>frmAddMovimientoDescuento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Movimientos\MovimientoDescuentos\frmModificarMovimientoDescuento.resx">
+      <DependentUpon>frmModificarMovimientoDescuento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Movimientos\MovimientoDescuentos\frmMovimientoDescuento.resx">
+      <DependentUpon>frmMovimientoDescuento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Movimientos\MovimientoPrestamos\frmAddMovimientoPrestamos.resx">
+      <DependentUpon>frmAddMovimientoPrestamos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Movimientos\MovimientoPrestamos\frmMovimientoPrestamos.resx">
+      <DependentUpon>frmMovimientoPrestamos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Movimientos\MovimientosLabores\frmAddMovimientoLabores.resx">
+      <DependentUpon>frmAddMovimientoLabores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Labores\frmAddLabores.resx">
+      <DependentUpon>frmAddLabores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Labores\frmLabores.resx">
+      <DependentUpon>frmLabores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Login\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main\FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Movimientos\MovimientosLabores\frmModificarMovimientoLabor.resx">
+      <DependentUpon>frmModificarMovimientoLabor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Movimientos\MovimientosLabores\frmMovimientoLabores.resx">
+      <DependentUpon>frmMovimientoLabores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Parametros\frmAddParametro.resx">
+      <DependentUpon>frmAddParametro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Parametros\frmParametros.resx">
+      <DependentUpon>frmParametros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Planilla\frmPlanilla.resx">
+      <DependentUpon>frmPlanilla.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\frmReportePlanilla.resx">
+      <DependentUpon>frmReportePlanilla.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Servidor\frmServidor.resx">
+      <DependentUpon>frmServidor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Usuarios\frmAddUsuario.resx">
+      <DependentUpon>frmAddUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Usuarios\frmAsignarEmpresa.resx">
+      <DependentUpon>frmAsignarEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Usuarios\frmAsignarPermisos.resx">
+      <DependentUpon>frmAsignarPermisos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Usuarios\frmUsuarios.resx">
+      <DependentUpon>frmUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Forms\Reportes\rptPlanilla.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPlanilla.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Forms\Reportes\bdPlanilla.xsc">
+      <DependentUpon>bdPlanilla.xsd</DependentUpon>
+    </None>
+    <None Include="Forms\Reportes\bdPlanilla.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>bdPlanilla.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Forms\Reportes\bdPlanilla.xss">
+      <DependentUpon>bdPlanilla.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\lupa.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\search_find_lupa_21889.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\search_find_client_user_16693.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\buscar empleado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.EntityFrameworkCore.Design.2.2.6\build\net461\Microsoft.EntityFrameworkCore.Design.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.EntityFrameworkCore.Design.2.2.6\build\net461\Microsoft.EntityFrameworkCore.Design.props'))" />
+  </Target>
+</Project>

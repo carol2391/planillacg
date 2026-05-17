@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsPlanilla" targetNamespace="http://tempuri.org/dsPlanilla.xsd" xmlns:mstns="http://tempuri.org/dsPlanilla.xsd" xmlns="http://tempuri.org/dsPlanilla.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsPlanilla" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsPlanilla" msprop:Generator_UserDSName="dsPlanilla">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="planilla" msprop:Generator_TableClassName="planillaDataTable" msprop:Generator_TableVarName="tableplanilla" msprop:Generator_RowChangedName="planillaRowChanged" msprop:Generator_TablePropName="planilla" msprop:Generator_RowDeletingName="planillaRowDeleting" msprop:Generator_RowChangingName="planillaRowChanging" msprop:Generator_RowEvHandlerName="planillaRowChangeEventHandler" msprop:Generator_RowDeletedName="planillaRowDeleted" msprop:Generator_RowClassName="planillaRow" msprop:Generator_UserTableName="planilla" msprop:Generator_RowEvArgName="planillaRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="COD_PLANILLA" msprop:Generator_ColumnVarNameInTable="columnCOD_PLANILLA" msprop:Generator_ColumnPropNameInRow="COD_PLANILLA" msprop:Generator_ColumnPropNameInTable="COD_PLANILLAColumn" msprop:Generator_UserColumnName="COD_PLANILLA" type="xs:string" minOccurs="0" />
+              <xs:element name="FECHA" msprop:Generator_ColumnVarNameInTable="columnFECHA" msprop:Generator_ColumnPropNameInRow="FECHA" msprop:Generator_ColumnPropNameInTable="FECHAColumn" msprop:Generator_UserColumnName="FECHA" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="COD_TRB" msprop:Generator_ColumnVarNameInTable="columnCOD_TRB" msprop:Generator_ColumnPropNameInRow="COD_TRB" msprop:Generator_ColumnPropNameInTable="COD_TRBColumn" msprop:Generator_UserColumnName="COD_TRB" type="xs:string" minOccurs="0" />
+              <xs:element name="SUELDO" msprop:Generator_ColumnVarNameInTable="columnSUELDO" msprop:Generator_ColumnPropNameInRow="SUELDO" msprop:Generator_ColumnPropNameInTable="SUELDOColumn" msprop:Generator_UserColumnName="SUELDO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DIARIO" msprop:Generator_ColumnVarNameInTable="columnDIARIO" msprop:Generator_ColumnPropNameInRow="DIARIO" msprop:Generator_ColumnPropNameInTable="DIARIOColumn" msprop:Generator_UserColumnName="DIARIO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="LABORES" msprop:Generator_ColumnVarNameInTable="columnLABORES" msprop:Generator_ColumnPropNameInRow="LABORES" msprop:Generator_ColumnPropNameInTable="LABORESColumn" msprop:Generator_UserColumnName="LABORES" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AUMENTO" msprop:Generator_ColumnVarNameInTable="columnAUMENTO" msprop:Generator_ColumnPropNameInRow="AUMENTO" msprop:Generator_ColumnPropNameInTable="AUMENTOColumn" msprop:Generator_UserColumnName="AUMENTO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SALARIO" msprop:Generator_ColumnVarNameInTable="columnSALARIO" msprop:Generator_ColumnPropNameInRow="SALARIO" msprop:Generator_ColumnPropNameInTable="SALARIOColumn" msprop:Generator_UserColumnName="SALARIO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IHSS" msprop:Generator_ColumnVarNameInTable="columnIHSS" msprop:Generator_ColumnPropNameInRow="IHSS" msprop:Generator_ColumnPropNameInTable="IHSSColumn" msprop:Generator_UserColumnName="IHSS" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ISR" msprop:Generator_ColumnVarNameInTable="columnISR" msprop:Generator_ColumnPropNameInRow="ISR" msprop:Generator_ColumnPropNameInTable="ISRColumn" msprop:Generator_UserColumnName="ISR" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AUSENCIAS" msprop:Generator_ColumnVarNameInTable="columnAUSENCIAS" msprop:Generator_ColumnPropNameInRow="AUSENCIAS" msprop:Generator_ColumnPropNameInTable="AUSENCIASColumn" msprop:Generator_UserColumnName="AUSENCIAS" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SEPTIMO" msprop:Generator_ColumnVarNameInTable="columnSEPTIMO" msprop:Generator_ColumnPropNameInRow="SEPTIMO" msprop:Generator_ColumnPropNameInTable="SEPTIMOColumn" msprop:Generator_UserColumnName="SEPTIMO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DEDUCCIONES" msprop:Generator_ColumnVarNameInTable="columnDEDUCCIONES" msprop:Generator_ColumnPropNameInRow="DEDUCCIONES" msprop:Generator_ColumnPropNameInTable="DEDUCCIONESColumn" msprop:Generator_UserColumnName="DEDUCCIONES" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PRESTAMO" msprop:Generator_ColumnVarNameInTable="columnPRESTAMO" msprop:Generator_ColumnPropNameInRow="PRESTAMO" msprop:Generator_ColumnPropNameInTable="PRESTAMOColumn" msprop:Generator_UserColumnName="PRESTAMO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DESCUENTOS" msprop:Generator_ColumnVarNameInTable="columnDESCUENTOS" msprop:Generator_ColumnPropNameInRow="DESCUENTOS" msprop:Generator_ColumnPropNameInTable="DESCUENTOSColumn" msprop:Generator_UserColumnName="DESCUENTOS" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SALARIO_NETO" msprop:Generator_ColumnVarNameInTable="columnSALARIO_NETO" msprop:Generator_ColumnPropNameInRow="SALARIO_NETO" msprop:Generator_ColumnPropNameInTable="SALARIO_NETOColumn" msprop:Generator_UserColumnName="SALARIO_NETO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="RAP" msprop:Generator_ColumnVarNameInTable="columnRAP" msprop:Generator_ColumnPropNameInRow="RAP" msprop:Generator_ColumnPropNameInTable="RAPColumn" msprop:Generator_UserColumnName="RAP" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NOM_TRB" msprop:Generator_ColumnVarNameInTable="columnNOM_TRB" msprop:Generator_ColumnPropNameInRow="NOM_TRB" msprop:Generator_ColumnPropNameInTable="NOM_TRBColumn" msprop:Generator_UserColumnName="NOM_TRB" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
