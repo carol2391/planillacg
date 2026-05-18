@@ -202,8 +202,8 @@ namespace nomina.Forms.Departamento
         private void RbNombre_Click(object sender, EventArgs e)
         {
             txtNombre.Select();
-            txtCodigo.Visible = true;
-            txtNombre.Visible = false;
+            txtCodigo.Visible = false;
+            txtNombre.Visible = true;
             txtNombre.Text = txtCodigo.Text = "";
         }
         private void TxtCodigo_TextChanged(object sender, EventArgs e)
@@ -247,6 +247,7 @@ namespace nomina.Forms.Departamento
 
         }
 
+    
     }
 }
     

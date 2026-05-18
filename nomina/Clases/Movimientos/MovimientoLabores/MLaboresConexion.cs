@@ -35,19 +35,21 @@ namespace nomina.Clases.MovimientoLabores
             EmpleadoData empleado = new EmpleadoData();
             if (lector.Read())
             {
-                if (!lector.IsDBNull(8))
+                if (!lector.IsDBNull(7))
                 {
-                    idNomina = lector.GetInt32(8);
+                    idNomina = lector.GetInt32(7);
                 }
-                empleado.Nombre = lector.GetString(9);
-                empleado.Codigo = lector.GetString(10);
+                empleado.Nombre = lector.GetString(8);
+                empleado.Codigo = lector.GetString(9);
 
                 mLabor = new MLaboresData(
                                lector.GetInt32(0), lector.GetInt32(1),
-                               lector.GetString(2), lector.GetString(3),
-                               lector.GetDecimal(4), lector.GetDateTime(5),
-                               lector.GetDecimal(6), lector.GetInt32(7),
-                               idNomina, empleado
+                               lector.GetString(2), 
+                               //lector.GetString(3),
+                               lector.GetDecimal(3), lector.GetDateTime(4),
+                               lector.GetDecimal(5), lector.GetInt32(6),
+                               idNomina, empleado,
+                               lector.GetString(10)
                             );
 
             }
@@ -79,12 +81,14 @@ namespace nomina.Clases.MovimientoLabores
                     idNomina = lector.GetInt32(8);
                 }
 
+                empleado.Id = lector.GetInt32(0);
                 empleado.Codigo= lector.GetString(10);
                 empleado.Nombre = lector.GetString(11);
 
               mlabores.Add( new MLaboresData(
                                lector.GetInt32(0), lector.GetInt32(1),
-                               lector.GetString(2), lector.GetString(3),
+                               lector.GetString(2),
+                               lector.GetString(3),
                                lector.GetDecimal(4), lector.GetDateTime(5),
                                lector.GetDecimal(6), lector.GetInt32(7),
                                idNomina, empleado

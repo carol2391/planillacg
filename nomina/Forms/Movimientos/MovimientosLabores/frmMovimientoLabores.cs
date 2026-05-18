@@ -231,8 +231,8 @@ namespace nomina.Forms.MovimientosLabores
             if (dgvLabores.RowCount > 0)
             {
                 int nlinea = dgvLabores.CurrentCell.RowIndex;
-                mLabor.idEmpleado = Convert.ToInt32( this.dgvLabores.Rows[nlinea].Cells["idEmpleado"].Value.ToString());
-                mLabor.idLabor = Convert.ToInt32(this.dgvLabores.Rows[nlinea].Cells["idLabor"].Value.ToString());
+                mLabor.IdEmpleado = Convert.ToInt32( this.dgvLabores.Rows[nlinea].Cells["idEmpleado"].Value.ToString());
+                mLabor.IdLabor = Convert.ToInt32(this.dgvLabores.Rows[nlinea].Cells["idLabor"].Value.ToString());
                 string sFecha = this.dgvLabores.Rows[nlinea].Cells["FechaLabor1"].Value.ToString();
                 string[] fechaSplit = sFecha.Split('/');
                 string año = fechaSplit[2].Substring(0, 4);
@@ -298,7 +298,7 @@ namespace nomina.Forms.MovimientosLabores
                     int añoActual = fechaActual.Year;
                     if (this.fechaLabor.Month == mesActual && this.fechaLabor.Year == añoActual)
                     {
-                        bool elimino = this.bdMlabores.accionesLabores("E", mLabor.idEmpleado, mLabor.idLabor,
+                        bool elimino = this.bdMlabores.accionesLabores("E", mLabor.IdEmpleado, mLabor.IdLabor,
                                 "" , 0,
                                  (decimal)0.0,mLabor.FechaLabor,(decimal)0.00,
                                  0, " ", 0);

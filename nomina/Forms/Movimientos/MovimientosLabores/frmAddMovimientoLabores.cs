@@ -130,6 +130,7 @@ namespace nomina.Forms
 
                 if (labor.TipoPago.descripcion.Substring(0,1).Equals("V"))
                 {
+
                     nudMontoLabor.Maximum = (decimal)999999999999999.00;
                     nudMontoLabor.Value = (decimal)0.00;
                     nudMontoLabor.DecimalPlaces = 2;

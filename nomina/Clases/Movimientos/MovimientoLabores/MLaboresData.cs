@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using nomina.Clases.TipoPago;
 using nomina.Clases.Empleado;
+using System.Security.Authentication.ExtendedProtection;
 
 namespace nomina.Clases.MovimientoLabores
 {
@@ -12,22 +13,43 @@ namespace nomina.Clases.MovimientoLabores
     {
         public MLaboresData() { }
 
-        public MLaboresData(int idEmpleaddo, int idLabor,
-               string DescripcionLabor, string TipoLabor,
+        public MLaboresData(int idEmpleado, int idLabor,
+               string DescripcionLabor, 
                decimal CantidaLabor, DateTime FechaLabor, decimal MontoLabor,
-               int idCuenta,int idTipoPago,EmpleadoData empleado)
+               int idCuenta,int idTipoPago,EmpleadoData empleado, string tipoLabor)
         {
-            this.empleado = empleado;
-            this.idLabor = idLabor;
+            this.Empleado = empleado;
+            this.IdLabor = idLabor;
             this.DescripcionLabor = DescripcionLabor;
             this.TipoLabor = TipoLabor;
             this.CantidaLabor = CantidaLabor;
             this.FechaLabor = FechaLabor;
             this.MontoLabor = MontoLabor;
             this.IdCuenta = idCuenta;
+            this.IdEmpleado = idEmpleado;
             //this.NombreCuenta = nombreCuenta;
-          
+            this.TipoLabor = tipoLabor;
             TipoPago = new TipoPagoData(idTipoPago,TipoLabor);
+        }
+
+        public MLaboresData(int idEmpleado, int idLabor,
+               string DescripcionLabor,
+               string TipoLabor,
+               decimal CantidaLabor, DateTime FechaLabor, decimal MontoLabor,
+               int idCuenta, int idTipoPago, EmpleadoData empleado)
+        {
+            this.Empleado = empleado;
+            this.IdLabor = idLabor;
+            this.DescripcionLabor = DescripcionLabor;
+            this.TipoLabor = TipoLabor;
+            this.CantidaLabor = CantidaLabor;
+            this.FechaLabor = FechaLabor;
+            this.MontoLabor = MontoLabor;
+            this.IdCuenta = idCuenta;
+            this.IdEmpleado = idEmpleado;
+            //this.NombreCuenta = nombreCuenta;
+
+            TipoPago = new TipoPagoData(idTipoPago, TipoLabor);
         }
 
         //public MLaboresData(int CodigoEmpleado, int CodigoLabor,
@@ -51,8 +73,8 @@ namespace nomina.Clases.MovimientoLabores
 
         public int idNomina { set; get; }
 
-        public int idEmpleado { set; get; }
-        public int idLabor { set; get; }
+        public int IdEmpleado { set; get; }
+        public int IdLabor { set; get; }
         public string DescripcionLabor { set; get; }
         public string TipoLabor { set; get; }
         public decimal CantidaLabor { set; get; }
@@ -60,11 +82,11 @@ namespace nomina.Clases.MovimientoLabores
         public decimal MontoLabor { set; get; }
         public int IdCuenta { set; get; }
         public string NombreCuenta { set; get; }
-        public string NombreEmpleado => empleado.Nombre;
-        public string CodidgoEmpleado => empleado.Codigo;
+        public string NombreEmpleado => Empleado.Nombre;
+        public string CodidgoEmpleado => Empleado.Codigo;
         public decimal Total { set; get; }
         public TipoPagoData TipoPago { set; get; }
-        public EmpleadoData empleado { set; get; }
+        public EmpleadoData Empleado { set; get; }
         public string TipoPagoD => TipoPago.descripcion;
     }
 }

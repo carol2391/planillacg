@@ -99,18 +99,18 @@ namespace nomina.Forms.MovimientosLabores
         public void cargarDatos()
         {
             EmpleadoConexion empleadoConexion = new EmpleadoConexion(conexion);
-            empleado = empleadoConexion.obtenerEmpleadoID(this.mlabor.idEmpleado);
+            empleado = empleadoConexion.obtenerEmpleadoID(this.mlabor.IdEmpleado);
             this.lblCodigoEmpleado.Text = empleado.Codigo;
             this.lblNombreEmpleado.Text = empleado.Nombre;
             this.lblSueldo.Text = empleado.Sueldo.ToString();
             this.lblDepartamento.Text = empleado.nombreDepto;
 
             LaboresConexion laborConexion = new LaboresConexion(conexion);
-            //labor = laborConexion.obtenerLaborCodigo(this.mlabor.CodigoLabor);
+            labor = laborConexion.obtenerLabor(this.mlabor.IdLabor);
             //lblCodigoLabor.Text = labor.Codigo;
             //lblNombreLabor.Text = labor.Nombre;
 
-            this.mlabor = bdMLabores.obtenerMLabor(this.mlabor.idEmpleado, this.mlabor.idLabor, 
+            this.mlabor = bdMLabores.obtenerMLabor(this.mlabor.IdEmpleado, this.mlabor.IdLabor, 
                             this.mlabor.FechaLabor);
             this.txtDescripcionLabor.Text = mlabor.DescripcionLabor;
             this.dtpFecha.Value = mlabor.FechaLabor;

@@ -326,31 +326,39 @@ namespace nomina.Clases.Departamento
         public List<DepartamentoData> buscarDepartamento(string valor, string campo)
         {
 
-            List<DepartamentoData> departamentos = new List<DepartamentoData>();
-            MySqlCommand comando = new MySqlCommand("buscar_departamento", this.conexion.getConexion());
-            comando.CommandType = System.Data.CommandType.StoredProcedure;
-            comando.Parameters.AddWithValue("@P_VALOR", valor);
-            comando.Parameters.AddWithValue("@P_CAMPO", campo);
-            this.conexion.getConexion().Open();
-
-            MySqlDataReader lector = comando.ExecuteReader();
-            int idDepto = 0;
-            int codCuenta = 0;
-            string jefe = " ";
-            while (lector.Read())
+            try
             {
-                if (!lector.IsDBNull(5))
-                    jefe = lector.GetString(5);
-                departamentos.Add(new DepartamentoData(lector.GetInt32(0),
-                                     lector.GetString(1),
-                                     lector.GetString(2),
-                                     jefe,
-                                     lector.GetInt32(4)
-                                    ));
-            }
-        
-            this.conexion.getConexion().Close();
-            return departamentos;
+                List<DepartamentoData> departamentos = new List<DepartamentoData>();
+                MySqlCommand comando = new MySqlCommand("buscar_departamento", this.conexion.getConexion());
+                comando.CommandType = System.Data.CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@P_VALOR", valor);
+                comando.Parameters.AddWithValue("@P_CAMPO", campo);
+                this.conexion.getConexion().Open();
+
+                MySqlDataReader lector = comando.ExecuteReader();
+                int idDepto = 0;
+                int codCuenta = 0;
+                string jefe = " ";
+                while (lector.Read())
+                {
+                    if (!lector.IsDBNull(5))
+                        jefe = lector.GetString(5);
+                        departamentos.Add(new DepartamentoData(lector.GetInt32(0),
+                                             lector.GetString(1),
+                                             lector.GetString(2),
+                                             jefe,
+                                             lector.IsDBNull(4) ? 0 : lector.GetInt32(4)
+                                            ));
+                }
+
+                this.conexion.getConexion().Close();
+                return departamentos;
         }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+}
     }
 }

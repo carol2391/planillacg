@@ -191,13 +191,19 @@ namespace nomina.Clases.Empleado
               
                 empleado.FechaInicio = lector.GetDateTime(36);
                 empleado.TipoEmpleadoNacionalidad = lector.GetString(37);
-                empleado.CuentaSueldo = lector.GetDecimal(38);
-                empleado.CuentaSeguroSocial = lector.GetDecimal(39);
-                empleado.CuentaRegimenEspecial = lector.GetDecimal(40);
-                empleado.CuentaISR = lector.GetDecimal(41);
-                empleado.OtraCuent1 = lector.GetDecimal(42);
-                empleado.OtraCuenta2 = lector.GetDecimal(43);
+                //empleado.CuentaSueldo = lector.GetDecimal(38);
+                //empleado.CuentaSeguroSocial = lector.GetDecimal(39);
+                //empleado.CuentaRegimenEspecial = lector.GetDecimal(40);
+                //empleado.CuentaISR = lector.GetDecimal(41);
+                //empleado.OtraCuent1 = lector.GetDecimal(42);
+                //empleado.OtraCuenta2 = lector.GetDecimal(43);
                 empleado.TipoPago = new LOpciones(lector.GetInt32(22), lector.GetString(32));
+                empleado.CuentaSueldo = lector.IsDBNull(38) ? 0m : lector.GetDecimal(38);
+                empleado.CuentaSeguroSocial = lector.IsDBNull(39) ? 0m : lector.GetDecimal(39);
+                empleado.CuentaRegimenEspecial = lector.IsDBNull(40) ? 0m : lector.GetDecimal(40);
+                empleado.CuentaISR = lector.IsDBNull(41) ? 0m : lector.GetDecimal(41);
+                empleado.OtraCuent1 = lector.IsDBNull(42) ? 0m : lector.GetDecimal(42);
+                empleado.OtraCuenta2 = lector.IsDBNull(43) ? 0m : lector.GetDecimal(43);
             }
             this.conexion.getConexion().Close();
             return empleado;
@@ -381,12 +387,12 @@ namespace nomina.Clases.Empleado
             cmd.Parameters.AddWithValue("@P_FECHA_INICIO", fechaInicio);
             cmd.Parameters.AddWithValue("@P_TIPO_EMPLEADO", tipoEmpleadoNacionalidad);
 
-            cmd.Parameters.AddWithValue("@P_CUENTA_SUELDO", numeroCuenta);
-            cmd.Parameters.AddWithValue("@P_CUENTA_SEGURO_SOCIAL", cuentaSeguroSocial);
-            cmd.Parameters.AddWithValue("@P_CUENTA_REGIMEN_ESPECIAL", cuentaRegimenEspecial);
-            cmd.Parameters.AddWithValue("@P_CUENTA_ISR", cuentaISR);
-            cmd.Parameters.AddWithValue("@P_OTRA_CUENTA_1", cuenta1);
-            cmd.Parameters.AddWithValue("@P_OTRA_CUENTA_2", cuenta2);
+            cmd.Parameters.AddWithValue("@P_CUENTA_SUELDO",null);//numeroCuenta
+            cmd.Parameters.AddWithValue("@P_CUENTA_SEGURO_SOCIAL", null); //cuentaSeguroSocial
+            cmd.Parameters.AddWithValue("@P_CUENTA_REGIMEN_ESPECIAL",null ); //cuentaRegimenEspecial
+            cmd.Parameters.AddWithValue("@P_CUENTA_ISR",null );//cuentaISR
+            cmd.Parameters.AddWithValue("@P_OTRA_CUENTA_1",null );//cuenta1
+            cmd.Parameters.AddWithValue("@P_OTRA_CUENTA_2", null);//cuenta2
             cmd.Parameters.Add("@salida", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;
 
 

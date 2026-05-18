@@ -164,10 +164,10 @@ namespace nomina.Forms.Departamento
 
                 if (empleado == null)
                 {
-                    agrego = bd.accionDepartamento("N", -1, txtCodigo.Text, txtNombre.Text, -1, 1);
+                    agrego = bd.accionDepartamento("M", depto.Id, txtCodigo.Text, txtNombre.Text, -1, 0);
                 }
                 else
-                    agrego = bd.accionDepartamento("N", -1, txtCodigo.Text, txtNombre.Text, empleado.Id, 1);
+                    agrego = bd.accionDepartamento("M", depto.Id, txtCodigo.Text, txtNombre.Text, empleado.Id, 0);
                 if (agrego)
                 {
                     this.DialogResult = DialogResult.OK;

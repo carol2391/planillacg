@@ -43,8 +43,8 @@ namespace nomina.Forms.Labores
             labores = bdLabores.obtenerLabores();
             descripcionTipoLabor();
             this.conexion = conexion;
-            txtCodigo.Enabled = false;
-            txtNombre.Enabled = false;
+            txtCodigo.Visible = false;
+            txtNombre.Visible = false;
         }
         #region eventos
         private void FrmLabores_Load(object sender, EventArgs e)
@@ -145,15 +145,15 @@ namespace nomina.Forms.Labores
 
         private void RbCodigo_Click(object sender, EventArgs e)
         {
-            txtNombre.Enabled = false;
-            txtCodigo.Enabled = true;
+            txtNombre.Visible = false;
+            txtCodigo.Visible = true;
             txtNombre.Text = "";
         }
 
         private void RbNombre_Click(object sender, EventArgs e)
         {
-            txtCodigo.Enabled = false;
-            txtNombre.Enabled = true;
+            txtNombre.Visible = true;
+            txtCodigo.Visible = false;
             txtCodigo.Text = "";
         }
         #endregion
