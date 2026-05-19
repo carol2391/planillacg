@@ -19,16 +19,18 @@ namespace nomina.Forms.MovimientosLabores
     {
         Conexion conexion;
         MLaboresData mlabor;
+        MLaboresData mLaborModificar;
         MLaboresConexion bdMLabores;
         LaboresData labor;
         EmpleadoData empleado;
         string isr;
-        public frmModificarMovimientoLabor(Conexion conexion, MLaboresData mlabor)
+        public frmModificarMovimientoLabor(Conexion conexion, MLaboresData mLabor)
         {
             InitializeComponent();
             this.conexion = conexion;
             bdMLabores = new MLaboresConexion(conexion);
-            this.mlabor = mlabor;
+            this.mlabor = mLabor;
+            this.mLaborModificar = mlabor;
             cargarDatos();
             
         }
@@ -116,6 +118,8 @@ namespace nomina.Forms.MovimientosLabores
             this.dtpFecha.Value = mlabor.FechaLabor;
             this.txtCodigoCuenta.Text = mlabor.IdCuenta.ToString();
             this.lblNombreCuenta.Text = mlabor.NombreCuenta;
+            this.lblCodigoLabor.Text = labor.Codigo;
+            this.lblNombreLabor.Text = labor.Nombre;
             establecerMonto(labor.TipoPago.descripcion.Substring(0,1),labor);
         }
 
@@ -232,7 +236,7 @@ namespace nomina.Forms.MovimientosLabores
             if (mesActual == dtpFecha.Value.Month)
             {
                 bool modifico = this.bdMLabores.accionesLabores("M",empleado.Id, labor.Id, txtDescripcionLabor.Text,
-                     labor.TipoPago.id, nudCantidadLabor.Value, dtpFecha.Value.Date, nudMontoLabor.Value, labor.idCodigoCuenta, this.isr,0);
+                     labor.TipoPago.id, nudCantidadLabor.Value, dtpFecha.Value.Date, nudMontoLabor.Value, labor.idCodigoCuenta, this.isr, this.mLaborModificar.Id);
                 if (modifico)
                 {
                     MessageBox.Show("Movimiento de labor modificado exitosamente", "Modificar Movimiento de Labor", MessageBoxButtons.OK, MessageBoxIcon.Information);

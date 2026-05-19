@@ -49,7 +49,8 @@ namespace nomina.Clases.MovimientoLabores
                                lector.GetDecimal(3), lector.GetDateTime(4),
                                lector.GetDecimal(5), lector.GetInt32(6),
                                idNomina, empleado,
-                               lector.GetString(10)
+                               lector.GetString(10),
+                               lector.GetInt32(11)
                             );
 
             }
@@ -91,7 +92,7 @@ namespace nomina.Clases.MovimientoLabores
                                lector.GetString(3),
                                lector.GetDecimal(4), lector.GetDateTime(5),
                                lector.GetDecimal(6), lector.GetInt32(7),
-                               idNomina, empleado
+                               idNomina, empleado, lector.GetInt32(12)
                             ));
                 empleado = new EmpleadoData();
             }
@@ -140,7 +141,7 @@ namespace nomina.Clases.MovimientoLabores
                                    lector.GetString(2), lector.GetString(3),
                                    lector.GetDecimal(4), lector.GetDateTime(5),
                                    lector.GetDecimal(6), lector.GetInt32(7),
-                                   idNomina, empleado
+                                   idNomina, empleado, lector.GetInt32(12)
                                 ));
 
                     empleado = new EmpleadoData();

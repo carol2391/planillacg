@@ -13,10 +13,10 @@ namespace nomina.Clases.MovimientoLabores
     {
         public MLaboresData() { }
 
-        public MLaboresData(int idEmpleado, int idLabor,
+        public MLaboresData( int idEmpleado, int idLabor,
                string DescripcionLabor, 
                decimal CantidaLabor, DateTime FechaLabor, decimal MontoLabor,
-               int idCuenta,int idTipoPago,EmpleadoData empleado, string tipoLabor)
+               int idCuenta,int idTipoPago,EmpleadoData empleado, string tipoLabor, int id)
         {
             this.Empleado = empleado;
             this.IdLabor = idLabor;
@@ -30,13 +30,15 @@ namespace nomina.Clases.MovimientoLabores
             //this.NombreCuenta = nombreCuenta;
             this.TipoLabor = tipoLabor;
             TipoPago = new TipoPagoData(idTipoPago,TipoLabor);
+            this.MontoTotal = CantidaLabor * MontoLabor;
+            this.Id = Id;
         }
 
         public MLaboresData(int idEmpleado, int idLabor,
                string DescripcionLabor,
                string TipoLabor,
                decimal CantidaLabor, DateTime FechaLabor, decimal MontoLabor,
-               int idCuenta, int idTipoPago, EmpleadoData empleado)
+               int idCuenta, int idTipoPago, EmpleadoData empleado, int id)
         {
             this.Empleado = empleado;
             this.IdLabor = idLabor;
@@ -47,6 +49,8 @@ namespace nomina.Clases.MovimientoLabores
             this.MontoLabor = MontoLabor;
             this.IdCuenta = idCuenta;
             this.IdEmpleado = idEmpleado;
+            this.Id = id;
+            this.MontoTotal = CantidaLabor * MontoLabor;
             //this.NombreCuenta = nombreCuenta;
 
             TipoPago = new TipoPagoData(idTipoPago, TipoLabor);
@@ -71,6 +75,7 @@ namespace nomina.Clases.MovimientoLabores
 
         //}
 
+        public int Id { set; get; }
         public int idNomina { set; get; }
 
         public int IdEmpleado { set; get; }
@@ -83,10 +88,10 @@ namespace nomina.Clases.MovimientoLabores
         public int IdCuenta { set; get; }
         public string NombreCuenta { set; get; }
         public string NombreEmpleado => Empleado.Nombre;
-        public string CodidgoEmpleado => Empleado.Codigo;
-        public decimal Total { set; get; }
+        public string CodigoEmpleado => Empleado.Codigo;
+        public decimal MontoTotal { set; get; }
         public TipoPagoData TipoPago { set; get; }
         public EmpleadoData Empleado { set; get; }
-        public string TipoPagoD => TipoPago.descripcion;
+        public string TipoPagoD { set; get; }
     }
 }

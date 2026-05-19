@@ -637,6 +637,7 @@ namespace nomina.Forms
                 //MessageBox.Show("Labores agregadas exitosamente", "Agregar", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 limpiarControlesGuardar();
+                this.DialogResult = DialogResult.OK;
             }
             else
             {

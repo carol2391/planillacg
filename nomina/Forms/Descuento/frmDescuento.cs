@@ -38,7 +38,7 @@ namespace nomina.Forms.Descuento
             this.frmMain = frmMain;
             // agregarColumnasData();
             this.descuentos = bd.obtenerDescuentos();
-            descripcionTipoDescuento();
+            DescripcionTipoDescuento();
             dgvDescuentos.DataSource = this.descuentos;
             txtCodigo.Visible = false;
             txtNombre.Visible = false;
@@ -135,12 +135,12 @@ namespace nomina.Forms.Descuento
             if (String.IsNullOrWhiteSpace(txtCodigo.Text))
             {
                 this.descuentos = bd.obtenerDescuentos();
-                descripcionTipoDescuento();
+                DescripcionTipoDescuento();
                 dgvDescuentos.DataSource = descuentos;
             }
             else {
                 this.descuentos = bd.buscarDescuento(txtCodigo.Text.Trim(), "COD_DEC");
-                descripcionTipoDescuento();
+                DescripcionTipoDescuento();
                 dgvDescuentos.DataSource = this.descuentos;
             }
         }
@@ -151,13 +151,13 @@ namespace nomina.Forms.Descuento
             if (String.IsNullOrWhiteSpace(txtNombre.Text))
             {
                 this.descuentos = bd.obtenerDescuentos();
-                descripcionTipoDescuento();
+                DescripcionTipoDescuento();
                 dgvDescuentos.DataSource = descuentos;
             }
             else
             {
                 this.descuentos = bd.buscarDescuento(txtNombre.Text.Trim(), "NOM_DEC");
-                descripcionTipoDescuento();
+                DescripcionTipoDescuento();
                 dgvDescuentos.DataSource = this.descuentos;
             }
         }
@@ -220,7 +220,7 @@ namespace nomina.Forms.Descuento
         private void actualizarObjetos()
         {
             this.descuentos = bd.obtenerDescuentos();
-            descripcionTipoDescuento();
+            DescripcionTipoDescuento();
             this.dgvDescuentos.DataSource = descuentos;
         }
         #endregion
@@ -296,34 +296,7 @@ namespace nomina.Forms.Descuento
         }
         #endregion
 
-        #region descripion de la descuento
-        private void descripcionTipoDescuento()
-        {
-
-            //foreach (DescuentoData descuento in this.descuentos)
-            //{
-            //    switch (descuento.TipoDescuento[0])
-            //    {
-            //        case 'D':
-            //            descuento.TipoDescuento = "Definido por el usuario";
-            //            break;
-
-            //        case 'F':
-            //            descuento.TipoDescuento = "Por Factor";
-            //            break;
-
-            //        case 'H':
-            //            descuento.TipoDescuento = "Por Hora";
-            //            break;
-
-            //        case 'V':
-            //            descuento.TipoDescuento = "Por Valor";
-            //            break;
-            //    }
-            //}
-        }
-        #endregion
-
+ 
         private void dgvDescuentos_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
            
@@ -359,5 +332,33 @@ namespace nomina.Forms.Descuento
 
             }
         }
+
+        #region descripion DEL TIPO DE PAGO DEL DESCUENTO
+        private void DescripcionTipoDescuento()
+        {
+
+            foreach (DescuentoData descuento in this.descuentos)
+            {
+                switch (descuento.TipoPago.Codigo[0])
+                {
+                    case 'D':
+                        descuento.TipoPago.descripcion = "Definido por el usuario";
+                        break;
+
+                    case 'F':
+                        descuento.TipoPago.descripcion = "Por Factor";
+                        break;
+
+                    case 'H':
+                        descuento.TipoPago.descripcion = "Por Hora";
+                        break;
+
+                    case 'V':
+                        descuento.TipoPago.descripcion = "Por Valor";
+                        break;
+                }
+            }
+        }
+        #endregion
     }
 }

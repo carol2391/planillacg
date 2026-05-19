@@ -219,29 +219,29 @@ namespace nomina.Forms.Descuento
         private void nuevo()
         {
             int tipoJornada = Convert.ToInt32(cbTipoJornada.SelectedValue.ToString());
-            int tipoDescuento = Convert.ToInt32(cbTipoDescuento.SelectedValue.ToString());
+            //int tipoDescuento = Convert.ToInt32(cbTipoDescuento.SelectedValue.ToString());
             bool agrego = false;
-            
+            TipoPagoData tipoPago = (TipoPagoData)cbTipoDescuento.SelectedItem;
             double monto;
             //||
-            if (!tipoDescuento.Equals("VALOR") && !tipoDescuento.Equals("FACTOR"))
+            if (!tipoPago.Codigo.Substring(0, 1).Equals("V") && !tipoPago.Equals("F"))
             {
                 agrego = bdDescuento.accionesDescuento("N",0, txtCodigo.Text, txtNombre.Text, 0,
-                        0,tipoJornada,tipoDescuento,0);
+                        0,tipoJornada,tipoPago.id,0);
             }
             else
-                 if (tipoDescuento.Equals("VALOR"))
+                 if (tipoPago.Equals("V"))
             {
                 monto = Convert.ToDouble(nudMonto.Value);
                 agrego = bdDescuento.accionesDescuento("N", 0, txtCodigo.Text, txtNombre.Text, nudMonto.Value,
-                        0, tipoJornada, tipoDescuento, 0);
+                        0, tipoJornada, tipoPago.id, 0);
             }
             else
-                 if (tipoDescuento.Equals("FACTOR"))
+                 if (tipoPago.Equals("F"))
             {
                 monto = Convert.ToDouble(nudMonto.Value);
                 agrego = bdDescuento.accionesDescuento("N", 0, txtCodigo.Text, txtNombre.Text, 0,
-                       nudMonto.Value, tipoJornada, tipoDescuento, 0);
+                       nudMonto.Value, tipoJornada, tipoPago.id, 0);
             }
 
             if (agrego)
@@ -282,35 +282,36 @@ namespace nomina.Forms.Descuento
             }
 
             }
-        
+
         #endregion
 
         #region modificar
         private void modificar()
         {
             int tipoJornada = Convert.ToInt32(cbTipoJornada.SelectedValue.ToString());
-            int tipoDescuento = Convert.ToInt32(cbTipoDescuento.SelectedValue.ToString());
+            //int tipoDescuento = Convert.ToInt32(cbTipoDescuento.SelectedValue.ToString());
             bool agrego = false;
+            TipoPagoData tipoPago = (TipoPagoData)cbTipoDescuento.SelectedItem;
             double monto;
             //||
-            if (!tipoDescuento.Equals("VALOR") && !tipoDescuento.Equals("FACTOR"))
+            if (!tipoPago.Codigo.Equals("V") && !tipoPago.Codigo.Equals("F"))
             {
-                agrego = bdDescuento.accionesDescuento("M",descuento.Id,txtCodigo.Text, txtNombre.Text, 0,
-                        0, tipoJornada, tipoDescuento, 0);
+                agrego = bdDescuento.accionesDescuento("M", descuento.Id, txtCodigo.Text, txtNombre.Text, 0,
+                        0, tipoJornada, tipoPago.id, 0);
             }
             else
-                 if (tipoDescuento.Equals("VALOR"))
+                 if (tipoPago.Codigo.Equals("V"))
             {
                 
                 agrego = bdDescuento.accionesDescuento("M", this.descuento.Id, txtCodigo.Text, txtNombre.Text, nudMonto.Value,
-                        0, tipoJornada, tipoDescuento, 0);
+                        0, tipoJornada, tipoPago.id, 0);
             }
             else
-                 if (tipoDescuento.Equals("FACTOR"))
+                 if (tipoPago.Codigo.Equals("F"))
             {
                
                 agrego =bdDescuento.accionesDescuento("M", this.descuento.Id,txtCodigo.Text, txtNombre.Text, 0,
-                        nudMonto.Value, tipoJornada, tipoDescuento, 0);
+                        nudMonto.Value, tipoJornada, tipoPago.id, 0);
             }
 
             if (agrego)
@@ -342,7 +343,28 @@ namespace nomina.Forms.Descuento
             
             tipoPago = bdTiPago.obtenerTipoPagos();
             tipoPago.Insert(0, new TipoPagoData(0, "Seleccione una opción..."));
-            
+            tipoPago.ForEach(tipo => {
+                if (tipo != null && !string.IsNullOrEmpty(tipo.descripcion))
+                {
+                    switch (tipo.descripcion[0])
+                    {
+                        case 'D':
+                            tipo.descripcion = "Definido por el usuario";
+                            break;
+                        case 'F':
+                            tipo.descripcion = "Por Factor";
+                            break;
+                        case 'H':
+                            tipo.descripcion = "Por Hora";
+                            break;
+                        case 'V':
+                            tipo.descripcion = "Por Valor";
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
             this.cbTipoDescuento.DataSource = tipoPago;
             configurarPropiedadesComboTipoPago(this.cbTipoDescuento);
             this.cbTipoDescuento.SelectedIndex = 0;
@@ -444,7 +466,7 @@ namespace nomina.Forms.Descuento
             {
                 TipoPagoData tipoDescuento = (TipoPagoData)cbTipoDescuento.SelectedItem;
                 //3 VALOR
-                if (tipoDescuento.descripcion.Substring(0, 1).Equals("V"))
+                if (tipoDescuento.Codigo.Substring(0, 1).Equals("V"))
                 {
                     this.lblMonto.Visible = true;
                     this.lblMonto.Text = "Monto del Descuento:";
@@ -455,7 +477,7 @@ namespace nomina.Forms.Descuento
                     nudMonto.Maximum = (decimal)999999999999999.00;
                 }
                 //FACTOR
-                else if (tipoDescuento.descripcion.Substring(0, 1).Equals("F"))
+                else if (tipoDescuento.Codigo.Substring(0, 1).Equals("F"))
                 {
                     this.lblMonto.Visible = true;
                     this.lblMonto.Text = "Factor de la Labor:";

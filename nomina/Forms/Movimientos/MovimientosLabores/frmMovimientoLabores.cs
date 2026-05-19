@@ -39,9 +39,13 @@ namespace nomina.Forms.MovimientosLabores
             bdPermisos = new PermisoUsuarioConexion();
             this.frmMain = frmMain;
             Utilidad.configurarDataGrid(dgvLabores);
+           
+            dgvLabores.AutoGenerateColumns = false;
             txtCodigo.Select();
             this.dtpFechaInicial.Enabled = false;
-            this.dgvLabores.DataSource = bdMlabores.obtenerLabores();
+            listaMovLabores = bdMlabores.obtenerLabores();
+            DescripcionTipoLabor();
+            this.dgvLabores.DataSource = listaMovLabores;
             this.dtpFechaFinal.Enabled = false;
             
         }
@@ -52,8 +56,15 @@ namespace nomina.Forms.MovimientosLabores
             //if (bdPermisos.existePermiso(this.frmMain.usuarioId, 33)) {
                 frmAddMovimientoLabores frm = new frmAddMovimientoLabores(conexion,frmMain);
                 frm.ShowDialog();
+              if (DialogResult.OK == frm.DialogResult)
+                {
+                    MLaboresConexion bd = new MLaboresConexion(conexion);
+                    this.listaMovLabores = bd.obtenerLabores();
+                    dgvLabores.DataSource = this.listaMovLabores;
+                //buscarMLabores();
+            }
             //}
-              
+
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -68,12 +79,15 @@ namespace nomina.Forms.MovimientosLabores
                     int añoActual = fechaActual.Year;
                     if (this.fechaLabor.Month == mesActual && this.fechaLabor.Year == añoActual)
                     {
-                        frmModificarMovimientoLabor frm = new frmModificarMovimientoLabor(conexion, mLabor);
+                        frmModificarMovimientoLabor frm = new frmModificarMovimientoLabor(conexion, this.mLabor);
                         frm.ShowDialog();
                         if (DialogResult.OK == frm.DialogResult)
                         {
-                            buscarMLabores();
-                        }
+                        MLaboresConexion bd = new MLaboresConexion(conexion);
+                        this.listaMovLabores = bd.obtenerLabores();
+                        dgvLabores.DataSource = this.listaMovLabores;
+                        //buscarMLabores();
+                    }
                     }
                     else
                         MessageBox.Show("Solo puede modificar las labores de este mes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -197,7 +211,7 @@ namespace nomina.Forms.MovimientosLabores
                                               this.dtpFechaInicial.Value.Date, 
                                               this.dtpFechaFinal.Value.Date);
 
-                descripcionTipoLabor();
+                DescripcionTipoLabor();
                 this.dgvLabores.DataSource = listaMovLabores;
                 sumarTotal();
             }
@@ -215,7 +229,7 @@ namespace nomina.Forms.MovimientosLabores
                 else
                      if (cbFechaFinal.Checked) {
                            DateTime fInicial = new DateTime();
-                            descripcionTipoLabor();
+                            DescripcionTipoLabor();
                             listaMovLabores = bdMlabores.buscarMLabor(txtCodigo.Text,
                                                                   fInicial, this.dtpFechaFinal.Value.Date );
                                       this.dgvLabores.DataSource = listaMovLabores;
@@ -231,8 +245,9 @@ namespace nomina.Forms.MovimientosLabores
             if (dgvLabores.RowCount > 0)
             {
                 int nlinea = dgvLabores.CurrentCell.RowIndex;
-                mLabor.IdEmpleado = Convert.ToInt32( this.dgvLabores.Rows[nlinea].Cells["idEmpleado"].Value.ToString());
-                mLabor.IdLabor = Convert.ToInt32(this.dgvLabores.Rows[nlinea].Cells["idLabor"].Value.ToString());
+                this.mLabor.Id = Convert.ToInt32(this.dgvLabores.Rows[nlinea].Cells["Id"].Value.ToString());
+                this.mLabor.IdEmpleado = Convert.ToInt32( this.dgvLabores.Rows[nlinea].Cells["idEmpleado"].Value.ToString());
+                this.mLabor.IdLabor = Convert.ToInt32(this.dgvLabores.Rows[nlinea].Cells["idLabor"].Value.ToString());
                 string sFecha = this.dgvLabores.Rows[nlinea].Cells["FechaLabor1"].Value.ToString();
                 string[] fechaSplit = sFecha.Split('/');
                 string año = fechaSplit[2].Substring(0, 4);
@@ -255,26 +270,26 @@ namespace nomina.Forms.MovimientosLabores
         }
         #endregion
 
-        private void descripcionTipoLabor() {
+        private void DescripcionTipoLabor() {
        
             foreach (MLaboresData mLabor in listaMovLabores)
             {
-                switch (mLabor.TipoLabor[0])
+                switch (mLabor.TipoPago.descripcion[0])
                 {
                     case 'D':
-                        mLabor.TipoLabor = "Definido por el usuario";
+                        mLabor.TipoPagoD = "Definido por el usuario";
                         break;
 
                     case 'F':
-                        mLabor.TipoLabor = "Por Factor";
+                        mLabor.TipoPagoD = "Por Factor";
                         break;
 
                     case 'H':
-                        mLabor.TipoLabor = "Por Hora";
+                        mLabor.TipoPagoD = "Por Hora";
                         break;
 
                     case 'V':
-                        mLabor.TipoLabor = "Por Valor";
+                        mLabor.TipoPagoD = "Por Valor";
                         break;
 
                 }

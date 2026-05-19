@@ -182,6 +182,7 @@ namespace nomina.Forms.Labores
             dgvLabores.DataSource = this.labores;
         }
 
+
         public void refrescarControles()
         {
             

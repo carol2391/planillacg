@@ -49,14 +49,16 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.CodigoEmpleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoLabor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NombreEmpleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaLabor1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CantidadLabor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CantidaLabor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MontoLabor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MontoTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.objTipoPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoPagoD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idlabor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idnomina = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idEmpleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,7 +79,7 @@
             this.btnSalir.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Location = new System.Drawing.Point(1068, 319);
-            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSalir.Margin = new System.Windows.Forms.Padding(4);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(112, 49);
             this.btnSalir.TabIndex = 38;
@@ -97,9 +99,9 @@
             this.groupBox1.Controls.Add(this.txtCodigo);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(1, 47);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(1059, 92);
             this.groupBox1.TabIndex = 37;
             this.groupBox1.TabStop = false;
@@ -119,7 +121,7 @@
             // 
             this.cbFechaFinal.AutoSize = true;
             this.cbFechaFinal.Location = new System.Drawing.Point(409, 59);
-            this.cbFechaFinal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbFechaFinal.Margin = new System.Windows.Forms.Padding(4);
             this.cbFechaFinal.Name = "cbFechaFinal";
             this.cbFechaFinal.Size = new System.Drawing.Size(110, 22);
             this.cbFechaFinal.TabIndex = 4;
@@ -132,7 +134,7 @@
             // 
             this.cbFechaInicial.AutoSize = true;
             this.cbFechaInicial.Location = new System.Drawing.Point(37, 55);
-            this.cbFechaInicial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbFechaInicial.Margin = new System.Windows.Forms.Padding(4);
             this.cbFechaInicial.Name = "cbFechaInicial";
             this.cbFechaInicial.Size = new System.Drawing.Size(115, 22);
             this.cbFechaInicial.TabIndex = 2;
@@ -146,7 +148,7 @@
             this.btnBuscar.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscar.Location = new System.Drawing.Point(300, 12);
-            this.btnBuscar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBuscar.Margin = new System.Windows.Forms.Padding(4);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(105, 31);
             this.btnBuscar.TabIndex = 40;
@@ -158,7 +160,7 @@
             // 
             this.dtpFechaFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFechaFinal.Location = new System.Drawing.Point(535, 55);
-            this.dtpFechaFinal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpFechaFinal.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaFinal.Name = "dtpFechaFinal";
             this.dtpFechaFinal.Size = new System.Drawing.Size(119, 24);
             this.dtpFechaFinal.TabIndex = 5;
@@ -169,7 +171,7 @@
             // 
             this.dtpFechaInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFechaInicial.Location = new System.Drawing.Point(172, 53);
-            this.dtpFechaInicial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpFechaInicial.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaInicial.Name = "dtpFechaInicial";
             this.dtpFechaInicial.Size = new System.Drawing.Size(119, 24);
             this.dtpFechaInicial.TabIndex = 3;
@@ -178,7 +180,7 @@
             // txtCodigo
             // 
             this.txtCodigo.Location = new System.Drawing.Point(172, 17);
-            this.txtCodigo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCodigo.Margin = new System.Windows.Forms.Padding(4);
             this.txtCodigo.MaxLength = 5;
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(119, 24);
@@ -190,7 +192,7 @@
             this.btnModificar.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModificar.Location = new System.Drawing.Point(1068, 206);
-            this.btnModificar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(4);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(112, 49);
             this.btnModificar.TabIndex = 36;
@@ -203,7 +205,7 @@
             this.btnQuitar.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnQuitar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnQuitar.Location = new System.Drawing.Point(1068, 262);
-            this.btnQuitar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnQuitar.Margin = new System.Windows.Forms.Padding(4);
             this.btnQuitar.Name = "btnQuitar";
             this.btnQuitar.Size = new System.Drawing.Size(112, 49);
             this.btnQuitar.TabIndex = 35;
@@ -216,7 +218,7 @@
             this.btnNuevo.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNuevo.Location = new System.Drawing.Point(1068, 149);
-            this.btnNuevo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnNuevo.Margin = new System.Windows.Forms.Padding(4);
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Size = new System.Drawing.Size(112, 49);
             this.btnNuevo.TabIndex = 34;
@@ -229,7 +231,7 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(216)))), ((int)(((byte)(102)))));
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(1, 1);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1059, 38);
             this.panel1.TabIndex = 32;
@@ -254,14 +256,16 @@
             this.dgvLabores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLabores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CodigoEmpleado,
+            this.TipoLabor,
             this.NombreEmpleado,
             this.FechaLabor1,
             this.Descripcion,
             this.idCuenta,
-            this.CantidadLabor,
+            this.CantidaLabor,
+            this.MontoLabor,
             this.MontoTotal,
-            this.Total1,
             this.objTipoPago,
+            this.TipoPagoD,
             this.idlabor,
             this.idnomina,
             this.idEmpleado,
@@ -271,7 +275,7 @@
             this.Id,
             this.empleado});
             this.dgvLabores.Location = new System.Drawing.Point(1, 146);
-            this.dgvLabores.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvLabores.Margin = new System.Windows.Forms.Padding(4);
             this.dgvLabores.Name = "dgvLabores";
             this.dgvLabores.RowHeadersWidth = 51;
             this.dgvLabores.Size = new System.Drawing.Size(1059, 406);
@@ -285,9 +289,9 @@
             this.pnTotal.Controls.Add(this.label7);
             this.pnTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnTotal.Location = new System.Drawing.Point(1, 560);
-            this.pnTotal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnTotal.Margin = new System.Windows.Forms.Padding(4);
             this.pnTotal.Name = "pnTotal";
-            this.pnTotal.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnTotal.Padding = new System.Windows.Forms.Padding(4);
             this.pnTotal.Size = new System.Drawing.Size(1059, 57);
             this.pnTotal.TabIndex = 50;
             this.pnTotal.TabStop = false;
@@ -297,7 +301,7 @@
             this.nudTotal.DecimalPlaces = 2;
             this.nudTotal.Enabled = false;
             this.nudTotal.Location = new System.Drawing.Point(795, 21);
-            this.nudTotal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nudTotal.Margin = new System.Windows.Forms.Padding(4);
             this.nudTotal.Maximum = new decimal(new int[] {
             -469762049,
             -590869294,
@@ -338,10 +342,19 @@
             this.CodigoEmpleado.Name = "CodigoEmpleado";
             this.CodigoEmpleado.Width = 134;
             // 
+            // TipoLabor
+            // 
+            this.TipoLabor.DataPropertyName = "TipoLabor";
+            this.TipoLabor.HeaderText = "TipoLabor";
+            this.TipoLabor.MinimumWidth = 6;
+            this.TipoLabor.Name = "TipoLabor";
+            this.TipoLabor.Visible = false;
+            this.TipoLabor.Width = 125;
+            // 
             // NombreEmpleado
             // 
             this.NombreEmpleado.DataPropertyName = "NombreEmpleado";
-            this.NombreEmpleado.HeaderText = "NombreEmpleado";
+            this.NombreEmpleado.HeaderText = "Nombre Empleado";
             this.NombreEmpleado.MinimumWidth = 6;
             this.NombreEmpleado.Name = "NombreEmpleado";
             this.NombreEmpleado.Width = 125;
@@ -357,7 +370,7 @@
             // Descripcion
             // 
             this.Descripcion.DataPropertyName = "DescripcionLabor";
-            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.HeaderText = "Descripción";
             this.Descripcion.MinimumWidth = 6;
             this.Descripcion.Name = "Descripcion";
             this.Descripcion.Width = 195;
@@ -371,39 +384,47 @@
             this.idCuenta.Visible = false;
             this.idCuenta.Width = 125;
             // 
-            // CantidadLabor
+            // CantidaLabor
             // 
-            this.CantidadLabor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.CantidadLabor.DataPropertyName = "CantidaLabor";
-            this.CantidadLabor.HeaderText = "Cantidad";
-            this.CantidadLabor.MinimumWidth = 6;
-            this.CantidadLabor.Name = "CantidadLabor";
-            this.CantidadLabor.Width = 90;
+            this.CantidaLabor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.CantidaLabor.DataPropertyName = "CantidaLabor";
+            this.CantidaLabor.HeaderText = "Cantidad";
+            this.CantidaLabor.MinimumWidth = 6;
+            this.CantidaLabor.Name = "CantidaLabor";
+            this.CantidaLabor.Width = 90;
+            // 
+            // MontoLabor
+            // 
+            this.MontoLabor.DataPropertyName = "MontoLabor";
+            this.MontoLabor.HeaderText = "Monto";
+            this.MontoLabor.MinimumWidth = 6;
+            this.MontoLabor.Name = "MontoLabor";
+            this.MontoLabor.Width = 125;
             // 
             // MontoTotal
             // 
-            this.MontoTotal.DataPropertyName = "MontoLabor";
+            this.MontoTotal.DataPropertyName = "MontoTotal";
             this.MontoTotal.HeaderText = "Monto Total";
             this.MontoTotal.MinimumWidth = 6;
             this.MontoTotal.Name = "MontoTotal";
             this.MontoTotal.Width = 150;
             // 
-            // Total1
-            // 
-            this.Total1.HeaderText = "Total";
-            this.Total1.MinimumWidth = 6;
-            this.Total1.Name = "Total1";
-            this.Total1.Visible = false;
-            this.Total1.Width = 125;
-            // 
             // objTipoPago
             // 
-            this.objTipoPago.DataPropertyName = "objTipoPago";
-            this.objTipoPago.HeaderText = "objTipoPago";
+            this.objTipoPago.DataPropertyName = "TipoPago";
+            this.objTipoPago.HeaderText = "TipoPago";
             this.objTipoPago.MinimumWidth = 6;
             this.objTipoPago.Name = "objTipoPago";
             this.objTipoPago.Visible = false;
             this.objTipoPago.Width = 125;
+            // 
+            // TipoPagoD
+            // 
+            this.TipoPagoD.DataPropertyName = "TipoPagoD";
+            this.TipoPagoD.HeaderText = "Tipo de pago";
+            this.TipoPagoD.MinimumWidth = 6;
+            this.TipoPagoD.Name = "TipoPagoD";
+            this.TipoPagoD.Width = 125;
             // 
             // idlabor
             // 
@@ -494,7 +515,7 @@
             this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "frmMovimientoLabores";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -533,14 +554,16 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DataGridViewTextBoxColumn CodigoEmpleado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TipoLabor;
         private System.Windows.Forms.DataGridViewTextBoxColumn NombreEmpleado;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaLabor1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCuenta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CantidadLabor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CantidaLabor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MontoLabor;
         private System.Windows.Forms.DataGridViewTextBoxColumn MontoTotal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Total1;
         private System.Windows.Forms.DataGridViewTextBoxColumn objTipoPago;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TipoPagoD;
         private System.Windows.Forms.DataGridViewTextBoxColumn idlabor;
         private System.Windows.Forms.DataGridViewTextBoxColumn idnomina;
         private System.Windows.Forms.DataGridViewTextBoxColumn idEmpleado;

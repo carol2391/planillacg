@@ -1,4 +1,12 @@
-﻿using System;
+﻿using nomina.Clases.ConexionManager;
+using nomina.Clases.Labores;
+using nomina.Clases.MovimientoLabores;
+using nomina.Clases.Opciones;
+using nomina.Clases.TipoJornada;
+using nomina.Clases.TipoPago;
+using nomina.Clases.Utilidades;
+using nomina.Forms.Empleado;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,13 +15,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using nomina.Clases.ConexionManager;
-using nomina.Clases.Labores;
-using nomina.Forms.Empleado;
-using nomina.Clases.Utilidades;
-using nomina.Clases.Opciones;
-using nomina.Clases.TipoPago;
-using nomina.Clases.TipoJornada;
 
 namespace nomina.Forms.Labores
 {
@@ -33,8 +34,10 @@ namespace nomina.Forms.Labores
             bdTiJornada = new TipoJornadaConexion(conexion);
             bdTiPago = new TipoPagoConexion(conexion);
             this.conexion = conexion;
-            configurarComboboxs();
+           
             txtCodigo.Select();
+           
+            configurarComboboxs();
             activarValorOFactor();
         }
 
@@ -52,6 +55,7 @@ namespace nomina.Forms.Labores
             LaboresConexion bd = new LaboresConexion(conexion);
             this.labor = bd.obtenerLabor(labor.Id);
             cargarDatosEditar();
+          
             txtCodigo.Select();
         }
         #region color
@@ -177,6 +181,30 @@ namespace nomina.Forms.Labores
 
             this.cbTipoLabor.DataSource = tipoPago;
             configurarPropiedadesComboTipoPago(this.cbTipoLabor);
+
+
+            tipoPago.ForEach(tipo => {
+                if (tipo != null && !string.IsNullOrEmpty(tipo.descripcion))
+                {
+                    switch (tipo.descripcion[0])
+                    {
+                        case 'D':
+                            tipo.descripcion = "Definido por el usuario";
+                            break;
+                        case 'F':
+                            tipo.descripcion = "Por Factor";
+                            break;
+                        case 'H':
+                            tipo.descripcion = "Por Hora";
+                            break;
+                        case 'V':
+                            tipo.descripcion = "Por Valor";
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
             this.cbTipoLabor.SelectedIndex = 0;
         }
         #endregion
@@ -206,7 +234,7 @@ namespace nomina.Forms.Labores
             if (this.cbTipoLabor.SelectedValue != null)
             {
                 TipoPagoData tipoPago = (TipoPagoData)cbTipoLabor.SelectedItem;
-                if (tipoPago.descripcion.Substring(0,1).Equals("V"))
+                if (tipoPago.Codigo.Substring(0,1).Equals("V"))
                 {
                     this.lblMontoLabor.Visible = true;
                     this.lblMontoLabor.Text = "Monto de la Labor:";
@@ -216,7 +244,7 @@ namespace nomina.Forms.Labores
                     nudMontoLabor.Maximum = (decimal)999999999999999.00;
                     nudMontoLabor.Value = (decimal)0.00;
                 }
-                else if (tipoPago.descripcion.Substring(0, 1).Equals("F"))
+                else if (tipoPago.Codigo.Substring(0, 1).Equals("F"))
                 {
                     this.lblMontoLabor.Visible = true;
                     this.lblMontoLabor.Text = "Factor de la Labor:";
@@ -345,20 +373,20 @@ namespace nomina.Forms.Labores
             bool agrego = false;
             decimal monto;
             //||
-            if (!tipoPago.descripcion.Substring(0,1).Equals("V") && !tipoPago.descripcion.Substring(0, 1).Equals("F"))
+            if (!tipoPago.Codigo.Substring(0,1).Equals("V") && !tipoPago.Codigo.Substring(0, 1).Equals("F"))
             {
                 agrego = bd.accionesLabor("M",labor.Id, txtCodigo.Text, txtNombre.Text, Convert.ToInt32(tipoJornada.idEntero),
                         0, 0, Convert.ToInt32(tipoPago.id), txtCodigoCuenta.Text);
             }
             else
-                 if (tipoPago.descripcion.Substring(0, 1).Equals("V"))
+                 if (tipoPago.Codigo.Substring(0, 1).Equals("V"))
                  {
                     monto = nudMontoLabor.Value;
                     agrego = bd.accionesLabor("M",labor.Id, txtCodigo.Text, txtNombre.Text, Convert.ToInt32(tipoJornada.idEntero),
                                     monto, 0, Convert.ToInt32(tipoPago.id), txtCodigoCuenta.Text);
                   }
                     else
-                         if (tipoPago.descripcion.Substring(0, 1).Equals("F"))
+                         if (tipoPago.Codigo.Substring(0, 1).Equals("F"))
                         {
                             monto = nudMontoLabor.Value;
                             agrego = bd.accionesLabor("M",labor.Id, txtCodigo.Text, txtNombre.Text, Convert.ToInt32(tipoJornada.idEntero),
@@ -452,6 +480,8 @@ namespace nomina.Forms.Labores
         {
             Utilidad.cambiarControlEnter(e);
 
-        }
+        }          
+
+        
     }
 }

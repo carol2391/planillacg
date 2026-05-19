@@ -39,6 +39,7 @@ namespace nomina.Clases.Labores
         public int idCodigoCuenta { set; get; }
         public string TipoPagoD => TipoPago.descripcion;
         public string Jornada => TipoJornada.descripcion;
-             
+
+
     }
 }
