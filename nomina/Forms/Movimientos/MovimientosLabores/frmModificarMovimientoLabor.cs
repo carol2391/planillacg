@@ -308,6 +308,9 @@ namespace nomina.Forms.MovimientosLabores
             Utilidad.cambiarControlEnter(e);
         }
 
-       
+        private void frmModificarMovimientoLabor_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

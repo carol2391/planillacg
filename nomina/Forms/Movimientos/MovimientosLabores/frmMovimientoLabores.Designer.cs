@@ -44,10 +44,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvLabores = new System.Windows.Forms.DataGridView();
-            this.pnTotal = new System.Windows.Forms.GroupBox();
-            this.nudTotal = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.CodigoEmpleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TipoLabor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NombreEmpleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,6 +63,10 @@
             this.CodigoCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnTotal = new System.Windows.Forms.GroupBox();
+            this.nudTotal = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLabores)).BeginInit();
@@ -159,12 +159,12 @@
             // dtpFechaFinal
             // 
             this.dtpFechaFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaFinal.Location = new System.Drawing.Point(535, 55);
+            this.dtpFechaFinal.Location = new System.Drawing.Point(527, 55);
             this.dtpFechaFinal.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaFinal.Name = "dtpFechaFinal";
             this.dtpFechaFinal.Size = new System.Drawing.Size(119, 24);
             this.dtpFechaFinal.TabIndex = 5;
-            this.dtpFechaFinal.Value = new System.DateTime(2019, 8, 19, 18, 3, 0, 0);
+            this.dtpFechaFinal.Value = new System.DateTime(2025, 5, 19, 0, 0, 0, 0);
             this.dtpFechaFinal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dtpFechaFinal_KeyPress);
             // 
             // dtpFechaInicial
@@ -280,58 +280,6 @@
             this.dgvLabores.RowHeadersWidth = 51;
             this.dgvLabores.Size = new System.Drawing.Size(1059, 406);
             this.dgvLabores.TabIndex = 39;
-            // 
-            // pnTotal
-            // 
-            this.pnTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(214)))), ((int)(((byte)(241)))));
-            this.pnTotal.Controls.Add(this.nudTotal);
-            this.pnTotal.Controls.Add(this.label5);
-            this.pnTotal.Controls.Add(this.label7);
-            this.pnTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pnTotal.Location = new System.Drawing.Point(1, 560);
-            this.pnTotal.Margin = new System.Windows.Forms.Padding(4);
-            this.pnTotal.Name = "pnTotal";
-            this.pnTotal.Padding = new System.Windows.Forms.Padding(4);
-            this.pnTotal.Size = new System.Drawing.Size(1059, 57);
-            this.pnTotal.TabIndex = 50;
-            this.pnTotal.TabStop = false;
-            // 
-            // nudTotal
-            // 
-            this.nudTotal.DecimalPlaces = 2;
-            this.nudTotal.Enabled = false;
-            this.nudTotal.Location = new System.Drawing.Point(795, 21);
-            this.nudTotal.Margin = new System.Windows.Forms.Padding(4);
-            this.nudTotal.Maximum = new decimal(new int[] {
-            -469762049,
-            -590869294,
-            5421010,
-            0});
-            this.nudTotal.Name = "nudTotal";
-            this.nudTotal.Size = new System.Drawing.Size(248, 24);
-            this.nudTotal.TabIndex = 49;
-            this.nudTotal.ThousandsSeparator = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(745, 25);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(45, 18);
-            this.label5.TabIndex = 49;
-            this.label5.Text = "Total:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(8, 91);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(0, 18);
-            this.label7.TabIndex = 47;
             // 
             // CodigoEmpleado
             // 
@@ -462,7 +410,7 @@
             this.CodigoLabor.Name = "CodigoLabor";
             this.CodigoLabor.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.CodigoLabor.Visible = false;
-            this.CodigoLabor.Width = 109;
+            this.CodigoLabor.Width = 125;
             // 
             // NombreCuenta
             // 
@@ -499,6 +447,58 @@
             this.empleado.Name = "empleado";
             this.empleado.Visible = false;
             this.empleado.Width = 125;
+            // 
+            // pnTotal
+            // 
+            this.pnTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(214)))), ((int)(((byte)(241)))));
+            this.pnTotal.Controls.Add(this.nudTotal);
+            this.pnTotal.Controls.Add(this.label5);
+            this.pnTotal.Controls.Add(this.label7);
+            this.pnTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pnTotal.Location = new System.Drawing.Point(1, 560);
+            this.pnTotal.Margin = new System.Windows.Forms.Padding(4);
+            this.pnTotal.Name = "pnTotal";
+            this.pnTotal.Padding = new System.Windows.Forms.Padding(4);
+            this.pnTotal.Size = new System.Drawing.Size(1059, 57);
+            this.pnTotal.TabIndex = 50;
+            this.pnTotal.TabStop = false;
+            // 
+            // nudTotal
+            // 
+            this.nudTotal.DecimalPlaces = 2;
+            this.nudTotal.Enabled = false;
+            this.nudTotal.Location = new System.Drawing.Point(795, 21);
+            this.nudTotal.Margin = new System.Windows.Forms.Padding(4);
+            this.nudTotal.Maximum = new decimal(new int[] {
+            -469762049,
+            -590869294,
+            5421010,
+            0});
+            this.nudTotal.Name = "nudTotal";
+            this.nudTotal.Size = new System.Drawing.Size(248, 24);
+            this.nudTotal.TabIndex = 49;
+            this.nudTotal.ThousandsSeparator = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(745, 25);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(45, 18);
+            this.label5.TabIndex = 49;
+            this.label5.Text = "Total:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(8, 91);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(0, 18);
+            this.label7.TabIndex = 47;
             // 
             // frmMovimientoLabores
             // 

@@ -97,12 +97,13 @@ namespace nomina.Forms.MovimientoDescuentos
             if (mesActual == dtpFecha.Value.Month)
             {
                 bool modifico = bdMDescuentos.accionesDescuento("M",movDescuentoData.idMDescuento, movDescuentoData.objEmpleado.Id, 
-                    movDescuentoData.objDescuento.Id, txtDescripcionDescuento.Text,
-               movDescuentoData.objTipoPago.id,
-                nudCantidadDescuento.Value, dtpFecha.Value.Date, nudMontoDescuento.Value, 0);
+                             movDescuentoData.objDescuento.Id, txtDescripcionDescuento.Text,
+                             movDescuentoData.objTipoPago.id,
+                             nudCantidadDescuento.Value, dtpFecha.Value.Date, nudMontoDescuento.Value, 0);
                 if (modifico)
                 {
                     MessageBox.Show("Movimiento de descuento modificado exitosamente", "Modificar Movimiento de Labor", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
                     DialogResult = DialogResult.OK;
                 }
                 else
@@ -139,13 +140,14 @@ namespace nomina.Forms.MovimientoDescuentos
             empleado = empleadoConexion.obtenerEmpleadoCodigo(this.movDescuentoData.CodigoEmpleado);
             
             DescuentoConexion bdDescuento = new DescuentoConexion(conexion);
-            this.movDescuentoData = bdMDescuentos.obtenerMDescuento(movDescuentoData.idMDescuento);
+            this.movDescuentoData = bdMDescuentos.obtenerMDescuento(this.movDescuentoData.idMDescuento);
 
             this.lblCodigoEmpleado.Text = movDescuentoData.objEmpleado.Codigo;
             this.lblNombreEmpleado.Text = movDescuentoData.objEmpleado.Nombre;
             this.lblSueldo.Text = movDescuentoData.objEmpleado.Sueldo.ToString();
             this.lblDepartamento.Text = movDescuentoData.objEmpleado.nombreDepto;
-
+            this.lblSueldo.Text = movDescuentoData.objEmpleado.Sueldo.ToString();
+            this.lblCodigoLabor.Text = movDescuentoData.objDescuento.Codigo;
             //descuentoData = laborConexion.obtenerDescuentoPorCodigo(this.movDescuentoData.CodigoDescuento);
 
             lblCodigoLabor.Text = movDescuentoData.objDescuento.Codigo;
@@ -155,7 +157,7 @@ namespace nomina.Forms.MovimientoDescuentos
             this.dtpFecha.Value = movDescuentoData.FechaDescuento;
             this.txtCodigoCuenta.Text = movDescuentoData.CodigoCuenta;
             this.lblNombreCuenta.Text = movDescuentoData.NombreCuenta;
-            establecerMonto(movDescuentoData.objTipoPago.descripcion.Substring(0,1), movDescuentoData.objDescuento);
+            EstablecerMonto(movDescuentoData.TipoPagoD, movDescuentoData.objDescuento);
         }
 
         #endregion
@@ -192,7 +194,7 @@ namespace nomina.Forms.MovimientoDescuentos
         #endregion
 
         #region establecer monto y cantidad
-        public void establecerMonto(string  tipoLabor, DescuentoData descuento)
+        public void EstablecerMonto(string  tipoLabor, DescuentoData descuento)
         {
             switch (tipoLabor)
             {

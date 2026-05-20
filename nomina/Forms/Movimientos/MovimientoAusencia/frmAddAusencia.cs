@@ -1,4 +1,4 @@
-﻿using System;
+﻿      using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -72,14 +72,14 @@ namespace nomina.Forms.Movimientos.Ausencia
         #region eventos tecla enter
         private void DtpFechaInicial_KeyPress(object sender, KeyPressEventArgs e)
         {
-            cambiarControlEnter(e);
-           // calcularMonto();
+           cambiarControlEnter(e);
+           calcularMonto();
         }
 
         private void DtpFechaFinal_KeyPress(object sender, KeyPressEventArgs e)
         {
             cambiarControlEnter(e);
-           // calcularMonto();
+           calcularMonto();
         }
 
         private void CbFechaFinal_KeyPress(object sender, KeyPressEventArgs e)
@@ -105,7 +105,7 @@ namespace nomina.Forms.Movimientos.Ausencia
 
         private void CbTipoAusencia_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Utilidad.cambiarControlEnter(e);
+             Utilidad.cambiarControlEnter(e);
         }
 
         private void CbFechaInicial_KeyPress(object sender, KeyPressEventArgs e)

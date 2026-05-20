@@ -31,6 +31,7 @@ namespace nomina.Forms.Movimientos.Ausencia
             this.dtpFechaFinal.Visible = false;
             bdPermisos = new PermisoUsuarioConexion();
             this.frmMain = frmMain;
+            dgvDatos.AutoGenerateColumns = false;
             dgvDatos.DataSource = bdAusencia.obtenerAusencias();
         }
 
@@ -66,7 +67,7 @@ namespace nomina.Forms.Movimientos.Ausencia
 
         private void BtnModificar_Click(object sender, EventArgs e)
         {
-            if (bdPermisos.existePermiso(this.frmMain.usuarioId, 42))
+            //if (bdPermisos.existePermiso(this.frmMain.usuarioId, 42))
             {
             }
               if (dgvDatos.RowCount > 0)
@@ -90,8 +91,8 @@ namespace nomina.Forms.Movimientos.Ausencia
                     MessageBox.Show("Solo puede actualizar las ausencias de este mes y año", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
-            else
-                btnModificar.Enabled = false;
+            //else
+            //    btnModificar.Enabled = false;
         }
 
         private void BtnQuitar_Click(object sender, EventArgs e)

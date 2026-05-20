@@ -45,8 +45,11 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CategoriaDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoAumento1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CodigoEmpleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NombreEmpleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SueldoAnterior = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SueldoActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,6 +59,11 @@
             this.Monto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CodigoCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdEmpleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdTipoAumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescripcionTipoAumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TotalMonto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -70,8 +78,11 @@
             this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDatos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
+            this.CategoriaDescripcion,
+            this.TipoAumento1,
             this.CodigoEmpleado,
             this.NombreEmpleado,
+            this.Fecha,
             this.Categoria,
             this.SueldoAnterior,
             this.SueldoActual,
@@ -80,19 +91,27 @@
             this.MontoAumento,
             this.Monto,
             this.Descripcion,
-            this.CodigoCategoria});
-            this.dgvDatos.Location = new System.Drawing.Point(2, 119);
+            this.CodigoCategoria,
+            this.IdEmpleado,
+            this.IdCategoria,
+            this.IdTipoAumento,
+            this.DescripcionTipoAumento,
+            this.TotalMonto});
+            this.dgvDatos.Location = new System.Drawing.Point(3, 146);
+            this.dgvDatos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvDatos.Name = "dgvDatos";
-            this.dgvDatos.Size = new System.Drawing.Size(794, 330);
+            this.dgvDatos.RowHeadersWidth = 51;
+            this.dgvDatos.Size = new System.Drawing.Size(1059, 406);
             this.dgvDatos.TabIndex = 79;
             // 
             // btnSalir
             // 
             this.btnSalir.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSalir.Location = new System.Drawing.Point(802, 259);
+            this.btnSalir.Location = new System.Drawing.Point(1069, 319);
+            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(84, 40);
+            this.btnSalir.Size = new System.Drawing.Size(112, 49);
             this.btnSalir.TabIndex = 78;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = false;
@@ -109,9 +128,11 @@
             this.groupBox1.Controls.Add(this.dtpFechaInicial);
             this.groupBox1.Controls.Add(this.txtCodigo);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(2, 38);
+            this.groupBox1.Location = new System.Drawing.Point(3, 47);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(794, 75);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(1059, 92);
             this.groupBox1.TabIndex = 77;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar";
@@ -119,18 +140,20 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 20);
+            this.label2.Location = new System.Drawing.Point(27, 25);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(109, 15);
+            this.label2.Size = new System.Drawing.Size(131, 18);
             this.label2.TabIndex = 43;
             this.label2.Text = "Código Empleado:";
             // 
             // cbFechaFinal
             // 
             this.cbFechaFinal.AutoSize = true;
-            this.cbFechaFinal.Location = new System.Drawing.Point(311, 47);
+            this.cbFechaFinal.Location = new System.Drawing.Point(415, 58);
+            this.cbFechaFinal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbFechaFinal.Name = "cbFechaFinal";
-            this.cbFechaFinal.Size = new System.Drawing.Size(93, 19);
+            this.cbFechaFinal.Size = new System.Drawing.Size(110, 22);
             this.cbFechaFinal.TabIndex = 4;
             this.cbFechaFinal.Text = "Fecha Final:";
             this.cbFechaFinal.UseVisualStyleBackColor = true;
@@ -140,9 +163,10 @@
             // cbFechaInicial
             // 
             this.cbFechaInicial.AutoSize = true;
-            this.cbFechaInicial.Location = new System.Drawing.Point(31, 45);
+            this.cbFechaInicial.Location = new System.Drawing.Point(41, 55);
+            this.cbFechaInicial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbFechaInicial.Name = "cbFechaInicial";
-            this.cbFechaInicial.Size = new System.Drawing.Size(98, 19);
+            this.cbFechaInicial.Size = new System.Drawing.Size(115, 22);
             this.cbFechaInicial.TabIndex = 2;
             this.cbFechaInicial.Text = "Fecha Inicial:";
             this.cbFechaInicial.UseVisualStyleBackColor = true;
@@ -153,9 +177,10 @@
             // 
             this.btnBuscar.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscar.Location = new System.Drawing.Point(225, 12);
+            this.btnBuscar.Location = new System.Drawing.Point(300, 15);
+            this.btnBuscar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(79, 25);
+            this.btnBuscar.Size = new System.Drawing.Size(105, 31);
             this.btnBuscar.TabIndex = 6;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = false;
@@ -165,9 +190,10 @@
             // dtpFechaFinal
             // 
             this.dtpFechaFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaFinal.Location = new System.Drawing.Point(404, 45);
+            this.dtpFechaFinal.Location = new System.Drawing.Point(539, 55);
+            this.dtpFechaFinal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtpFechaFinal.Name = "dtpFechaFinal";
-            this.dtpFechaFinal.Size = new System.Drawing.Size(90, 21);
+            this.dtpFechaFinal.Size = new System.Drawing.Size(119, 24);
             this.dtpFechaFinal.TabIndex = 5;
             this.dtpFechaFinal.Value = new System.DateTime(2019, 8, 19, 18, 3, 0, 0);
             this.dtpFechaFinal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dtpFechaFinal_KeyPress);
@@ -175,18 +201,20 @@
             // dtpFechaInicial
             // 
             this.dtpFechaInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaInicial.Location = new System.Drawing.Point(129, 43);
+            this.dtpFechaInicial.Location = new System.Drawing.Point(172, 53);
+            this.dtpFechaInicial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtpFechaInicial.Name = "dtpFechaInicial";
-            this.dtpFechaInicial.Size = new System.Drawing.Size(90, 21);
+            this.dtpFechaInicial.Size = new System.Drawing.Size(119, 24);
             this.dtpFechaInicial.TabIndex = 3;
             this.dtpFechaInicial.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dtpFechaInicial_KeyPress);
             // 
             // txtCodigo
             // 
-            this.txtCodigo.Location = new System.Drawing.Point(129, 14);
+            this.txtCodigo.Location = new System.Drawing.Point(172, 17);
+            this.txtCodigo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtCodigo.MaxLength = 5;
             this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(90, 21);
+            this.txtCodigo.Size = new System.Drawing.Size(119, 24);
             this.txtCodigo.TabIndex = 1;
             this.txtCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigo_KeyPress);
             // 
@@ -194,9 +222,10 @@
             // 
             this.btnModificar.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnModificar.Location = new System.Drawing.Point(802, 167);
+            this.btnModificar.Location = new System.Drawing.Point(1069, 206);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(84, 40);
+            this.btnModificar.Size = new System.Drawing.Size(112, 49);
             this.btnModificar.TabIndex = 76;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = false;
@@ -206,9 +235,10 @@
             // 
             this.btnQuitar.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnQuitar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnQuitar.Location = new System.Drawing.Point(802, 213);
+            this.btnQuitar.Location = new System.Drawing.Point(1069, 262);
+            this.btnQuitar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnQuitar.Name = "btnQuitar";
-            this.btnQuitar.Size = new System.Drawing.Size(84, 40);
+            this.btnQuitar.Size = new System.Drawing.Size(112, 49);
             this.btnQuitar.TabIndex = 75;
             this.btnQuitar.Text = "Quitar";
             this.btnQuitar.UseVisualStyleBackColor = false;
@@ -218,9 +248,10 @@
             // 
             this.btnNuevo.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevo.Location = new System.Drawing.Point(802, 121);
+            this.btnNuevo.Location = new System.Drawing.Point(1069, 149);
+            this.btnNuevo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(84, 40);
+            this.btnNuevo.Size = new System.Drawing.Size(112, 49);
             this.btnNuevo.TabIndex = 74;
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.UseVisualStyleBackColor = false;
@@ -230,18 +261,20 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(216)))), ((int)(((byte)(102)))));
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(2, 1);
+            this.panel1.Location = new System.Drawing.Point(3, 1);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(794, 31);
+            this.panel1.Size = new System.Drawing.Size(1059, 38);
             this.panel1.TabIndex = 73;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(229, 5);
+            this.label1.Location = new System.Drawing.Point(305, 6);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(198, 24);
+            this.label1.Size = new System.Drawing.Size(250, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "Movimiento Aumentos";
             // 
@@ -249,69 +282,105 @@
             // 
             this.Id.DataPropertyName = "Id";
             this.Id.HeaderText = "Id";
+            this.Id.MinimumWidth = 6;
             this.Id.Name = "Id";
             this.Id.Visible = false;
+            this.Id.Width = 125;
+            // 
+            // CategoriaDescripcion
+            // 
+            this.CategoriaDescripcion.DataPropertyName = "CategoriaDescripcion";
+            this.CategoriaDescripcion.HeaderText = "CategoriaDescripcion";
+            this.CategoriaDescripcion.MinimumWidth = 6;
+            this.CategoriaDescripcion.Name = "CategoriaDescripcion";
+            this.CategoriaDescripcion.Visible = false;
+            this.CategoriaDescripcion.Width = 125;
+            // 
+            // TipoAumento1
+            // 
+            this.TipoAumento1.DataPropertyName = "TipoAumento";
+            this.TipoAumento1.HeaderText = "TipoAumento";
+            this.TipoAumento1.MinimumWidth = 6;
+            this.TipoAumento1.Name = "TipoAumento1";
+            this.TipoAumento1.Visible = false;
+            this.TipoAumento1.Width = 125;
             // 
             // CodigoEmpleado
             // 
             this.CodigoEmpleado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.CodigoEmpleado.DataPropertyName = "CodigoEmpleado";
             this.CodigoEmpleado.HeaderText = "Código Empleado";
+            this.CodigoEmpleado.MinimumWidth = 6;
             this.CodigoEmpleado.Name = "CodigoEmpleado";
-            this.CodigoEmpleado.Width = 105;
+            this.CodigoEmpleado.Width = 134;
             // 
             // NombreEmpleado
             // 
             this.NombreEmpleado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.NombreEmpleado.DataPropertyName = "NombreEmpleado";
             this.NombreEmpleado.HeaderText = "Nombre Empleado";
+            this.NombreEmpleado.MinimumWidth = 6;
             this.NombreEmpleado.Name = "NombreEmpleado";
-            this.NombreEmpleado.Width = 109;
+            this.NombreEmpleado.Width = 138;
+            // 
+            // Fecha
+            // 
+            this.Fecha.DataPropertyName = "Fecha";
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.MinimumWidth = 6;
+            this.Fecha.Name = "Fecha";
+            this.Fecha.Width = 125;
             // 
             // Categoria
             // 
             this.Categoria.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Categoria.DataPropertyName = "Categoria";
+            this.Categoria.DataPropertyName = "CategoriaDescripcion";
             this.Categoria.HeaderText = "Categoria";
+            this.Categoria.MinimumWidth = 6;
             this.Categoria.Name = "Categoria";
             this.Categoria.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Categoria.Width = 77;
+            this.Categoria.Width = 95;
             // 
             // SueldoAnterior
             // 
             this.SueldoAnterior.DataPropertyName = "SueldoAnterior";
             this.SueldoAnterior.HeaderText = "Sueldo Anterior";
+            this.SueldoAnterior.MinimumWidth = 6;
             this.SueldoAnterior.Name = "SueldoAnterior";
+            this.SueldoAnterior.Width = 125;
             // 
             // SueldoActual
             // 
             this.SueldoActual.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.SueldoActual.DataPropertyName = "SueldoActual";
             this.SueldoActual.HeaderText = "Sueldo Actual";
+            this.SueldoActual.MinimumWidth = 6;
             this.SueldoActual.Name = "SueldoActual";
-            this.SueldoActual.Width = 90;
+            this.SueldoActual.Width = 110;
             // 
             // TipoAumento
             // 
             this.TipoAumento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.TipoAumento.DataPropertyName = "TipoAumento";
+            this.TipoAumento.DataPropertyName = "DescripcionTipoAumento";
             this.TipoAumento.HeaderText = "Tipo Aumento";
+            this.TipoAumento.MinimumWidth = 6;
             this.TipoAumento.Name = "TipoAumento";
-            this.TipoAumento.Width = 90;
+            this.TipoAumento.Width = 110;
             // 
             // Porcentaje
             // 
             this.Porcentaje.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.Porcentaje.DataPropertyName = "Porcentaje";
             this.Porcentaje.HeaderText = "Porcentaje";
+            this.Porcentaje.MinimumWidth = 6;
             this.Porcentaje.Name = "Porcentaje";
-            this.Porcentaje.Visible = false;
-            this.Porcentaje.Width = 83;
+            this.Porcentaje.Width = 101;
             // 
             // MontoAumento
             // 
             this.MontoAumento.DataPropertyName = "MontoAumento";
             this.MontoAumento.HeaderText = "Monto Aumento";
+            this.MontoAumento.MinimumWidth = 6;
             this.MontoAumento.Name = "MontoAumento";
             this.MontoAumento.Visible = false;
             this.MontoAumento.Width = 150;
@@ -320,27 +389,78 @@
             // 
             this.Monto.DataPropertyName = "Monto";
             this.Monto.HeaderText = "Monto";
+            this.Monto.MinimumWidth = 6;
             this.Monto.Name = "Monto";
+            this.Monto.Width = 125;
             // 
             // Descripcion
             // 
             this.Descripcion.DataPropertyName = "Descripcion";
             this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.MinimumWidth = 6;
             this.Descripcion.Name = "Descripcion";
+            this.Descripcion.Width = 125;
             // 
             // CodigoCategoria
             // 
             this.CodigoCategoria.DataPropertyName = "CodigoCategoria";
             this.CodigoCategoria.HeaderText = "Codigo Categoria";
+            this.CodigoCategoria.MinimumWidth = 6;
             this.CodigoCategoria.Name = "CodigoCategoria";
             this.CodigoCategoria.Visible = false;
+            this.CodigoCategoria.Width = 125;
+            // 
+            // IdEmpleado
+            // 
+            this.IdEmpleado.DataPropertyName = "IdEmpleado";
+            this.IdEmpleado.HeaderText = "IdEmpleado";
+            this.IdEmpleado.MinimumWidth = 6;
+            this.IdEmpleado.Name = "IdEmpleado";
+            this.IdEmpleado.Visible = false;
+            this.IdEmpleado.Width = 125;
+            // 
+            // IdCategoria
+            // 
+            this.IdCategoria.DataPropertyName = "IdCategoria";
+            this.IdCategoria.HeaderText = "IdCategoria";
+            this.IdCategoria.MinimumWidth = 6;
+            this.IdCategoria.Name = "IdCategoria";
+            this.IdCategoria.Visible = false;
+            this.IdCategoria.Width = 125;
+            // 
+            // IdTipoAumento
+            // 
+            this.IdTipoAumento.DataPropertyName = "IdTipoAumento";
+            this.IdTipoAumento.HeaderText = "IdTipoAumento";
+            this.IdTipoAumento.MinimumWidth = 6;
+            this.IdTipoAumento.Name = "IdTipoAumento";
+            this.IdTipoAumento.Visible = false;
+            this.IdTipoAumento.Width = 125;
+            // 
+            // DescripcionTipoAumento
+            // 
+            this.DescripcionTipoAumento.DataPropertyName = "DescripcionTipoAumento";
+            this.DescripcionTipoAumento.HeaderText = "DescripcionTipoAumento";
+            this.DescripcionTipoAumento.MinimumWidth = 6;
+            this.DescripcionTipoAumento.Name = "DescripcionTipoAumento";
+            this.DescripcionTipoAumento.Visible = false;
+            this.DescripcionTipoAumento.Width = 125;
+            // 
+            // TotalMonto
+            // 
+            this.TotalMonto.DataPropertyName = "TotalMonto";
+            this.TotalMonto.HeaderText = "TotalMonto";
+            this.TotalMonto.MinimumWidth = 6;
+            this.TotalMonto.Name = "TotalMonto";
+            this.TotalMonto.Visible = false;
+            this.TotalMonto.Width = 125;
             // 
             // frmMovimientoAumentos
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(195)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(888, 458);
+            this.ClientSize = new System.Drawing.Size(1184, 564);
             this.Controls.Add(this.dgvDatos);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.groupBox1);
@@ -349,6 +469,7 @@
             this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "frmMovimientoAumentos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -380,8 +501,11 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CategoriaDescripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TipoAumento1;
         private System.Windows.Forms.DataGridViewTextBoxColumn CodigoEmpleado;
         private System.Windows.Forms.DataGridViewTextBoxColumn NombreEmpleado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn Categoria;
         private System.Windows.Forms.DataGridViewTextBoxColumn SueldoAnterior;
         private System.Windows.Forms.DataGridViewTextBoxColumn SueldoActual;
@@ -391,5 +515,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Monto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn CodigoCategoria;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdEmpleado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdCategoria;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdTipoAumento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DescripcionTipoAumento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TotalMonto;
     }
 }

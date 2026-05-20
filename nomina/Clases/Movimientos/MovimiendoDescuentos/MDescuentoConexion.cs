@@ -47,15 +47,22 @@ namespace nomina.Clases.MovimiendoDescuentos
                 mdescuento.objEmpleado.Nombre = lector.GetString(2);
                 mdescuento.objDescuento.Id = lector.GetInt32(3);
                 mdescuento.objDescuento.Nombre = lector.GetString(4);
+                mdescuento.objDescuento.Codigo = lector.GetString(14);
+                mdescuento.objDescuento.Factor = lector.GetDecimal(15);
+                mdescuento.objDescuento.Monto = lector.GetDecimal(16);
                 mdescuento.CantidadDescuento = lector.GetDecimal(5);
                 mdescuento.FechaDescuento = lector.GetDateTime(6);
                 mdescuento.MontoDescuento = lector.GetDecimal(7);
                 mdescuento.IdCuenta = lector.GetInt32(8);
                 mdescuento.objTipoPago.id = lector.GetInt32(9);
                 mdescuento.objTipoPago.descripcion = lector.GetString(10);
+                mdescuento.TipoPagoD = lector.GetString(10);
                 mdescuento.idMDescuento = lector.GetInt32(11);
                 mdescuento.objEmpleado.objDepto = new Departamento.DepartamentoData();
+                mdescuento.objEmpleado.Sueldo = lector.GetDecimal(13);
                 mdescuento.objEmpleado.objDepto.NombreDepartamento= lector.GetString(12);
+                mdescuento.objDescuento.Codigo = lector.GetString(14);
+                mdescuento.objDescuento.Monto = lector.GetDecimal(15);
             }
             this.conexion.getConexion().Close();
             return mdescuento;
@@ -80,8 +87,8 @@ namespace nomina.Clases.MovimiendoDescuentos
 
             MySqlDataReader lector = comando.ExecuteReader();
 
-            
-       
+
+
             while (lector.Read())
             {
                 mdescuento.objEmpleado = new EmpleadoData();
@@ -98,6 +105,8 @@ namespace nomina.Clases.MovimiendoDescuentos
                 mdescuento.IdCuenta = lector.GetInt32(8);
                 mdescuento.objTipoPago.id = lector.GetInt32(9);
                 mdescuento.objTipoPago.descripcion = lector.GetString(10);
+                mdescuento.Total = mdescuento.objTipoPago.descripcion!= "D" && mdescuento.objTipoPago.descripcion != "H" ? mdescuento.CantidadDescuento * mdescuento.MontoDescuento : mdescuento.MontoDescuento;
+                mdescuento.idMDescuento = lector.GetInt32(11);
                 mdescuentos.Add(mdescuento);
                 mdescuento = new MDescuentoData();
 

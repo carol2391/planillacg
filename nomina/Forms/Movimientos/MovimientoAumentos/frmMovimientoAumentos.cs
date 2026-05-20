@@ -33,6 +33,7 @@ namespace nomina.Forms.Movimientos.MovimientoAumentos
             bdPermisos = new PermisoUsuarioConexion();
             this.frmMain = frmMain;
             Utilidad.configurarDataGrid(dgvDatos);
+            dgvDatos.AutoGenerateColumns = false;
             txtCodigo.Select();
             this.dtpFechaInicial.Visible = false;
             this.dtpFechaFinal.Visible = false;
@@ -216,7 +217,7 @@ namespace nomina.Forms.Movimientos.MovimientoAumentos
                                               this.dtpFechaInicial.Value.Date,
                                               this.dtpFechaFinal.Value.Date);
 
-                //descripcionTipoAumento();
+                //DescripcionDelTipoAumento();
                 this.dgvDatos.DataSource = listaAumentos;
 
             }
@@ -227,7 +228,7 @@ namespace nomina.Forms.Movimientos.MovimientoAumentos
                 listaAumentos = bdAumento.buscarAumentos(empleado.Id,
                                         this.dtpFechaInicial.Value.Date,
                                          fFinal);
-                //descripcionTipoAumento();
+                //DescripcionDelTipoAumento();
                 this.dgvDatos.DataSource = listaAumentos;
                 //this.dtpFechaFinal.Visible = false;
             }
@@ -236,7 +237,7 @@ namespace nomina.Forms.Movimientos.MovimientoAumentos
         #endregion
 
         //#region descripcion tipo descuento
-        //private void descripcionTipoAumento()
+        //private void DescripcionDelTipoAumento()
         //{
 
         //    foreach (AumentoData aumento in listaAumentos)

@@ -43,7 +43,7 @@ namespace nomina.Clases.MovimiendoDescuentos
         public TipoPagoData objTipoPago { set; get; }
         public EmpleadoData objEmpleado { set; get; }
         public DescuentoData objDescuento { set; get; }
-        public string TipoPagoD => objTipoPago.descripcion;
+        public string TipoPagoD { set; get; }
         public string CodigoDescuento => objDescuento.Codigo;
         public string DescripcionDescuento => objDescuento.Nombre;
         public int idDescuento => objDescuento.Id;

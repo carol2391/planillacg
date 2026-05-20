@@ -208,6 +208,7 @@ namespace nomina.Forms.MovimientoDescuentos
                 this.lblSueldo.Text = empleado.Sueldo.ToString();
                 this.lblDepartamento.Text = empleado.objDepto.NombreDepartamento;
                 this.btnBuscarEmpleado.Visible = false;
+                this.gpLabor.Visible = true;
             }
         }
 
@@ -229,7 +230,7 @@ namespace nomina.Forms.MovimientoDescuentos
                 this.descuentoData = frm.descuento;
                 this.lblCodigoDescuento.Text = descuentoData.Codigo;
                 this.lblNombreLabor.Text = descuentoData.Nombre;
-                if (descuentoData.TipoPago.descripcion.ToUpper().Equals("VALOR"))
+                if (descuentoData.TipoPago.descripcion.ToUpper().Equals("V"))
                 {
                     this.nudMontoDescuento.Value = (Decimal)descuentoData.Monto;
                     this.nudCantidadDescuento.Enabled = true;
@@ -239,7 +240,7 @@ namespace nomina.Forms.MovimientoDescuentos
 
                 }
                 else
-                     if (descuentoData.TipoPago.descripcion.ToUpper().Equals("FACTOR"))
+                     if (descuentoData.TipoPago.descripcion.ToUpper().Equals("F"))
                 {
                     this.nudMontoDescuento.Value = (Decimal)descuentoData.Factor;
                     this.nudCantidadDescuento.Enabled = true;
@@ -248,7 +249,7 @@ namespace nomina.Forms.MovimientoDescuentos
                     this.nudMontoDescuento.Maximum = (decimal)9999999999.00;
                 }
                 else
-                      if (descuentoData.TipoPago.descripcion.ToUpper().Equals("DEFINIDO POR EL USUARIO"))
+                      if (descuentoData.TipoPago.descripcion.ToUpper().Equals("D"))
                 {
                     this.nudMontoDescuento.Value = (decimal)0.00;
                     this.nudMontoDescuento.Enabled = true;
@@ -258,7 +259,7 @@ namespace nomina.Forms.MovimientoDescuentos
                     
                 }
                 else
-                      if (descuentoData.TipoPago.descripcion.ToUpper().Equals("HORA"))
+                      if (descuentoData.TipoPago.descripcion.ToUpper().Equals("H"))
                 {
                     this.nudCantidadDescuento.Enabled = true;
                     this.nudMontoDescuento.Enabled = false;
@@ -282,6 +283,7 @@ namespace nomina.Forms.MovimientoDescuentos
             this.lblNombreLabor.Text = "";
             txtCodigoCuenta.Text = "";
             this.txtNombreCuenta.Text = "";
+            this.gpLabor.Visible = false;
             this.btnBuscarEmpleado.Select();
             limpiarControlesCuandoModifica();
         }
@@ -439,7 +441,7 @@ namespace nomina.Forms.MovimientoDescuentos
         }
         #endregion
 
-        public string descripcionDescuento(string descripcion)
+        public string DescripcionDescuento(string descripcion)
         {
             switch (descripcion)
             {
@@ -521,6 +523,7 @@ namespace nomina.Forms.MovimientoDescuentos
                 MessageBox.Show("Descuentos agregados exitosamente", "Agregar", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 limpiarControlesGuardar();
+
             }
 
             calcularMonto(this.descuentoData.TipoPago.descripcion.Substring(0, 1));

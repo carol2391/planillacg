@@ -36,6 +36,7 @@ namespace nomina.Forms
         public frmAddMovimientoLabores(Conexion conexion,frmMain frmMain)
         {
             InitializeComponent();
+            this.gpLabor.Visible = false;
             //Utilidad.configurarDataGrid(dgvLabores);
             lblCodigoEmpleado.Enabled = false;
             //btnBuscarEmpleado.BackgroundImageLayout = ImageLayout.Center;
@@ -64,6 +65,7 @@ namespace nomina.Forms
                 this.lblDepartamento.Text = empleado.nombreDepto;
               
                 this.btnBuscarEmpleado.Visible = false;
+                this.gpLabor.Visible = true;
             }
         }
 
@@ -660,7 +662,7 @@ namespace nomina.Forms
             txtCodigoCuenta.Text = "";
             this.txtNombreCuenta.Text = "";
             this.btnBuscarEmpleado.Select();
-
+            this.gpLabor.Visible = false;
             limpiarControlesCuandoModifica();
 
         }

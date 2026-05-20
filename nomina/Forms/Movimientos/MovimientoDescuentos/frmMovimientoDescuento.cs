@@ -1,4 +1,11 @@
-﻿using System;
+﻿using nomina.Clases.ConexionManager;
+using nomina.Clases.Empleado;
+using nomina.Clases.MovimiendoDescuentos;
+using nomina.Clases.MovimientoLabores;
+using nomina.Clases.PermisosUsuario;
+using nomina.Clases.Utilidades;
+using nomina.Forms.Main;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,13 +14,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using nomina.Clases.ConexionManager;
-using nomina.Clases.MovimiendoDescuentos;
-using nomina.Clases.Utilidades;
-using nomina.Clases.Empleado;
-
-using nomina.Forms.Main;
-using nomina.Clases.PermisosUsuario;
 
 
 namespace nomina.Forms.MovimientoDescuentos
@@ -39,12 +39,15 @@ namespace nomina.Forms.MovimientoDescuentos
             this.conexion = conexion;
             bdMDescuentos = new MDescuentoConexion(conexion);
             bdPermisos = new PermisoUsuarioConexion();
+            this.dgvDescuentos.AutoGenerateColumns = false;
             this.frmMain = frmMain;
             Utilidad.configurarDataGrid(dgvDescuentos);
             txtCodigo.Select();
             this.dtpFechaInicial.Enabled = false;
             this.dtpFechaFinal.Enabled = false;
-            dgvDescuentos.DataSource = bdMDescuentos.obtenerMDescuentos();
+            listaMovDescuentos = bdMDescuentos.obtenerMDescuentos();
+            DescripcionTipoDescuento();
+            dgvDescuentos.DataSource = listaMovDescuentos;
         }
 
         #region menu
@@ -65,8 +68,8 @@ namespace nomina.Forms.MovimientoDescuentos
         {
             //if (bdPermisos.existePermiso(this.frmMain.usuarioId, 37)) {
                frmAddMovimientoDescuento frm = new frmAddMovimientoDescuento(conexion,frmMain);
-                frm.ShowDialog();
-            dgvDescuentos.DataSource = bdMDescuentos.obtenerMDescuentos();
+               frm.ShowDialog();
+               dgvDescuentos.DataSource = bdMDescuentos.obtenerMDescuentos();
             //}
             //else
             //    btnNuevo.Enabled = false;
@@ -76,20 +79,22 @@ namespace nomina.Forms.MovimientoDescuentos
         {
             //if (bdPermisos.existePermiso(this.frmMain.usuarioId, 38))
             //{
-                if (dgvDescuentos.RowCount > 0)
+            cargarDatosEditar();
+            if (dgvDescuentos.RowCount > 0)
                 {
-                    cargarDatosEditar();
+
                     DateTime fechaActual = DateTime.Now;
                     int mesActual = fechaActual.Month;
                     int añoActual = fechaActual.Year;
                     if (this.fechaDescuento.Month == mesActual && this.fechaDescuento.Year == añoActual)
                     {
+                        
                         frmModificarMovimientoDescuento frm = new frmModificarMovimientoDescuento(conexion, mDescuento);
                         frm.ShowDialog();
                         if (DialogResult.OK == frm.DialogResult)
                         {
-                           dgvDescuentos.DataSource = bdMDescuentos.obtenerMDescuentos();
-                       }
+                            buscarMDescuentos();
+                         }
                     }
                     else
                         MessageBox.Show("Solo puede modificar los descuentos de este mes y año", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -184,7 +189,7 @@ namespace nomina.Forms.MovimientoDescuentos
                                               this.dtpFechaInicial.Value.Date,
                                               this.dtpFechaFinal.Value.Date);
 
-                descripcionTipoLabor();
+                DescripcionTipoDescuento();
                 this.dgvDescuentos.DataSource = listaMovDescuentos;
                 sumarTotal();
             }
@@ -195,7 +200,7 @@ namespace nomina.Forms.MovimientoDescuentos
                 listaMovDescuentos = bdMDescuentos.buscarMDescuentos(txtCodigo.Text,
                                         this.dtpFechaInicial.Value.Date,
                                          fFinal);
-                descripcionTipoLabor();
+                DescripcionTipoDescuento();
                 this.dgvDescuentos.DataSource = listaMovDescuentos;
                 sumarTotal();
             }
@@ -203,7 +208,7 @@ namespace nomina.Forms.MovimientoDescuentos
                      if (cbFechaFinal.Checked)
             {
                 DateTime fInicial = new DateTime();
-                descripcionTipoLabor();
+                DescripcionTipoDescuento();
                 listaMovDescuentos = bdMDescuentos.buscarMDescuentos(txtCodigo.Text,
                                                       fInicial, this.dtpFechaFinal.Value.Date);
                 this.dgvDescuentos.DataSource = listaMovDescuentos;
@@ -213,6 +218,32 @@ namespace nomina.Forms.MovimientoDescuentos
 
         #endregion
 
+        private void DescripcionTipoDescuento()
+        {
+
+            foreach (MDescuentoData mDescuento in listaMovDescuentos)
+            {
+                switch (mDescuento.TipoDescuento[0])
+                {
+                    case 'D':
+                        mDescuento.TipoPagoD = "Definido por el usuario";
+                        break;
+
+                    case 'F':
+                        mDescuento.TipoPagoD = "Por Factor";
+                        break;
+
+                    case 'H':
+                        mDescuento.TipoPagoD = "Por Hora";
+                        break;
+
+                    case 'V':
+                        mDescuento.TipoPagoD = "Por Valor";
+                        break;
+
+                }
+            }
+        }
         #region descripcion tipo descuento
         private void descripcionTipoLabor()
         {
@@ -249,7 +280,7 @@ namespace nomina.Forms.MovimientoDescuentos
             decimal total = 0;
             foreach (MDescuentoData mDescuento in listaMovDescuentos)
             {
-                total += mDescuento.MontoDescuento;
+                total += mDescuento.Total;
             }
             this.nudTotal.Value = total;
         }
@@ -260,16 +291,22 @@ namespace nomina.Forms.MovimientoDescuentos
         {
             if (dgvDescuentos.RowCount > 0)
             {
+                mDescuento = new MDescuentoData();
                 mDescuento.objEmpleado = new EmpleadoData();
                 mDescuento.objDescuento = new Clases.Descuentos.DescuentoData();
                 int nlinea = dgvDescuentos.CurrentCell.RowIndex;
+                mDescuento.idMDescuento = Convert.ToInt32(this.dgvDescuentos.Rows[nlinea].Cells["idMDescuento"].Value.ToString());
                 mDescuento.objEmpleado.Id= Convert.ToInt32(this.dgvDescuentos.Rows[nlinea].Cells["idEmpleado"].Value.ToString());
+                mDescuento.objEmpleado.Codigo = this.dgvDescuentos.Rows[nlinea].Cells["CodigoEmpleado"].Value.ToString();
+                mDescuento.objEmpleado.Nombre = this.dgvDescuentos.Rows[nlinea].Cells["NombreEmpleado"].Value.ToString();
+
                 mDescuento.objDescuento.Id = Convert.ToInt32( this.dgvDescuentos.Rows[nlinea].Cells["idDescuento"].Value.ToString());
                 mDescuento.idMDescuento = Convert.ToInt32(this.dgvDescuentos.Rows[nlinea].Cells["idMDescuento"].Value.ToString());
-                string sFecha = this.dgvDescuentos.Rows[nlinea].Cells["FechaDescuento"].Value.ToString();
+                string sFecha = this.dgvDescuentos.Rows[nlinea].Cells["FechaDescuento1"].Value.ToString();
                 string[] fechaSplit = sFecha.Split('/');
                 string año = fechaSplit[2].Substring(0, 4);
                 this.fechaDescuento = new DateTime(Convert.ToInt32(año), Convert.ToInt32(fechaSplit[1]), Convert.ToInt32(fechaSplit[0]));
+                mDescuento.TipoPagoD = this.dgvDescuentos.Rows[nlinea].Cells["TipoPagoD"].Value.ToString();
                 mDescuento.FechaDescuento = fechaDescuento;
             }
         }

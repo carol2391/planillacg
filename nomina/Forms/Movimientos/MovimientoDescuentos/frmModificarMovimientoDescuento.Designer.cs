@@ -73,18 +73,20 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(216)))), ((int)(((byte)(102)))));
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Location = new System.Drawing.Point(9, 8);
+            this.panel1.Location = new System.Drawing.Point(12, 10);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(745, 31);
+            this.panel1.Size = new System.Drawing.Size(993, 38);
             this.panel1.TabIndex = 47;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(229, 5);
+            this.label7.Location = new System.Drawing.Point(305, 6);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(293, 24);
+            this.label7.Size = new System.Drawing.Size(375, 29);
             this.label7.TabIndex = 0;
             this.label7.Text = "Modificar Movimientos Descuento";
             // 
@@ -100,9 +102,11 @@
             this.gpEmpleados.Controls.Add(this.lbTicketId);
             this.gpEmpleados.Controls.Add(this.lbAlertId);
             this.gpEmpleados.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gpEmpleados.Location = new System.Drawing.Point(9, 45);
+            this.gpEmpleados.Location = new System.Drawing.Point(12, 55);
+            this.gpEmpleados.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gpEmpleados.Name = "gpEmpleados";
-            this.gpEmpleados.Size = new System.Drawing.Size(745, 134);
+            this.gpEmpleados.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpEmpleados.Size = new System.Drawing.Size(993, 165);
             this.gpEmpleados.TabIndex = 46;
             this.gpEmpleados.TabStop = false;
             this.gpEmpleados.Text = "Información del Empleado";
@@ -111,9 +115,10 @@
             // 
             this.lblCodigoEmpleado.AutoSize = true;
             this.lblCodigoEmpleado.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblCodigoEmpleado.Location = new System.Drawing.Point(9, 44);
+            this.lblCodigoEmpleado.Location = new System.Drawing.Point(12, 54);
+            this.lblCodigoEmpleado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCodigoEmpleado.Name = "lblCodigoEmpleado";
-            this.lblCodigoEmpleado.Size = new System.Drawing.Size(129, 16);
+            this.lblCodigoEmpleado.Size = new System.Drawing.Size(152, 20);
             this.lblCodigoEmpleado.TabIndex = 43;
             this.lblCodigoEmpleado.Text = "lblCodigoEmpleado";
             // 
@@ -121,9 +126,10 @@
             // 
             this.lblDepartamento.AutoSize = true;
             this.lblDepartamento.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblDepartamento.Location = new System.Drawing.Point(273, 93);
+            this.lblDepartamento.Location = new System.Drawing.Point(364, 114);
+            this.lblDepartamento.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDepartamento.Name = "lblDepartamento";
-            this.lblDepartamento.Size = new System.Drawing.Size(45, 16);
+            this.lblDepartamento.Size = new System.Drawing.Size(53, 20);
             this.lblDepartamento.TabIndex = 42;
             this.lblDepartamento.Text = "label9";
             // 
@@ -131,9 +137,10 @@
             // 
             this.lblSueldo.AutoSize = true;
             this.lblSueldo.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblSueldo.Location = new System.Drawing.Point(9, 93);
+            this.lblSueldo.Location = new System.Drawing.Point(12, 114);
+            this.lblSueldo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSueldo.Name = "lblSueldo";
-            this.lblSueldo.Size = new System.Drawing.Size(45, 16);
+            this.lblSueldo.Size = new System.Drawing.Size(53, 20);
             this.lblSueldo.TabIndex = 41;
             this.lblSueldo.Text = "label9";
             // 
@@ -141,9 +148,10 @@
             // 
             this.lblNombreEmpleado.AutoSize = true;
             this.lblNombreEmpleado.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblNombreEmpleado.Location = new System.Drawing.Point(273, 44);
+            this.lblNombreEmpleado.Location = new System.Drawing.Point(364, 54);
+            this.lblNombreEmpleado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNombreEmpleado.Name = "lblNombreEmpleado";
-            this.lblNombreEmpleado.Size = new System.Drawing.Size(45, 16);
+            this.lblNombreEmpleado.Size = new System.Drawing.Size(53, 20);
             this.lblNombreEmpleado.TabIndex = 39;
             this.lblNombreEmpleado.Text = "label8";
             // 
@@ -151,18 +159,20 @@
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(273, 78);
+            this.label18.Location = new System.Drawing.Point(364, 96);
+            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(89, 15);
+            this.label18.Size = new System.Drawing.Size(106, 18);
             this.label18.TabIndex = 37;
             this.label18.Text = "Departamento:";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(9, 77);
+            this.label12.Location = new System.Drawing.Point(12, 95);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(54, 16);
+            this.label12.Size = new System.Drawing.Size(65, 20);
             this.label12.TabIndex = 34;
             this.label12.Text = "Sueldo:";
             // 
@@ -170,9 +180,10 @@
             // 
             this.lbTicketId.AutoSize = true;
             this.lbTicketId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTicketId.Location = new System.Drawing.Point(273, 25);
+            this.lbTicketId.Location = new System.Drawing.Point(364, 31);
+            this.lbTicketId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbTicketId.Name = "lbTicketId";
-            this.lbTicketId.Size = new System.Drawing.Size(135, 15);
+            this.lbTicketId.Size = new System.Drawing.Size(160, 18);
             this.lbTicketId.TabIndex = 6;
             this.lbTicketId.Text = "Nombre del Empleado:";
             // 
@@ -180,9 +191,10 @@
             // 
             this.lbAlertId.AutoSize = true;
             this.lbAlertId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbAlertId.Location = new System.Drawing.Point(9, 25);
+            this.lbAlertId.Location = new System.Drawing.Point(12, 31);
+            this.lbAlertId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbAlertId.Name = "lbAlertId";
-            this.lbAlertId.Size = new System.Drawing.Size(109, 15);
+            this.lbAlertId.Size = new System.Drawing.Size(131, 18);
             this.lbAlertId.TabIndex = 3;
             this.lbAlertId.Text = "Código Empleado:";
             // 
@@ -190,9 +202,10 @@
             // 
             this.btnSalir.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSalir.Location = new System.Drawing.Point(99, 390);
+            this.btnSalir.Location = new System.Drawing.Point(132, 480);
+            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(84, 40);
+            this.btnSalir.Size = new System.Drawing.Size(112, 49);
             this.btnSalir.TabIndex = 9;
             this.btnSalir.Text = "Cancelar";
             this.btnSalir.UseVisualStyleBackColor = false;
@@ -203,9 +216,10 @@
             // 
             this.btnModificar.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnModificar.Location = new System.Drawing.Point(9, 390);
+            this.btnModificar.Location = new System.Drawing.Point(12, 480);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(84, 40);
+            this.btnModificar.Size = new System.Drawing.Size(112, 49);
             this.btnModificar.TabIndex = 8;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = false;
@@ -235,9 +249,11 @@
             this.gpLabor.Controls.Add(this.label2);
             this.gpLabor.Controls.Add(this.label1);
             this.gpLabor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gpLabor.Location = new System.Drawing.Point(9, 185);
+            this.gpLabor.Location = new System.Drawing.Point(12, 228);
+            this.gpLabor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gpLabor.Name = "gpLabor";
-            this.gpLabor.Size = new System.Drawing.Size(750, 199);
+            this.gpLabor.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpLabor.Size = new System.Drawing.Size(1000, 245);
             this.gpLabor.TabIndex = 43;
             this.gpLabor.TabStop = false;
             this.gpLabor.Text = "Información de la Labor";
@@ -246,14 +262,15 @@
             // 
             this.nudMontoTotal.DecimalPlaces = 2;
             this.nudMontoTotal.Enabled = false;
-            this.nudMontoTotal.Location = new System.Drawing.Point(607, 89);
+            this.nudMontoTotal.Location = new System.Drawing.Point(809, 110);
+            this.nudMontoTotal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nudMontoTotal.Maximum = new decimal(new int[] {
             -559939585,
             902409669,
             54,
             0});
             this.nudMontoTotal.Name = "nudMontoTotal";
-            this.nudMontoTotal.Size = new System.Drawing.Size(120, 22);
+            this.nudMontoTotal.Size = new System.Drawing.Size(160, 26);
             this.nudMontoTotal.TabIndex = 5;
             this.nudMontoTotal.ThousandsSeparator = true;
             this.nudMontoTotal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nudMontoTotal_KeyPress);
@@ -262,9 +279,10 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(604, 71);
+            this.label5.Location = new System.Drawing.Point(805, 87);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(75, 15);
+            this.label5.Size = new System.Drawing.Size(92, 18);
             this.label5.TabIndex = 64;
             this.label5.Text = "Monto Total:";
             // 
@@ -272,9 +290,10 @@
             // 
             this.lblNombreCuenta.AutoSize = true;
             this.lblNombreCuenta.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblNombreCuenta.Location = new System.Drawing.Point(273, 162);
+            this.lblNombreCuenta.Location = new System.Drawing.Point(364, 199);
+            this.lblNombreCuenta.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNombreCuenta.Name = "lblNombreCuenta";
-            this.lblNombreCuenta.Size = new System.Drawing.Size(45, 16);
+            this.lblNombreCuenta.Size = new System.Drawing.Size(53, 20);
             this.lblNombreCuenta.TabIndex = 62;
             this.lblNombreCuenta.Text = "label9";
             // 
@@ -282,26 +301,28 @@
             // 
             this.nudCantidadDescuento.DecimalPlaces = 2;
             this.nudCantidadDescuento.Enabled = false;
-            this.nudCantidadDescuento.Location = new System.Drawing.Point(467, 89);
+            this.nudCantidadDescuento.Location = new System.Drawing.Point(623, 110);
+            this.nudCantidadDescuento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nudCantidadDescuento.Maximum = new decimal(new int[] {
             9999999,
             0,
             0,
             131072});
             this.nudCantidadDescuento.Name = "nudCantidadDescuento";
-            this.nudCantidadDescuento.Size = new System.Drawing.Size(120, 22);
+            this.nudCantidadDescuento.Size = new System.Drawing.Size(160, 26);
             this.nudCantidadDescuento.TabIndex = 4;
             this.nudCantidadDescuento.ThousandsSeparator = true;
             this.nudCantidadDescuento.ValueChanged += new System.EventHandler(this.nudCantidadLabor_ValueChanged);
             this.nudCantidadDescuento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nudCantidadLabor_KeyPress);
             // 
-            // lblNombreLabor
+            // lblDescucento
             // 
             this.lblDescucento.AutoSize = true;
             this.lblDescucento.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblDescucento.Location = new System.Drawing.Point(273, 41);
-            this.lblDescucento.Name = "lblNombreLabor";
-            this.lblDescucento.Size = new System.Drawing.Size(45, 16);
+            this.lblDescucento.Location = new System.Drawing.Point(364, 50);
+            this.lblDescucento.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDescucento.Name = "lblDescucento";
+            this.lblDescucento.Size = new System.Drawing.Size(53, 20);
             this.lblDescucento.TabIndex = 61;
             this.lblDescucento.Text = "label9";
             // 
@@ -309,9 +330,10 @@
             // 
             this.lblCodigoLabor.AutoSize = true;
             this.lblCodigoLabor.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblCodigoLabor.Location = new System.Drawing.Point(6, 41);
+            this.lblCodigoLabor.Location = new System.Drawing.Point(12, 50);
+            this.lblCodigoLabor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCodigoLabor.Name = "lblCodigoLabor";
-            this.lblCodigoLabor.Size = new System.Drawing.Size(45, 16);
+            this.lblCodigoLabor.Size = new System.Drawing.Size(53, 20);
             this.lblCodigoLabor.TabIndex = 43;
             this.lblCodigoLabor.Text = "label9";
             // 
@@ -320,9 +342,10 @@
             this.btnBuscarCuenta.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnBuscarCuenta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnBuscarCuenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscarCuenta.Location = new System.Drawing.Point(163, 159);
+            this.btnBuscarCuenta.Location = new System.Drawing.Point(217, 196);
+            this.btnBuscarCuenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBuscarCuenta.Name = "btnBuscarCuenta";
-            this.btnBuscarCuenta.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscarCuenta.Size = new System.Drawing.Size(100, 28);
             this.btnBuscarCuenta.TabIndex = 7;
             this.btnBuscarCuenta.Text = "Buscar";
             this.btnBuscarCuenta.UseVisualStyleBackColor = false;
@@ -332,14 +355,15 @@
             // 
             this.nudMontoDescuento.DecimalPlaces = 2;
             this.nudMontoDescuento.Enabled = false;
-            this.nudMontoDescuento.Location = new System.Drawing.Point(276, 89);
+            this.nudMontoDescuento.Location = new System.Drawing.Point(368, 110);
+            this.nudMontoDescuento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nudMontoDescuento.Maximum = new decimal(new int[] {
             1569325055,
             23283064,
             0,
             131072});
             this.nudMontoDescuento.Name = "nudMontoDescuento";
-            this.nudMontoDescuento.Size = new System.Drawing.Size(173, 22);
+            this.nudMontoDescuento.Size = new System.Drawing.Size(231, 26);
             this.nudMontoDescuento.TabIndex = 3;
             this.nudMontoDescuento.ThousandsSeparator = true;
             this.nudMontoDescuento.ValueChanged += new System.EventHandler(this.nudMontoLabor_ValueChanged);
@@ -349,36 +373,40 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(273, 142);
+            this.label10.Location = new System.Drawing.Point(364, 175);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(127, 15);
+            this.label10.Size = new System.Drawing.Size(152, 18);
             this.label10.TabIndex = 60;
             this.label10.Text = "Nombre de la Cuenta:";
             // 
             // dtpFecha
             // 
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFecha.Location = new System.Drawing.Point(466, 35);
+            this.dtpFecha.Location = new System.Drawing.Point(621, 43);
+            this.dtpFecha.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtpFecha.Name = "dtpFecha";
-            this.dtpFecha.Size = new System.Drawing.Size(145, 22);
+            this.dtpFecha.Size = new System.Drawing.Size(192, 26);
             this.dtpFecha.TabIndex = 1;
             this.dtpFecha.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dtpFecha_KeyPress);
             // 
             // txtCodigoCuenta
             // 
-            this.txtCodigoCuenta.Location = new System.Drawing.Point(12, 160);
+            this.txtCodigoCuenta.Location = new System.Drawing.Point(16, 197);
+            this.txtCodigoCuenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtCodigoCuenta.MaxLength = 5;
             this.txtCodigoCuenta.Name = "txtCodigoCuenta";
-            this.txtCodigoCuenta.Size = new System.Drawing.Size(145, 22);
+            this.txtCodigoCuenta.Size = new System.Drawing.Size(192, 26);
             this.txtCodigoCuenta.TabIndex = 6;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(9, 142);
+            this.label11.Location = new System.Drawing.Point(12, 175);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(91, 15);
+            this.label11.Size = new System.Drawing.Size(111, 18);
             this.label11.TabIndex = 59;
             this.label11.Text = "Código Cuenta:";
             // 
@@ -386,18 +414,20 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(273, 72);
+            this.label6.Location = new System.Drawing.Point(364, 89);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(45, 15);
+            this.label6.Size = new System.Drawing.Size(55, 18);
             this.label6.TabIndex = 50;
             this.label6.Text = "Monto:";
             // 
             // lbCreatedBy
             // 
             this.lbCreatedBy.AutoSize = true;
-            this.lbCreatedBy.Location = new System.Drawing.Point(464, 18);
+            this.lbCreatedBy.Location = new System.Drawing.Point(619, 22);
+            this.lbCreatedBy.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCreatedBy.Name = "lbCreatedBy";
-            this.lbCreatedBy.Size = new System.Drawing.Size(49, 16);
+            this.lbCreatedBy.Size = new System.Drawing.Size(60, 20);
             this.lbCreatedBy.TabIndex = 37;
             this.lbCreatedBy.Text = "Fecha:";
             // 
@@ -405,9 +435,10 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(463, 71);
+            this.label4.Location = new System.Drawing.Point(617, 87);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(141, 15);
+            this.label4.Size = new System.Drawing.Size(169, 18);
             this.label4.TabIndex = 48;
             this.label4.Text = "Cantidad del Descuento:";
             // 
@@ -415,19 +446,21 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 74);
+            this.label3.Location = new System.Drawing.Point(8, 91);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 15);
+            this.label3.Size = new System.Drawing.Size(56, 18);
             this.label3.TabIndex = 47;
             this.label3.Text = "Razón:";
             // 
             // txtDescripcionDescuento
             // 
-            this.txtDescripcionDescuento.Location = new System.Drawing.Point(9, 92);
+            this.txtDescripcionDescuento.Location = new System.Drawing.Point(12, 113);
+            this.txtDescripcionDescuento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtDescripcionDescuento.MaxLength = 30;
             this.txtDescripcionDescuento.Multiline = true;
             this.txtDescripcionDescuento.Name = "txtDescripcionDescuento";
-            this.txtDescripcionDescuento.Size = new System.Drawing.Size(229, 37);
+            this.txtDescripcionDescuento.Size = new System.Drawing.Size(304, 45);
             this.txtDescripcionDescuento.TabIndex = 2;
             this.txtDescripcionDescuento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDescripcionLabor_KeyPress);
             // 
@@ -435,9 +468,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(6, 23);
+            this.label2.Location = new System.Drawing.Point(8, 28);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(131, 15);
+            this.label2.Size = new System.Drawing.Size(159, 18);
             this.label2.TabIndex = 41;
             this.label2.Text = "Código del Descuento;";
             // 
@@ -445,24 +479,26 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(270, 23);
+            this.label1.Location = new System.Drawing.Point(360, 28);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(137, 15);
+            this.label1.Size = new System.Drawing.Size(165, 18);
             this.label1.TabIndex = 44;
             this.label1.Text = "Nombre del Descuento:";
             // 
             // frmModificarMovimientoDescuento
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(195)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(766, 434);
+            this.ClientSize = new System.Drawing.Size(1021, 534);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.gpEmpleados);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.gpLabor);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmModificarMovimientoDescuento";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificar Movimiento Descuento";

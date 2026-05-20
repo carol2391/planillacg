@@ -46,6 +46,7 @@ namespace nomina.Forms.MovimientosLabores
             listaMovLabores = bdMlabores.obtenerLabores();
             DescripcionTipoLabor();
             this.dgvLabores.DataSource = listaMovLabores;
+            SumarTotal();
             this.dtpFechaFinal.Enabled = false;
             
         }
@@ -213,7 +214,7 @@ namespace nomina.Forms.MovimientosLabores
 
                 DescripcionTipoLabor();
                 this.dgvLabores.DataSource = listaMovLabores;
-                sumarTotal();
+                SumarTotal();
             }
             else
                  if (cbFechaInicial.Checked)
@@ -224,7 +225,7 @@ namespace nomina.Forms.MovimientosLabores
                                          fFinal);
                // descripcionTipoLabor();
                 this.dgvLabores.DataSource = listaMovLabores;
-                sumarTotal();
+                SumarTotal();
             }
                 else
                      if (cbFechaFinal.Checked) {
@@ -233,7 +234,7 @@ namespace nomina.Forms.MovimientosLabores
                             listaMovLabores = bdMlabores.buscarMLabor(txtCodigo.Text,
                                                                   fInicial, this.dtpFechaFinal.Value.Date );
                                       this.dgvLabores.DataSource = listaMovLabores;
-                                       sumarTotal();
+                                       SumarTotal();
                         }
         }
 
@@ -259,12 +260,12 @@ namespace nomina.Forms.MovimientosLabores
 
         #region calcular total cuando agrega una labor
         
-        public void sumarTotal()
+        public void SumarTotal()
         {
             decimal total = 0;
             foreach (MLaboresData mLabor in listaMovLabores)
             {
-                total += mLabor.MontoLabor;
+                total += mLabor.MontoTotal;
             }
             this.nudTotal.Value = (decimal)total;
         }
@@ -294,8 +295,6 @@ namespace nomina.Forms.MovimientosLabores
 
                 }
             }
-          
-
         }
 
         #region eliminar

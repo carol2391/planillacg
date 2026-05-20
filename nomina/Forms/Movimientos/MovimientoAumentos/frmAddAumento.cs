@@ -284,7 +284,7 @@ namespace nomina.Forms.Movimientos.MovimientoAumentos
             decimal salarioInicial = Convert.ToDecimal(empleado.objCategoria.SalarioInicial);
             decimal salarioFinal = Convert.ToDecimal(empleado.objCategoria.SalarioFinal);
 
-            if ( nudMontoAumento.Value< salarioInicial || nudMontoAumento.Value > salarioFinal ) {
+            if ( nudNuevoSueldo.Value< salarioInicial && nudNuevoSueldo.Value > salarioFinal ) {
                 MessageBox.Show("El monto debe de estar en el rango de la Categoría", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 nudMontoAumentoPorcentaje.Value = (decimal)0.0;
                 return false;
@@ -377,7 +377,7 @@ namespace nomina.Forms.Movimientos.MovimientoAumentos
                     monto = nudMontoAumentoPorcentaje.Value;
                            // + Convert.ToDecimal(empleado.Sueldo);
                     nudMontoAumento.Value = monto;
-                    if (monto >= salarioInicial && monto <= salarioFinal)
+                    if (monto<= salarioInicial && monto <= salarioFinal)
                     { 
                         nudNuevoSueldo.Value = monto+Convert.ToDecimal(empleado.Sueldo);
                         //this.monto = nudMontoAumento.Value;
@@ -396,7 +396,7 @@ namespace nomina.Forms.Movimientos.MovimientoAumentos
                            // +
                            //Convert.ToDecimal(empleado.Sueldo);
                     nudMontoAumento.Value = monto;
-                    if (monto >= salarioInicial && monto <= salarioFinal)
+                    if (monto <= salarioInicial && monto <= salarioFinal)
                     {
                         nudNuevoSueldo.Value = monto+ Convert.ToDecimal(empleado.Sueldo);
                         

@@ -30,7 +30,7 @@ namespace nomina.Clases.MovimientoLabores
             //this.NombreCuenta = nombreCuenta;
             this.TipoLabor = tipoLabor;
             TipoPago = new TipoPagoData(idTipoPago,TipoLabor);
-            this.MontoTotal = CantidaLabor * MontoLabor;
+            this.MontoTotal =!this.TipoLabor.Equals("D") && !this.TipoLabor.Equals("H") ? CantidaLabor * MontoLabor: MontoLabor;
             this.Id = Id;
         }
 
@@ -50,7 +50,8 @@ namespace nomina.Clases.MovimientoLabores
             this.IdCuenta = idCuenta;
             this.IdEmpleado = idEmpleado;
             this.Id = id;
-            this.MontoTotal = CantidaLabor * MontoLabor;
+            this.MontoTotal = !this.TipoLabor.Equals("D") && !this.TipoLabor.Equals("H") ? CantidaLabor * MontoLabor : MontoLabor;
+
             //this.NombreCuenta = nombreCuenta;
 
             TipoPago = new TipoPagoData(idTipoPago, TipoLabor);
