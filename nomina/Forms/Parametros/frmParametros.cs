@@ -12,6 +12,7 @@ using nomina.Clases.Parametro;
 using nomina.Clases.Utilidades;
 using nomina.Forms.Main;
 using nomina.Clases.PermisosUsuario;
+using nomina.Clases.UsuarioPermisos;
 
 namespace nomina.Forms.Parametros
 {
@@ -53,30 +54,30 @@ namespace nomina.Forms.Parametros
         }
         private void BtnNuevo_Click(object sender, EventArgs e)
         {
-            if (bdPermisos.existePermiso(this.frmMain.usuarioId, 53)) {
+            //if (bdPermisos.existePermiso(this.frmMain.usuarioId, 53)) {
                 frmAddParametro frm = new frmAddParametro(conexion);
                 frm.Tag = "agregar";
                 frm.ShowDialog();
-            }
-            else
-                btnNuevo.Enabled = false;
+            //}
+            //else
+            //    btnNuevo.Enabled = false;
 
         }
 
         private void BtnModificar_Click(object sender, EventArgs e)
         {
-            if ( bdPermisos.existePermiso(this.frmMain.usuarioId, 54) )
+            //if ( bdPermisos.existePermiso(this.frmMain.usuarioId, 54) )
                  modificar();
-            else
-                btnModificar.Enabled = false;
+            //else
+            //    btnModificar.Enabled = false;
         }
 
         private void BtnQuitar_Click(object sender, EventArgs e)
         {
-            if ( bdPermisos.existePermiso(this.frmMain.usuarioId, 55) )
+            //if ( bdPermisos.existePermiso(this.frmMain.usuarioId, 55) )
                 eliminar();
-            else
-                btnQuitar.Enabled = false;
+            //else
+            //    btnQuitar.Enabled = false;
         }
 
         private void BtnSalir_Click(object sender, EventArgs e)
@@ -172,5 +173,10 @@ namespace nomina.Forms.Parametros
 
         }
         #endregion
+
+        private void frmParametros_Shown(object sender, EventArgs e)
+        {
+            Validator.validarPermisos(this.frmMain.usuarioId, btnNuevo, btnModificar, btnQuitar, btnSalir, this, 13);
+        }
     }
 }

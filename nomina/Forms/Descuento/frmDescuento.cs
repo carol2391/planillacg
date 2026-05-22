@@ -16,6 +16,7 @@ using nomina.Forms.Main;
 using nomina.Clases.PermisosUsuario;
 using nomina.Clases.TipoJornada;
 using nomina.Clases.TipoPago;
+using nomina.Clases.UsuarioPermisos;
 
 namespace nomina.Forms.Descuento
 {
@@ -360,5 +361,10 @@ namespace nomina.Forms.Descuento
             }
         }
         #endregion
+
+        private void frmDescuento_Shown(object sender, EventArgs e)
+        {
+            Validator.validarPermisos(this.frmMain.usuarioId, btnNuevo, btnModificar, btnQuitar, btnSalir, this, 7);
+        }
     }
 }

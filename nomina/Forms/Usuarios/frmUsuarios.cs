@@ -23,6 +23,7 @@ namespace nomina.Forms.Usuarios
         UsuarioConexion bd;
         PermisoUsuarioConexion bdPermisos;
         frmMain frmMain;
+        bool superUsuario = false;
         public frmUsuarios(Conexion conexion, frmMain frmMain)
         {
             InitializeComponent();
@@ -34,6 +35,8 @@ namespace nomina.Forms.Usuarios
             this.dgvDatos.DataSource = this.bd.obtenerUsuarios();
             this.txtNombre.Visible =false;
             txtUsuario.Visible = false;
+
+            superUsuario = Properties.Settings.Default.usuario.ToUpper().Trim().Equals(this.frmMain.usuarioName) && this.frmMain.usuarioId==-1;
         }
 
         #region menu
@@ -50,7 +53,7 @@ namespace nomina.Forms.Usuarios
                 else
                     this.DialogResult = DialogResult.No;
             }
-           else if (bdPermisos.existePermiso(this.frmMain.usuarioId, 2))
+           else if (superUsuario || bdPermisos.existePermiso(this.frmMain.usuarioId,2, 1))
                     {
                         frmAddUsuario frm = new frmAddUsuario(conexion,frmMain);
                         frm.Tag = "nuevo";
@@ -65,12 +68,12 @@ namespace nomina.Forms.Usuarios
         private void BtnModificar_Click(object sender, EventArgs e)
         {
             //3 modificar
-            if (bdPermisos.existePermiso(this.frmMain.usuarioId, 3))
+            if (this.superUsuario || bdPermisos.existePermiso(this.frmMain.usuarioId,2, 3))
             {
                 if (dgvDatos.RowCount > 0)
                 {
                     cargarDatosEditar();
-                    frmAddUsuario frm = new frmAddUsuario(conexion,  frmMain);
+                    frmAddUsuario frm = new frmAddUsuario(conexion, this.user,  frmMain);
                     frm.Tag = "modificar";
                     DialogResult result = frm.ShowDialog();
                     if (result == System.Windows.Forms.DialogResult.OK)
@@ -88,7 +91,7 @@ namespace nomina.Forms.Usuarios
         private void BtnQuitar_Click(object sender, EventArgs e)
         {
             //4 eliminar
-            if (bdPermisos.existePermiso(this.frmMain.usuarioId, 4))
+            if (bdPermisos.existePermiso(this.frmMain.usuarioId,2, 4))
             {
                 if (dgvDatos.RowCount > 0)
                 {

@@ -13,6 +13,7 @@ using nomina.Clases.ConexionManager;
 using nomina.Clases.Empleado;
 using nomina.Forms.Main;
 using nomina.Clases.PermisosUsuario;
+using nomina.Clases.UsuarioPermisos;
 
 namespace nomina.Forms.Movimientos.MovimientoAumentos
 {
@@ -316,5 +317,9 @@ namespace nomina.Forms.Movimientos.MovimientoAumentos
         }
         #endregion
 
-}
+        private void frmMovimientoAumentos_Shown(object sender, EventArgs e)
+        {
+            Validator.validarPermisos(this.frmMain.usuarioId, btnNuevo, btnModificar, btnQuitar, btnSalir, this, 11);
+        }
+    }
 }

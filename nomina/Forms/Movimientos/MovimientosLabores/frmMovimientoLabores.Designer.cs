@@ -520,6 +520,7 @@
             this.Name = "frmMovimientoLabores";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Movimientos Labores";
+            this.Shown += new System.EventHandler(this.frmMovimientoLabores_Shown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);

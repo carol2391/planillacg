@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using nomina.Clases.Utilidades;
 using nomina.Clases.Antecedentes;
 using nomina.Clases.ConexionManager;
+using nomina.Forms.Empleado;
 
 namespace nomina.Forms.Empleado
 {
@@ -173,6 +174,26 @@ namespace nomina.Forms.Empleado
         private void txtLugarOrigen_KeyPress(object sender, KeyPressEventArgs e)
         {
             Utilidad.cambiarControlEnter(e);
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            //frmEmpleado frm = new frmEmpleado(conexion, frmMain);
+            //frm.Tag = "buscar";
+            //frm.ShowDialog();
+            //if (frm.DialogResult == DialogResult.OK)
+            //{
+            //    this.empleado = frm.empleado;
+            //    mostrarInfoEmpleado();
+            //    this.lblCodigoEmpleado.Text = empleado.Codigo;
+            //    this.lblNombreEmpleado.Text = empleado.Nombre;
+            //    this.lblSueldo.Text = empleado.Sueldo.ToString();
+            //    this.lblDepartamento.Text = empleado.objDepto.NombreDepartamento;
+            //    this.lblCategoria.Text = empleado.objCategoria.NombreCategoria;
+            //    this.lblSalarioInicial.Text = empleado.objCategoria.SalarioInicial.ToString();
+            //    this.lblSalarioFinal.Text = empleado.objCategoria.SalarioFinal.ToString();
+            //    cbTipoAumento.Select();
+            //}
         }
     }
 }

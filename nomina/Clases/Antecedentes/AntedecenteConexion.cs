@@ -33,13 +33,13 @@ namespace nomina.Clases.Antecedentes
             cmd.Parameters.AddWithValue("@P_ID_ANTECEDENTE", idAntecente);
             cmd.Parameters.AddWithValue("@P_TIPO_ANTECEDENTE", tipoAntecedente);
             cmd.Parameters.AddWithValue("@P_ACCION", accion);
-            cmd.Parameters.Add("@salida", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@P_SALIDA", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;
 
             try
             {
                 conexion.getConexion().Open();
                 cmd.ExecuteNonQuery();
-                int salida = Convert.ToInt32(cmd.Parameters["@salida"].Value);
+                int salida = Convert.ToInt32(cmd.Parameters["@P_SALIDA"].Value);
 
                 if (salida == 1)
                 {
@@ -60,7 +60,7 @@ namespace nomina.Clases.Antecedentes
         }
         #endregion
 
-        #region obtener lista de categorias
+        #region obtener lista de antecedentes
         public List<AntecedenteData> obtenerAntecedentes(string tipoAntecedente,int idEmpleado)
         {
 

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using nomina.Clases.ConexionManager;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
-using System.Data;
-using nomina.Clases.ConexionManager;
+using System.Windows.Forms;
 
 namespace nomina.Clases.Movimientos.MovimientoPrestamo
 {
@@ -111,11 +112,13 @@ namespace nomina.Clases.Movimientos.MovimientoPrestamo
                 prestamo.Monto = lector.GetDecimal(5);
                 prestamo.CuotaMes = lector.GetDecimal(6);
                 prestamo.Tiempo = lector.GetInt32(7);
-                prestamo.Estado = lector.GetString(8);
+                prestamo.Estado = lector.GetString(8) == "A" ? "Activo" : "Inactivo";
+
                 prestamo.IdTipoPago = lector.GetInt32(9);
                 prestamo.DescripcionTipoPago = lector.GetString(10);
                 prestamo.MontoActual = lector.GetDecimal(11);
                 prestamo.NombreEmpleado = lector.GetString(12);
+                prestamo.NombreDepartamento = lector.GetString(13);
                 lprestamos.Add(prestamo);          
                 prestamo = new PrestamoData();
 
@@ -152,16 +155,35 @@ namespace nomina.Clases.Movimientos.MovimientoPrestamo
             conexion.getConexion().Open();
 
             cmd.ExecuteNonQuery();
-            int salida = Convert.ToInt32(cmd.Parameters["@P_SALIDA"].Value);
-            /*si es igual a uno no existe*/
-            if (salida == 1)
+            int resultado = Convert.ToInt32(cmd.Parameters["@P_SALIDA"].Value);
+            ///*si es igual a uno no existe*/
+            //if (salida == 1)
+            //{
+            //    this.conexion.getConexion().Close();
+            //    return true;
+            //}
+            //else
+            //{
+            //    this.conexion.getConexion().Close();
+            //    return false;
+            //}
+
+            if (resultado == 1)
             {
                 this.conexion.getConexion().Close();
+                MessageBox.Show("Prestamo procesado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;
+            }
+            else if (resultado == -2)
+            {
+                this.conexion.getConexion().Close();
+                MessageBox.Show("El empleado ya cuenta con un préstamo activo en la fecha indicada.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
             }
             else
             {
                 this.conexion.getConexion().Close();
+                MessageBox.Show("Ocurrió un error inesperado al guardar en la base de datos. Verifique el error_log.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             //}

@@ -12,6 +12,9 @@ using nomina.Clases.ConexionManager;
 using nomina.Forms.Main;
 using nomina.Clases.Utilidades;
 using nomina.Clases.PermisosUsuario;
+using nomina.Clases.UsuarioPermisos;
+
+
 
 namespace nomina.Forms.Categoria
 {
@@ -40,38 +43,33 @@ namespace nomina.Forms.Categoria
             txtNombre.Visible= false;
             panel1.BackColor = Color.SkyBlue;
             btnModificar.BackColor = btnNuevo.BackColor = bntQuitar.BackColor = btnSalir.BackColor = Color.SkyBlue;
+          
+
         }
         #region eventos
 
-        //carga en el datagri todas las categorias de la bd
         private void frmCategoria_Load(object sender, EventArgs e)
         {
             
         }
         private void BtnNuevo_Click(object sender, EventArgs e)
         {
-            //if (bdPermisos.existePermiso(this.frmMain.usuarioId, 17))
-            //{
+            if (bdPermisos.existePermiso(this.frmMain.usuarioId, 2,2))
+            {
                 frmAddCategoria frm = new frmAddCategoria(conexion);
                 frm.Tag = "agregar";
                 frm.ShowDialog();
-               dgvCategorias.DataSource = bdCategoria.obtenerCategorias();
-            //if (frm.DialogResult == DialogResult.OK)
-            //{
-            //this.frmMain.cargarBaseDeDatos();
-            //this.actualizarObjetos();
-            // this.refrescarControles();
-            //}
-            //}
-            //else
-            //    btnNuevo.Enabled = false;
-
-        }
+                dgvCategorias.DataSource = bdCategoria.obtenerCategorias();
+               if (frm.DialogResult == DialogResult.OK) { 
+                   dgvCategorias.DataSource = bdCategoria.obtenerCategorias();
+               }
+            }
+            else
+                btnNuevo.Visible = false;
+            }
 
         private void BtnModificar_Click(object sender, EventArgs e)
         {
-
-            //if (bdPermisos.existePermiso(this.frmMain.usuarioId, 18)) {
                 if (dgvCategorias.RowCount > 0)
                 {
                     this.cargarDatosEditar();
@@ -83,14 +81,10 @@ namespace nomina.Forms.Categoria
                       dgvCategorias.DataSource = bdCategoria.obtenerCategorias();
                     }
                 }
-            //}
-            //else
-            //    btnModificar.Enabled = false;
 
         }
         private void BntQuitar_Click(object sender, EventArgs e)
         {
-            //if (bdPermisos.existePermiso(this.frmMain.usuarioId, 19)) {
                 if (dgvCategorias.RowCount > 0)
                 {
                     DialogResult resultado = MessageBox.Show("¿Está seguro de eliminar esta categoria?", "Eliminar categoria", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
@@ -113,10 +107,6 @@ namespace nomina.Forms.Categoria
                         //}
                     }
                 }
-            //}
-            //else
-            //    this.bntQuitar.Enabled = false;
-
         }
 
 
@@ -212,6 +202,12 @@ namespace nomina.Forms.Categoria
             frm.Tag = "ver";
             frm.bloquearControles();
             frm.ShowDialog();
+        }
+
+        private void frmCategoria_Shown(object sender, EventArgs e)
+        {
+            
+            Validator.validarPermisos( frmMain.usuarioId, btnNuevo, btnModificar, bntQuitar, btnSalir, this,5);
         }
     }
 }

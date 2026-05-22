@@ -38,6 +38,7 @@ namespace nomina.Forms.Movimientos.MovimientoPrestamos
             this.lblEstado.Visible = false;
            
             this.frmMain = frmMain;
+            this.gpPrestamo.Visible = false;
             this.btnBuscarEmpleado.Select();
         }
 
@@ -207,6 +208,7 @@ namespace nomina.Forms.Movimientos.MovimientoPrestamos
                 this.lblCategoria.Text = empleado.objCategoria.NombreCategoria;
                 this.lblSalarioInicial.Text = empleado.objCategoria.SalarioInicial.ToString();
                 this.lblSalarioFinal.Text = empleado.objCategoria.SalarioFinal.ToString();
+                this.gpPrestamo.Visible = true;
                 txtCodigo.Focus();
             }
         }
@@ -280,6 +282,7 @@ namespace nomina.Forms.Movimientos.MovimientoPrestamos
             if (agrego)
             {
                 MessageBox.Show("Movimiento de Aumento agregado exitosamente", "Agregar Movimiento Aumento", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.gpPrestamo.Visible = false;
                 limpiarControles();
                 //this.DialogResult = DialogResult.OK;
             }

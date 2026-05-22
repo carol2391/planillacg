@@ -13,6 +13,7 @@ using nomina.Clases.Utilidades;
 using nomina.Clases.Empleado;
 using nomina.Forms.Main;
 using nomina.Clases.PermisosUsuario;
+using nomina.Clases.UsuarioPermisos;
 
 
 namespace nomina.Forms.MovimientosLabores
@@ -335,5 +336,10 @@ namespace nomina.Forms.MovimientosLabores
 
         }
         #endregion
+
+        private void frmMovimientoLabores_Shown(object sender, EventArgs e)
+        {
+            Validator.validarPermisos(this.frmMain.usuarioId, btnNuevo, btnModificar, btnQuitar, btnSalir, this, 8);
+        }
     }
 }

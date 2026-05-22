@@ -8,30 +8,23 @@ namespace nomina.Clases.PermisosUsuario
 {
    public class PermisoUsuarioData
     {
-        //public int UsuarioId { set; get; }
-        public int PermisoId { set; get; }
-        public string Descripcion { set; get; }
-        public int Permiso { set; get; }
-        //public PermisoUsuarioData(int usuario, int permisoId, int permiso) {
-        // this.UsuariosId = usuario;
-        //    this.PermisosId = permisoId;
-        //    this.Permiso = permiso;
-        //}
 
-        //public PermisoUsuarioData(int usuarioId, int permisoId,string descripcion, int permiso)
-        //{
-        //    this.UsuarioId = usuarioId;
-        //    this.PermisoId = permisoId;
-        //    this.Descripcion = descripcion;
-        //    this.Permiso = permiso;
-        //}
-
-        public PermisoUsuarioData(int permisoId, string descripcion, int permiso)
-        {
-            this.PermisoId = permisoId;
-            this.Descripcion = descripcion;
-            this.Permiso = permiso;
+        public PermisoUsuarioData() { 
         }
+        public int IdModulo { set; get; }
+        public int IdAccion { set; get; }
+        public string NombreAccion { set; get; }
+        public string NombreModulo { set; get; }
+       public bool TienePermiso { set; get; }
+        public PermisoUsuarioData(int idModulo, string modulo, int  IdAccion,  string accion,bool tienePermiso)
+        {
+            this.IdModulo = idModulo;
+            this.IdAccion = IdAccion;
+            this.NombreAccion = accion;
+            this.NombreModulo = modulo;
+            this.TienePermiso = tienePermiso;
+        }
+
     }
 
 }

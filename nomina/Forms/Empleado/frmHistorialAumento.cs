@@ -11,20 +11,24 @@ using nomina.Clases.Utilidades;
 using nomina.Clases.ConexionManager;
 using nomina.Clases.Movimientos.HistorialAumento;
 using nomina.Clases.Empleado;
+using nomina.Forms.Main;
 
 namespace nomina.Forms.Empleado
 {
     public partial class frmHistorialAumento : Form
     {
         Conexion conexion;
+        frmMain frmMain1;
+        public EmpleadoData empleado { set; get; }
         List<HistorialData> listaHistorialAumentos;
         HistorialConexion bdHistorialAum;
         //HistorialData ausenciaData;
-        public frmHistorialAumento(Conexion conexion)
+        public frmHistorialAumento(Conexion conexion, frmMain frmMain)
         {
             InitializeComponent();
             Utilidad.configuarForm(this, "Historial Aumento del Empleado");
             colorForm();
+            this.frmMain1 = frmMain;
             this.conexion = conexion;
             bdHistorialAum = new HistorialConexion(conexion);
         }
@@ -66,23 +70,26 @@ namespace nomina.Forms.Empleado
 
         private void BtnBuscar_Click(object sender, EventArgs e)
         {
-            if (validar())
-            {
-                EmpleadoConexion bd = new EmpleadoConexion(conexion);
-                EmpleadoData emp = bd.obtenerEmpleadoCodigo(txtCodigo.Text.Trim());
-                if (emp.Codigo == null)
-                    MessageBox.Show("Error no existe el empleado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                else
-                    buscarHistorialAumento();
+            
+                frmEmpleado frm = new frmEmpleado(conexion, frmMain1);
+                frm.Tag = "buscar";
+                frm.ShowDialog();
+                if (frm.DialogResult == DialogResult.OK)
+                {
+                    this.empleado = frm.empleado;
+                    this.lblNombre.Text = empleado.Nombre;
+                  
 
-            }
+                }
+
+            
         }
 
         #region validar
         private bool validar()
         {
 
-            if (String.IsNullOrWhiteSpace(txtCodigo.Text))
+            if (lblNombre.Text.Equals("Nombre Empleado:"))
             {
                 MessageBox.Show("Ingrese el código de Empleado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -115,7 +122,7 @@ namespace nomina.Forms.Empleado
 
             if (cbFechaInicial.Checked && cbFechaFinal.Checked)
             {
-                listaHistorialAumentos = bdHistorialAum.buscarAumentosHistorial(txtCodigo.Text,
+                listaHistorialAumentos = bdHistorialAum.buscarAumentosHistorial(empleado.Id,
                                               this.dtpFechaInicial.Value.Date,
                                               this.dtpFechaFinal.Value.Date);
 
@@ -127,7 +134,7 @@ namespace nomina.Forms.Empleado
                  if (cbFechaInicial.Checked)
             {
                
-                listaHistorialAumentos = bdHistorialAum.buscarAumentosHistorial(txtCodigo.Text,
+                listaHistorialAumentos = bdHistorialAum.buscarAumentosHistorial(empleado.Id,
                                         this.dtpFechaInicial.Value.Date,
                                          this.dtpFechaInicial.Value.Date);
                 

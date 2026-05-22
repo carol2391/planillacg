@@ -15,6 +15,8 @@ using nomina.Clases.MovimientoLabores;
 using nomina.Forms.Main;
 using nomina.Clases.Utilidades;
 using nomina.Clases.PermisosUsuario;
+using nomina.Clases.UsuarioPermisos;
+using System.Runtime.CompilerServices;
 
 //revisar las categorias y los departamentos
 //no se puede agregar un empleado si no hay 
@@ -296,7 +298,7 @@ namespace nomina.Forms.Empleado
         private void BtnVerHistorial_Click(object sender, EventArgs e)
         {
             //if (bdPermisos.existePermiso(this.frmMain.usuarioId, 56)) {
-            frmHistorialAumento frm = new frmHistorialAumento(conexion);
+            frmHistorialAumento frm = new frmHistorialAumento(conexion,frmMain);
             frm.ShowDialog();
             //}
 
@@ -361,6 +363,51 @@ namespace nomina.Forms.Empleado
                 this.empleado.objDepto.NombreDepartamento = this.dgvDatos.Rows[rowIndex].Cells["Departamento"].Value.ToString();
                 this.empleado.Sueldo = Convert.ToDecimal(this.dgvDatos.Rows[rowIndex].Cells["Sueldo"].Value.ToString());
             }  
+        }
+
+        private void frmEmpleado_Shown(object sender, EventArgs e)
+        {
+            ValidarPermisos();
+        }
+
+        private  void ValidarPermisos()
+        {
+            // 1. Validamos los accesos y guardamos el resultado REAL en variables
+            bool tieneNuevo = Validator.ExistePermiso( this.frmMain.usuarioId, 3, 2, btnNuevo);
+            bool tieneModificar = Validator.ExistePermiso(this.frmMain.usuarioId, 3, 3, btnModificar);
+            bool tieneQuitar = Validator.ExistePermiso(this.frmMain.usuarioId, 3, 4, btnQuitar);
+            bool tieneAntecedente = Validator.ExistePermiso(this.frmMain.usuarioId, 3, 5, btnQuitar);
+            bool tieneSalir = true;
+            btnSalir.Visible = true;
+
+            // 2. Creamos la lista amarrando el botón con su visibilidad real de la BD
+            var listaBotones = new List<(Button Boton, bool Mostrar)>
+            {
+                (btnNuevo, tieneNuevo),
+                (btnModificar, tieneModificar),
+                (btnQuitar, tieneQuitar),
+                (btnSalir, tieneSalir),
+                (btnAntecedente, tieneAntecedente)
+            };
+
+            int yActual =105;
+            int espacioEntreBotones = 5; // Separación en píxeles entre un botón y otro
+
+            foreach (var item in listaBotones)
+            {
+                if (item.Mostrar)
+                {
+                    // Calculamos X restando el ancho del botón y un margen de 20px al ancho total del formulario
+                    // Esto evita usar números fijos y hace que se pegue al borde derecho de forma limpia
+                    int xDinamico = this.ClientSize.Width - item.Boton.Width - 12;
+
+                    // Asignamos la nueva posición calculada
+                    item.Boton.Location = new Point(xDinamico, yActual);
+
+                    // Acumulamos para el siguiente botón: posición actual + alto del botón + el espacio de separación
+                    yActual += item.Boton.Height + espacioEntreBotones;
+                }
+            }
         }
     }
 }

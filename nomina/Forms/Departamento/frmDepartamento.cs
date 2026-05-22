@@ -12,6 +12,7 @@ using nomina.Clases.Departamento;
 using nomina.Clases.Utilidades;
 using nomina.Forms.Main;
 using nomina.Clases.PermisosUsuario;
+using nomina.Clases.UsuarioPermisos;
 
 namespace nomina.Forms.Departamento
 {
@@ -247,7 +248,10 @@ namespace nomina.Forms.Departamento
 
         }
 
-    
+        private void frmDepartamento_Shown(object sender, EventArgs e)
+        {
+            Validator.validarPermisos (this.frmMain.usuarioId, btnNuevo, btnModificar, bntQuitar, btnSalir, this,4);
+        }
     }
 }
     

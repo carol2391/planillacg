@@ -3,6 +3,7 @@ using nomina.Clases.Empleado;
 using nomina.Clases.MovimiendoDescuentos;
 using nomina.Clases.MovimientoLabores;
 using nomina.Clases.PermisosUsuario;
+using nomina.Clases.UsuarioPermisos;
 using nomina.Clases.Utilidades;
 using nomina.Forms.Main;
 using System;
@@ -349,5 +350,10 @@ namespace nomina.Forms.MovimientoDescuentos
 
         }
         #endregion
+
+        private void frmMovimientoDescuento_Shown(object sender, EventArgs e)
+        {
+            Validator.validarPermisos(this.frmMain.usuarioId, btnNuevo, btnModificar, btnQuitar, btnSalir, this, 9);
+        }
     }
 }

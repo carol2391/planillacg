@@ -223,6 +223,8 @@
     <Compile Include="Clases\TipoPago\TipoPagoData.cs" />
     <Compile Include="Clases\UsuarioPermisos\PermisoUsuarioConexion.cs" />
     <Compile Include="Clases\UsuarioPermisos\PermisoUsuarioData.cs" />
+    <Compile Include="Clases\UsuarioPermisos\Validator.cs" />
+    <Compile Include="Clases\Usuarios\ModuloPermisoRow.cs" />
     <Compile Include="Clases\Usuarios\UsuarioConexion.cs" />
     <Compile Include="Clases\Usuarios\UsuarioData.cs" />
     <Compile Include="Clases\Utilidades\Utilidad.cs" />
@@ -390,9 +392,7 @@
     <Compile Include="Forms\Login\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Main\FrmMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\Main\FrmMain.cs" />
     <Compile Include="Forms\Main\FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>

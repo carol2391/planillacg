@@ -50,6 +50,7 @@ namespace nomina.Forms.Login
               Properties.Settings.Default.password.ToUpper().Equals(txtPassword.Text.ToUpper()))
             {
                 this.usuarioName = txtUser.Text.Trim();
+                this.usuarioId = -1;
                 DialogResult = DialogResult.OK;
             }
             else

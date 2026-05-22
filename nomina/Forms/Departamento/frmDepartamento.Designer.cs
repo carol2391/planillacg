@@ -56,7 +56,7 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(216)))), ((int)(((byte)(102)))));
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(9, 2);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(717, 38);
             this.panel1.TabIndex = 1;
@@ -77,7 +77,7 @@
             this.btnModificar.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModificar.Location = new System.Drawing.Point(615, 169);
-            this.btnModificar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(4);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(112, 49);
             this.btnModificar.TabIndex = 8;
@@ -90,7 +90,7 @@
             this.bntQuitar.BackColor = System.Drawing.Color.RoyalBlue;
             this.bntQuitar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bntQuitar.Location = new System.Drawing.Point(615, 225);
-            this.bntQuitar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bntQuitar.Margin = new System.Windows.Forms.Padding(4);
             this.bntQuitar.Name = "bntQuitar";
             this.bntQuitar.Size = new System.Drawing.Size(112, 49);
             this.bntQuitar.TabIndex = 7;
@@ -103,7 +103,7 @@
             this.btnNuevo.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNuevo.Location = new System.Drawing.Point(615, 112);
-            this.btnNuevo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnNuevo.Margin = new System.Windows.Forms.Padding(4);
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Size = new System.Drawing.Size(112, 49);
             this.btnNuevo.TabIndex = 6;
@@ -125,7 +125,7 @@
             this.NombreEncargado,
             this.CodigoCuenta});
             this.dgvDeptos.Location = new System.Drawing.Point(9, 112);
-            this.dgvDeptos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvDeptos.Margin = new System.Windows.Forms.Padding(4);
             this.dgvDeptos.Name = "dgvDeptos";
             this.dgvDeptos.RowHeadersWidth = 51;
             this.dgvDeptos.Size = new System.Drawing.Size(597, 529);
@@ -184,9 +184,9 @@
             this.groupBox1.Controls.Add(this.rbCodigo);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(16, 48);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(591, 57);
             this.groupBox1.TabIndex = 28;
             this.groupBox1.TabStop = false;
@@ -195,7 +195,7 @@
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(372, 21);
-            this.txtNombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(4);
             this.txtNombre.MaxLength = 30;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(209, 24);
@@ -205,7 +205,7 @@
             // txtCodigo
             // 
             this.txtCodigo.Location = new System.Drawing.Point(95, 23);
-            this.txtCodigo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCodigo.Margin = new System.Windows.Forms.Padding(4);
             this.txtCodigo.MaxLength = 3;
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(132, 24);
@@ -216,7 +216,7 @@
             // 
             this.rbNombre.AutoSize = true;
             this.rbNombre.Location = new System.Drawing.Point(276, 23);
-            this.rbNombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbNombre.Margin = new System.Windows.Forms.Padding(4);
             this.rbNombre.Name = "rbNombre";
             this.rbNombre.Size = new System.Drawing.Size(87, 22);
             this.rbNombre.TabIndex = 32;
@@ -229,7 +229,7 @@
             // 
             this.rbCodigo.AutoSize = true;
             this.rbCodigo.Location = new System.Drawing.Point(8, 26);
-            this.rbCodigo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbCodigo.Margin = new System.Windows.Forms.Padding(4);
             this.rbCodigo.Name = "rbCodigo";
             this.rbCodigo.Size = new System.Drawing.Size(81, 22);
             this.rbCodigo.TabIndex = 31;
@@ -243,7 +243,7 @@
             this.btnSalir.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Location = new System.Drawing.Point(615, 282);
-            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSalir.Margin = new System.Windows.Forms.Padding(4);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(112, 49);
             this.btnSalir.TabIndex = 29;
@@ -265,12 +265,13 @@
             this.Controls.Add(this.dgvDeptos);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "frmDepartamento";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Departamento";
             this.Load += new System.EventHandler(this.frmDepartamento_Load);
+            this.Shown += new System.EventHandler(this.frmDepartamento_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDeptos)).EndInit();

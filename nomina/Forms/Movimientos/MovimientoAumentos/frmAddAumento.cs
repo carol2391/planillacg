@@ -377,6 +377,7 @@ namespace nomina.Forms.Movimientos.MovimientoAumentos
                     monto = nudMontoAumentoPorcentaje.Value;
                            // + Convert.ToDecimal(empleado.Sueldo);
                     nudMontoAumento.Value = monto;
+                    
                     if (monto<= salarioInicial && monto <= salarioFinal)
                     { 
                         nudNuevoSueldo.Value = monto+Convert.ToDecimal(empleado.Sueldo);

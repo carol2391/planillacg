@@ -36,6 +36,10 @@ using nomina.Clases.PermisosUsuario;
 namespace nomina.Forms.Main
 
 {
+    public static class SuperUsuario
+    {
+        public static bool superUsuario { get; set; }
+    }
     public partial class frmMain : Form
     {
         Conexion conexion;
@@ -66,11 +70,14 @@ namespace nomina.Forms.Main
             bdCategoria = new CategoriaConexion(conexion);
             bdLabores = new LaboresConexion(conexion);
             bdEmpleado = new EmpleadoConexion(conexion);
-             bdDescuento = new DescuentoConexion(conexion);
+            bdDescuento = new DescuentoConexion(conexion);
             departamentos = new List<DepartamentoData>();
             categorias = new List<CategoriaData>();
             bdPermisos = new PermisoUsuarioConexion();
-           // verificarPermisos();
+            if (!SuperUsuario.superUsuario) {
+                VerificarPermisos();
+            }
+         
 
         }
 
@@ -90,6 +97,7 @@ namespace nomina.Forms.Main
             {
                 this.usuarioId = frm.usuarioId;
                 this.usuarioName = frm.usuarioName;
+                SuperUsuario.superUsuario = usuarioId == -1 && string.Equals(usuarioName?.Trim(), Properties.Settings.Default.usuario?.Trim(), StringComparison.OrdinalIgnoreCase);
                 mostrarEmpresas();
             }
             else
@@ -250,11 +258,11 @@ namespace nomina.Forms.Main
 
         private void generarPlanillaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (bdPermisos.existePermiso(this.usuarioId, 57)) {
-                frmPlanilla frm = new frmPlanilla(conexion, this);
-                frm.Tag = "generar";
-                frm.ShowDialog();
-            }
+            //if (bdPermisos.existePermiso(this.usuarioId, 57)) {
+            //    frmPlanilla frm = new frmPlanilla(conexion, this);
+            //    frm.Tag = "generar";
+            //    frm.ShowDialog();
+            //}
               
         }
 
@@ -273,7 +281,7 @@ namespace nomina.Forms.Main
         private void UsuariosToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             //1 para ver usuarios
-            if (  bdPermisos.existePermiso(this.usuarioId, 1) ) {
+            if (SuperUsuario.superUsuario || bdPermisos.existePermiso(this.usuarioId,2, 1)){
                   frmUsuarios frm = new frmUsuarios(conexion,this);
                   frm.Tag = "usuarios";
                   frm.ShowDialog();
@@ -284,7 +292,7 @@ namespace nomina.Forms.Main
         private void AsignarPermisosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //6 asignar permiso
-            if (bdPermisos.existePermiso(this.usuarioId, 6))
+            if (SuperUsuario.superUsuario || bdPermisos.existePermiso(this.usuarioId,14, 3))
             {
                 frmAsignarPermisos frm = new frmAsignarPermisos(conexion, this);
                 frm.ShowDialog();
@@ -312,110 +320,110 @@ namespace nomina.Forms.Main
                 
         }
 
-        public void verificarPermisos() {
+        public void VerificarPermisos() {
             //1 para ver usuarios
-            if (!bdPermisos.existePermiso(this.usuarioId, 1))
+            if (!bdPermisos.existePermiso(this.usuarioId, 2,1))
             {
-                usuariosToolStripMenuItem.Enabled = false;
+                usuariosToolStripMenuItem.Visible = false;
             }
 
             //8 para ver empresas
-            if (!bdPermisos.existePermiso(this.usuarioId, 8))
+            if (!bdPermisos.existePermiso(this.usuarioId,1,1))
              {
-                empresasToolStripMenuItem1.Enabled = false;
+                empresasToolStripMenuItem1.Visible = false;
                 
             }
 
             //12 ver departamento
-            if (!bdPermisos.existePermiso(this.usuarioId, 12))
+            if (!bdPermisos.existePermiso(this.usuarioId, 4,1))
             {
-                tsmDepartamentos.Enabled = false;
+                tsmDepartamentos.Visible = false;
 
             }
 
             //16 ver categoria
-            if (!bdPermisos.existePermiso(this.usuarioId, 16))
+            if (!bdPermisos.existePermiso(this.usuarioId,5,1))
             {
-                this.tsmCategorias.Enabled = false;
+                tsmCategorias.Visible = false;
             }
 
             //20 ver empleado
-            if (!bdPermisos.existePermiso(this.usuarioId,20))
+            if (!bdPermisos.existePermiso(this.usuarioId, 3, 1))
             {
-                this.tsmEmpleados.Enabled = false;
+                tsmEmpleados.Visible = false;
+              
             }
 
             //24 ver labores
-            if (!bdPermisos.existePermiso(this.usuarioId, 24))
+            if (!bdPermisos.existePermiso(this.usuarioId, 6, 1))
             {
-                this.laboresOTrabajosToolStripMenuItem.Enabled = false;
+                laboresOTrabajosToolStripMenuItem.Visible = false;
 
             }
 
             //28 ver descuento
-            if (!bdPermisos.existePermiso(this.usuarioId, 28))
+            if (!bdPermisos.existePermiso(this.usuarioId, 7, 1))
             {
-                descuentosEspecialesToolStripMenuItem.Enabled = false;
+                descuentosEspecialesToolStripMenuItem.Visible = false;
 
             }
             //32  ver movimiento labores
-            if (!bdPermisos.existePermiso(this.usuarioId, 32))
+            if (!bdPermisos.existePermiso(this.usuarioId, 8, 1))
             {
-                laboresToolStripMenuItem.Enabled = false;
+                laboresToolStripMenuItem.Visible = false;
 
             }
-             
+
             //36  ver movimiento descuento
-            if (!bdPermisos.existePermiso(this.usuarioId, 36))
+            if (!bdPermisos.existePermiso(this.usuarioId, 9, 1))
             {
-                descuentosToolStripMenuItem.Enabled = false;
+                descuentosToolStripMenuItem.Visible = false;
 
             }
 
             //40  ver movimiento ausencia
-            if (!bdPermisos.existePermiso(this.usuarioId, 40))
+            if (!bdPermisos.existePermiso(this.usuarioId, 10, 1))
             {
-                ausenciasToolStripMenuItem.Enabled = false;
+                ausenciasToolStripMenuItem.Visible = false;
 
             }
 
             //44 ver movimiento aumento
-            if (!bdPermisos.existePermiso(this.usuarioId, 44))
+            if (!bdPermisos.existePermiso(this.usuarioId, 11, 1))
             {
-               aumentosToolStripMenuItem.Enabled = false;
+                aumentosToolStripMenuItem.Visible = false;
 
             }
 
 
             //48 ver movimiento prestamos
-            if (!bdPermisos.existePermiso(this.usuarioId, 44))
+            if (!bdPermisos.existePermiso(this.usuarioId, 12, 1))
             {
-               prestamosToolStripMenuItem.Enabled = false;
+                prestamosToolStripMenuItem.Visible = false;
 
             }
 
-            //52 ver parametros
-            if (!bdPermisos.existePermiso(this.usuarioId, 52))
-            {
-                parametrosToolStripMenuItem.Enabled = false;
+            ////52 ver parametros
+            //if (!bdPermisos.existePermiso(this.usuarioId, 52))
+            //{
+            //    parametrosToolStripMenuItem.Enabled = false;
 
-            }
-            //57 PLANILLA
-            if (!bdPermisos.existePermiso(this.usuarioId, 57))
-            {
-                generarPlanillaToolStripMenuItem.Enabled = false;
-            }
+            //}
+            ////57 PLANILLA
+            //if (!bdPermisos.existePermiso(this.usuarioId, 57))
+            //{
+            //    generarPlanillaToolStripMenuItem.Enabled = false;
+            //}
 
-            //58 PLANILLA
-            if (!bdPermisos.existePermiso(this.usuarioId, 58))
-            {
-                nominaOPlanillaToolStripMenuItem.Enabled = false;
-            }
+            ////58 PLANILLA
+            //if (!bdPermisos.existePermiso(this.usuarioId, 58))
+            //{
+            //    nominaOPlanillaToolStripMenuItem.Enabled = false;
+            //}
 
-          
-       }// fin permisos
+        }// fin permisos
 
-            private void consultasToolStripMenuItem_Click(object sender, EventArgs e)
+        private void consultasToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
