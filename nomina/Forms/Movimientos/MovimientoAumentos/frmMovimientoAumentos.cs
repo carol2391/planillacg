@@ -34,6 +34,9 @@ namespace nomina.Forms.Movimientos.MovimientoAumentos
             bdPermisos = new PermisoUsuarioConexion();
             this.frmMain = frmMain;
             Utilidad.configurarDataGrid(dgvDatos);
+            Utilidad.configuarForm(this, "Movimientos Aumento");
+            panel1.BackColor = Color.SkyBlue;
+            btnModificar.BackColor = btnNuevo.BackColor = btnQuitar.BackColor = btnSalir.BackColor = Color.SkyBlue;
             dgvDatos.AutoGenerateColumns = false;
             txtCodigo.Select();
             this.dtpFechaInicial.Visible = false;
@@ -119,20 +122,15 @@ namespace nomina.Forms.Movimientos.MovimientoAumentos
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            //if (bdPermisos.existePermiso(this.frmMain.usuarioId, 45)) {
-                frmAddAumento frm = new frmAddAumento(conexion);
+                frmAddAumento frm = new frmAddAumento(conexion, frmMain);
                 frm.Tag = "agregar";
                 frm.ShowDialog();
               dgvDatos.DataSource = bdAumento.obtenerAumentos();
-            //}else
-            //    btnNuevo.Enabled = false;
 
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            //if (bdPermisos.existePermiso(this.frmMain.usuarioId, 46))
-            //{
                 if (dgvDatos.RowCount > 0)
                 {
                     DateTime fechaActual = DateTime.Now;
@@ -147,7 +145,6 @@ namespace nomina.Forms.Movimientos.MovimientoAumentos
                         DialogResult result = frm.ShowDialog();
                         if (result == System.Windows.Forms.DialogResult.OK)
                         {
-                        ///cargar el datagrid con la información
                             dgvDatos.DataSource = bdAumento.obtenerAumentos();
                          }
 
@@ -157,19 +154,11 @@ namespace nomina.Forms.Movimientos.MovimientoAumentos
                         MessageBox.Show("Solo puede actualizar los aumentos de este mes y año", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 }
-            //}else
-
-            //    btnModificar.Enabled = false;
-
-
         }
 
         private void btnQuitar_Click(object sender, EventArgs e)
         {
-            //if (bdPermisos.existePermiso(this.frmMain.usuarioId, 47))
                 eliminar();
-            //else
-            //    btnQuitar.Enabled = false;
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -217,8 +206,6 @@ namespace nomina.Forms.Movimientos.MovimientoAumentos
                 listaAumentos = bdAumento.buscarAumentos(empleado.Id,
                                               this.dtpFechaInicial.Value.Date,
                                               this.dtpFechaFinal.Value.Date);
-
-                //DescripcionDelTipoAumento();
                 this.dgvDatos.DataSource = listaAumentos;
 
             }
@@ -229,9 +216,7 @@ namespace nomina.Forms.Movimientos.MovimientoAumentos
                 listaAumentos = bdAumento.buscarAumentos(empleado.Id,
                                         this.dtpFechaInicial.Value.Date,
                                          fFinal);
-                //DescripcionDelTipoAumento();
                 this.dgvDatos.DataSource = listaAumentos;
-                //this.dtpFechaFinal.Visible = false;
             }
             
         }

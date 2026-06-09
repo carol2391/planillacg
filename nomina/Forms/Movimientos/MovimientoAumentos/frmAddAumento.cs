@@ -43,10 +43,11 @@ namespace nomina.Forms.Movimientos.MovimientoAumentos
             cbTipoAumento.Select();
         }
         /*formulario para agregar un nuevo aumento*/
-        public frmAddAumento(Conexion conexion)
+        public frmAddAumento(Conexion conexion, frmMain frmMain)
         {
             InitializeComponent();
             this.conexion = conexion;
+            this.frmMain = frmMain;
             bdAumento = new AumentoConexion(conexion);
             desactivarInfoEmpleado();
             configurarComboboxs();

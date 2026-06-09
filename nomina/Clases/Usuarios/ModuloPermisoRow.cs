@@ -15,5 +15,6 @@ namespace nomina.Clases.Usuarios
         public bool Modificar { get; set; }
         public bool Eliminar { get; set; }
         public bool VerAntecedentes { get; set; }
+        public bool VerHistorialAumento { get; set; }
     }
 }

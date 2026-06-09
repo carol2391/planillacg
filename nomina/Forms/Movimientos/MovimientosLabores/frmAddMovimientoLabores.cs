@@ -753,5 +753,10 @@ namespace nomina.Forms
         {
             Utilidad.cambiarControlEnter(e);
         }
+
+        private void btnBuscarCuenta_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

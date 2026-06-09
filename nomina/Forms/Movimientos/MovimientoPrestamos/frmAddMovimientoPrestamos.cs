@@ -31,6 +31,7 @@ namespace nomina.Forms.Movimientos.MovimientoPrestamos
         {
             InitializeComponent();
             this.conexion = conexion;
+         
             bdPrestamo = new PrestamoConexion(conexion);
             desactivarInfoEmpleado();
             configurarComboboxs();
@@ -43,11 +44,12 @@ namespace nomina.Forms.Movimientos.MovimientoPrestamos
         }
 
         /*editar un prestamo*/
-        public frmAddMovimientoPrestamos(Conexion conexion,PrestamoData prestamo)
+        public frmAddMovimientoPrestamos(Conexion conexion,PrestamoData prestamo, frmMain frmMain)
         {
             InitializeComponent();
             this.conexion = conexion;
             bdPrestamo = new PrestamoConexion(conexion);
+            this.frmMain = frmMain;
             this.prestamoData = prestamo;
             this.prestamoData = bdPrestamo.obtenerPrestamo(prestamoData.Id);
             this.cbActivo.Visible = true;

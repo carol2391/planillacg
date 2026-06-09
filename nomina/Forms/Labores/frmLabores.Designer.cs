@@ -58,7 +58,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnSalir.BackColor = System.Drawing.Color.SkyBlue;
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Location = new System.Drawing.Point(647, 274);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(4);
@@ -135,7 +135,7 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnModificar.BackColor = System.Drawing.Color.SkyBlue;
             this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModificar.Location = new System.Drawing.Point(647, 161);
             this.btnModificar.Margin = new System.Windows.Forms.Padding(4);
@@ -148,7 +148,7 @@
             // 
             // btnQuitar
             // 
-            this.btnQuitar.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnQuitar.BackColor = System.Drawing.Color.SkyBlue;
             this.btnQuitar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnQuitar.Location = new System.Drawing.Point(647, 218);
             this.btnQuitar.Margin = new System.Windows.Forms.Padding(4);
@@ -161,7 +161,7 @@
             // 
             // btnNuevo
             // 
-            this.btnNuevo.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnNuevo.BackColor = System.Drawing.Color.SkyBlue;
             this.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNuevo.Location = new System.Drawing.Point(647, 105);
             this.btnNuevo.Margin = new System.Windows.Forms.Padding(4);
@@ -288,7 +288,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(216)))), ((int)(((byte)(102)))));
+            this.panel1.BackColor = System.Drawing.Color.SkyBlue;
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);

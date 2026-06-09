@@ -71,10 +71,10 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(216)))), ((int)(((byte)(102)))));
+            this.panel1.BackColor = System.Drawing.Color.SkyBlue;
             this.panel1.Controls.Add(this.label7);
             this.panel1.Location = new System.Drawing.Point(12, 10);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(993, 38);
             this.panel1.TabIndex = 47;
@@ -103,9 +103,9 @@
             this.gpEmpleados.Controls.Add(this.lbAlertId);
             this.gpEmpleados.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gpEmpleados.Location = new System.Drawing.Point(12, 55);
-            this.gpEmpleados.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpEmpleados.Margin = new System.Windows.Forms.Padding(4);
             this.gpEmpleados.Name = "gpEmpleados";
-            this.gpEmpleados.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpEmpleados.Padding = new System.Windows.Forms.Padding(4);
             this.gpEmpleados.Size = new System.Drawing.Size(993, 165);
             this.gpEmpleados.TabIndex = 46;
             this.gpEmpleados.TabStop = false;
@@ -200,10 +200,10 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnSalir.BackColor = System.Drawing.Color.AliceBlue;
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Location = new System.Drawing.Point(132, 480);
-            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSalir.Margin = new System.Windows.Forms.Padding(4);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(112, 49);
             this.btnSalir.TabIndex = 9;
@@ -214,10 +214,10 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnModificar.BackColor = System.Drawing.Color.SkyBlue;
             this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModificar.Location = new System.Drawing.Point(12, 480);
-            this.btnModificar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(4);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(112, 49);
             this.btnModificar.TabIndex = 8;
@@ -250,9 +250,9 @@
             this.gpLabor.Controls.Add(this.label1);
             this.gpLabor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gpLabor.Location = new System.Drawing.Point(12, 228);
-            this.gpLabor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpLabor.Margin = new System.Windows.Forms.Padding(4);
             this.gpLabor.Name = "gpLabor";
-            this.gpLabor.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpLabor.Padding = new System.Windows.Forms.Padding(4);
             this.gpLabor.Size = new System.Drawing.Size(1000, 245);
             this.gpLabor.TabIndex = 43;
             this.gpLabor.TabStop = false;
@@ -263,7 +263,7 @@
             this.nudMontoTotal.DecimalPlaces = 2;
             this.nudMontoTotal.Enabled = false;
             this.nudMontoTotal.Location = new System.Drawing.Point(809, 110);
-            this.nudMontoTotal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nudMontoTotal.Margin = new System.Windows.Forms.Padding(4);
             this.nudMontoTotal.Maximum = new decimal(new int[] {
             -559939585,
             902409669,
@@ -302,7 +302,7 @@
             this.nudCantidadDescuento.DecimalPlaces = 2;
             this.nudCantidadDescuento.Enabled = false;
             this.nudCantidadDescuento.Location = new System.Drawing.Point(623, 110);
-            this.nudCantidadDescuento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nudCantidadDescuento.Margin = new System.Windows.Forms.Padding(4);
             this.nudCantidadDescuento.Maximum = new decimal(new int[] {
             9999999,
             0,
@@ -339,11 +339,11 @@
             // 
             // btnBuscarCuenta
             // 
-            this.btnBuscarCuenta.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnBuscarCuenta.BackColor = System.Drawing.Color.SkyBlue;
             this.btnBuscarCuenta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnBuscarCuenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscarCuenta.Location = new System.Drawing.Point(217, 196);
-            this.btnBuscarCuenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBuscarCuenta.Margin = new System.Windows.Forms.Padding(4);
             this.btnBuscarCuenta.Name = "btnBuscarCuenta";
             this.btnBuscarCuenta.Size = new System.Drawing.Size(100, 28);
             this.btnBuscarCuenta.TabIndex = 7;
@@ -356,7 +356,7 @@
             this.nudMontoDescuento.DecimalPlaces = 2;
             this.nudMontoDescuento.Enabled = false;
             this.nudMontoDescuento.Location = new System.Drawing.Point(368, 110);
-            this.nudMontoDescuento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nudMontoDescuento.Margin = new System.Windows.Forms.Padding(4);
             this.nudMontoDescuento.Maximum = new decimal(new int[] {
             1569325055,
             23283064,
@@ -384,7 +384,7 @@
             // 
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFecha.Location = new System.Drawing.Point(621, 43);
-            this.dtpFecha.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpFecha.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(192, 26);
             this.dtpFecha.TabIndex = 1;
@@ -393,7 +393,7 @@
             // txtCodigoCuenta
             // 
             this.txtCodigoCuenta.Location = new System.Drawing.Point(16, 197);
-            this.txtCodigoCuenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCodigoCuenta.Margin = new System.Windows.Forms.Padding(4);
             this.txtCodigoCuenta.MaxLength = 5;
             this.txtCodigoCuenta.Name = "txtCodigoCuenta";
             this.txtCodigoCuenta.Size = new System.Drawing.Size(192, 26);
@@ -456,7 +456,7 @@
             // txtDescripcionDescuento
             // 
             this.txtDescripcionDescuento.Location = new System.Drawing.Point(12, 113);
-            this.txtDescripcionDescuento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDescripcionDescuento.Margin = new System.Windows.Forms.Padding(4);
             this.txtDescripcionDescuento.MaxLength = 30;
             this.txtDescripcionDescuento.Multiline = true;
             this.txtDescripcionDescuento.Name = "txtDescripcionDescuento";
@@ -498,7 +498,7 @@
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.gpLabor);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmModificarMovimientoDescuento";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificar Movimiento Descuento";

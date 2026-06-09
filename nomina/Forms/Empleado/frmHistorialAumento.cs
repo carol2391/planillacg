@@ -22,7 +22,6 @@ namespace nomina.Forms.Empleado
         public EmpleadoData empleado { set; get; }
         List<HistorialData> listaHistorialAumentos;
         HistorialConexion bdHistorialAum;
-        //HistorialData ausenciaData;
         public frmHistorialAumento(Conexion conexion, frmMain frmMain)
         {
             InitializeComponent();
@@ -71,18 +70,22 @@ namespace nomina.Forms.Empleado
         private void BtnBuscar_Click(object sender, EventArgs e)
         {
             
-                frmEmpleado frm = new frmEmpleado(conexion, frmMain1);
-                frm.Tag = "buscar";
+            frmEmpleado frm = new frmEmpleado(conexion, frmMain1);
+            frm.Tag = "buscar";
+            if (!lblNombre.Text.Equals("Nombre Empleado:") && validar())
+            {
+                buscarHistorialAumento();
+            }
+            else {
                 frm.ShowDialog();
                 if (frm.DialogResult == DialogResult.OK)
                 {
                     this.empleado = frm.empleado;
                     this.lblNombre.Text = empleado.Nombre;
-                  
 
                 }
-
-            
+            }
+                       
         }
 
         #region validar
@@ -143,5 +146,29 @@ namespace nomina.Forms.Empleado
             }
         }
         #endregion
+
+        private void cbFechaInicial_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!cbFechaInicial.Checked)
+            {
+                this.dtpFechaInicial.Visible = false;           
+            }
+            else
+            {
+                this.dtpFechaInicial.Visible = true;          
+            }
+        }
+
+        private void cbFechaFinal_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!cbFechaFinal.Checked)
+            {
+                this.dtpFechaFinal.Visible = false;
+            }
+            else
+            {
+                this.dtpFechaFinal.Visible = true;
+            }
+        }
     }
 }

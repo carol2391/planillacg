@@ -45,18 +45,20 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.SkyBlue;
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(3, 0);
+            this.panel1.Location = new System.Drawing.Point(4, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(382, 52);
+            this.panel1.Size = new System.Drawing.Size(509, 64);
             this.panel1.TabIndex = 38;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Ebrima", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(135, 9);
+            this.label1.Location = new System.Drawing.Point(180, 11);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(112, 37);
+            this.label1.Size = new System.Drawing.Size(138, 46);
             this.label1.TabIndex = 34;
             this.label1.Text = "Nomina";
             // 
@@ -64,10 +66,11 @@
             // 
             this.txtPassword.BackColor = System.Drawing.Color.SkyBlue;
             this.txtPassword.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPassword.Location = new System.Drawing.Point(33, 216);
+            this.txtPassword.Location = new System.Drawing.Point(44, 266);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(313, 27);
+            this.txtPassword.Size = new System.Drawing.Size(416, 32);
             this.txtPassword.TabIndex = 40;
             this.txtPassword.Enter += new System.EventHandler(this.txtPassword_Enter);
             this.txtPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPassword_KeyPress);
@@ -77,9 +80,10 @@
             // 
             this.txtUser.BackColor = System.Drawing.Color.SkyBlue;
             this.txtUser.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUser.Location = new System.Drawing.Point(33, 183);
+            this.txtUser.Location = new System.Drawing.Point(44, 225);
+            this.txtUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(314, 27);
+            this.txtUser.Size = new System.Drawing.Size(417, 32);
             this.txtUser.TabIndex = 39;
             this.txtUser.Enter += new System.EventHandler(this.txtUser_Enter);
             this.txtUser.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUser_KeyPress);
@@ -90,9 +94,10 @@
             this.pictureBox1.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.ErrorImage")));
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(138, 58);
+            this.pictureBox1.Location = new System.Drawing.Point(184, 71);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(112, 106);
+            this.pictureBox1.Size = new System.Drawing.Size(149, 130);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 41;
             this.pictureBox1.TabStop = false;
@@ -106,9 +111,10 @@
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalir.ForeColor = System.Drawing.Color.Black;
-            this.btnSalir.Location = new System.Drawing.Point(33, 322);
+            this.btnSalir.Location = new System.Drawing.Point(44, 396);
+            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(313, 40);
+            this.btnSalir.Size = new System.Drawing.Size(417, 49);
             this.btnSalir.TabIndex = 43;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = false;
@@ -122,9 +128,10 @@
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Font = new System.Drawing.Font("Ebrima", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(33, 276);
+            this.btnLogin.Location = new System.Drawing.Point(44, 340);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(313, 40);
+            this.btnLogin.Size = new System.Drawing.Size(417, 49);
             this.btnLogin.TabIndex = 42;
             this.btnLogin.Text = "Iniciar Sesión";
             this.btnLogin.UseVisualStyleBackColor = false;
@@ -133,19 +140,21 @@
             // lklConnection
             // 
             this.lklConnection.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lklConnection.Location = new System.Drawing.Point(0, 397);
+            this.lklConnection.Location = new System.Drawing.Point(0, 489);
+            this.lklConnection.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lklConnection.Name = "lklConnection";
-            this.lklConnection.Size = new System.Drawing.Size(381, 19);
+            this.lklConnection.Size = new System.Drawing.Size(508, 23);
             this.lklConnection.TabIndex = 44;
             this.lklConnection.TabStop = true;
             this.lklConnection.Text = "Configurar conexión";
+            this.lklConnection.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lklConnection_LinkClicked);
             // 
             // frmLogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(195)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(381, 416);
+            this.ClientSize = new System.Drawing.Size(508, 512);
             this.Controls.Add(this.lklConnection);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnLogin);
@@ -154,6 +163,7 @@
             this.Controls.Add(this.txtUser);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

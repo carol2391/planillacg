@@ -6,6 +6,7 @@ using nomina.Estructuras;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -114,34 +115,47 @@ namespace nomina.Clases.PermisosUsuario
                             case "VER ANTECEDENTES":
                                 matrizPivoteada[idModulo].VerAntecedentes = tienePermiso;
                                 break;
+
+                            case "VER HISTORIAL AUMENTO":
+                                matrizPivoteada[idModulo].VerHistorialAumento = tienePermiso;
+                                break;
                         }
                     }
                 }
 
-             
+                dgv.DataSource = null;
                 // Convertimos el diccionario en una lista plana para alimentar el DataGridView
                 dgv.DataSource = new List<ModuloPermisoRow>(matrizPivoteada.Values);
 
-                // 2. LA CLAVE: Ocultamos el CheckBox en las filas que NO sean "Empleados"
                 foreach (DataGridViewRow fila in dgv.Rows)
                 {
                     if (fila.DataBoundItem is ModuloPermisoRow filaPermiso)
                     {
-                        // Comparamos el nombre del módulo
-                        if (filaPermiso.Modulo.ToUpper().Trim() != "EMPLEADO")
+                        string nombreModuloActual = filaPermiso.Modulo.ToUpper().Trim();
+
+                        if (nombreModuloActual != "EMPLEADO")
                         {
-                            // 1. Instanciamos la celda de texto totalmente limpia
+                            // 1. Reemplazamos VerAntecedentes
                             DataGridViewTextBoxCell celdaTexto = new DataGridViewTextBoxCell();
-
-                            // 2. La asignamos a la fila PRIMERO (así C# ya sabe a qué control pertenece)
                             fila.Cells["VerAntecedentes"] = celdaTexto;
-
-                            // 3. AHORA SÍ, ya podemos configurar el valor y bloquearla de forma segura
-                            celdaTexto.Value = string.Empty;
                             celdaTexto.ReadOnly = true;
+
+                            // LA CLAVE: No usamos string.Empty. Hacemos el texto invisible.
+                            celdaTexto.Style.ForeColor = Color.Transparent;
+                            celdaTexto.Style.SelectionForeColor = Color.Transparent;
+
+                            // 2. Reemplazamos VerHistorialAumento
+                            DataGridViewTextBoxCell celdaTexto2 = new DataGridViewTextBoxCell();
+                            fila.Cells["VerHistorialAumento"] = celdaTexto2;
+                            celdaTexto2.ReadOnly = true;
+
+                            // LA CLAVE: Texto invisible
+                            celdaTexto2.Style.ForeColor = Color.Transparent;
+                            celdaTexto2.Style.SelectionForeColor = Color.Transparent;
                         }
                     }
                 }
+                dgv.Refresh();
                 return dgv;
             }
             catch (Exception ex)

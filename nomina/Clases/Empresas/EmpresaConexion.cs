@@ -308,7 +308,7 @@ namespace nomina.Clases.Empresas
                 int flag = 0;
           
                 this.databaseConnection = new MySqlConnection(EmpresaConexion.connectionString);
-                string readCommand = "SELECT COUNT(nom) FROM cgpc00";
+                string readCommand = "SELECT COUNT(nom) FROM cgpc00 where cod_em="+codigo;
                 MySqlCommand cmd = new MySqlCommand(readCommand, this.databaseConnection);
                 cmd.Parameters.AddWithValue("@param", codigo);
                 cmd.CommandType = CommandType.Text;
@@ -531,12 +531,17 @@ namespace nomina.Clases.Empresas
                 {
                     if (!existenEmpresas(codigo))
                     {
-                       // crearTablasProcedimientoEnEmpresas(Properties.Resources.estructura_empresas);
-                       // crearTablasProcedimientoEnEmpresas(Properties.Resources.procedimientos__almacenados_empresas);
-                        //crearTablasProcedimientoEnEmpresas(Properties.Resources.triguers_empresas);
-                    }
+                        string scriptEstructura = Properties.Resources.estructura_empresas;
+                        string scriptProcedimientos = Properties.Resources.procedimientos__almacenados_empresas;
+                        string bdname = "n" + codigo;
+                        scriptEstructura = scriptEstructura.Replace("sistema_nomina", $"`{bdname}`");
+                         scriptProcedimientos = scriptProcedimientos.Replace("sistema_nomina", $"`{bdname}`");
 
-                    string text = "";
+                        crearTablasProcedimientoEnEmpresas(scriptEstructura);
+                        crearTablasProcedimientoEnEmpresas(scriptProcedimientos);
+                }
+
+                 
 
 
                     this.databaseConnection = new MySqlConnection(connectionString);
@@ -589,10 +594,10 @@ namespace nomina.Clases.Empresas
 
 
             }
-            #endregion
+        #endregion
 
-            #region crear empresa estructura
-            public void crearTablasProcedimientoEnEmpresas(string estructura)
+        #region crear empresa estructura
+        public void crearTablasProcedimientoEnEmpresas(string estructura)
             {
 
                 try
@@ -600,9 +605,12 @@ namespace nomina.Clases.Empresas
               
                     EmpresaConexion.connectionString += "Allow User Variables=True;";
                     string text = estructura;
-                    if (!serverData.server.Equals("127.0.0.1"))
-                        text = text.Replace("localhost", serverData.server);
+                if (!serverData.server.Equals("127.0.0.1"))
+                    text = text.Replace("localhost", serverData.server);
+                else {
                     text = text.Replace("root", serverData.user);
+                }
+                    
 
 
                     this.databaseConnection = new MySqlConnection(connectionString);
@@ -702,10 +710,10 @@ namespace nomina.Clases.Empresas
                 try
                 {
                     //string text = File.ReadAllText(path);
-                    string text = procedimiento.Replace("cr90", nombreEmpresa);
+                    string text = procedimiento.Replace("sistema_nomina", nombreEmpresa);
                     if (!serverData.server.Equals("127.0.0.1"))
                         text = text.Replace("localhost", serverData.server);
-                    text = text.Replace("root", serverData.user);
+                        text = text.Replace("root", serverData.user);
 
                     EmpresaConexion.connectionString = EmpresaConexion.connectionString.Replace("empresas", nombreEmpresa);
                     databaseConnection = new MySqlConnection(EmpresaConexion.connectionString);
@@ -726,7 +734,7 @@ namespace nomina.Clases.Empresas
             #endregion
 
             #region modificar empresa y crea la bd retenciones, cuando ya hay una empresa creada
-            public bool modificarEmpresaRetenciones(int id, string codigo, string nombre, DateTime fecha, string direccion,
+            public bool modificarEmpresaNomina(int id, string codigo, string nombre, DateTime fecha, string direccion,
                 string RTN, string telefono, string correo, string codigoAntiguo, Image imagen, string usuarioCreador)
             {
                 bool result;
@@ -734,8 +742,8 @@ namespace nomina.Clases.Empresas
                 {
                     if (!existenEmpresas(codigo))
                     {
-                        //crearTablasProcedimientoEnEmpresas(Properties.Resources.estructura_empresas);
-                        //crearTablasProcedimientoEnEmpresas(Properties.Resources.procedimientos__almacenados_empresas);
+                       crearTablasProcedimientoEnEmpresas(Properties.Resources.estructura_empresas);
+                        crearTablasProcedimientoEnEmpresas(Properties.Resources.procedimientos__almacenados_empresas);
                         //crearTablasProcedimientoEnEmpresas(Properties.Resources.triguers_empresas);
                     }
                     byte[] avatar = null;

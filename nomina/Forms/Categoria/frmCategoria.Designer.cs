@@ -56,7 +56,7 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(216)))), ((int)(((byte)(102)))));
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(1, 5);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(759, 38);
             this.panel1.TabIndex = 0;
@@ -86,7 +86,7 @@
             this.SalarioInicial,
             this.SalarioFinal});
             this.dgvCategorias.Location = new System.Drawing.Point(4, 108);
-            this.dgvCategorias.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvCategorias.Margin = new System.Windows.Forms.Padding(4);
             this.dgvCategorias.Name = "dgvCategorias";
             this.dgvCategorias.RowHeadersWidth = 51;
             this.dgvCategorias.Size = new System.Drawing.Size(639, 507);
@@ -140,7 +140,7 @@
             this.btnNuevo.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNuevo.Location = new System.Drawing.Point(648, 110);
-            this.btnNuevo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnNuevo.Margin = new System.Windows.Forms.Padding(4);
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Size = new System.Drawing.Size(112, 49);
             this.btnNuevo.TabIndex = 2;
@@ -153,7 +153,7 @@
             this.bntQuitar.BackColor = System.Drawing.Color.RoyalBlue;
             this.bntQuitar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bntQuitar.Location = new System.Drawing.Point(648, 223);
-            this.bntQuitar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bntQuitar.Margin = new System.Windows.Forms.Padding(4);
             this.bntQuitar.Name = "bntQuitar";
             this.bntQuitar.Size = new System.Drawing.Size(112, 49);
             this.bntQuitar.TabIndex = 3;
@@ -166,7 +166,7 @@
             this.btnModificar.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModificar.Location = new System.Drawing.Point(648, 166);
-            this.btnModificar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(4);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(112, 49);
             this.btnModificar.TabIndex = 4;
@@ -183,9 +183,9 @@
             this.groupBox1.Controls.Add(this.rbCodigo);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(7, 47);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(633, 57);
             this.groupBox1.TabIndex = 29;
             this.groupBox1.TabStop = false;
@@ -194,7 +194,7 @@
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(372, 21);
-            this.txtNombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(4);
             this.txtNombre.MaxLength = 30;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(252, 24);
@@ -204,7 +204,7 @@
             // txtCodigo
             // 
             this.txtCodigo.Location = new System.Drawing.Point(95, 23);
-            this.txtCodigo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCodigo.Margin = new System.Windows.Forms.Padding(4);
             this.txtCodigo.MaxLength = 3;
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(132, 24);
@@ -215,7 +215,7 @@
             // 
             this.rbNombre.AutoSize = true;
             this.rbNombre.Location = new System.Drawing.Point(276, 23);
-            this.rbNombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbNombre.Margin = new System.Windows.Forms.Padding(4);
             this.rbNombre.Name = "rbNombre";
             this.rbNombre.Size = new System.Drawing.Size(87, 22);
             this.rbNombre.TabIndex = 32;
@@ -228,7 +228,7 @@
             // 
             this.rbCodigo.AutoSize = true;
             this.rbCodigo.Location = new System.Drawing.Point(8, 26);
-            this.rbCodigo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbCodigo.Margin = new System.Windows.Forms.Padding(4);
             this.rbCodigo.Name = "rbCodigo";
             this.rbCodigo.Size = new System.Drawing.Size(81, 22);
             this.rbCodigo.TabIndex = 31;
@@ -242,7 +242,7 @@
             this.btnSalir.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Location = new System.Drawing.Point(648, 279);
-            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSalir.Margin = new System.Windows.Forms.Padding(4);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(112, 49);
             this.btnSalir.TabIndex = 30;
@@ -256,15 +256,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(195)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(763, 617);
+            this.Controls.Add(this.dgvCategorias);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.bntQuitar);
             this.Controls.Add(this.btnNuevo);
-            this.Controls.Add(this.dgvCategorias);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "frmCategoria";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

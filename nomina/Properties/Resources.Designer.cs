@@ -81,12 +81,72 @@ namespace nomina.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a CREATE DATABASE IF NOT EXISTS sistema_nomina
+        ///CHARACTER SET utf8mb4
+        ///COLLATE utf8mb4_unicode_ci;
+        ///
+        ///USE sistema_nomina;
+        ///
+        ///
+        ///SET FOREIGN_KEY_CHECKS = 0;
+        ///
+        ///CREATE TABLE `tipo_aumento` (
+        ///  `TIPO_AUMENTO_ID` int NOT NULL AUTO_INCREMENT,
+        ///  `DESCRIPCION` varchar(45) DEFAULT NULL,
+        ///  PRIMARY KEY (`TIPO_AUMENTO_ID`)
+        ///) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+        ///
+        ///CREATE TABLE `tipo_empleado` (
+        ///  `ID_TIPO_EMPLEADO` int NOT NULL AUTO_INCREMENT,
+        ///  `DESCRIPCION` varchar(1000) NOT NULL,
+        ///  PRIMARY KE [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        internal static string estructura_empresas {
+            get {
+                return ResourceManager.GetString("estructura_empresas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap lupa {
             get {
                 object obj = ResourceManager.GetObject("lupa", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a use sistema_nomina;
+        ///
+        ///CREATE  FUNCTION `existe_aumento`(
+        ///  P_AUMENTOS_ID INT,
+        ///   P_ID_EMPLEADO INT,
+        ///   P_FEC_AUM DATE,
+        ///   P_ID_CAT INT
+        ///) RETURNS int
+        ///    DETERMINISTIC
+        ///BEGIN
+        ///  declare v_salida int;
+        ///  SET P_AUMENTOS_ID = COALESCE(P_AUMENTOS_ID, -1);
+        ///    SELECT COUNT(ID_EMPLEADO) INTO v_salida FROM aumentos 
+        ///    WHERE 
+        ///    AUMENTOS_ID &lt;&gt; P_AUMENTOS_ID 
+        ///    AND ID_EMPLEADO =P_ID_EMPLEADO
+        ///    AND FECHA= P_FEC_AUM
+        ///        AND ID_CATEGORIA = P_ID_CAT;
+        ///RETURN v_salida;
+        ///END ;
+        ///
+        ///
+        ///
+        ///
+        ///CREATE  FUNCT [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        internal static string procedimientos__almacenados_empresas {
+            get {
+                return ResourceManager.GetString("procedimientos__almacenados_empresas", resourceCulture);
             }
         }
         

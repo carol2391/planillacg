@@ -47,10 +47,11 @@ namespace nomina.Forms.Movimientos.Ausencia
             cbTipoAusencia.Select();
         }
         /*formulario para nuevo*/
-        public frmAddAusencia(Conexion conexion)
+        public frmAddAusencia(Conexion conexion, frmMain frmMain)
         {
             InitializeComponent();
             this.conexion = conexion;
+            this.frmMain = frmMain;
             bdAusencia = new AusenciaConexion(conexion);
             desactivarInfoEmpleado();
             configurarComboboxs();

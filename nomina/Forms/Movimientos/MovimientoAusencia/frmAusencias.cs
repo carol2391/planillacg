@@ -56,7 +56,7 @@ namespace nomina.Forms.Movimientos.Ausencia
             //if (bdPermisos.existePermiso(this.frmMain.usuarioId, 41))
             //{
 
-                frmAddAusencia frm = new frmAddAusencia(conexion);
+                frmAddAusencia frm = new frmAddAusencia(conexion, frmMain);
                 frm.Tag = "agregar";
                 frm.ShowDialog();
                 dgvDatos.DataSource = bdAusencia.obtenerAusencias();

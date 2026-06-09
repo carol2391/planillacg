@@ -54,58 +54,21 @@ namespace nomina.Forms.Empleado
             bdMlabores = new MLaboresConexion(this.conexion);
             dgvDatos.DataSource = bdEmpleado.obtenerEmpleados();
             this.pnTipoAntecedente.Visible = this.pnTitulo.Visible = false;
-            //this.departamentos = departamentos;
-            //this.categorias = categorias;
-            //this.frmMain.categorias.Insert(0, new CategoriaData(0, "", "Seleccione una opción...", 0, 0));
-            //this.frmMain.departamentos.Insert(0, new DepartamentoData(0, "", "Seleccione una opción...", "", ""));
 
         }
         #region eventos
 
         private void frmEmpleado_Load(object sender, EventArgs e)
         {
-            //Utilidad.configurarDataGrid(dgvEmpleados);
-            //if (this.Tag.Equals("Buscar"))
-            //{
-            //    this.btnNuevo.Text = "&Seleccionar";
-            //    this.btnModificar.Visible = false;
-            //    this.btnQuitar.Visible = false;
-            //    this.btnSalir.Location = new Point(661, 139);
-            //    this.AutoSize = true;
-            //    this.btnVerHistorial.Visible = false;
-            //}
         }
 
         private void BtnNuevo_Click(object sender, EventArgs e)
         {
-            /*buscar el empleado para cargarlo
-             en el formulario de movimientos labores*/
-            //if (this.Tag.Equals("Buscar"))
-            //{
-            //    this.empleado = this.obtenerEmpleado();
-            //    if (this.empleado != null)
-            //    {
-            //        this.DialogResult = DialogResult.OK;
-            //    }
-            //    else
-            //        this.DialogResult = DialogResult.No;
 
-            //}
-            //else 
-            //if (bdPermisos.existePermiso(this.frmMain.usuarioId, 21))
-            //{
             frmAddEmpleado frm = new frmAddEmpleado(conexion);
             frm.Tag = "agregar";
             frm.ShowDialog();
             dgvDatos.DataSource = bdEmpleado.obtenerEmpleados();
-            //if (frm.DialogResult == DialogResult.OK)
-            //{
-            //this.frmMain.cargarBaseDeDatos();
-
-            //}
-            //}
-            //else
-            //    btnNuevo.Enabled = false;
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -121,23 +84,14 @@ namespace nomina.Forms.Empleado
                 DialogResult result = frm.ShowDialog();
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
-                    //this.frmMain.cargarBaseDeDatos();
                     this.dgvDatos.DataSource = bdEmpleado.obtenerEmpleados();
                 }
             }
-            // }
-            //else
-
-            //     btnModificar.Enabled = false;
-
-
-
         }
 
         private void bntQuitar_Click(object sender, EventArgs e)
         {
-            //if (bdPermisos.existePermiso(this.frmMain.usuarioId, 23))
-            //{
+           
             if (dgvDatos.RowCount > 0)
             {
                 DialogResult resultado = MessageBox.Show("¿Está seguro de eliminar el empleado?", "Eliminar empleado", MessageBoxButtons.YesNoCancel);
@@ -173,17 +127,11 @@ namespace nomina.Forms.Empleado
                     }
                     else
                         MessageBox.Show("No se puede eliminar, porque tiene movimientos", "Eliminar empleado", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //else
-                    //    MessageBox.Show("No existe el código de la categoria", "Eliminar empleado", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //}//fin si existe
-                    //else {
-                    //   
-                    //}
+                  
 
                 }//fin si message boc
             }
-            //}else
-            //    this.btnQuitar.Enabled = false;
+           
         }
 
 
@@ -296,12 +244,9 @@ namespace nomina.Forms.Empleado
 
         
         private void BtnVerHistorial_Click(object sender, EventArgs e)
-        {
-            //if (bdPermisos.existePermiso(this.frmMain.usuarioId, 56)) {
+        {         
             frmHistorialAumento frm = new frmHistorialAumento(conexion,frmMain);
             frm.ShowDialog();
-            //}
-
         }
 
         private void btnAntecedente_Click(object sender, EventArgs e)
@@ -376,7 +321,8 @@ namespace nomina.Forms.Empleado
             bool tieneNuevo = Validator.ExistePermiso( this.frmMain.usuarioId, 3, 2, btnNuevo);
             bool tieneModificar = Validator.ExistePermiso(this.frmMain.usuarioId, 3, 3, btnModificar);
             bool tieneQuitar = Validator.ExistePermiso(this.frmMain.usuarioId, 3, 4, btnQuitar);
-            bool tieneAntecedente = Validator.ExistePermiso(this.frmMain.usuarioId, 3, 5, btnQuitar);
+            bool tieneAntecedente = Validator.ExistePermiso(this.frmMain.usuarioId, 3, 5, btnAntecedente);
+            bool tieneHistorialAumento = Validator.ExistePermiso(this.frmMain.usuarioId, 3, 6, btnVerHistorial);
             bool tieneSalir = true;
             btnSalir.Visible = true;
 
@@ -387,7 +333,8 @@ namespace nomina.Forms.Empleado
                 (btnModificar, tieneModificar),
                 (btnQuitar, tieneQuitar),
                 (btnSalir, tieneSalir),
-                (btnAntecedente, tieneAntecedente)
+                (btnAntecedente, tieneAntecedente),
+                (btnVerHistorial, tieneHistorialAumento)
             };
 
             int yActual =105;

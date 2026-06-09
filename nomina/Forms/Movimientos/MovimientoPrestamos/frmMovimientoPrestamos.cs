@@ -167,7 +167,7 @@ namespace nomina.Forms.Movimientos.MovimientoPrestamos
                 if (this.prestamoData.Fecha.Month == mesActual && this.prestamoData.Fecha.Year == añoActual)
                 {
 
-                    frmAddMovimientoPrestamos frm = new frmAddMovimientoPrestamos(conexion, prestamoData);
+                    frmAddMovimientoPrestamos frm = new frmAddMovimientoPrestamos(conexion, prestamoData, frmMain);
                     frm.Tag = "modificar";
                     DialogResult result = frm.ShowDialog();
                     if (result == System.Windows.Forms.DialogResult.OK)

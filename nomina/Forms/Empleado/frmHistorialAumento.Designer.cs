@@ -189,6 +189,7 @@
             this.cbFechaFinal.TabIndex = 4;
             this.cbFechaFinal.Text = "Fecha Final:";
             this.cbFechaFinal.UseVisualStyleBackColor = true;
+            this.cbFechaFinal.CheckedChanged += new System.EventHandler(this.cbFechaFinal_CheckedChanged);
             this.cbFechaFinal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CbFechaFinal_KeyPress);
             // 
             // cbFechaInicial
@@ -201,11 +202,12 @@
             this.cbFechaInicial.TabIndex = 2;
             this.cbFechaInicial.Text = "Fecha Inicial:";
             this.cbFechaInicial.UseVisualStyleBackColor = true;
+            this.cbFechaInicial.CheckedChanged += new System.EventHandler(this.cbFechaInicial_CheckedChanged);
             this.cbFechaInicial.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CbFechaInicial_KeyPress);
             // 
             // btnBuscar
             // 
-            this.btnBuscar.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnBuscar.BackColor = System.Drawing.Color.SkyBlue;
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscar.Location = new System.Drawing.Point(310, 14);
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(4);

@@ -62,7 +62,7 @@
             this.btnSalir.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Location = new System.Drawing.Point(832, 273);
-            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSalir.Margin = new System.Windows.Forms.Padding(4);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(112, 49);
             this.btnSalir.TabIndex = 51;
@@ -77,9 +77,9 @@
             this.groupBox1.Controls.Add(this.nudPeriodo);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(7, 42);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(817, 57);
             this.groupBox1.TabIndex = 50;
             this.groupBox1.TabStop = false;
@@ -98,7 +98,7 @@
             // nudPeriodo
             // 
             this.nudPeriodo.Location = new System.Drawing.Point(107, 23);
-            this.nudPeriodo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nudPeriodo.Margin = new System.Windows.Forms.Padding(4);
             this.nudPeriodo.Maximum = new decimal(new int[] {
             -1981284353,
             -1966660860,
@@ -114,7 +114,7 @@
             this.btnModificar.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModificar.Location = new System.Drawing.Point(832, 160);
-            this.btnModificar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(4);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(112, 49);
             this.btnModificar.TabIndex = 49;
@@ -127,7 +127,7 @@
             this.btnQuitar.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnQuitar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnQuitar.Location = new System.Drawing.Point(832, 217);
-            this.btnQuitar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnQuitar.Margin = new System.Windows.Forms.Padding(4);
             this.btnQuitar.Name = "btnQuitar";
             this.btnQuitar.Size = new System.Drawing.Size(112, 49);
             this.btnQuitar.TabIndex = 48;
@@ -140,7 +140,7 @@
             this.btnNuevo.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNuevo.Location = new System.Drawing.Point(832, 103);
-            this.btnNuevo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnNuevo.Margin = new System.Windows.Forms.Padding(4);
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Size = new System.Drawing.Size(112, 49);
             this.btnNuevo.TabIndex = 47;
@@ -169,7 +169,7 @@
             this.RangoInicial25,
             this.RangoFinal25});
             this.dgvDatos.Location = new System.Drawing.Point(4, 103);
-            this.dgvDatos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvDatos.Margin = new System.Windows.Forms.Padding(4);
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.RowHeadersWidth = 51;
             this.dgvDatos.Size = new System.Drawing.Size(820, 507);
@@ -274,12 +274,12 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(216)))), ((int)(((byte)(102)))));
+            this.panel1.BackColor = System.Drawing.Color.SkyBlue;
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(1, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(943, 38);
+            this.panel1.Size = new System.Drawing.Size(943, 34);
             this.panel1.TabIndex = 45;
             // 
             // label1
@@ -306,7 +306,7 @@
             this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.dgvDatos);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "frmParametros";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

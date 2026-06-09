@@ -12,6 +12,9 @@ using nomina.Clases.ConexionManager;
 using nomina.Clases.Empresas;
 using nomina.Clases.Utilidades;
 using nomina.Clases.PermisosUsuario;
+using nomina.Forms.Usuarios;
+using nomina.Clases.PermisosUsuario;
+using nomina.Clases.UsuarioPermisos;
 
 namespace nomina.Forms.Empresas
 {
@@ -140,9 +143,6 @@ namespace nomina.Forms.Empresas
         #region menu
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            //if (this.bdPermisos.existePermiso(this.frmMain.usuarioId, 1, 1)
-            //  || Properties.Settings.Default.usuario.ToUpper().Trim().Equals(frmMain.usuarioName.ToUpper().Trim()))
-            //{
                 new frmAddEmpresa(this.conexion, frmMain)
                 {
                     Tag = "agregar"
@@ -156,12 +156,6 @@ namespace nomina.Forms.Empresas
                     this.dgvDatos.DataSource = this.bdEmpresa.obtenerEmpresas(this.frmMain.usuarioId);
 
                 }
-            //}
-            //else
-            //{
-            //    this.btnNuevo.Enabled = false;
-            //    MessageBox.Show("No tiene permisos para crear", "Crear", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-            //}
             this.dgvDatos.Select();
             opcion = Opcion.Salir;
         }
@@ -169,10 +163,7 @@ namespace nomina.Forms.Empresas
         private void btnModificar_Click(object sender, EventArgs e)
         {
 
-            //if (this.bdPermisos.existePermiso(this.frmMain.usuarioId, 1, 2)
-            //    || Properties.Settings.Default.usuario.ToUpper().Trim().Equals(frmMain.usuarioName.ToUpper().Trim()))
-
-            //{
+           
                 if (this.dgvDatos.RowCount > 0)
                 {
                     this.cargarDatos();
@@ -190,12 +181,6 @@ namespace nomina.Forms.Empresas
                     }
 
                 }
-                //else
-                //{
-                //    this.btnModificar.Enabled = false;
-                //    MessageBox.Show("No tiene permisos para modificar", "Modificar", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                //}
-            //}
             this.dgvDatos.Select();
             opcion = Opcion.Salir;
         }
@@ -268,8 +253,8 @@ namespace nomina.Forms.Empresas
                 empData.NominaFlag = Convert.ToInt32(this.dgvDatos.Rows[nlinea].Cells["NominaFlag"].Value.ToString());
 
                 empData.Image = (Image)this.dgvDatos.Rows[nlinea].Cells["Imagen"].Value;
+                conexion = new Conexion("n"+empData.Codigo);
 
-             
 
             }
         }
@@ -287,7 +272,7 @@ namespace nomina.Forms.Empresas
                 }
                 else
                 {
-                    MessageBox.Show("Debe activar la empresa en retenciones, en la opción de modificar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    MessageBox.Show("Debe activar la empresa en nomina, en la opción de modificar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
             }
         }
@@ -297,35 +282,33 @@ namespace nomina.Forms.Empresas
 
         private void btnAsignarEmpresa_Click(object sender, EventArgs e)
         {
-            //if (frmMain.usuarioName.ToUpper().Equals(Properties.Settings.Default.usuario.ToUpper().Trim()))
-            //{
-            //    frmAsignarEmpresa f = new frmAsignarEmpresa(conexion, frmMain);
-            //    f.ShowDialog();
-            //    this.dgvDatos.DataSource = this.bdEmpresa.obtenerEmpresasAdmin();
-            //}
-            //else
-            //    this.dgvDatos.DataSource = this.bdEmpresa.obtenerEmpresas(frmMain.usuarioId);
+            if (frmMain.usuarioName.ToUpper().Equals(Properties.Settings.Default.usuario.ToUpper().Trim()))
+            {
+                frmAsignarEmpresa f = new frmAsignarEmpresa(conexion, frmMain);
+                f.ShowDialog();
+                this.dgvDatos.DataSource = this.bdEmpresa.obtenerEmpresasAdmin();
+            }
+            else
+                this.dgvDatos.DataSource = this.bdEmpresa.obtenerEmpresas(frmMain.usuarioId);
 
         }
 
         private void btnAsignarPermisos_Click(object sender, EventArgs e)
         {
-            //if (frmMain.usuarioName.ToUpper().Equals(Properties.Settings.Default.usuario.ToUpper().Trim()))
-            //{
-            //    frmAsignarPermisos f = new frmAsignarPermisos(conexion, frmMain);
-            //    f.ShowDialog();
-
-            //}
-
+               frmAsignarPermisos f = new frmAsignarPermisos(conexion, frmMain);
+                f.ShowDialog();
         }
 
         private void btnActualizarBD_Click(object sender, EventArgs e)
         {
-            //if (frmMain.usuarioName.ToUpper().Equals(Properties.Settings.Default.usuario.ToUpper().Trim()))
-            //{
-            //    frmActualizarBD f = new frmActualizarBD();
-            //    f.ShowDialog();
-            //}
+                       
         }
+
+        private void frmEmpresas_Shown(object sender, EventArgs e)
+        {
+            //Validator.validarPermisos(frmMain.usuarioId, btnNuevo, btnModificar, btnQuitar, btnSalir, this, 1);
+        }
+
+     
     }
 }

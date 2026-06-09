@@ -182,7 +182,7 @@
             // 
             // btnBuscarCuenta
             // 
-            this.btnBuscarCuenta.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnBuscarCuenta.BackColor = System.Drawing.Color.SkyBlue;
             this.btnBuscarCuenta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnBuscarCuenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscarCuenta.Location = new System.Drawing.Point(217, 196);
@@ -330,7 +330,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnSalir.BackColor = System.Drawing.Color.AliceBlue;
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Location = new System.Drawing.Point(129, 481);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(4);
@@ -343,7 +343,7 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnModificar.BackColor = System.Drawing.Color.SkyBlue;
             this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModificar.Location = new System.Drawing.Point(9, 481);
             this.btnModificar.Margin = new System.Windows.Forms.Padding(4);
@@ -464,7 +464,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(216)))), ((int)(((byte)(102)))));
+            this.panel1.BackColor = System.Drawing.Color.SkyBlue;
             this.panel1.Controls.Add(this.label7);
             this.panel1.Location = new System.Drawing.Point(9, 11);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);

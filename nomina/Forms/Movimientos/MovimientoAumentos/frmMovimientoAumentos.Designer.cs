@@ -283,7 +283,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnSalir.BackColor = System.Drawing.Color.SkyBlue;
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Location = new System.Drawing.Point(1069, 319);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(4);
@@ -354,7 +354,7 @@
             // 
             this.btnBuscar.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscar.Location = new System.Drawing.Point(300, 15);
+            this.btnBuscar.Location = new System.Drawing.Point(310, 14);
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(4);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(105, 31);
@@ -372,7 +372,8 @@
             this.dtpFechaFinal.Name = "dtpFechaFinal";
             this.dtpFechaFinal.Size = new System.Drawing.Size(119, 24);
             this.dtpFechaFinal.TabIndex = 5;
-            this.dtpFechaFinal.Value = new System.DateTime(2019, 8, 19, 18, 3, 0, 0);
+            this.dtpFechaFinal.Value = new System.DateTime(2026, 5, 22, 0, 0, 0, 0);
+            this.dtpFechaFinal.Visible = false;
             this.dtpFechaFinal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dtpFechaFinal_KeyPress);
             // 
             // dtpFechaInicial
@@ -383,6 +384,7 @@
             this.dtpFechaInicial.Name = "dtpFechaInicial";
             this.dtpFechaInicial.Size = new System.Drawing.Size(119, 24);
             this.dtpFechaInicial.TabIndex = 3;
+            this.dtpFechaInicial.Visible = false;
             this.dtpFechaInicial.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dtpFechaInicial_KeyPress);
             // 
             // txtCodigo
@@ -397,7 +399,7 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnModificar.BackColor = System.Drawing.Color.SkyBlue;
             this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModificar.Location = new System.Drawing.Point(1069, 206);
             this.btnModificar.Margin = new System.Windows.Forms.Padding(4);
@@ -410,7 +412,7 @@
             // 
             // btnQuitar
             // 
-            this.btnQuitar.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnQuitar.BackColor = System.Drawing.Color.SkyBlue;
             this.btnQuitar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnQuitar.Location = new System.Drawing.Point(1069, 262);
             this.btnQuitar.Margin = new System.Windows.Forms.Padding(4);
@@ -423,7 +425,7 @@
             // 
             // btnNuevo
             // 
-            this.btnNuevo.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnNuevo.BackColor = System.Drawing.Color.SkyBlue;
             this.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNuevo.Location = new System.Drawing.Point(1069, 149);
             this.btnNuevo.Margin = new System.Windows.Forms.Padding(4);
@@ -436,7 +438,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(216)))), ((int)(((byte)(102)))));
+            this.panel1.BackColor = System.Drawing.Color.SkyBlue;
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(3, 1);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);

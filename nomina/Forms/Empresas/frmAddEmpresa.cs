@@ -253,7 +253,7 @@ namespace nomina.Forms.Empresas
         #region metodo donde se modifica una empresa
         public void modificar()
         {
-            DialogResult resultado = MessageBox.Show("¿Desea activar Retenciones?", "Activar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            DialogResult resultado = MessageBox.Show("¿Desea activar Nomina?", "Activar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (resultado == System.Windows.Forms.DialogResult.Yes)
             {
                 frmBarraProgreso frmBarrraProgreso = new frmBarraProgreso(this, Tipo.ModificarEmpresa);

@@ -52,7 +52,7 @@
             // txtUsuario
             // 
             this.txtUsuario.Location = new System.Drawing.Point(163, 25);
-            this.txtUsuario.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtUsuario.Margin = new System.Windows.Forms.Padding(4);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(132, 22);
             this.txtUsuario.TabIndex = 1;
@@ -71,7 +71,7 @@
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(163, 57);
-            this.txtNombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(4);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(307, 22);
             this.txtNombre.TabIndex = 2;
@@ -90,7 +90,7 @@
             // txtCorreo
             // 
             this.txtCorreo.Location = new System.Drawing.Point(163, 89);
-            this.txtCorreo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCorreo.Margin = new System.Windows.Forms.Padding(4);
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(307, 22);
             this.txtCorreo.TabIndex = 3;
@@ -110,7 +110,7 @@
             // 
             this.cbMostrarContrasenia.AutoSize = true;
             this.cbMostrarContrasenia.Location = new System.Drawing.Point(163, 153);
-            this.cbMostrarContrasenia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbMostrarContrasenia.Margin = new System.Windows.Forms.Padding(4);
             this.cbMostrarContrasenia.Name = "cbMostrarContrasenia";
             this.cbMostrarContrasenia.Size = new System.Drawing.Size(144, 20);
             this.cbMostrarContrasenia.TabIndex = 5;
@@ -121,7 +121,7 @@
             // txtContrasenia
             // 
             this.txtContrasenia.Location = new System.Drawing.Point(163, 121);
-            this.txtContrasenia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtContrasenia.Margin = new System.Windows.Forms.Padding(4);
             this.txtContrasenia.Name = "txtContrasenia";
             this.txtContrasenia.PasswordChar = '*';
             this.txtContrasenia.Size = new System.Drawing.Size(275, 22);
@@ -141,7 +141,7 @@
             // txtRepetirContrasenia
             // 
             this.txtRepetirContrasenia.Location = new System.Drawing.Point(163, 181);
-            this.txtRepetirContrasenia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtRepetirContrasenia.Margin = new System.Windows.Forms.Padding(4);
             this.txtRepetirContrasenia.Name = "txtRepetirContrasenia";
             this.txtRepetirContrasenia.PasswordChar = '*';
             this.txtRepetirContrasenia.Size = new System.Drawing.Size(275, 22);
@@ -176,9 +176,9 @@
             this.gbDatos.Controls.Add(this.label2);
             this.gbDatos.Controls.Add(this.txtUsuario);
             this.gbDatos.Location = new System.Drawing.Point(4, 49);
-            this.gbDatos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbDatos.Margin = new System.Windows.Forms.Padding(4);
             this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbDatos.Padding = new System.Windows.Forms.Padding(4);
             this.gbDatos.Size = new System.Drawing.Size(503, 295);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
@@ -187,7 +187,7 @@
             // 
             this.cbActivo.AutoSize = true;
             this.cbActivo.Location = new System.Drawing.Point(163, 260);
-            this.cbActivo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbActivo.Margin = new System.Windows.Forms.Padding(4);
             this.cbActivo.Name = "cbActivo";
             this.cbActivo.Size = new System.Drawing.Size(66, 20);
             this.cbActivo.TabIndex = 8;
@@ -209,7 +209,7 @@
             // 
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFecha.Location = new System.Drawing.Point(163, 217);
-            this.dtpFecha.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpFecha.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(108, 22);
             this.dtpFecha.TabIndex = 7;
@@ -217,14 +217,14 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(216)))), ((int)(((byte)(102)))));
+            this.btnCancelar.BackColor = System.Drawing.Color.AliceBlue;
             this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancelar.FlatAppearance.BorderSize = 0;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.btnCancelar.ForeColor = System.Drawing.Color.Black;
             this.btnCancelar.Location = new System.Drawing.Point(151, 352);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(139, 48);
             this.btnCancelar.TabIndex = 10;
@@ -234,14 +234,14 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnGuardar.BackColor = System.Drawing.Color.SkyBlue;
             this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGuardar.FlatAppearance.BorderSize = 0;
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.btnGuardar.ForeColor = System.Drawing.Color.Black;
             this.btnGuardar.Location = new System.Drawing.Point(4, 352);
-            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(139, 48);
             this.btnGuardar.TabIndex = 9;
@@ -252,12 +252,12 @@
             // 
             // lblTitulo
             // 
-            this.lblTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(216)))), ((int)(((byte)(102)))));
+            this.lblTitulo.BackColor = System.Drawing.Color.SkyBlue;
             this.lblTitulo.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.lblTitulo.Location = new System.Drawing.Point(0, 0);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(516, 46);
+            this.lblTitulo.Size = new System.Drawing.Size(519, 58);
             this.lblTitulo.TabIndex = 47;
             this.lblTitulo.Text = "Nuevo Usuario";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -267,13 +267,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(195)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(516, 404);
+            this.ClientSize = new System.Drawing.Size(519, 422);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.gbDatos);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "frmAddUsuario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

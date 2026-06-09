@@ -50,15 +50,16 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnCancelar.BackColor = System.Drawing.Color.AliceBlue;
             this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancelar.FlatAppearance.BorderSize = 0;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.btnCancelar.ForeColor = System.Drawing.Color.Black;
-            this.btnCancelar.Location = new System.Drawing.Point(113, 192);
+            this.btnCancelar.Location = new System.Drawing.Point(151, 236);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(104, 39);
+            this.btnCancelar.Size = new System.Drawing.Size(139, 48);
             this.btnCancelar.TabIndex = 5;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
@@ -67,15 +68,16 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnGuardar.BackColor = System.Drawing.Color.SkyBlue;
             this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGuardar.FlatAppearance.BorderSize = 0;
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.btnGuardar.ForeColor = System.Drawing.Color.Black;
-            this.btnGuardar.Location = new System.Drawing.Point(3, 192);
+            this.btnGuardar.Location = new System.Drawing.Point(4, 236);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(104, 39);
+            this.btnGuardar.Size = new System.Drawing.Size(139, 48);
             this.btnGuardar.TabIndex = 5;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = false;
@@ -84,13 +86,12 @@
             // 
             // lblTitulo
             // 
-            this.lblTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(216)))), ((int)(((byte)(102)))));
+            this.lblTitulo.BackColor = System.Drawing.Color.SkyBlue;
             this.lblTitulo.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.lblTitulo.Location = new System.Drawing.Point(0, 0);
-            this.lblTitulo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(472, 37);
+            this.lblTitulo.Size = new System.Drawing.Size(629, 46);
             this.lblTitulo.TabIndex = 37;
             this.lblTitulo.Text = "Nueva Categoria";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -106,23 +107,24 @@
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(0, 43);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.panel1.Location = new System.Drawing.Point(0, 53);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(472, 144);
+            this.panel1.Size = new System.Drawing.Size(629, 177);
             this.panel1.TabIndex = 39;
             // 
             // nudSalFinal
             // 
             this.nudSalFinal.DecimalPlaces = 2;
-            this.nudSalFinal.Location = new System.Drawing.Point(238, 95);
+            this.nudSalFinal.Location = new System.Drawing.Point(317, 117);
+            this.nudSalFinal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nudSalFinal.Maximum = new decimal(new int[] {
             1569325055,
             23283064,
             0,
             131072});
             this.nudSalFinal.Name = "nudSalFinal";
-            this.nudSalFinal.Size = new System.Drawing.Size(169, 20);
+            this.nudSalFinal.Size = new System.Drawing.Size(225, 22);
             this.nudSalFinal.TabIndex = 4;
             this.nudSalFinal.ThousandsSeparator = true;
             this.nudSalFinal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nudSalFinal_KeyPress);
@@ -132,14 +134,15 @@
             // nudSalInicial
             // 
             this.nudSalInicial.DecimalPlaces = 2;
-            this.nudSalInicial.Location = new System.Drawing.Point(11, 95);
+            this.nudSalInicial.Location = new System.Drawing.Point(15, 117);
+            this.nudSalInicial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nudSalInicial.Maximum = new decimal(new int[] {
             1569325055,
             23283064,
             0,
             131072});
             this.nudSalInicial.Name = "nudSalInicial";
-            this.nudSalInicial.Size = new System.Drawing.Size(169, 20);
+            this.nudSalInicial.Size = new System.Drawing.Size(225, 22);
             this.nudSalInicial.TabIndex = 3;
             this.nudSalInicial.ThousandsSeparator = true;
             this.nudSalInicial.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nudSalInicial_KeyPress);
@@ -150,11 +153,11 @@
             // 
             this.txtNombre.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.txtNombre.Location = new System.Drawing.Point(238, 35);
-            this.txtNombre.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.txtNombre.Location = new System.Drawing.Point(317, 43);
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.txtNombre.MaxLength = 30;
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(171, 17);
+            this.txtNombre.Size = new System.Drawing.Size(228, 21);
             this.txtNombre.TabIndex = 2;
             this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtNombre_KeyPress);
             this.txtNombre.Validating += new System.ComponentModel.CancelEventHandler(this.txtNombre_Validating);
@@ -164,11 +167,11 @@
             // 
             this.txtCodigo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.txtCodigo.Location = new System.Drawing.Point(11, 35);
-            this.txtCodigo.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.txtCodigo.Location = new System.Drawing.Point(15, 43);
+            this.txtCodigo.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.txtCodigo.MaxLength = 3;
             this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(171, 17);
+            this.txtCodigo.Size = new System.Drawing.Size(228, 21);
             this.txtCodigo.TabIndex = 1;
             this.txtCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtCodigo_KeyPress);
             this.txtCodigo.Validating += new System.ComponentModel.CancelEventHandler(this.txtCodigo_Validating);
@@ -177,40 +180,36 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(237, 79);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Location = new System.Drawing.Point(316, 97);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(61, 13);
+            this.label6.Size = new System.Drawing.Size(77, 16);
             this.label6.TabIndex = 13;
             this.label6.Text = "Salario final";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(10, 79);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Location = new System.Drawing.Point(13, 97);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(68, 13);
+            this.label7.Size = new System.Drawing.Size(87, 16);
             this.label7.TabIndex = 11;
             this.label7.Text = "Salario inicial";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(235, 19);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(313, 23);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.Size = new System.Drawing.Size(56, 16);
             this.label2.TabIndex = 3;
             this.label2.Text = "Nombre";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 19);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(12, 23);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
+            this.label1.Size = new System.Drawing.Size(51, 16);
             this.label1.TabIndex = 1;
             this.label1.Text = "Código";
             // 
@@ -220,17 +219,18 @@
             // 
             // frmAddCategoria
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(195)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(472, 237);
+            this.ClientSize = new System.Drawing.Size(629, 292);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.lblTitulo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "frmAddCategoria";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

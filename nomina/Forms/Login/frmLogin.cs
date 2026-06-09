@@ -147,5 +147,18 @@ namespace nomina.Forms.Login
         {
             txtUser.Focus();
         }
+
+        private void lklConnection_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            if (Properties.Settings.Default.usuario.ToUpper().Trim().Equals(txtUser.Text.ToUpper().Trim()) &&
+              Properties.Settings.Default.password.ToUpper().Equals(txtPassword.Text.ToUpper()))
+            {
+                frmServidor frmServidor = new frmServidor();
+                frmServidor.ShowDialog();
+                
+            }
+            
+        }
     }
 }

@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using MySql.Data;
+using MySql.Data.MySqlClient;
+using nomina.Clases.ConexionManager;
+using nomina.Estructuras;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using nomina.Clases.ConexionManager;
-using MySql.Data.MySqlClient;
-using MySql.Data;
 
 namespace nomina.Clases.EmpresasUsuario
 {
@@ -13,22 +15,23 @@ namespace nomina.Clases.EmpresasUsuario
     {
         Conexion conexion;
 
-        static string connectionString = "datasource=127.0.0.1;" +
-                        "port=3306;username=root;" +
-                         "password=C0ntrolG3rencial2019;database=empresas;Convert Zero Datetime=True;";
-
-        //static string connectionString = "datasource=127.0.0.1;" +
-        //          "port=3306;username=root;" +
-        //           "password=;database=empresas;Convert Zero Datetime=True;";
+        ServidorData serverData = new ServidorData();
+        Registro registro = new Registro();
 
         public MySqlConnection databaseConnection;
 
-        public EmpresaUsuarioConexion(
-            //Conexion con
-            )
+        public EmpresaUsuarioConexion()
         {
-            databaseConnection = new MySqlConnection(connectionString);
-            //this.conexion = con;
+            serverData = (ServidorData)registro.leerRegistro();
+            string connectioUrl = "datasource = " + serverData.server + ";" +
+                                 "port = " + serverData.port + ";" +
+                                 "username = " + serverData.user + ";" +
+                                  "Password = " + serverData.password + ";" +
+                                  "database= " + "empresas" + ";" +
+                                  " Persist Security Info = True; " +
+                                   "Convert Zero Datetime = True; ";
+
+            databaseConnection = new MySqlConnection(connectioUrl);
         }
 
         public List<EmpresaUsuarioData> obtenerEmpresasUsuarios(int codigoUsuario)
@@ -37,7 +40,7 @@ namespace nomina.Clases.EmpresasUsuario
             MySqlCommand comando = new MySqlCommand("obtener_empresas_usuario", databaseConnection);
             comando.CommandType = System.Data.CommandType.StoredProcedure;
             comando.Parameters.AddWithValue("@P_USUARIO_ID", codigoUsuario);
-
+            comando.Parameters.AddWithValue("@P_MODULO", "NOMINA");
             databaseConnection.Open();
 
             MySqlDataReader lector = comando.ExecuteReader();

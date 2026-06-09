@@ -110,10 +110,13 @@ namespace nomina.Forms.Main
             frmEmpresas frmEmpresas = new frmEmpresas(conexion, this);
             frmEmpresas.Tag = "empresas";
             frmEmpresas.ShowDialog();
-            if (DialogResult.OK == frmEmpresas.DialogResult)
-                this.baseDeDatos ="n"+ frmEmpresas.empData.Codigo;
-            int n = 0;
-            n++;
+            if (DialogResult.OK == frmEmpresas.DialogResult) {
+                this.baseDeDatos = "n" + frmEmpresas.empData.Codigo;
+                this.Text = frmEmpresas.empData.Nombre + " - Usuario: " + this.usuarioName;
+                conexion = new Conexion(this.baseDeDatos);
+            }
+                
+                
         }
 
         #endregion
@@ -314,7 +317,8 @@ namespace nomina.Forms.Main
             frmEmpresas.ShowDialog();
             if (DialogResult.OK == frmEmpresas.DialogResult)
             {
-                this.baseDeDatos = frmEmpresas.empData.DirConeccion;
+                this.baseDeDatos = "n"+ frmEmpresas.empData.Codigo;
+                this.Text = frmEmpresas.empData.Nombre + " - Usuario: " + this.usuarioName;
                 conexion = new Conexion(this.baseDeDatos);
             }
                 

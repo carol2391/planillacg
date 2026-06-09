@@ -32,8 +32,6 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtBuscarPermiso = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.dgvPermisos = new System.Windows.Forms.DataGridView();
             this.btnBuscarUsuario = new System.Windows.Forms.Button();
             this.lblNombre = new System.Windows.Forms.Label();
@@ -44,12 +42,12 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnGuardar.BackColor = System.Drawing.Color.SkyBlue;
             this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGuardar.FlatAppearance.BorderSize = 0;
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.btnGuardar.ForeColor = System.Drawing.Color.White;
+            this.btnGuardar.ForeColor = System.Drawing.Color.Black;
             this.btnGuardar.Location = new System.Drawing.Point(4, 491);
             this.btnGuardar.Margin = new System.Windows.Forms.Padding(4);
             this.btnGuardar.Name = "btnGuardar";
@@ -61,12 +59,12 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnCancelar.BackColor = System.Drawing.Color.AliceBlue;
             this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancelar.FlatAppearance.BorderSize = 0;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.btnCancelar.ForeColor = System.Drawing.Color.White;
+            this.btnCancelar.ForeColor = System.Drawing.Color.Black;
             this.btnCancelar.Location = new System.Drawing.Point(151, 491);
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancelar.Name = "btnCancelar";
@@ -78,12 +76,12 @@
             // 
             // lblTitulo
             // 
-            this.lblTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(216)))), ((int)(((byte)(102)))));
+            this.lblTitulo.BackColor = System.Drawing.Color.SkyBlue;
             this.lblTitulo.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.lblTitulo.Location = new System.Drawing.Point(0, 0);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(884, 46);
+            this.lblTitulo.Size = new System.Drawing.Size(871, 46);
             this.lblTitulo.TabIndex = 51;
             this.lblTitulo.Text = "Asignar Permisos";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -91,8 +89,6 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.groupBox1.Controls.Add(this.txtBuscarPermiso);
-            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.dgvPermisos);
             this.groupBox1.Controls.Add(this.btnBuscarUsuario);
             this.groupBox1.Controls.Add(this.lblNombre);
@@ -104,25 +100,6 @@
             this.groupBox1.Size = new System.Drawing.Size(863, 434);
             this.groupBox1.TabIndex = 50;
             this.groupBox1.TabStop = false;
-            // 
-            // txtBuscarPermiso
-            // 
-            this.txtBuscarPermiso.Location = new System.Drawing.Point(441, 37);
-            this.txtBuscarPermiso.Margin = new System.Windows.Forms.Padding(4);
-            this.txtBuscarPermiso.Name = "txtBuscarPermiso";
-            this.txtBuscarPermiso.Size = new System.Drawing.Size(240, 22);
-            this.txtBuscarPermiso.TabIndex = 58;
-            this.txtBuscarPermiso.TextChanged += new System.EventHandler(this.txtBuscarPermiso_TextChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(383, 41);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 16);
-            this.label2.TabIndex = 57;
-            this.label2.Text = "Permiso:";
             // 
             // dgvPermisos
             // 
@@ -139,12 +116,12 @@
             // 
             // btnBuscarUsuario
             // 
-            this.btnBuscarUsuario.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnBuscarUsuario.BackColor = System.Drawing.Color.SkyBlue;
             this.btnBuscarUsuario.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBuscarUsuario.FlatAppearance.BorderSize = 0;
             this.btnBuscarUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscarUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscarUsuario.ForeColor = System.Drawing.Color.White;
+            this.btnBuscarUsuario.ForeColor = System.Drawing.Color.Black;
             this.btnBuscarUsuario.Location = new System.Drawing.Point(197, 32);
             this.btnBuscarUsuario.Margin = new System.Windows.Forms.Padding(4);
             this.btnBuscarUsuario.Name = "btnBuscarUsuario";
@@ -178,7 +155,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(195)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(884, 554);
+            this.ClientSize = new System.Drawing.Size(871, 559);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.lblTitulo);
@@ -205,7 +182,5 @@
         private System.Windows.Forms.Button btnBuscarUsuario;
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtBuscarPermiso;
-        private System.Windows.Forms.Label label2;
     }
 }

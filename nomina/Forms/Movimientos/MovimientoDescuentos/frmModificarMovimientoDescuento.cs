@@ -1,17 +1,19 @@
-﻿using System;
+﻿using nomina.Clases.ConexionManager;
+using nomina.Clases.Descuentos;
+using nomina.Clases.Empleado;
+using nomina.Clases.MovimiendoDescuentos;
+using nomina.Clases.Utilidades;
+using nomina.Forms.Main;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using nomina.Clases.ConexionManager;
-using nomina.Clases.MovimiendoDescuentos;
-using nomina.Clases.Utilidades;
-using nomina.Clases.Empleado;
-using nomina.Clases.Descuentos;
 namespace nomina.Forms.MovimientoDescuentos
 {
     public partial class frmModificarMovimientoDescuento : Form
@@ -27,6 +29,7 @@ namespace nomina.Forms.MovimientoDescuentos
         public frmModificarMovimientoDescuento(Conexion conexion,MDescuentoData mdescuento)
         {
             InitializeComponent();
+  
             this.conexion = conexion;
             bdMDescuentos = new MDescuentoConexion(conexion);
             this.movDescuentoData = mdescuento;

@@ -77,9 +77,9 @@
             this.gpLabor.Controls.Add(this.label2);
             this.gpLabor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gpLabor.Location = new System.Drawing.Point(3, 220);
-            this.gpLabor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpLabor.Margin = new System.Windows.Forms.Padding(4);
             this.gpLabor.Name = "gpLabor";
-            this.gpLabor.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpLabor.Padding = new System.Windows.Forms.Padding(4);
             this.gpLabor.Size = new System.Drawing.Size(781, 390);
             this.gpLabor.TabIndex = 61;
             this.gpLabor.TabStop = false;
@@ -88,7 +88,7 @@
             // txtCodigoNomina
             // 
             this.txtCodigoNomina.Location = new System.Drawing.Point(15, 343);
-            this.txtCodigoNomina.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCodigoNomina.Margin = new System.Windows.Forms.Padding(4);
             this.txtCodigoNomina.Name = "txtCodigoNomina";
             this.txtCodigoNomina.Size = new System.Drawing.Size(159, 26);
             this.txtCodigoNomina.TabIndex = 8;
@@ -109,7 +109,7 @@
             this.nudMontoAusencia.DecimalPlaces = 2;
             this.nudMontoAusencia.Enabled = false;
             this.nudMontoAusencia.Location = new System.Drawing.Point(15, 277);
-            this.nudMontoAusencia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nudMontoAusencia.Margin = new System.Windows.Forms.Padding(4);
             this.nudMontoAusencia.Maximum = new decimal(new int[] {
             1874919423,
             2328306,
@@ -135,7 +135,7 @@
             // 
             this.nudMontoDias.Enabled = false;
             this.nudMontoDias.Location = new System.Drawing.Point(17, 207);
-            this.nudMontoDias.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nudMontoDias.Margin = new System.Windows.Forms.Padding(4);
             this.nudMontoDias.Maximum = new decimal(new int[] {
             1241513983,
             370409800,
@@ -161,7 +161,7 @@
             this.cbFechaFinal.AutoSize = true;
             this.cbFechaFinal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbFechaFinal.Location = new System.Drawing.Point(273, 98);
-            this.cbFechaFinal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbFechaFinal.Margin = new System.Windows.Forms.Padding(4);
             this.cbFechaFinal.Name = "cbFechaFinal";
             this.cbFechaFinal.Size = new System.Drawing.Size(241, 22);
             this.cbFechaFinal.TabIndex = 4;
@@ -175,7 +175,7 @@
             this.cbFechaInicial.AutoSize = true;
             this.cbFechaInicial.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbFechaInicial.Location = new System.Drawing.Point(15, 98);
-            this.cbFechaInicial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbFechaInicial.Margin = new System.Windows.Forms.Padding(4);
             this.cbFechaInicial.Name = "cbFechaInicial";
             this.cbFechaInicial.Size = new System.Drawing.Size(177, 22);
             this.cbFechaInicial.TabIndex = 2;
@@ -188,7 +188,7 @@
             // 
             this.dtpFechaFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFechaFinal.Location = new System.Drawing.Point(275, 130);
-            this.dtpFechaFinal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpFechaFinal.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaFinal.Name = "dtpFechaFinal";
             this.dtpFechaFinal.Size = new System.Drawing.Size(119, 26);
             this.dtpFechaFinal.TabIndex = 5;
@@ -200,7 +200,7 @@
             // 
             this.dtpFechaInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFechaInicial.Location = new System.Drawing.Point(15, 130);
-            this.dtpFechaInicial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpFechaInicial.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaInicial.Name = "dtpFechaInicial";
             this.dtpFechaInicial.Size = new System.Drawing.Size(119, 26);
             this.dtpFechaInicial.TabIndex = 3;
@@ -212,7 +212,7 @@
             this.cbTipoAusencia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipoAusencia.FormattingEnabled = true;
             this.cbTipoAusencia.Location = new System.Drawing.Point(12, 50);
-            this.cbTipoAusencia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbTipoAusencia.Margin = new System.Windows.Forms.Padding(4);
             this.cbTipoAusencia.Name = "cbTipoAusencia";
             this.cbTipoAusencia.Size = new System.Drawing.Size(273, 28);
             this.cbTipoAusencia.TabIndex = 1;
@@ -243,9 +243,9 @@
             this.gpEmpleados.Controls.Add(this.lbAlertId);
             this.gpEmpleados.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gpEmpleados.Location = new System.Drawing.Point(1, 50);
-            this.gpEmpleados.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpEmpleados.Margin = new System.Windows.Forms.Padding(4);
             this.gpEmpleados.Name = "gpEmpleados";
-            this.gpEmpleados.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpEmpleados.Padding = new System.Windows.Forms.Padding(4);
             this.gpEmpleados.Size = new System.Drawing.Size(783, 162);
             this.gpEmpleados.TabIndex = 60;
             this.gpEmpleados.TabStop = false;
@@ -301,7 +301,7 @@
             this.btnBuscarEmpleado.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnBuscarEmpleado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscarEmpleado.Location = new System.Drawing.Point(213, 46);
-            this.btnBuscarEmpleado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBuscarEmpleado.Margin = new System.Windows.Forms.Padding(4);
             this.btnBuscarEmpleado.Name = "btnBuscarEmpleado";
             this.btnBuscarEmpleado.Size = new System.Drawing.Size(100, 28);
             this.btnBuscarEmpleado.TabIndex = 1;
@@ -357,7 +357,7 @@
             this.btnCancelar.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Location = new System.Drawing.Point(123, 618);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(112, 49);
             this.btnCancelar.TabIndex = 10;
@@ -371,7 +371,7 @@
             this.btnGuardar.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardar.Location = new System.Drawing.Point(3, 618);
-            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(112, 49);
             this.btnGuardar.TabIndex = 9;
@@ -382,7 +382,7 @@
             // 
             // lblTitulo
             // 
-            this.lblTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(216)))), ((int)(((byte)(102)))));
+            this.lblTitulo.BackColor = System.Drawing.Color.SkyBlue;
             this.lblTitulo.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.lblTitulo.Location = new System.Drawing.Point(0, 0);
@@ -405,7 +405,7 @@
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.gpEmpleados);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "frmAddAusencia";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

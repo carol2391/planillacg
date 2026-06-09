@@ -71,7 +71,7 @@
             // 
             // lblTitulo
             // 
-            this.lblTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(216)))), ((int)(((byte)(102)))));
+            this.lblTitulo.BackColor = System.Drawing.Color.SkyBlue;
             this.lblTitulo.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitulo.Location = new System.Drawing.Point(0, 0);
@@ -95,9 +95,9 @@
             this.gpEmpleados.Controls.Add(this.lbAlertId);
             this.gpEmpleados.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gpEmpleados.Location = new System.Drawing.Point(4, 42);
-            this.gpEmpleados.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpEmpleados.Margin = new System.Windows.Forms.Padding(4);
             this.gpEmpleados.Name = "gpEmpleados";
-            this.gpEmpleados.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpEmpleados.Padding = new System.Windows.Forms.Padding(4);
             this.gpEmpleados.Size = new System.Drawing.Size(1165, 164);
             this.gpEmpleados.TabIndex = 33;
             this.gpEmpleados.TabStop = false;
@@ -150,11 +150,11 @@
             // 
             // btnBuscarEmpleado
             // 
-            this.btnBuscarEmpleado.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnBuscarEmpleado.BackColor = System.Drawing.Color.SkyBlue;
             this.btnBuscarEmpleado.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnBuscarEmpleado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscarEmpleado.Location = new System.Drawing.Point(213, 46);
-            this.btnBuscarEmpleado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBuscarEmpleado.Margin = new System.Windows.Forms.Padding(4);
             this.btnBuscarEmpleado.Name = "btnBuscarEmpleado";
             this.btnBuscarEmpleado.Size = new System.Drawing.Size(100, 28);
             this.btnBuscarEmpleado.TabIndex = 1;
@@ -231,9 +231,9 @@
             this.gpLabor.Controls.Add(this.label1);
             this.gpLabor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gpLabor.Location = new System.Drawing.Point(4, 213);
-            this.gpLabor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpLabor.Margin = new System.Windows.Forms.Padding(4);
             this.gpLabor.Name = "gpLabor";
-            this.gpLabor.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpLabor.Padding = new System.Windows.Forms.Padding(4);
             this.gpLabor.Size = new System.Drawing.Size(1171, 245);
             this.gpLabor.TabIndex = 34;
             this.gpLabor.TabStop = false;
@@ -245,7 +245,7 @@
             this.nudMontoTotal.DecimalPlaces = 2;
             this.nudMontoTotal.Enabled = false;
             this.nudMontoTotal.Location = new System.Drawing.Point(775, 110);
-            this.nudMontoTotal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nudMontoTotal.Margin = new System.Windows.Forms.Padding(4);
             this.nudMontoTotal.Maximum = new decimal(new int[] {
             -559939585,
             902409669,
@@ -272,7 +272,7 @@
             this.nudCantidadLabor.DecimalPlaces = 2;
             this.nudCantidadLabor.Enabled = false;
             this.nudCantidadLabor.Location = new System.Drawing.Point(575, 110);
-            this.nudCantidadLabor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nudCantidadLabor.Margin = new System.Windows.Forms.Padding(4);
             this.nudCantidadLabor.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -309,22 +309,23 @@
             // 
             // btnBuscarCuenta
             // 
-            this.btnBuscarCuenta.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnBuscarCuenta.BackColor = System.Drawing.Color.SkyBlue;
             this.btnBuscarCuenta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnBuscarCuenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscarCuenta.Location = new System.Drawing.Point(217, 196);
-            this.btnBuscarCuenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBuscarCuenta.Location = new System.Drawing.Point(216, 195);
+            this.btnBuscarCuenta.Margin = new System.Windows.Forms.Padding(4);
             this.btnBuscarCuenta.Name = "btnBuscarCuenta";
             this.btnBuscarCuenta.Size = new System.Drawing.Size(100, 28);
             this.btnBuscarCuenta.TabIndex = 57;
             this.btnBuscarCuenta.Text = "Buscar";
             this.btnBuscarCuenta.UseVisualStyleBackColor = false;
+            this.btnBuscarCuenta.Click += new System.EventHandler(this.btnBuscarCuenta_Click);
             // 
             // txtNombreCuenta
             // 
             this.txtNombreCuenta.Enabled = false;
             this.txtNombreCuenta.Location = new System.Drawing.Point(368, 197);
-            this.txtNombreCuenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNombreCuenta.Margin = new System.Windows.Forms.Padding(4);
             this.txtNombreCuenta.MaxLength = 50;
             this.txtNombreCuenta.Name = "txtNombreCuenta";
             this.txtNombreCuenta.Size = new System.Drawing.Size(725, 26);
@@ -335,7 +336,7 @@
             this.nudMontoLabor.DecimalPlaces = 2;
             this.nudMontoLabor.Enabled = false;
             this.nudMontoLabor.Location = new System.Drawing.Point(368, 110);
-            this.nudMontoLabor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nudMontoLabor.Margin = new System.Windows.Forms.Padding(4);
             this.nudMontoLabor.Maximum = new decimal(new int[] {
             1569325055,
             23283064,
@@ -363,7 +364,7 @@
             // 
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFecha.Location = new System.Drawing.Point(977, 106);
-            this.dtpFecha.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpFecha.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(116, 26);
             this.dtpFecha.TabIndex = 6;
@@ -372,7 +373,7 @@
             // txtCodigoCuenta
             // 
             this.txtCodigoCuenta.Location = new System.Drawing.Point(16, 197);
-            this.txtCodigoCuenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCodigoCuenta.Margin = new System.Windows.Forms.Padding(4);
             this.txtCodigoCuenta.MaxLength = 5;
             this.txtCodigoCuenta.Name = "txtCodigoCuenta";
             this.txtCodigoCuenta.Size = new System.Drawing.Size(192, 26);
@@ -436,7 +437,7 @@
             // txtDescripcionLabor
             // 
             this.txtDescripcionLabor.Location = new System.Drawing.Point(12, 113);
-            this.txtDescripcionLabor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDescripcionLabor.Margin = new System.Windows.Forms.Padding(4);
             this.txtDescripcionLabor.MaxLength = 30;
             this.txtDescripcionLabor.Multiline = true;
             this.txtDescripcionLabor.Name = "txtDescripcionLabor";
@@ -446,11 +447,11 @@
             // 
             // btnBuscarLabor
             // 
-            this.btnBuscarLabor.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnBuscarLabor.BackColor = System.Drawing.Color.SkyBlue;
             this.btnBuscarLabor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnBuscarLabor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscarLabor.Location = new System.Drawing.Point(213, 49);
-            this.btnBuscarLabor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBuscarLabor.Margin = new System.Windows.Forms.Padding(4);
             this.btnBuscarLabor.Name = "btnBuscarLabor";
             this.btnBuscarLabor.Size = new System.Drawing.Size(100, 28);
             this.btnBuscarLabor.TabIndex = 2;
@@ -483,10 +484,10 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnGuardar.BackColor = System.Drawing.Color.SkyBlue;
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardar.Location = new System.Drawing.Point(7, 466);
-            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(112, 49);
             this.btnGuardar.TabIndex = 8;
@@ -497,10 +498,10 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnCancelar.BackColor = System.Drawing.Color.AliceBlue;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Location = new System.Drawing.Point(127, 465);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(112, 49);
             this.btnCancelar.TabIndex = 9;
@@ -521,7 +522,7 @@
             this.Controls.Add(this.gpEmpleados);
             this.Controls.Add(this.lblTitulo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "frmAddMovimientoLabores";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

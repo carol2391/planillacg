@@ -55,44 +55,18 @@ namespace nomina.Forms.Usuarios
             dgvPermisos.Columns.Add(new DataGridViewCheckBoxColumn { Name = "Modificar", DataPropertyName = "Modificar", HeaderText = "MODIFICAR", Width = 90 });
             dgvPermisos.Columns.Add(new DataGridViewCheckBoxColumn { Name = "Eliminar", DataPropertyName = "Eliminar", HeaderText = "ELIMINAR", Width = 85 });
             dgvPermisos.Columns.Add(new DataGridViewCheckBoxColumn { Name = "VerAntecedentes", DataPropertyName = "VerAntecedentes", HeaderText = "VER ANTECEDENTES", Width = 140 });
+            dgvPermisos.Columns.Add(new DataGridViewCheckBoxColumn { Name = "VerHistorialAumento", DataPropertyName = "VerHistorialAumento", HeaderText = "VER HISTORIAL AUMENTO", Width = 140 });
         }
         public void cargarPermisosData()
         {
             this.dgvPermisos.Enabled = true;
-            //permisos = bd.obtenerPermisos(this.user.UsuarioId);
             
            bd.CargarMatrizPermisos(this.user.UsuarioId, this.dgvPermisos);
         }
 
         private void txtBuscarPermiso_TextChanged(object sender, EventArgs e)
         {
-            if (!String.IsNullOrWhiteSpace(txtBuscarPermiso.Text.Trim()))
-            {
-
-                dgvPermisos.CurrentCell = null;
-
-                foreach (DataGridViewRow fila in dgvPermisos.Rows)
-                {
-                    fila.Visible = false;
-                }
-
-                foreach (DataGridViewRow fila in dgvPermisos.Rows)
-                {
-                    foreach (DataGridViewCell celda in fila.Cells)
-                    {
-                        if (celda.Value.ToString().ToUpper().Contains(txtBuscarPermiso.Text.ToUpper()))
-                        {
-                            fila.Visible = true;
-                        }
-
-                    }
-                }
-            }
-            else
-            {
-                dgvPermisos.DataSource = permisos;
-            }
-
+          
 
         }
 
@@ -133,6 +107,7 @@ namespace nomina.Forms.Usuarios
                     if (filaPermiso.Modulo.ToUpper().Trim() == "EMPLEADO")
                     {
                         bd.insertarPermisos(user.UsuarioId, idModulo, 5, filaPermiso.VerAntecedentes ? 1 : 0);
+                        bd.insertarPermisos(user.UsuarioId, idModulo, 6, filaPermiso.VerHistorialAumento ? 1 : 0);
                     }
                 }
             }
@@ -176,7 +151,7 @@ namespace nomina.Forms.Usuarios
 
         private void dgvPermisos_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            // 1. Validamos que estemos sobre celdas de datos válidas
+            // 1. Validamos que estemos sobre celdas de datos válidas (ignoramos cabeceras)
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 // 2. Validamos que la fila tenga un objeto enlazado correcto
@@ -184,33 +159,41 @@ namespace nomina.Forms.Usuarios
                 {
                     string nombreColumna = dgvPermisos.Columns[e.ColumnIndex].Name;
                     string moduloActual = filaPermiso.Modulo.ToUpper().Trim();
-                    bool ocultarCheckbox = false;
+                    bool ocultarCelda = false;
 
-                    // REGLA 1: Si es el módulo "ASIGNAR PERMISOS", ocultamos todas las columnas EXCEPTO "Modificar"
-                    if (moduloActual == "ASIGNAR PERMISOS" && nombreColumna != "Modificar")
+                    // REGLA 1 CORREGIDA: Si es "ASIGNAR PERMISOS", ocultamos todo EXCEPTO "Modificar" y "Modulo"
+                    if (moduloActual == "Asignar Permisos" &&
+                        nombreColumna != "Modificar" &&
+                        nombreColumna != "Modulo" &&
+                        nombreColumna != "IdModulo") // Añadimos las columnas que NO deben borrarse
                     {
-                        ocultarCheckbox = true;
+                        ocultarCelda = true;
                     }
 
-                    // REGLA 2: Mantener tu regla anterior (VerAntecedentes SOLO se ve en "EMPLEADO")
+                    // REGLA 2: VerAntecedentes SOLO se ve en "EMPLEADO"
                     if (nombreColumna == "VerAntecedentes" && moduloActual != "EMPLEADO")
                     {
-                        ocultarCheckbox = true;
+                        ocultarCelda = true;
                     }
 
-                    // 3. Si la celda cumple con alguna regla de ocultación, la pintamos en blanco
-                    if (ocultarCheckbox)
+                    // REGLA 3: VerHistorialAumento SOLO se ve en "EMPLEADO"
+                    if (nombreColumna == "VerHistorialAumento" && moduloActual != "EMPLEADO")
                     {
-                        // Dibuja el fondo normal de la celda (gris, blanco o azul si está seleccionada)
+                        ocultarCelda = true;
+                    }
+
+                    // 3. Si la celda cumple con alguna regla, la pintamos vacía
+                    if (ocultarCelda)
+                    {
+                        // Dibuja el fondo normal de la celda
                         e.PaintBackground(e.CellBounds, true);
 
-                        // Le indicamos a Windows Forms que ya manejamos el dibujo para que NO pinte el CheckBox
+                        // Le indicamos a Windows Forms que ya manejamos el dibujo (así omite dibujar el Checkbox o Texto)
                         e.Handled = true;
                     }
                 }
             }
         }
-
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("¿Está seguro que desea cancelar?", "Cancelar", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
