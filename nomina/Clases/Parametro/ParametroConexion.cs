@@ -41,7 +41,9 @@ namespace nomina.Clases.Parametro
                                 lector.GetDecimal(8),
                                lector.GetDecimal(9),
                                 lector.GetDecimal(10), 
-                                lector.GetDecimal(11)
+                                lector.GetDecimal(11),
+                                lector.GetDecimal(12),
+                                lector.GetDecimal(13)
 
                             );
 
@@ -78,7 +80,9 @@ namespace nomina.Clases.Parametro
                                 lector.GetDecimal(8),
                                lector.GetDecimal(9),
                                 lector.GetDecimal(10),
-                                lector.GetDecimal(11)
+                                lector.GetDecimal(11),
+                                 lector.GetDecimal(12),
+                                 lector.GetDecimal(13)
                             ));
             }
             this.conexion.getConexion().Close();
@@ -87,18 +91,19 @@ namespace nomina.Clases.Parametro
         #endregion
 
         #region insertar paramero
-        public bool agregarPärametro( int Periodo, decimal Excento,
-            decimal RangoInicial10, decimal RangoFinal10, decimal RangoInicial15,
+        public bool agregarParametro( int Periodo, decimal Excento,
+           decimal RangoInicial15,
             decimal RangoFinal15, decimal RangoInicial20, decimal RangoFinal20,
-            decimal RangoInicial25, decimal RangoFinal25,decimal sueldoPromedio
+            decimal RangoInicial25, decimal RangoFinal25,decimal sueldoPromedio,
+            decimal reservaLaboralRAP, decimal valorPisoRAP, decimal salarioMinimoPromedio,
+            decimal valorTechoIhss
+
            )
         {
             MySqlCommand cmd = new MySqlCommand("insertar_parametro", this.conexion.getConexion());
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@P_PERIODO", Periodo);
             cmd.Parameters.AddWithValue("@P_EXCENTO", Excento);
-            cmd.Parameters.AddWithValue("@P_RANGO_INICIAL10", RangoInicial10);
-            cmd.Parameters.AddWithValue("@P_RANGO_FINAL10", RangoFinal10);
             cmd.Parameters.AddWithValue("@P_RANGO_INICIAL15", RangoInicial15);
             cmd.Parameters.AddWithValue("@P_RANGO_FINAL15", RangoFinal15);
             cmd.Parameters.AddWithValue("@P_RANGO_INICIAL20", RangoInicial20);
@@ -106,6 +111,10 @@ namespace nomina.Clases.Parametro
             cmd.Parameters.AddWithValue("@P_RANGO_INICIAL25", RangoInicial25);
             cmd.Parameters.AddWithValue("@P_RANGO_FINAL25", RangoFinal25);
             cmd.Parameters.AddWithValue("@P_SUELDO_PROMEDIO", sueldoPromedio);
+            cmd.Parameters.AddWithValue("@P_RESERVA_LABORAL_RAP", reservaLaboralRAP);
+            cmd.Parameters.AddWithValue("@P_VALOR_PISO_RAP", valorPisoRAP);
+            cmd.Parameters.AddWithValue("@P_SALARIO_MINIMO_PROMEDIO", salarioMinimoPromedio);
+            cmd.Parameters.AddWithValue("@P_VALOR_TECHO_IHSS", valorTechoIhss);
             // cmd.Parameters.Add("@P_SALIDA", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;
 
             try
@@ -136,20 +145,20 @@ namespace nomina.Clases.Parametro
         #endregion
 
         #region modificar parametro
-        public bool modificarParametro(int id, int Periodo, decimal Excento,
-            decimal RangoInicial10, decimal RangoFinal10, decimal RangoInicial15,
+        public bool modificarParametro(int id, int Periodo, decimal Excento, decimal RangoInicial15,
             decimal RangoFinal15, decimal RangoInicial20, decimal RangoFinal20,
-            decimal RangoInicial25, decimal RangoFinal25, decimal sueldoPromedio
+            decimal RangoInicial25, decimal RangoFinal25, decimal sueldoPromedio,
+            decimal reservaLaboralRAP, decimal valorPisoRAP, decimal salarioMinimoPromedio,
+            decimal valorTechoIhss
+
            )
-        {
+        { 
             MySqlCommand cmd = new MySqlCommand("modificar_parametro", this.conexion.getConexion());
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
            
             cmd.Parameters.AddWithValue("@P_PARAMETRO_ID", id);
             cmd.Parameters.AddWithValue("@P_PERIODO", Periodo);
             cmd.Parameters.AddWithValue("@P_EXCENTO", Excento);
-            cmd.Parameters.AddWithValue("@P_RANGO_INICIAL10", RangoInicial10);
-            cmd.Parameters.AddWithValue("@P_RANGO_FINAL10", RangoFinal10);
             cmd.Parameters.AddWithValue("@P_RANGO_INICIAL15", RangoInicial15);
             cmd.Parameters.AddWithValue("@P_RANGO_FINAL15", RangoFinal15);
             cmd.Parameters.AddWithValue("@P_RANGO_INICIAL20", RangoInicial20);
@@ -157,6 +166,11 @@ namespace nomina.Clases.Parametro
             cmd.Parameters.AddWithValue("@P_RANGO_INICIAL25", RangoInicial25);
             cmd.Parameters.AddWithValue("@P_RANGO_FINAL25", RangoFinal25);
             cmd.Parameters.AddWithValue("@P_SUELDO_PROMEDIO",sueldoPromedio);
+            cmd.Parameters.AddWithValue("@P_SUELDO_PROMEDIO", sueldoPromedio);
+            cmd.Parameters.AddWithValue("@P_RESERVA_LABORAL_RAP", reservaLaboralRAP);
+            cmd.Parameters.AddWithValue("@P_VALOR_PISO_RAP", valorPisoRAP);
+            cmd.Parameters.AddWithValue("@P_SALARIO_MINIMO_PROMEDIO", salarioMinimoPromedio);
+            cmd.Parameters.AddWithValue("@P_VALOR_TECHO_IHSS", valorTechoIhss);
             // cmd.Parameters.Add("@P_SALIDA", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;
 
             try

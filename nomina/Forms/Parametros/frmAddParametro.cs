@@ -158,19 +158,6 @@ namespace nomina.Forms.Parametros
                 return false;
             }
 
-            if (this.nudInicial10.Value == 0)
-            {
-
-                MessageBox.Show("Ingrese el rango inicial del 10%", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            if (this.nudFinal10.Value == 0)
-            {
-
-                MessageBox.Show("Ingrese el rango final del 10%", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
 
             if (this.nudInicial15.Value == 0)
             {
@@ -212,6 +199,33 @@ namespace nomina.Forms.Parametros
                 MessageBox.Show("Ingrese el rango final del 25%", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+            if (this.nudReservaLaboralRAP.Value == 0)
+            {
+
+                MessageBox.Show("Ingrese el valor de la Reserva Laboral del RAP", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (this.nudValorPisoRAP.Value == 0)
+            {
+
+                MessageBox.Show("Ingrese el valor del Piso del RAP", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (this.nudSalarioMinimoPRO.Value == 0)
+            {
+
+                MessageBox.Show("Ingrese el salario minimo promedio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (this.nudValorTechoIHSS.Value == 0)
+            {
+
+                MessageBox.Show("Ingrese el valor del Techo del IHSS", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
             return true;
         }
 
@@ -219,12 +233,13 @@ namespace nomina.Forms.Parametros
 
         #region guardar nuevo parametro
         private void agregar() {
-            bool agrego = bdParametro.agregarPärametro((int)nudPeriodo.Value,
-                                  nudExcento.Value, nudInicial10.Value,
-                                  nudFinal10.Value, this.nudInicial15.Value,
+            bool agrego = bdParametro.agregarParametro((int)nudPeriodo.Value,
+                                  nudExcento.Value, this.nudInicial15.Value,
                                    nudFinal15.Value, this.nudInicial20.Value,
                                    nudFinal20.Value, this.nudInicial25.Value,
-                                   nudFinal25.Value, this.nudSueldoPromedio.Value);
+                                   nudFinal25.Value, this.nudSueldoPromedio.Value,
+                                   nudReservaLaboralRAP.Value, nudValorPisoRAP.Value,
+                                   nudSalarioMinimoPRO.Value,nudValorTechoIHSS.Value);
             if (agrego)
             {
                 MessageBox.Show("Parametro agregado exitosamente", "Agregar Parametro", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -240,11 +255,13 @@ namespace nomina.Forms.Parametros
         private void modificar()
         {
             bool agrego = bdParametro.modificarParametro(parametroData.Id,(int)nudPeriodo.Value,
-                                  nudExcento.Value, nudInicial10.Value,
-                                  nudFinal10.Value, this.nudInicial15.Value,
+                                  nudExcento.Value, this.nudInicial15.Value,
                                    nudFinal15.Value, this.nudInicial20.Value,
                                    nudFinal20.Value, this.nudInicial25.Value,
-                                   nudFinal25.Value,this.nudSueldoPromedio.Value);
+                                   nudFinal25.Value,this.nudSueldoPromedio.Value,
+                                   nudReservaLaboralRAP.Value, nudValorPisoRAP.Value,
+                                   nudSalarioMinimoPRO.Value, nudValorTechoIHSS.Value);
+
             if (agrego)
             {
                 MessageBox.Show("Parametro actualizado exitosamente", "Modificar Parametro", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -262,9 +279,6 @@ namespace nomina.Forms.Parametros
             this.nudExcento.Value = parametroData.Excento;
             this.nudSueldoPromedio.Value = parametroData.SueldoPromedio;
 
-            this.nudInicial10.Value = parametroData.RangoInicial10;
-            this.nudFinal10.Value = parametroData.RangoFinal10;
-
             this.nudInicial15.Value = parametroData.RangoInicial15;
             this.nudFinal15.Value = parametroData.RangoFinal15;
 
@@ -274,6 +288,12 @@ namespace nomina.Forms.Parametros
 
             this.nudInicial25.Value = parametroData.RangoInicial25;
             this.nudFinal25.Value = parametroData.RangoFinal25;
+
+            this.nudReservaLaboralRAP.Value= parametroData.ReservaLaboralRAP;
+            this.nudValorPisoRAP.Value = parametroData.ValorPisoRap;
+            this.nudSalarioMinimoPRO.Value = parametroData.SalarioMinimoPromedio;
+            this.nudValorTechoIHSS.Value = parametroData.ValorTechoIHSS;
+
         }
         #endregion
         private void limpiarControles() {

@@ -11,23 +11,27 @@ namespace nomina.Clases.Parametro
         public ParametroData() { }
 
         public ParametroData(int Id, int Periodo, decimal Excento,
-            decimal RangoInicial10, decimal RangoFinal10, decimal RangoInicial15,
+           decimal RangoInicial15,
             decimal RangoFinal15, decimal RangoInicial20, decimal RangoFinal20,
-            decimal RangoInicial25, decimal RangoFinal25, decimal sueldoPromedio
+            decimal RangoInicial25, decimal RangoFinal25, decimal sueldoPromedio,
+            decimal reservaLaboral, decimal valorPiso, decimal valorTecho, decimal
+            salarioMinimoPromedio
             )
         {
                 this.Id = Id;
                 this.Periodo = Periodo;
                 this.Excento = Excento;
-                this.RangoInicial10 = RangoInicial10;
-                this.RangoFinal10 = RangoFinal10;
                 this.RangoInicial15 = RangoInicial15;
                 this.RangoFinal15 = RangoFinal15;
                 this.RangoInicial20 = RangoInicial20;
-                  this.RangoFinal20 = RangoFinal20;
+                this.RangoFinal20 = RangoFinal20;
                 this.RangoInicial25 = RangoInicial25;
                 this.RangoFinal25 = RangoFinal25;
-              this.SueldoPromedio = sueldoPromedio;
+                this.SueldoPromedio = sueldoPromedio;
+                this.ReservaLaboralRAP = reservaLaboral;
+                this.ValorPisoRap = valorPiso;
+                this.ValorTechoIHSS = valorTecho;
+                this.SalarioMinimoPromedio = salarioMinimoPromedio;
 
         }
 
@@ -44,5 +48,10 @@ namespace nomina.Clases.Parametro
         public decimal RangoFinal25 { set; get; }
 
         public decimal SueldoPromedio { set; get; }
-  }
+
+        public decimal ReservaLaboralRAP { set; get; }
+        public decimal ValorPisoRap { set; get; }
+        public decimal ValorTechoIHSS { set; get; }
+        public decimal SalarioMinimoPromedio { set; get; }
+    }
 }
