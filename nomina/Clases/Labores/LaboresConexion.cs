@@ -8,6 +8,7 @@ using MySql.Data.MySqlClient;
 using System.Data;
 using nomina.Clases.TipoPago;
 using nomina.Clases.Opciones;
+using nomina.Clases.Seguridad;
 
 namespace nomina.Clases.Labores
 {
@@ -130,6 +131,7 @@ namespace nomina.Clases.Labores
             cmd.Parameters.AddWithValue("@P_FAC_LAB", FactorLabor);
             cmd.Parameters.AddWithValue("@P_ID_TIPO_PAGO", tipoPago);
             cmd.Parameters.AddWithValue("@P_ID_CUENTA", CodigoCuenta);
+            cmd.Parameters.AddWithValue("@P_USUARIO", Session.Usuario);
             cmd.Parameters.Add("@salida", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;
 
 

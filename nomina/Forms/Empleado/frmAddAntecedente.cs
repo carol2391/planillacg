@@ -11,6 +11,7 @@ using nomina.Clases.Utilidades;
 using nomina.Clases.Antecedentes;
 using nomina.Clases.ConexionManager;
 using nomina.Forms.Empleado;
+using nomina.Forms.Main;
 
 namespace nomina.Forms.Empleado
 {
@@ -20,11 +21,12 @@ namespace nomina.Forms.Empleado
         AntedecenteConexion bdAntecedente;
         int idAntecedente;
         string accion;
+        frmMain FrmMain;
         string tipoAntecedente;
-        public frmAddAntecedente(int idEmpleado,int idAntecedente ,Conexion conexion, string accion,string tipoAntecedente)
+        public frmAddAntecedente(int idEmpleado,int idAntecedente ,Conexion conexion, string accion,string tipoAntecedente, frmMain frmMain)
         {
             InitializeComponent();
-         
+            this.FrmMain = frmMain;
             this.idEmpleado = idEmpleado;
             this.idAntecedente = idAntecedente;
             bdAntecedente = new AntedecenteConexion(conexion);
@@ -147,13 +149,13 @@ namespace nomina.Forms.Empleado
             if (accion.Equals("nuevo"))
             {
               agrego =  this.bdAntecedente.accionesAntecedentes("N", 0, idEmpleado, (int)nudNumeroAntecedente.Value,
-                    dtpFechaEmision.Value.Date, dtpFechaVencimiento.Value.Date,dtpVigencia.Value.Date, txtLugarOrigen.Text.Trim(),tipoAntecedente);
+                    dtpFechaEmision.Value.Date, dtpFechaVencimiento.Value.Date,dtpVigencia.Value.Date, txtLugarOrigen.Text.Trim(),tipoAntecedente, this.FrmMain.usuarioName);
 
             }
             else
                 if (accion.Equals("modificar")) {
                  agrego = this.bdAntecedente.accionesAntecedentes("M", idAntecedente, idEmpleado, (int)nudNumeroAntecedente.Value,
-                    dtpFechaEmision.Value.Date, dtpFechaVencimiento.Value.Date, dtpVigencia.Value.Date, txtLugarOrigen.Text.Trim(),tipoAntecedente);
+                    dtpFechaEmision.Value.Date, dtpFechaVencimiento.Value.Date, dtpVigencia.Value.Date, txtLugarOrigen.Text.Trim(),tipoAntecedente, this.FrmMain.usuarioName);
             }
 
             if (agrego)

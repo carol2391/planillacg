@@ -20,7 +20,7 @@ namespace nomina.Clases.Antecedentes
         #region accione antecedente
         public bool accionesAntecedentes(string accion,int idAntecente, int idEmpleado, int numeroAntecedente,
                                         DateTime fechaEmision, DateTime fechaVencimiento,
-                                           DateTime vigencia, string lugarOrigen,string tipoAntecedente)
+                                           DateTime vigencia, string lugarOrigen,string tipoAntecedente, string usuario)
         {
             MySqlCommand cmd = new MySqlCommand("acciones_antecedente", this.conexion.getConexion());
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -33,6 +33,7 @@ namespace nomina.Clases.Antecedentes
             cmd.Parameters.AddWithValue("@P_ID_ANTECEDENTE", idAntecente);
             cmd.Parameters.AddWithValue("@P_TIPO_ANTECEDENTE", tipoAntecedente);
             cmd.Parameters.AddWithValue("@P_ACCION", accion);
+            cmd.Parameters.AddWithValue("@P_USUARIO", usuario);
             cmd.Parameters.Add("@P_SALIDA", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;
 
             try

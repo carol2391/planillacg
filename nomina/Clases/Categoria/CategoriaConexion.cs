@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using nomina.Clases.ConexionManager;
 using MySql.Data.MySqlClient;
 using System.Data;
+using nomina.Clases.Seguridad;
 
 
 namespace nomina.Clases.Categoria
@@ -63,6 +64,7 @@ namespace nomina.Clases.Categoria
             cmd.Parameters.AddWithValue("@P_SAL_FIN", saldoFinal);
             cmd.Parameters.AddWithValue("@P_ID_CATEGORIA", idCategoria);
             cmd.Parameters.AddWithValue("@P_ACCION",accion);
+            cmd.Parameters.AddWithValue("@P_USUARIO", Session.Usuario);
             cmd.Parameters.Add("@salida", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;
 
             try

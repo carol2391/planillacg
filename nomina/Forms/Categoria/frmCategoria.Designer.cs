@@ -92,6 +92,7 @@
             this.dgvCategorias.Size = new System.Drawing.Size(639, 507);
             this.dgvCategorias.TabIndex = 1;
             this.dgvCategorias.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvCategorias_CellDoubleClick);
+            this.dgvCategorias.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.dgvCategorias_PreviewKeyDown);
             // 
             // Id
             // 

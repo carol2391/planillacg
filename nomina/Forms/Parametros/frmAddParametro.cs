@@ -233,13 +233,13 @@ namespace nomina.Forms.Parametros
 
         #region guardar nuevo parametro
         private void agregar() {
-            bool agrego = bdParametro.agregarParametro((int)nudPeriodo.Value,
+            bool agrego = bdParametro.accionesParametros(null,(int)nudPeriodo.Value,
                                   nudExcento.Value, this.nudInicial15.Value,
                                    nudFinal15.Value, this.nudInicial20.Value,
                                    nudFinal20.Value, this.nudInicial25.Value,
                                    nudFinal25.Value, this.nudSueldoPromedio.Value,
                                    nudReservaLaboralRAP.Value, nudValorPisoRAP.Value,
-                                   nudSalarioMinimoPRO.Value,nudValorTechoIHSS.Value);
+                                   nudSalarioMinimoPRO.Value,nudValorTechoIHSS.Value, "N");
             if (agrego)
             {
                 MessageBox.Show("Parametro agregado exitosamente", "Agregar Parametro", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -254,13 +254,13 @@ namespace nomina.Forms.Parametros
         #region modificar un parametro
         private void modificar()
         {
-            bool agrego = bdParametro.modificarParametro(parametroData.Id,(int)nudPeriodo.Value,
+            bool agrego = bdParametro.accionesParametros(parametroData.Id,(int)nudPeriodo.Value,
                                   nudExcento.Value, this.nudInicial15.Value,
                                    nudFinal15.Value, this.nudInicial20.Value,
                                    nudFinal20.Value, this.nudInicial25.Value,
                                    nudFinal25.Value,this.nudSueldoPromedio.Value,
                                    nudReservaLaboralRAP.Value, nudValorPisoRAP.Value,
-                                   nudSalarioMinimoPRO.Value, nudValorTechoIHSS.Value);
+                                   nudSalarioMinimoPRO.Value, nudValorTechoIHSS.Value, "M");
 
             if (agrego)
             {

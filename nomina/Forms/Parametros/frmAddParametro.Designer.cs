@@ -29,6 +29,14 @@
         private void InitializeComponent()
         {
             this.pnLabor = new System.Windows.Forms.Panel();
+            this.nudValorTechoIHSS = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
+            this.nudValorPisoRAP = new System.Windows.Forms.NumericUpDown();
+            this.label14 = new System.Windows.Forms.Label();
+            this.nudReservaLaboralRAP = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
+            this.nudSalarioMinimoPRO = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.nudSueldoPromedio = new System.Windows.Forms.NumericUpDown();
             this.nudFinal25 = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
@@ -50,15 +58,11 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
-            this.nudSalarioMinimoPRO = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.nudReservaLaboralRAP = new System.Windows.Forms.NumericUpDown();
-            this.label13 = new System.Windows.Forms.Label();
-            this.nudValorPisoRAP = new System.Windows.Forms.NumericUpDown();
-            this.label14 = new System.Windows.Forms.Label();
-            this.nudValorTechoIHSS = new System.Windows.Forms.NumericUpDown();
-            this.label15 = new System.Windows.Forms.Label();
             this.pnLabor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudValorTechoIHSS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudValorPisoRAP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudReservaLaboralRAP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSalarioMinimoPRO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSueldoPromedio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFinal25)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudInicial25)).BeginInit();
@@ -68,10 +72,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudInicial15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudExcento)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPeriodo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSalarioMinimoPRO)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudReservaLaboralRAP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudValorPisoRAP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudValorTechoIHSS)).BeginInit();
             this.SuspendLayout();
             // 
             // pnLabor
@@ -109,6 +109,102 @@
             this.pnLabor.Name = "pnLabor";
             this.pnLabor.Size = new System.Drawing.Size(576, 450);
             this.pnLabor.TabIndex = 47;
+            // 
+            // nudValorTechoIHSS
+            // 
+            this.nudValorTechoIHSS.DecimalPlaces = 2;
+            this.nudValorTechoIHSS.Location = new System.Drawing.Point(319, 378);
+            this.nudValorTechoIHSS.Margin = new System.Windows.Forms.Padding(4);
+            this.nudValorTechoIHSS.Maximum = new decimal(new int[] {
+            1316134911,
+            2328,
+            0,
+            0});
+            this.nudValorTechoIHSS.Name = "nudValorTechoIHSS";
+            this.nudValorTechoIHSS.Size = new System.Drawing.Size(228, 22);
+            this.nudValorTechoIHSS.TabIndex = 15;
+            this.nudValorTechoIHSS.ThousandsSeparator = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(318, 358);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(118, 16);
+            this.label15.TabIndex = 49;
+            this.label15.Text = "Valor Techo IHSS:";
+            // 
+            // nudValorPisoRAP
+            // 
+            this.nudValorPisoRAP.DecimalPlaces = 2;
+            this.nudValorPisoRAP.Location = new System.Drawing.Point(319, 330);
+            this.nudValorPisoRAP.Margin = new System.Windows.Forms.Padding(4);
+            this.nudValorPisoRAP.Maximum = new decimal(new int[] {
+            1316134911,
+            2328,
+            0,
+            0});
+            this.nudValorPisoRAP.Name = "nudValorPisoRAP";
+            this.nudValorPisoRAP.Size = new System.Drawing.Size(228, 22);
+            this.nudValorPisoRAP.TabIndex = 13;
+            this.nudValorPisoRAP.ThousandsSeparator = true;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(318, 310);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(103, 16);
+            this.label14.TabIndex = 47;
+            this.label14.Text = "Valor Piso RAP:";
+            // 
+            // nudReservaLaboralRAP
+            // 
+            this.nudReservaLaboralRAP.DecimalPlaces = 2;
+            this.nudReservaLaboralRAP.Location = new System.Drawing.Point(19, 330);
+            this.nudReservaLaboralRAP.Margin = new System.Windows.Forms.Padding(4);
+            this.nudReservaLaboralRAP.Maximum = new decimal(new int[] {
+            1316134911,
+            2328,
+            0,
+            0});
+            this.nudReservaLaboralRAP.Name = "nudReservaLaboralRAP";
+            this.nudReservaLaboralRAP.Size = new System.Drawing.Size(228, 22);
+            this.nudReservaLaboralRAP.TabIndex = 12;
+            this.nudReservaLaboralRAP.ThousandsSeparator = true;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(18, 310);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(139, 16);
+            this.label13.TabIndex = 45;
+            this.label13.Text = "Reserva Laboral RAP";
+            // 
+            // nudSalarioMinimoPRO
+            // 
+            this.nudSalarioMinimoPRO.DecimalPlaces = 2;
+            this.nudSalarioMinimoPRO.Location = new System.Drawing.Point(19, 378);
+            this.nudSalarioMinimoPRO.Margin = new System.Windows.Forms.Padding(4);
+            this.nudSalarioMinimoPRO.Maximum = new decimal(new int[] {
+            1316134911,
+            2328,
+            0,
+            0});
+            this.nudSalarioMinimoPRO.Name = "nudSalarioMinimoPRO";
+            this.nudSalarioMinimoPRO.Size = new System.Drawing.Size(228, 22);
+            this.nudSalarioMinimoPRO.TabIndex = 14;
+            this.nudSalarioMinimoPRO.ThousandsSeparator = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(17, 358);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(161, 16);
+            this.label1.TabIndex = 43;
+            this.label1.Text = "Salario Minimo Promedio:";
             // 
             // nudSueldoPromedio
             // 
@@ -318,7 +414,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(313, 74);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(134, 20);
+            this.label4.Size = new System.Drawing.Size(107, 16);
             this.label4.TabIndex = 22;
             this.label4.Text = "Salario Mensual:";
             // 
@@ -388,102 +484,6 @@
             this.lblTitulo.Text = "Nuevo Parametro";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // nudSalarioMinimoPRO
-            // 
-            this.nudSalarioMinimoPRO.DecimalPlaces = 2;
-            this.nudSalarioMinimoPRO.Location = new System.Drawing.Point(19, 378);
-            this.nudSalarioMinimoPRO.Margin = new System.Windows.Forms.Padding(4);
-            this.nudSalarioMinimoPRO.Maximum = new decimal(new int[] {
-            1316134911,
-            2328,
-            0,
-            0});
-            this.nudSalarioMinimoPRO.Name = "nudSalarioMinimoPRO";
-            this.nudSalarioMinimoPRO.Size = new System.Drawing.Size(228, 22);
-            this.nudSalarioMinimoPRO.TabIndex = 42;
-            this.nudSalarioMinimoPRO.ThousandsSeparator = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 358);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(161, 16);
-            this.label1.TabIndex = 43;
-            this.label1.Text = "Salario Minimo Promedio:";
-            // 
-            // nudReservaLaboralRAP
-            // 
-            this.nudReservaLaboralRAP.DecimalPlaces = 2;
-            this.nudReservaLaboralRAP.Location = new System.Drawing.Point(19, 330);
-            this.nudReservaLaboralRAP.Margin = new System.Windows.Forms.Padding(4);
-            this.nudReservaLaboralRAP.Maximum = new decimal(new int[] {
-            1316134911,
-            2328,
-            0,
-            0});
-            this.nudReservaLaboralRAP.Name = "nudReservaLaboralRAP";
-            this.nudReservaLaboralRAP.Size = new System.Drawing.Size(228, 22);
-            this.nudReservaLaboralRAP.TabIndex = 44;
-            this.nudReservaLaboralRAP.ThousandsSeparator = true;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(18, 310);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(139, 16);
-            this.label13.TabIndex = 45;
-            this.label13.Text = "Reserva Laboral RAP";
-            // 
-            // nudValorPisoRAP
-            // 
-            this.nudValorPisoRAP.DecimalPlaces = 2;
-            this.nudValorPisoRAP.Location = new System.Drawing.Point(319, 330);
-            this.nudValorPisoRAP.Margin = new System.Windows.Forms.Padding(4);
-            this.nudValorPisoRAP.Maximum = new decimal(new int[] {
-            1316134911,
-            2328,
-            0,
-            0});
-            this.nudValorPisoRAP.Name = "nudValorPisoRAP";
-            this.nudValorPisoRAP.Size = new System.Drawing.Size(228, 22);
-            this.nudValorPisoRAP.TabIndex = 46;
-            this.nudValorPisoRAP.ThousandsSeparator = true;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(318, 310);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(103, 16);
-            this.label14.TabIndex = 47;
-            this.label14.Text = "Valor Piso RAP:";
-            // 
-            // nudValorTechoIHSS
-            // 
-            this.nudValorTechoIHSS.DecimalPlaces = 2;
-            this.nudValorTechoIHSS.Location = new System.Drawing.Point(319, 378);
-            this.nudValorTechoIHSS.Margin = new System.Windows.Forms.Padding(4);
-            this.nudValorTechoIHSS.Maximum = new decimal(new int[] {
-            1316134911,
-            2328,
-            0,
-            0});
-            this.nudValorTechoIHSS.Name = "nudValorTechoIHSS";
-            this.nudValorTechoIHSS.Size = new System.Drawing.Size(228, 22);
-            this.nudValorTechoIHSS.TabIndex = 48;
-            this.nudValorTechoIHSS.ThousandsSeparator = true;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(318, 358);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(118, 16);
-            this.label15.TabIndex = 49;
-            this.label15.Text = "Valor Techo IHSS:";
-            // 
             // frmAddParametro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -503,6 +503,10 @@
             this.Load += new System.EventHandler(this.FrmAddParametro_Load);
             this.pnLabor.ResumeLayout(false);
             this.pnLabor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudValorTechoIHSS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudValorPisoRAP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudReservaLaboralRAP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSalarioMinimoPRO)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSueldoPromedio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFinal25)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudInicial25)).EndInit();
@@ -512,10 +516,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudInicial15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudExcento)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPeriodo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSalarioMinimoPRO)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudReservaLaboralRAP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudValorPisoRAP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudValorTechoIHSS)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

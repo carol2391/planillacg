@@ -75,7 +75,7 @@
             this.btnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.btnGuardar.ForeColor = System.Drawing.Color.Black;
             this.btnGuardar.Location = new System.Drawing.Point(4, 379);
-            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(139, 48);
             this.btnGuardar.TabIndex = 7;
@@ -93,7 +93,7 @@
             this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.btnCancelar.ForeColor = System.Drawing.Color.Black;
             this.btnCancelar.Location = new System.Drawing.Point(151, 379);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(139, 48);
             this.btnCancelar.TabIndex = 8;
@@ -126,9 +126,9 @@
             this.gbEmpresa.Controls.Add(this.label2);
             this.gbEmpresa.Controls.Add(this.txtCodigo);
             this.gbEmpresa.Location = new System.Drawing.Point(0, 49);
-            this.gbEmpresa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbEmpresa.Margin = new System.Windows.Forms.Padding(4);
             this.gbEmpresa.Name = "gbEmpresa";
-            this.gbEmpresa.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbEmpresa.Padding = new System.Windows.Forms.Padding(4);
             this.gbEmpresa.Size = new System.Drawing.Size(749, 322);
             this.gbEmpresa.TabIndex = 66;
             this.gbEmpresa.TabStop = false;
@@ -142,7 +142,7 @@
             this.btnCargar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.btnCargar.ForeColor = System.Drawing.Color.Black;
             this.btnCargar.Location = new System.Drawing.Point(457, 250);
-            this.btnCargar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCargar.Margin = new System.Windows.Forms.Padding(4);
             this.btnCargar.Name = "btnCargar";
             this.btnCargar.Size = new System.Drawing.Size(139, 43);
             this.btnCargar.TabIndex = 11;
@@ -164,7 +164,7 @@
             // 
             this.pbImagen.BackColor = System.Drawing.Color.White;
             this.pbImagen.Location = new System.Drawing.Point(457, 39);
-            this.pbImagen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbImagen.Margin = new System.Windows.Forms.Padding(4);
             this.pbImagen.Name = "pbImagen";
             this.pbImagen.Size = new System.Drawing.Size(253, 203);
             this.pbImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -184,7 +184,7 @@
             // txtCorreo
             // 
             this.txtCorreo.Location = new System.Drawing.Point(89, 273);
-            this.txtCorreo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCorreo.Margin = new System.Windows.Forms.Padding(4);
             this.txtCorreo.MaxLength = 255;
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(275, 22);
@@ -203,7 +203,7 @@
             // txtTelefono
             // 
             this.txtTelefono.Location = new System.Drawing.Point(89, 235);
-            this.txtTelefono.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTelefono.Margin = new System.Windows.Forms.Padding(4);
             this.txtTelefono.MaxLength = 255;
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(275, 22);
@@ -213,7 +213,7 @@
             // 
             this.dptFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dptFecha.Location = new System.Drawing.Point(89, 90);
-            this.dptFecha.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dptFecha.Margin = new System.Windows.Forms.Padding(4);
             this.dptFecha.Name = "dptFecha";
             this.dptFecha.Size = new System.Drawing.Size(104, 22);
             this.dptFecha.TabIndex = 3;
@@ -231,7 +231,7 @@
             // txtRTN
             // 
             this.txtRTN.Location = new System.Drawing.Point(89, 198);
-            this.txtRTN.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtRTN.Margin = new System.Windows.Forms.Padding(4);
             this.txtRTN.MaxLength = 14;
             this.txtRTN.Name = "txtRTN";
             this.txtRTN.Size = new System.Drawing.Size(275, 22);
@@ -250,7 +250,7 @@
             // txtDireccion
             // 
             this.txtDireccion.Location = new System.Drawing.Point(89, 128);
-            this.txtDireccion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDireccion.Margin = new System.Windows.Forms.Padding(4);
             this.txtDireccion.MaxLength = 300;
             this.txtDireccion.Multiline = true;
             this.txtDireccion.Name = "txtDireccion";
@@ -281,7 +281,7 @@
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(89, 57);
-            this.txtNombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(4);
             this.txtNombre.MaxLength = 200;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(307, 22);
@@ -300,7 +300,7 @@
             // txtCodigo
             // 
             this.txtCodigo.Location = new System.Drawing.Point(89, 23);
-            this.txtCodigo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCodigo.Margin = new System.Windows.Forms.Padding(4);
             this.txtCodigo.MaxLength = 255;
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(132, 22);
@@ -317,7 +317,7 @@
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnCancelar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "frmAddEmpresa";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

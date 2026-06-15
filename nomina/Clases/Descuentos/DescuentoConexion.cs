@@ -9,6 +9,7 @@ using nomina.Clases.ConexionManager;
 using nomina.Clases.Descuentos;
 using nomina.Clases.TipoPago;
 using nomina.Clases.Opciones;
+using nomina.Clases.Seguridad;
 
 namespace nomina.Clases.Descuentos
 {
@@ -93,6 +94,7 @@ namespace nomina.Clases.Descuentos
             cmd.Parameters.AddWithValue("@P_ID_COD_CUE", idCodCuenta);
             cmd.Parameters.AddWithValue("@P_ACCION", accion);
             cmd.Parameters.AddWithValue("@P_ID_DEC", idDescuento);
+            cmd.Parameters.AddWithValue("@P_USUARIO", Session.Usuario);
             cmd.Parameters.Add("@salida", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;
 
 

@@ -21,7 +21,7 @@ namespace nomina.Clases.Movimientos.HistorialAumento
             comando.Parameters.AddWithValue("@P_ID_EMPLEADO", idEmpelado);
             comando.Parameters.AddWithValue("@P_FECI", fechaInicial);
             comando.Parameters.AddWithValue("@P_FECF", fechaFinal);
-
+             
             this.conexion.getConexion().Open();
 
             MySqlDataReader lector = comando.ExecuteReader();

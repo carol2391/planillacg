@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Data;
 using nomina.Clases.ConexionManager;
+using nomina.Clases.Seguridad;
 
 namespace nomina.Clases.Movimientos.MovimientoAumento
 {
@@ -138,7 +139,7 @@ namespace nomina.Clases.Movimientos.MovimientoAumento
         public bool accionesAumentos(string accion,int idAumento, int idEmpleado, int idCategoria, DateTime fecha,
                             decimal sueldoAnterior,
                             decimal sueldoActual, int idTipoAumento, decimal porcentaje, decimal montoAumento,
-                            decimal totalMonto, string descripcion)
+                            decimal totalMonto, string descripcion, string usuario)
         {
             MySqlCommand cmd = new MySqlCommand("acciones_maumentos", this.conexion.getConexion());
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -154,6 +155,8 @@ namespace nomina.Clases.Movimientos.MovimientoAumento
             cmd.Parameters.AddWithValue("@P_MONTO", montoAumento);
             cmd.Parameters.AddWithValue("@P_TOTAL_MONTO", totalMonto);
             cmd.Parameters.AddWithValue("@P_DESCRIPCION", descripcion);
+            cmd.Parameters.AddWithValue("@P_USUARIO", usuario);
+            cmd.Parameters.AddWithValue("@P_USUARIO", Session.Usuario);
             cmd.Parameters.Add("@P_SALIDA", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;
 
             //try

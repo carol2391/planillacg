@@ -340,7 +340,7 @@ namespace nomina.Forms.Movimientos.MovimientoAumentos
                                     empleado.Sueldo, nudNuevoSueldo.Value, 1,
                                      (decimal)0.00, nudMontoAumentoPorcentaje.Value, 
                                      monto,
-                                     txtDescripcion.Text);
+                                     txtDescripcion.Text, frmMain.usuarioName);
                     //limpiarControles();
                     //this.DialogResult = DialogResult.OK;
                     break;
@@ -351,7 +351,7 @@ namespace nomina.Forms.Movimientos.MovimientoAumentos
                                     empleado.Sueldo, nudNuevoSueldo.Value, 2,
                                      nudMontoAumentoPorcentaje.Value, (decimal)0.00,
                                      monto,
-                                     txtDescripcion.Text);
+                                     txtDescripcion.Text, frmMain.usuarioName);
                     // limpiarControles();
                     // this.DialogResult = DialogResult.OK;
                     break;
@@ -466,7 +466,7 @@ namespace nomina.Forms.Movimientos.MovimientoAumentos
                                     empleado.Sueldo, nudNuevoSueldo.Value, 1,
                                      nudMontoAumentoPorcentaje.Value, (decimal)0.00,
                                      monto,
-                                     txtDescripcion.Text);
+                                     txtDescripcion.Text, frmMain.usuarioName);
                     // limpiarControles();
                     //this.DialogResult = DialogResult.OK;
                     break;
@@ -477,7 +477,7 @@ namespace nomina.Forms.Movimientos.MovimientoAumentos
                                     empleado.Sueldo, nudNuevoSueldo.Value, 2,
                                      nudMontoAumentoPorcentaje.Value, (decimal)0.00,
                                      monto,
-                                     txtDescripcion.Text);
+                                     txtDescripcion.Text, frmMain.usuarioName);
                     //limpiarControles();
                     //this.DialogResult = DialogResult.OK;
                     break;

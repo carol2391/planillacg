@@ -58,13 +58,13 @@ namespace nomina.Forms.Planilla
         {
             if (this.Tag == "generar") {
                 this.btnGenerar.Text = "Generar";
-                this.lblProgreso.Visible = false;
+                
             }   
             else
             {
                 this.btnGenerar.Text = "Ver";
-                this.pgBarra.Visible = false;
-                this.lblProgreso.Visible = false;
+               
+             
             }
            
             }
@@ -75,7 +75,7 @@ namespace nomina.Forms.Planilla
             /*VER PLANILLA*/
             if (this.Tag != "generar")
             {
-                this.pgBarra.Visible = false;
+                
 
                 frmReportePlanilla frm = new frmReportePlanilla(conexion, this.txtCodigo.Text, this.dtpFecha.Value.Date);
                 frm.ShowDialog();
@@ -84,7 +84,7 @@ namespace nomina.Forms.Planilla
             if (this.Tag == "generar")
             {
                 this.btnGenerar.Enabled = false;
-                this.lblProgreso.Visible = true;
+               
                 backgroundWorker1.RunWorkerAsync();
                 timer1.Start();
         }
@@ -143,23 +143,9 @@ namespace nomina.Forms.Planilla
         private void generarNomina_ExportProgres(object sender, EventArgs e)
         {
 
-            //aqui informas del avance de la tarea
+           
 
-            pgBarra.Increment(1);
-            timer1.Enabled = true;
-            lblProgreso.Text = (Convert.ToInt32(lblProgreso.Text) + 1).ToString();
-
-            pgBarra.Style = ProgressBarStyle.Continuous;
-            if (pgBarra.Value == 100)
-            {
-                timer1.Stop();
-                timer1.Enabled = false;
-                this.Hide();
-                pgBarra.Value = 0;
-                return;
-            }
-
-            pgBarra.PerformStep();
+           
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -203,22 +189,7 @@ namespace nomina.Forms.Planilla
 
         private void Timer1_Tick_1(object sender, EventArgs e)
         {
-            pgBarra.Increment(1);
-            lblProgreso.Text = pgBarra.Value.ToString()+"%";
            
-            if (pgBarra.Value == pgBarra.Maximum)
-            {
-                this.btnGenerar.Enabled = true;
-                timer1.Stop();
-                pgBarra.Value = 0;
-                lblProgreso.Text = 0.ToString()+"%";
-
-                //if (genero && this.Tag == "generar")
-                //    MessageBox.Show("Planilla  generada exitosamente", "Generar Planilla", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //else
-                //  if (!genero && this.Tag == "generar")
-                //    MessageBox.Show("Ya existe una planilla generada con ese código y fecha", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         private void LblProgreso_Click(object sender, EventArgs e)

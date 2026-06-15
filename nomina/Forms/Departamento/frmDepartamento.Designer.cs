@@ -131,6 +131,7 @@
             this.dgvDeptos.Size = new System.Drawing.Size(597, 529);
             this.dgvDeptos.TabIndex = 5;
             this.dgvDeptos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvDeptos_CellDoubleClick);
+            this.dgvDeptos.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.dgvDatos_PreviewKeyDown);
             // 
             // Id
             // 

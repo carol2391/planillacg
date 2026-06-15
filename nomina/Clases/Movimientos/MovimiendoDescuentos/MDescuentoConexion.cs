@@ -1,14 +1,16 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using nomina.Clases.ConexionManager;
+using nomina.Clases.Descuentos;
+using nomina.Clases.Empleado;
+using nomina.Clases.Seguridad;
+using nomina.Clases.TipoPago;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
-using System.Data;
-using nomina.Clases.ConexionManager;
-using nomina.Clases.Empleado;
-using nomina.Clases.Descuentos;
-using nomina.Clases.TipoPago;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace nomina.Clases.MovimiendoDescuentos
 {
@@ -237,7 +239,7 @@ namespace nomina.Clases.MovimiendoDescuentos
             cmd.Parameters.AddWithValue("@P_FECHA_DESCUENTO", fechaDescuento);
             cmd.Parameters.AddWithValue("@P_MON_DESCUENTO", montoDescuento);
             cmd.Parameters.AddWithValue("@P_ID_CUENTA", idCuenta);
-            
+            cmd.Parameters.AddWithValue("@P_USUARIO", Session.Usuario);
             // cmd.Parameters.AddWithValue("@P_ID_NOMINA",idNomina );
 
             cmd.Parameters.Add("@p_salida", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;

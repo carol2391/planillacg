@@ -7,6 +7,7 @@ using nomina.Clases.ConexionManager;
 using MySql.Data.MySqlClient;
 using System.Data;
 using nomina.Clases.Opciones;
+using nomina.Clases.Seguridad;
 
 namespace nomina.Clases.Empleado
 {
@@ -394,12 +395,12 @@ namespace nomina.Clases.Empleado
             cmd.Parameters.AddWithValue("@P_OTRA_CUENTA_1",null );//cuenta1
             cmd.Parameters.AddWithValue("@P_OTRA_CUENTA_2", null);//cuenta2
             cmd.Parameters.Add("@salida", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;
-
+            cmd.Parameters.AddWithValue("@P_USUARIO", Session.Usuario);
 
             //try
             //{
-                //Se abre la conexión
-                conexion.getConexion().Open();
+            //Se abre la conexión
+            conexion.getConexion().Open();
 
             // int filasAfectadas = 
             cmd.ExecuteNonQuery();

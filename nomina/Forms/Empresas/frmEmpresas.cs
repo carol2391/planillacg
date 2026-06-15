@@ -13,7 +13,6 @@ using nomina.Clases.Empresas;
 using nomina.Clases.Utilidades;
 using nomina.Clases.PermisosUsuario;
 using nomina.Forms.Usuarios;
-using nomina.Clases.PermisosUsuario;
 using nomina.Clases.UsuarioPermisos;
 
 namespace nomina.Forms.Empresas

@@ -282,7 +282,7 @@ namespace nomina.Forms.Movimientos.MovimientoAumentos
                                     (decimal)0.00, (decimal)0.00, 1,
                                      (decimal)0.00, (decimal)0.00,
                                      (decimal)0.00,
-                                     " ");
+                                     " ", frmMain.usuarioName);
 
                         if (elimino)
                         {

@@ -26,13 +26,13 @@ namespace nomina.Forms.Departamento
     {
         Conexion conexion;
         frmMain frmMain;
-        DepartamentoData depto;
+        public DepartamentoData depto { set; get; }
         List<DepartamentoData> departamentos = new List<DepartamentoData>();
         DepartamentoConexion bdDepto;
         PermisoUsuarioConexion bdPermisos;
         Opcion opcion;
 
-        public frmDepartamento(Conexion conexion, frmMain frm, List<DepartamentoData> departamentos)
+        public frmDepartamento(Conexion conexion, frmMain frm)
         {
             InitializeComponent();
             this.conexion = conexion;
@@ -113,13 +113,10 @@ namespace nomina.Forms.Departamento
                     }
                     else
                     {
-                        //MessageBox.Show("Seleccione un departamento", "Modificar Departamento", MessageBoxButtons.OK);
+                       
                     }
                 }
-            //}
-            //else
-            //    btnModificar.Enabled = false;
-
+     
             opcion = Opcion.Salir;
 
         }//fin modificar
@@ -157,11 +154,9 @@ namespace nomina.Forms.Departamento
 
         private void bntQuitar_Click(object sender, EventArgs e)
         {
-            //if (bdPermisos.existePermiso(this.frmMain.usuarioId, 15)) {
-                eliminarDepartamento();
-            //}
-            //else
-            //   this.bntQuitar.Enabled = false;
+           
+            eliminarDepartamento();
+;
             opcion = Opcion.Salir;
         }
 
@@ -248,6 +243,19 @@ namespace nomina.Forms.Departamento
 
         }
 
+        private void dgvDatos_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (this.Tag.Equals("buscar") && e.KeyCode == Keys.Enter)
+            {
+                this.cargarDatosEditar();
+                base.DialogResult = DialogResult.OK;
+            }
+            else
+            {
+                base.DialogResult = DialogResult.No;
+            
+            }
+        }
         private void frmDepartamento_Shown(object sender, EventArgs e)
         {
             Validator.validarPermisos (this.frmMain.usuarioId, btnNuevo, btnModificar, bntQuitar, btnSalir, this,4);

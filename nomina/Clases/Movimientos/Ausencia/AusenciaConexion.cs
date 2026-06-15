@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Data;
 using nomina.Clases.ConexionManager;
+using nomina.Clases.Seguridad;
 
 namespace nomina.Clases.Ausencia
 {
@@ -135,19 +136,20 @@ namespace nomina.Clases.Ausencia
         {
             MySqlCommand cmd = new MySqlCommand("acciones_mausencias", this.conexion.getConexion());
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@P_ACCION", accion);
+            cmd.Parameters.AddWithValue("@P_ACCION", accion);    
+            cmd.Parameters.AddWithValue("@P_ID_AUSENCIA", idAusencia);            
             cmd.Parameters.AddWithValue("@P_ID_EMPLEADO", idEmpleado);
-            cmd.Parameters.AddWithValue("@P_ID_AUSENCIA", idAusencia);
-            cmd.Parameters.AddWithValue("@P_ID_TIPO_AUSENCIA", idTipoAusencia);
+            cmd.Parameters.AddWithValue("@P_ID_TIPO_AUSENCIA", idTipoAusencia); 
             cmd.Parameters.AddWithValue("@P_FEC_INICIAL_AU", fechaInicial);
             cmd.Parameters.AddWithValue("@P_FEC_FINAL_AU", fechaFinal);
             cmd.Parameters.AddWithValue("@P_ID_NOMINA", idNomina);
             cmd.Parameters.AddWithValue("@P_SEPTIMO", septimo);
             cmd.Parameters.AddWithValue("@P_MONTO", monto);
+            cmd.Parameters.AddWithValue("@P_USUARIO", Session.Usuario);
             cmd.Parameters.Add("@salida", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;
 
-            //try
-            //{
+            try
+            {
                 //Se abre la conexión
                 conexion.getConexion().Open();
 
@@ -166,12 +168,12 @@ namespace nomina.Clases.Ausencia
                     return false;
                 }
 
-        //}
-        //    catch (MySqlException)
-        //    {
-        //        this.conexion.getConexion().Close();
-        //        return false;
-        //    }
+        }
+                catch (MySqlException ex)
+                {
+                    this.conexion.getConexion().Close();
+                    return false;
+                }
 }
         #endregion
 

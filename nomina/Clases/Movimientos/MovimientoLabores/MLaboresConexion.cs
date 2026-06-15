@@ -8,6 +8,7 @@ using MySql.Data.MySqlClient;
 using System.Data;
 using System.Windows.Forms;
 using nomina.Clases.Empleado;
+using nomina.Clases.Seguridad;
 
 namespace nomina.Clases.MovimientoLabores
 {
@@ -282,6 +283,7 @@ namespace nomina.Clases.MovimientoLabores
             cmd.Parameters.AddWithValue("@P_ID_CUENTA", idCuenta);
            // cmd.Parameters.AddWithValue("@P_ID_NOMINA",idNomina );
             cmd.Parameters.AddWithValue("@P_ISR", isr);
+            cmd.Parameters.AddWithValue("@P_USUARIO", Session.Usuario);
             cmd.Parameters.Add("@p_salida", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;
 
             //try

@@ -260,7 +260,7 @@ namespace nomina.Forms.Empleado
             {
                 int rowIndex = this.dgvDatos.CurrentCell.RowIndex;
                 int idEmpleado = Convert.ToInt32(this.dgvDatos.Rows[rowIndex].Cells["Id"].Value.ToString());
-                frmAntecedente frm = new frmAntecedente(idEmpleado, conexion, "PO");
+                frmAntecedente frm = new frmAntecedente(idEmpleado, conexion, "PO", frmMain);
                 frm.ShowDialog();
 
             }
@@ -273,7 +273,7 @@ namespace nomina.Forms.Empleado
             {
                 int rowIndex = this.dgvDatos.CurrentCell.RowIndex;
                 int idEmpleado = Convert.ToInt32(this.dgvDatos.Rows[rowIndex].Cells["Id"].Value.ToString());
-                frmAntecedente frm = new frmAntecedente(idEmpleado, conexion, "PN");
+                frmAntecedente frm = new frmAntecedente(idEmpleado, conexion, "PN", frmMain);
                 frm.ShowDialog();
             }
             this.pnTipoAntecedente.Visible = this.pnTitulo.Visible = false;
@@ -312,7 +312,10 @@ namespace nomina.Forms.Empleado
 
         private void frmEmpleado_Shown(object sender, EventArgs e)
         {
-            ValidarPermisos();
+            if (!SuperUsuario.superUsuario) {
+                ValidarPermisos();
+            }
+           
         }
 
         private  void ValidarPermisos()

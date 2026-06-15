@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using nomina.Clases.ConexionManager;
 using nomina.Clases.Utilidades;
 using nomina.Clases.Antecedentes;
+using nomina.Forms.Main;
 
 namespace nomina.Forms.Empleado
 {
@@ -27,7 +28,8 @@ namespace nomina.Forms.Empleado
         Opcion opcion;
         AntedecenteConexion bdAntecedente;
         string tipoAntecedente;
-        public frmAntecedente(int idEmpleado, Conexion conexion, string tipoAntecedente)
+        frmMain frmMain;
+        public frmAntecedente(int idEmpleado, Conexion conexion, string tipoAntecedente, frmMain  frmMain)
         {
             InitializeComponent();
             if (tipoAntecedente.Equals("PO")) {
@@ -37,6 +39,7 @@ namespace nomina.Forms.Empleado
                 this.lblTitulo.Text = "ANTECEDENTES PENALES";
             Utilidad.configuarForm(this, "Antecedentes");
             Utilidad.configurarDataGrid(dgvDatos);
+            this.frmMain = frmMain;
             this.conexion = conexion;
             this.idEmpleado = idEmpleado;
             this.bdAntecedente = new AntedecenteConexion(conexion);
@@ -78,7 +81,7 @@ namespace nomina.Forms.Empleado
             
               //  int rowIndex = this.dgvDatos.CurrentCell.RowIndex;
                 //this.idAntecedente = Convert.ToInt32(this.dgvDatos.Rows[rowIndex].Cells["Id"].Value.ToString());
-                frmAddAntecedente frm = new frmAddAntecedente(idEmpleado, 0, conexion,"nuevo",tipoAntecedente);
+                frmAddAntecedente frm = new frmAddAntecedente(idEmpleado, 0, conexion,"nuevo",tipoAntecedente, frmMain);
                 frm.ShowDialog();
                 this.dgvDatos.DataSource = bdAntecedente.obtenerAntecedentes(tipoAntecedente,idEmpleado);
                this.opcion = Opcion.Salir;
@@ -90,7 +93,7 @@ namespace nomina.Forms.Empleado
             {
                 int rowIndex = this.dgvDatos.CurrentCell.RowIndex;
                 this.idAntecedente = Convert.ToInt32(this.dgvDatos.Rows[rowIndex].Cells["Id"].Value.ToString());
-                frmAddAntecedente frm = new frmAddAntecedente(idEmpleado,idAntecedente, conexion,"modificar",tipoAntecedente);
+                frmAddAntecedente frm = new frmAddAntecedente(idEmpleado,idAntecedente, conexion,"modificar",tipoAntecedente, frmMain);
                 frm.ShowDialog();
                 this.dgvDatos.DataSource = bdAntecedente.obtenerAntecedentes(tipoAntecedente,idEmpleado);
             }
@@ -103,7 +106,7 @@ namespace nomina.Forms.Empleado
             {
                 int rowIndex = this.dgvDatos.CurrentCell.RowIndex;
                 this.idAntecedente = Convert.ToInt32(this.dgvDatos.Rows[rowIndex].Cells["Id"].Value.ToString());
-                this.bdAntecedente.accionesAntecedentes("E", this.idAntecedente, idEmpleado, 0, DateTime.Now, DateTime.Now, DateTime.Now, "","");
+                this.bdAntecedente.accionesAntecedentes("E", this.idAntecedente, idEmpleado, 0, DateTime.Now, DateTime.Now, DateTime.Now, "","", frmMain.usuarioName);
                 this.dgvDatos.DataSource = bdAntecedente.obtenerAntecedentes(tipoAntecedente,idEmpleado);
             }
             this.opcion = Opcion.Salir;

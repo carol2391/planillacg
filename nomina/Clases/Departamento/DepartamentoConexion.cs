@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using nomina.Clases.ConexionManager;
 using MySql.Data.MySqlClient;
 using System.Data;
+using nomina.Clases.Seguridad;
 namespace nomina.Clases.Departamento
 {
     public class DepartamentoConexion
@@ -32,10 +33,10 @@ namespace nomina.Clases.Departamento
           cmd.Parameters.AddWithValue("@P_ID_DEP", idDepartamento);
           cmd.Parameters.AddWithValue("@P_COD_DEP",codDepto);
           cmd.Parameters.AddWithValue("@P_NOM_DEP", nombreDepto);
-         
-                cmd.Parameters.AddWithValue("@P_ID_EMPLEADO", id_encargado);
-          cmd.Parameters.AddWithValue("@P_ID_CUENTA", idCuenta);
-          cmd.Parameters.Add("@salida", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;
+         cmd.Parameters.AddWithValue("@P_ID_EMPLEADO", id_encargado);
+         cmd.Parameters.AddWithValue("@P_ID_CUENTA", idCuenta);
+         cmd.Parameters.AddWithValue("@P_USUARIO", Session.Usuario);
+         cmd.Parameters.Add("@salida", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;
             //try
             //{
                 conexion.getConexion().Open();

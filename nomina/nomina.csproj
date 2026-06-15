@@ -114,6 +114,24 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
     <Reference Include="MySqlConnector, Version=0.49.2.0, Culture=neutral, PublicKeyToken=d33d3e53aa5f8c92, processorArchitecture=MSIL">
       <HintPath>..\packages\MySqlConnector.0.49.2\lib\net461\MySqlConnector.dll</HintPath>
     </Reference>
@@ -235,7 +253,9 @@
     <Compile Include="Clases\Opciones\LOpciones.cs" />
     <Compile Include="Clases\Parametro\ParametroConexion.cs" />
     <Compile Include="Clases\Parametro\ParametroData.cs" />
+    <Compile Include="Clases\Reportes\ReportesConexion.cs" />
     <Compile Include="Clases\Seguridad\Encryptacion.cs" />
+    <Compile Include="Clases\Seguridad\Session.cs" />
     <Compile Include="Clases\TipoAumento\TipoAumentoConexion.cs" />
     <Compile Include="Clases\TipoAumento\TipoAumentoData.cs" />
     <Compile Include="Clases\TipoAusencia\TipoAusenciaConexion.cs" />
@@ -338,6 +358,10 @@
     <Compile Include="Forms\Empresas\frmEmpresas.Designer.cs">
       <DependentUpon>frmEmpresas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Main\frmMain.cs" />
+    <Compile Include="Forms\Main\frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Movimientos\MovimientoAumentos\frmAddAumento.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -416,10 +440,6 @@
     <Compile Include="Forms\Login\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Main\FrmMain.cs" />
-    <Compile Include="Forms\Main\FrmMain.Designer.cs">
-      <DependentUpon>FrmMain.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Movimientos\MovimientosLabores\frmModificarMovimientoLabor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -464,6 +484,30 @@
     <Compile Include="Forms\Reportes\frmReportePlanilla.Designer.cs">
       <DependentUpon>frmReportePlanilla.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Reportes\ReporteNomina\frmFiltro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\ReporteNomina\frmFiltro.Designer.cs">
+      <DependentUpon>frmFiltro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\ReporteNomina\frmReporteNomina.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\ReporteNomina\frmReporteNomina.Designer.cs">
+      <DependentUpon>frmReporteNomina.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\ReporteNomina\frmReportePlanila.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\ReporteNomina\frmReportePlanila.Designer.cs">
+      <DependentUpon>frmReportePlanila.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\ReporteNomina\frmReporteVarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\ReporteNomina\frmReporteVarios.Designer.cs">
+      <DependentUpon>frmReporteVarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Servidor\frmServidor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -502,6 +546,7 @@
       <DependentUpon>rptPlanilla.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <EmbeddedResource Include="BarraProgreso\frmBarraProgreso.resx">
       <DependentUpon>frmBarraProgreso.cs</DependentUpon>
     </EmbeddedResource>
@@ -547,6 +592,9 @@
     <EmbeddedResource Include="Forms\Empresas\frmEmpresas.resx">
       <DependentUpon>frmEmpresas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main\frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Movimientos\MovimientoAumentos\frmAddAumento.resx">
       <DependentUpon>frmAddAumento.cs</DependentUpon>
     </EmbeddedResource>
@@ -586,9 +634,6 @@
     <EmbeddedResource Include="Forms\Login\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Main\FrmMain.resx">
-      <DependentUpon>FrmMain.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Movimientos\MovimientosLabores\frmModificarMovimientoLabor.resx">
       <DependentUpon>frmModificarMovimientoLabor.cs</DependentUpon>
     </EmbeddedResource>
@@ -607,6 +652,22 @@
     <EmbeddedResource Include="Forms\Reportes\frmReportePlanilla.resx">
       <DependentUpon>frmReportePlanilla.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\ReporteNomina\frmFiltro.resx">
+      <DependentUpon>frmFiltro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\ReporteNomina\frmReporteNomina.resx">
+      <DependentUpon>frmReporteNomina.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\ReporteNomina\frmReportePlanila.resx">
+      <DependentUpon>frmReportePlanila.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\ReporteNomina\frmReporteVarios.resx">
+      <DependentUpon>frmReporteVarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\rpCategoria.rdlc" />
+    <EmbeddedResource Include="Forms\Reportes\rpDepartamentordlc.rdlc" />
+    <EmbeddedResource Include="Forms\Reportes\rplabores.rdlc" />
+    <EmbeddedResource Include="Forms\Reportes\rpPlanilla.rdlc" />
     <EmbeddedResource Include="Forms\Servidor\frmServidor.resx">
       <DependentUpon>frmServidor.cs</DependentUpon>
     </EmbeddedResource>
@@ -682,6 +743,22 @@
   <ItemGroup>
     <None Include="Resources\procedimientos__almacenados_empresas.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

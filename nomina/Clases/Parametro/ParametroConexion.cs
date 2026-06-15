@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Data;
 using nomina.Clases.ConexionManager;
+using nomina.Clases.Seguridad;
 
 namespace nomina.Clases.Parametro
 {
@@ -91,17 +92,19 @@ namespace nomina.Clases.Parametro
         #endregion
 
         #region insertar paramero
-        public bool agregarParametro( int Periodo, decimal Excento,
+        public bool accionesParametros(int? id,  int Periodo, decimal Excento,
            decimal RangoInicial15,
             decimal RangoFinal15, decimal RangoInicial20, decimal RangoFinal20,
             decimal RangoInicial25, decimal RangoFinal25,decimal sueldoPromedio,
             decimal reservaLaboralRAP, decimal valorPisoRAP, decimal salarioMinimoPromedio,
-            decimal valorTechoIhss
+            decimal valorTechoIhss, string accion
 
            )
         {
-            MySqlCommand cmd = new MySqlCommand("insertar_parametro", this.conexion.getConexion());
+            MySqlCommand cmd = new MySqlCommand("acciones_parametro", this.conexion.getConexion());
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@P_ACCION", accion);
+            cmd.Parameters.AddWithValue("@P_ID_PARAMETRO", id);
             cmd.Parameters.AddWithValue("@P_PERIODO", Periodo);
             cmd.Parameters.AddWithValue("@P_EXCENTO", Excento);
             cmd.Parameters.AddWithValue("@P_RANGO_INICIAL15", RangoInicial15);
@@ -115,28 +118,30 @@ namespace nomina.Clases.Parametro
             cmd.Parameters.AddWithValue("@P_VALOR_PISO_RAP", valorPisoRAP);
             cmd.Parameters.AddWithValue("@P_SALARIO_MINIMO_PROMEDIO", salarioMinimoPromedio);
             cmd.Parameters.AddWithValue("@P_VALOR_TECHO_IHSS", valorTechoIhss);
-            // cmd.Parameters.Add("@P_SALIDA", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;
+            cmd.Parameters.AddWithValue("@P_USUARIO", Session.Usuario);
+            cmd.Parameters.Add("@P_SALIDA", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;
 
             try
             {
                 //    //Se abre la conexión
                 conexion.getConexion().Open();
 
-            int filasAfectadas = cmd.ExecuteNonQuery();
-            //int salida = Convert.ToInt32(cmd.Parameters["@P_SALIDA"].Value);
-            /*si es igual a uno no existe*/
-            if (filasAfectadas == 1)
-            {
-                this.conexion.getConexion().Close();
-                return true;
+                // int filasAfectadas = 
+                cmd.ExecuteNonQuery();
+                int salida = Convert.ToInt32(cmd.Parameters["@P_SALIDA"].Value);
+
+                if (salida == 1)
+                {
+                    this.conexion.getConexion().Close();
+                    return true;
+                }
+                else
+                {
+                    this.conexion.getConexion().Close();
+                    return false;
+                }
             }
-            else
-            {
-                this.conexion.getConexion().Close();
-                return false;
-            }
-        }
-            catch (MySqlException)
+            catch (MySqlException EX)
             {
                 this.conexion.getConexion().Close();
                 return false;

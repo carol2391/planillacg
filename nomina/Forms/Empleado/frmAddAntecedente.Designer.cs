@@ -172,6 +172,11 @@
             // 
             this.nudNumeroAntecedente.Location = new System.Drawing.Point(8, 53);
             this.nudNumeroAntecedente.Margin = new System.Windows.Forms.Padding(4);
+            this.nudNumeroAntecedente.Maximum = new decimal(new int[] {
+            1569325055,
+            23283064,
+            0,
+            0});
             this.nudNumeroAntecedente.Name = "nudNumeroAntecedente";
             this.nudNumeroAntecedente.Size = new System.Drawing.Size(160, 22);
             this.nudNumeroAntecedente.TabIndex = 1;

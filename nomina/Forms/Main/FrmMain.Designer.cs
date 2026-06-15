@@ -244,42 +244,49 @@
             // 
             this.análisisToolStripMenuItem.Name = "análisisToolStripMenuItem";
             this.análisisToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.análisisToolStripMenuItem.Text = "Análisis";
+            this.análisisToolStripMenuItem.Text = "Departamentos";
+            this.análisisToolStripMenuItem.Click += new System.EventHandler(this.análisisToolStripMenuItem_Click);
             // 
             // movimientosToolStripMenuItem
             // 
             this.movimientosToolStripMenuItem.Name = "movimientosToolStripMenuItem";
             this.movimientosToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.movimientosToolStripMenuItem.Text = "Movimientos";
+            this.movimientosToolStripMenuItem.Text = "Categorías";
+             this.movimientosToolStripMenuItem.Click += new System.EventHandler(this.movimientosToolStripMenuItem_Click);
             // 
             // prestamosToolStripMenuItem1
             // 
             this.prestamosToolStripMenuItem1.Name = "prestamosToolStripMenuItem1";
             this.prestamosToolStripMenuItem1.Size = new System.Drawing.Size(197, 22);
-            this.prestamosToolStripMenuItem1.Text = "Prestamos";
+            this.prestamosToolStripMenuItem1.Text = "Labores";
+            this.prestamosToolStripMenuItem1.Click += new System.EventHandler(this.prestamosToolStripMenuItem1_Click);
             // 
             // liquidaciónToolStripMenuItem
             // 
             this.liquidaciónToolStripMenuItem.Name = "liquidaciónToolStripMenuItem";
             this.liquidaciónToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.liquidaciónToolStripMenuItem.Text = "Liquidación";
+                 this.liquidaciónToolStripMenuItem.Visible = false;
             // 
             // listadosGeneralesToolStripMenuItem
             // 
             this.listadosGeneralesToolStripMenuItem.Name = "listadosGeneralesToolStripMenuItem";
             this.listadosGeneralesToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.listadosGeneralesToolStripMenuItem.Visible = false;
             this.listadosGeneralesToolStripMenuItem.Text = "Listados generales";
             // 
             // cuotasPatronalesToolStripMenuItem
             // 
             this.cuotasPatronalesToolStripMenuItem.Name = "cuotasPatronalesToolStripMenuItem";
             this.cuotasPatronalesToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.cuotasPatronalesToolStripMenuItem.Visible = false;
             this.cuotasPatronalesToolStripMenuItem.Text = "Cuotas patronales";
             // 
             // opcionesDeSupervisorToolStripMenuItem
             // 
             this.opcionesDeSupervisorToolStripMenuItem.Name = "opcionesDeSupervisorToolStripMenuItem";
             this.opcionesDeSupervisorToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.opcionesDeSupervisorToolStripMenuItem.Visible = false;
             this.opcionesDeSupervisorToolStripMenuItem.Text = "Opciones de supervisor";
             // 
             // empresasToolStripMenuItem

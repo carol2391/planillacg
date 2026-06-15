@@ -23,7 +23,7 @@ namespace nomina.Forms.Categoria
         #region propiedades
         Conexion conexion;
         frmMain frmMain;
-        CategoriaData categoria;
+        public CategoriaData categoria { set; get; }
         List<CategoriaData> categorias = new List<CategoriaData>();
         CategoriaConexion bdCategoria;
         PermisoUsuarioConexion bdPermisos;
@@ -54,19 +54,17 @@ namespace nomina.Forms.Categoria
         }
         private void BtnNuevo_Click(object sender, EventArgs e)
         {
-            if (bdPermisos.existePermiso(this.frmMain.usuarioId, 2,2))
+
+            frmAddCategoria frm = new frmAddCategoria(conexion);
+            frm.Tag = "agregar";
+            frm.ShowDialog();
+            dgvCategorias.DataSource = bdCategoria.obtenerCategorias();
+            if (frm.DialogResult == DialogResult.OK)
             {
-                frmAddCategoria frm = new frmAddCategoria(conexion);
-                frm.Tag = "agregar";
-                frm.ShowDialog();
                 dgvCategorias.DataSource = bdCategoria.obtenerCategorias();
-               if (frm.DialogResult == DialogResult.OK) { 
-                   dgvCategorias.DataSource = bdCategoria.obtenerCategorias();
-               }
             }
-            else
-                btnNuevo.Visible = false;
-            }
+        }
+           
 
         private void BtnModificar_Click(object sender, EventArgs e)
         {
@@ -208,6 +206,20 @@ namespace nomina.Forms.Categoria
         {
             
             Validator.validarPermisos( frmMain.usuarioId, btnNuevo, btnModificar, bntQuitar, btnSalir, this,5);
+        }
+
+        private void dgvCategorias_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (this.Tag.Equals("buscar") && e.KeyCode == Keys.Enter)
+            {
+                this.cargarDatosEditar();
+                base.DialogResult = DialogResult.OK;
+            }
+            else
+            {
+                base.DialogResult = DialogResult.No;
+
+            }
         }
     }
 }
