@@ -1,10 +1,12 @@
-﻿using nomina.Clases.Categoria;
+﻿using Microsoft.Reporting.WinForms;
+using nomina.Clases.Categoria;
 using nomina.Clases.ConexionManager;
 using nomina.Clases.Departamento;
 using nomina.Clases.Descuentos;
 using nomina.Clases.Empleado;
 using nomina.Clases.Labores;
 using nomina.Clases.PermisosUsuario;
+using nomina.Clases.Reportes;
 using nomina.Clases.Seguridad;
 using nomina.Clases.Usuarios;
 using nomina.Forms.Categoria;
@@ -26,15 +28,13 @@ using nomina.Forms.Reportes.ReporteNomina;
 using nomina.Forms.Usuarios;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace nomina.Forms.Main
 
 {
-    public static class SuperUsuario
-    {
-        public static bool superUsuario { get; set; }
-    }
+
     public partial class frmMain : Form
     {
         Conexion conexion;
@@ -79,7 +79,7 @@ namespace nomina.Forms.Main
                 this.usuarioId = frm.usuarioId;
                 this.usuarioName = frm.usuarioName;
                 Session.Usuario = this.usuarioName;
-                SuperUsuario.superUsuario = usuarioId == -1 && string.Equals(usuarioName?.Trim(), Properties.Settings.Default.usuario?.Trim(), StringComparison.OrdinalIgnoreCase);
+                Session.superUsuario = usuarioId == -1 && string.Equals(usuarioName?.Trim(), Properties.Settings.Default.usuario?.Trim(), StringComparison.OrdinalIgnoreCase);
                 mostrarEmpresas();
             }
             else
@@ -106,7 +106,7 @@ namespace nomina.Forms.Main
                 bdDescuento = new DescuentoConexion(conexion);
                 bdPermisos = new PermisoUsuarioConexion();
 
-                if (!SuperUsuario.superUsuario)
+                if (!Session.superUsuario)
                 {
                     VerificarPermisos();
                 }
@@ -261,19 +261,15 @@ namespace nomina.Forms.Main
 
         private void generarPlanillaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (bdPermisos.existePermiso(this.usuarioId, 57)) {
-            //    frmPlanilla frm = new frmPlanilla(conexion, this);
-            //    frm.Tag = "generar";
-            //    frm.ShowDialog();
-            //}
 
-        }
-
-        private void nominaOPlanillaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmReportePlanila frm = new frmReportePlanila(conexion, this);
+            frmPlanilla frm = new frmPlanilla(conexion, this);
+            frm.Tag = "generar";
             frm.ShowDialog();
+
+
         }
+
+
 
         private void UsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -307,19 +303,13 @@ namespace nomina.Forms.Main
         private void prestamosToolStripMenuItem1_Click(object sender, EventArgs e)
         {
 
-            frmFiltro frmFiltro = new frmFiltro("L", conexion, this);
-            frmFiltro.ShowDialog();
-            if (frmFiltro.DialogResult == DialogResult.OK)
-            {
-                frmReporteVarios frm = new frmReporteVarios(conexion, "sp_reporte_labores", frmFiltro.Id, "L");
-                frm.Show();
-            }
+            
 
         }
         private void UsuariosToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             //1 para ver usuarios
-            if (SuperUsuario.superUsuario || bdPermisos.existePermiso(this.usuarioId, 2, 1))
+            if (Session.superUsuario || bdPermisos.existePermiso(this.usuarioId, 2, 1))
             {
                 frmUsuarios frm = new frmUsuarios(conexion, this);
                 frm.Tag = "usuarios";
@@ -331,7 +321,7 @@ namespace nomina.Forms.Main
         private void AsignarPermisosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //6 asignar permiso
-            if (SuperUsuario.superUsuario || bdPermisos.existePermiso(this.usuarioId, 14, 3))
+            if (Session.superUsuario || bdPermisos.existePermiso(this.usuarioId, 14, 3))
             {
                 frmAsignarPermisos frm = new frmAsignarPermisos(conexion, this);
                 frm.ShowDialog();
@@ -444,24 +434,6 @@ namespace nomina.Forms.Main
 
             }
 
-            ////52 ver parametros
-            //if (!bdPermisos.existePermiso(this.usuarioId, 52))
-            //{
-            //    parametrosToolStripMenuItem.Enabled = false;
-
-            //}
-            ////57 PLANILLA
-            //if (!bdPermisos.existePermiso(this.usuarioId, 57))
-            //{
-            //    generarPlanillaToolStripMenuItem.Enabled = false;
-            //}
-
-            ////58 PLANILLA
-            //if (!bdPermisos.existePermiso(this.usuarioId, 58))
-            //{
-            //    nominaOPlanillaToolStripMenuItem.Enabled = false;
-            //}
-
         }// fin permisos
 
         private void consultasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -478,6 +450,210 @@ namespace nomina.Forms.Main
         {
             frmEmpresaPrueba frm = new frmEmpresaPrueba();
             frm.Show();
+        }
+
+        private void sueldosPorDepartamentoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sueldosPorCategoriaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmFiltro frmFiltro = new frmFiltro("C", conexion, this);
+            frmFiltro.ShowDialog();
+            if (frmFiltro.DialogResult == DialogResult.OK)
+            {
+                frmReporteVarios frm = new frmReporteVarios(conexion, "sp_reporte_nomina_categoria", frmFiltro.Id, "C");
+                frm.Show();
+            }
+
+        }
+
+        private void resumenDeLaboresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nominaOPlanillaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+   
+
+        private void libroDeSalariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void primeraQuincenaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReportePlanila frm = new frmReportePlanila(conexion, this, "PQUINCENA");
+            frm.ShowDialog();
+        }
+
+        private void segundaQuincenaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReportePlanila frm = new frmReportePlanila(conexion, this, "SQUINCENA");
+            frm.ShowDialog();
+        }
+
+        private void anticipoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReportePlanila frm = new frmReportePlanila(conexion, this, "ANTICIPO");
+            frm.ShowDialog();
+        }
+
+        private void mensualToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmReportePlanila frm = new frmReportePlanila(conexion, this, "MENSUAL");
+            frm.ShowDialog();
+        }
+
+        private void listadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void empleadiosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReporteVarios frm = new frmReporteVarios(conexion, "sp_reporte_general_empleados", 0, "RGE");
+            frm.Show();
+        }
+
+        private void departamentosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReporteVarios frm = new frmReporteVarios(conexion, "sp_reporte_departamento", 0, "D");
+            frm.Show();
+        }
+
+        private void categoríasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReporteVarios frm = new frmReporteVarios(conexion, "sp_reporte_general_categorias", 0, "RGC");
+            frm.Show();
+        }
+
+        private void deduccionesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmReporteVarios frm = new frmReporteVarios(conexion, "sp_reporte_general_deducciones", 0, "RGD");
+            frm.Show();
+        }
+
+        private void laboresToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void descriptivoPorEmpleadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmFiltro frmFiltro = new frmFiltro("RE", conexion, this);
+            frmFiltro.ShowDialog();
+            if (frmFiltro.DialogResult == DialogResult.OK)
+            {
+                frmReporteVarios frm = new frmReporteVarios(conexion, "sp_prestamos_descriptivos_empleado", frmFiltro.Id, "RDE");
+                frm.Show();
+            }
+        }
+
+        private void resumenPorEmpleadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmFiltro frmFiltro = new frmFiltro("RE", conexion, this);
+            frmFiltro.ShowDialog();
+            if (frmFiltro.DialogResult == DialogResult.OK)
+            {
+                frmReporteVarios frm = new frmReporteVarios(conexion, "sp_resumen_prestamos_empleados", frmFiltro.Id, "RRE");
+                frm.Show();
+            }
+
+        }
+
+        private void porEmpleadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmFiltro frmFiltro = new frmFiltro("RE", conexion, this);
+            frmFiltro.ShowDialog();
+            if (frmFiltro.DialogResult == DialogResult.OK)
+            {
+                frmReporteVarios frm = new frmReporteVarios(conexion, "sp_reporte_general_deducciones", frmFiltro.Id, "RE");
+                frm.Show();
+            }
+        }
+
+        private void resumenGeneralToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReporteVarios frm = new frmReporteVarios(conexion, "sp_reporte_general_deducciones", 0, "RGD");
+            frm.Show();
+        }
+
+        private void porEmpleadoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmFiltro frmFiltro = new frmFiltro("L", conexion, this);
+            frmFiltro.ShowDialog();
+            if (frmFiltro.DialogResult == DialogResult.OK)
+            {
+                frmReporteVarios frm = new frmReporteVarios(conexion, "sp_reporte_labores", frmFiltro.Id, "L");
+                frm.Show();
+            }
+        }
+
+        private void resumenGeneralToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmReporteVarios frm = new frmReporteVarios(conexion, "sp_reporte_labores", 0, "L");
+            frm.Show();
+        }
+
+        private void liquidaciónToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmFiltro frmFiltro = new frmFiltro("RE", conexion, this);
+            frmFiltro.ShowDialog();
+            if (frmFiltro.DialogResult == DialogResult.OK)
+            {
+                frmReporteVarios frm = new frmReporteVarios(conexion, "sp_reporte_liquidacion_detallado", frmFiltro.Id, "RL");
+                frm.Show();
+            }
+        }
+
+        private void fichaDeEmpleadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmFiltro frmFiltro = new frmFiltro("RE", conexion, this);
+            frmFiltro.ShowDialog();
+            if (frmFiltro.DialogResult == DialogResult.OK)
+            {
+                frmReporteVarios frm = new frmReporteVarios(conexion, "sp_ficha_empleado", frmFiltro.Id, "RF");
+                frm.Show();
+            }
+        }
+
+        private void ultimoAccesoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmFiltro frmFiltro = new frmFiltro("BI", conexion, this);
+            frmFiltro.ShowDialog();
+            if (frmFiltro.DialogResult == DialogResult.OK)
+            {
+                frmReporteVarios frm = new frmReporteVarios(conexion, "sp_consultar_bitacora", "BIULTIMO",  frmFiltro.UserName, "ULTIMO_ACCESO");
+                frm.Show();
+            }
+        }
+
+        private void detalleDeAccesosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmFiltro frmFiltro = new frmFiltro("BI", conexion, this);
+            frmFiltro.ShowDialog();
+            if (frmFiltro.DialogResult == DialogResult.OK)
+            {
+                frmReporteVarios frm = new frmReporteVarios(conexion, "sp_consultar_bitacora", "BIULTIMO", frmFiltro.UserName, "DETALLE_ACCESOS");
+                frm.Show();
+            }
+        }
+
+        private void últimaModificaciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmFiltro frmFiltro = new frmFiltro("BI", conexion, this);
+            frmFiltro.ShowDialog();
+            if (frmFiltro.DialogResult == DialogResult.OK)
+            {
+                frmReporteVarios frm = new frmReporteVarios(conexion, "sp_consultar_bitacora","BI", frmFiltro.UserName, "ULTIMA_MODIFICACION");
+                frm.Show();
+            }
         }
     }
 

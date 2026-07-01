@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Data;
 using nomina.Clases.ConexionManager;
+using System.Runtime.Remoting.Messaging;
+using System.Windows.Forms;
 
 namespace nomina.Clases.GenerarPlanilla
 {
@@ -21,28 +23,45 @@ namespace nomina.Clases.GenerarPlanilla
         }
 
         #region GENERAR PLANILLA
-        public string generarPlanilla(string codigoPlanilla,DateTime fecha)
+        public bool generarPlanilla(string codigoPlanilla,DateTime fecha, string tipo)
         {
-             MySqlCommand comando = new MySqlCommand("generar_planilla", this.conexion.getConexion());
+             MySqlCommand comando = new MySqlCommand("sp_generar_planilla", this.conexion.getConexion());
             comando.CommandType = System.Data.CommandType.StoredProcedure;
             comando.Parameters.AddWithValue("@P_COD_PLANILLA", codigoPlanilla);
             comando.Parameters.AddWithValue("@P_FECHA", fecha.Date);
+            comando.Parameters.AddWithValue("@P_ANIO", fecha.Date.Year);
+            comando.Parameters.AddWithValue("@P_TIPO_PLANILLA", tipo);
             comando.Parameters.Add("@P_SALIDA", MySqlDbType.Int32).Direction = ParameterDirection.Output;
             //try
             //{
             this.conexion.getConexion().Open();
+            comando.ExecuteNonQuery();
+            int salida = Convert.ToInt32(comando.Parameters["@P_SALIDA"].Value);
 
-            string salida = Convert.ToString(comando.Parameters["@P_SALIDA"].Value);
-            this.conexion.getConexion().Close();
-            return salida;
+            if (salida == 1)
+            {
+                this.conexion.getConexion().Close();
+                return true;
+            }
+            else if (salida == -2) {
+                this.conexion.getConexion().Close();
+                MessageBox.Show("Ya existe un anticipo en este mes ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else
+            {
+                this.conexion.getConexion().Close();
+                return false;
+            }
 
-        //}
+
+            //}
             //catch (MySqlException)
             //{
             //    this.conexion.getConexion().Close();
             //    return false;
             //}
-}
+        }
         #endregion
 
       

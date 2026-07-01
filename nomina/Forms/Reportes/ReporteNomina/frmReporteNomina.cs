@@ -19,12 +19,14 @@ namespace nomina.Forms.Reportes.ReporteNomina
         ReportesConexion reportesConexion;
         public int Mes { set; get; }
         public int Anio { set; get; }
-        public frmReporteNomina(Conexion conexion, int mes, int anio)
+        public string Tipo { set; get; }
+        public frmReporteNomina(Conexion conexion, int mes, int anio, string tipo)
         {
             InitializeComponent();
             this.Mes = mes;
             this.Anio = anio;
             this.conexion = conexion;
+            Tipo= tipo;
         }
 
         private void frmReporteNomina_Load(object sender, EventArgs e)
@@ -32,7 +34,7 @@ namespace nomina.Forms.Reportes.ReporteNomina
 
             reportesConexion = new ReportesConexion(conexion);
 
-            DataTable dt = reportesConexion.ObtenerReportesNomina("sp_reporte_nomina_libro_salarios", Mes, Anio);
+            DataTable dt = reportesConexion.ObtenerReportesNomina("sp_reporte_nomina_libro_salarios", Mes, Anio, Tipo);
 
             reportViewer2.LocalReport.DataSources.Clear();
 

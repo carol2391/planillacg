@@ -14,6 +14,8 @@ using MySql.Data;
 using System.Threading;
 using nomina.Clases.Utilidades;
 using nomina.Clases.Opciones;
+using nomina.Clases.GenerarPlanilla;
+using nomina.Clases.ConexionManager;
 
 namespace nomina.BarraProgreso
 {
@@ -23,6 +25,8 @@ namespace nomina.BarraProgreso
         PermisoUsuario,
         NuevaEmpresa,
         ModificarEmpresa,
+        Reportes,
+        GenerarPlanilla,
         Guardar
     }
 
@@ -48,7 +52,11 @@ namespace nomina.BarraProgreso
         public Tipo tipo { set; get; }
         public DialogoResultado resultado { set; get; }
         private Thread hiloSecundario, hiloPrimario;
-
+        private string codigo;
+        private DateTime  fecha;
+        PlanillaConexion planillabd;
+        string TipoPlanilla;
+        Conexion Conexion;
         #endregion
 
         #region constructor carga la barra cuando se estan asignando las empresas a las que el usuario tiene acceso
@@ -64,6 +72,17 @@ namespace nomina.BarraProgreso
         }
         #endregion
 
+        public frmBarraProgreso(string codigo, DateTime fecha,Conexion conexion, string tipoPlanilla)
+        {
+            InitializeComponent();
+            Utilidad.configuarForm(this, "Cargando...");
+            this.fecha  = fecha;
+            this.codigo = codigo;
+            this.tipo = Tipo.GenerarPlanilla;
+            this.Conexion = conexion;
+            this.TipoPlanilla = tipoPlanilla;
+            configurarBarra();
+        }
         public frmBarraProgreso(frmAddEmpresa frmEmpresa, Tipo tipoAccion)
         {
             InitializeComponent();
@@ -240,6 +259,19 @@ namespace nomina.BarraProgreso
                             if (this.tipo.Equals(Tipo.ModificarEmpresa))
             {
                 this.modificarEmpresa();
+            }
+            else
+                 if (this.tipo.Equals(Tipo.GenerarPlanilla))
+            {
+                planillabd = new PlanillaConexion(Conexion);
+                if (planillabd.generarPlanilla(this.codigo, this.fecha, TipoPlanilla))
+                {
+                    this.resultado = DialogoResultado.Si;
+                }
+                else
+                {
+                    this.resultado = DialogoResultado.No;
+                }
             }
         }
         #endregion

@@ -358,7 +358,9 @@
     <Compile Include="Forms\Empresas\frmEmpresas.Designer.cs">
       <DependentUpon>frmEmpresas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Main\frmMain.cs" />
+    <Compile Include="Forms\Main\frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Main\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
@@ -664,10 +666,18 @@
     <EmbeddedResource Include="Forms\Reportes\ReporteNomina\frmReporteVarios.resx">
       <DependentUpon>frmReporteVarios.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\rpBitacora.rdlc" />
     <EmbeddedResource Include="Forms\Reportes\rpCategoria.rdlc" />
     <EmbeddedResource Include="Forms\Reportes\rpDepartamentordlc.rdlc" />
+    <EmbeddedResource Include="Forms\Reportes\rpDescriptivoPrestamoEmpleado.rdlc" />
+    <EmbeddedResource Include="Forms\Reportes\rpFichaEmpleado.rdlc" />
     <EmbeddedResource Include="Forms\Reportes\rplabores.rdlc" />
     <EmbeddedResource Include="Forms\Reportes\rpPlanilla.rdlc" />
+    <EmbeddedResource Include="Forms\Reportes\rpReporteGeneralCategorias.rdlc" />
+    <EmbeddedResource Include="Forms\Reportes\rpReporteGeneralDeducciones.rdlc" />
+    <EmbeddedResource Include="Forms\Reportes\rpReporteGeneralEmpleados.rdlc" />
+    <EmbeddedResource Include="Forms\Reportes\rpReporteLiquidacion.rdlc" />
+    <EmbeddedResource Include="Forms\Reportes\rpResumenPrestamoEmpleado.rdlc" />
     <EmbeddedResource Include="Forms\Servidor\frmServidor.resx">
       <DependentUpon>frmServidor.cs</DependentUpon>
     </EmbeddedResource>

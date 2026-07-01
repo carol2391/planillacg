@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <Body>
+    <ReportItems>
+      <Textbox Name="Textbox33">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Código:             </Value>
+                <Style />
+              </TextRun>
+              <TextRun>
+                <Value>=First(Fields!COD_TRB.Value, "FichaEmpleado")</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Nombre:            </Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=First(Fields!NOM_TRB.Value, "FichaEmpleado")</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>
+Depto:               </Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=First(Fields!DEPTO.Value, "FichaEmpleado")</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Dirección:         </Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=Fields!DIRECCION.Value</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>
+Fecha Nac. :     </Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=Fields!FECHA_NAC.Value</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>
+Sexo:                </Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=First(Fields!SEXO.Value, "FichaEmpleado")</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value> 
+RTN:                 </Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=First(Fields!RTN.Value, "FichaEmpleado")</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>   
+Fecha Ingreso:  </Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=First(Fields!FECHA_ING.Value, "FichaEmpleado")</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value xml:space="preserve">
+</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox33</rd:DefaultName>
+        <Top>0.81703cm</Top>
+        <Left>1.07103cm</Left>
+        <Height>3.49983cm</Height>
+        <Width>7.2625cm</Width>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox34">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Puesto:                            </Value>
+                <Style />
+              </TextRun>
+              <TextRun>
+                <Value>=First(Fields!PUESTO_TRABAJO.Value, "FichaEmpleado")</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Categoría:                        </Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=First(Fields!CATEGORIA.Value, "FichaEmpleado")</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>
+Telefóno:                          </Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=First(Fields!TELEFONO.Value, "FichaEmpleado")</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>N Identidad:                      </Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=First(Fields!IDENTIDAD.Value, "FichaEmpleado")</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>
+Estado Civil. :                    </Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=Fields!ESTADO_CIVIL.Value</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>
+Hoja de Antecedentes:       </Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=First(Fields!ANTECEDENTES.Value, "FichaEmpleado")</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>     
+Pasaporte:                        </Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=First(Fields!PASAPORTE.Value, "FichaEmpleado")</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>   
+Carnet IHSS:                     </Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=First(Fields!CARNET_IHSS.Value, "FichaEmpleado")</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>
+Sueldo:                              </Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=First(Fields!SUELDO.Value, "FichaEmpleado")</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#333333</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox33</rd:DefaultName>
+        <Top>0.81703cm</Top>
+        <Left>8.65752cm</Left>
+        <Height>4.41cm</Height>
+        <Width>8.13033cm</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+    </ReportItems>
+    <Height>3.16667in</Height>
+    <Style />
+  </Body>
+  <Width>7.39286in</Width>
+  <Page>
+    <PageHeight>27.94cm</PageHeight>
+    <PageWidth>21.59cm</PageWidth>
+    <LeftMargin>2cm</LeftMargin>
+    <RightMargin>2cm</RightMargin>
+    <TopMargin>2cm</TopMargin>
+    <BottomMargin>2cm</BottomMargin>
+    <ColumnSpacing>0.13cm</ColumnSpacing>
+    <Style />
+  </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="dsPlanilla">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>7d71fc97-3075-4f1a-a198-a949c46f83e7</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="FichaEmpleado">
+      <Query>
+        <DataSourceName>dsPlanilla</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="COD_TRB">
+          <DataField>COD_TRB</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NOM_TRB">
+          <DataField>NOM_TRB</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PUESTO_TRABAJO">
+          <DataField>PUESTO_TRABAJO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SUELDO">
+          <DataField>SUELDO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CATEGORIA">
+          <DataField>CATEGORIA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DIRECCION">
+          <DataField>DIRECCION</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FECHA_NAC">
+          <DataField>FECHA_NAC</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SEXO">
+          <DataField>SEXO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RTN">
+          <DataField>RTN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DEPTO">
+          <DataField>DEPTO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FECHA_ING">
+          <DataField>FECHA_ING</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TELEFONO">
+          <DataField>TELEFONO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ESTADO_CIVIL">
+          <DataField>ESTADO_CIVIL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IDENTIDAD">
+          <DataField>IDENTIDAD</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PASAPORTE">
+          <DataField>PASAPORTE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CARNET_IHSS">
+          <DataField>CARNET_IHSS</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ANTECEDENTES">
+          <DataField>ANTECEDENTES</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>dsPlanilla</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\ccaro\Desktop\PLANILLAS CG\backluop\nomina_v2\nomina\Forms\Reportes\bdPlanilla.xsd</rd:SchemaPath>
+        <rd:TableName>FichaEmpleado</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>1dc4d9c0-cdbb-441f-839b-1f0a2a0ea117</rd:ReportID>
+</Report>

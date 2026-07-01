@@ -17,7 +17,7 @@ namespace nomina.Clases.Reportes
         {
             this.conexion = conexion;
         }
-        public DataTable ObtenerReportesNomina(string nombreReporte, int mes, int anio)
+        public DataTable ObtenerReportesNomina(string nombreReporte, int mes, int anio, string tipo)
         {
             DataTable dt = new DataTable();
 
@@ -29,7 +29,7 @@ namespace nomina.Clases.Reportes
 
                 comando.Parameters.AddWithValue("@P_MES", mes);
                 comando.Parameters.AddWithValue("@P_ANIO", anio);
-
+                comando.Parameters.AddWithValue("@P_TIPO", tipo);
 
                 conn.Open();
 
@@ -43,26 +43,94 @@ namespace nomina.Clases.Reportes
         }
 
       public DataTable ObtenerReportes(string nombreReporte, int? filtro)
-{
-    DataTable dt = new DataTable();
+        {
+            DataTable dt = new DataTable();
 
-    MySqlConnection conn = this.conexion.getConexion();
+            MySqlConnection conn = this.conexion.getConexion();
 
-    using (MySqlCommand comando = new MySqlCommand(nombreReporte, conn))
-    {
-        comando.CommandType = CommandType.StoredProcedure;
+            using (MySqlCommand comando = new MySqlCommand(nombreReporte, conn))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
 
-        comando.Parameters.AddWithValue("@P_FILTRO",
-            (object)filtro ?? DBNull.Value);
+                comando.Parameters.AddWithValue("@P_FILTRO",
+                    (object)filtro ?? DBNull.Value);
 
-        conn.Open();
+                conn.Open();
 
-        MySqlDataAdapter da = new MySqlDataAdapter(comando);
-         da.Fill(dt);
-         conn.Close();
-    }
+                MySqlDataAdapter da = new MySqlDataAdapter(comando);
+                 da.Fill(dt);
+                 conn.Close();
+            }
 
-    return dt;
-}
+            return dt;
+        }
+        public DataTable ObtenerReporteLiquidacion(int idEmpleado, DateTime fecha)
+        {
+            DataTable dt = new DataTable();
+
+            MySqlConnection conn = this.conexion.getConexion();
+
+            using (MySqlCommand comando = new MySqlCommand("sp_reporte_liquidacion_detallado", conn))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+
+                comando.Parameters.AddWithValue("@p_id_empleado",idEmpleado );
+                comando.Parameters.AddWithValue("@p_fecha_fin", fecha);
+
+                conn.Open();
+
+                MySqlDataAdapter da = new MySqlDataAdapter(comando);
+                da.Fill(dt);
+                conn.Close();
+            }
+
+            return dt;
+        }
+
+        public DataTable ObtenerFichaEmpleado(int idEmpleado)
+        {
+            DataTable dt = new DataTable();
+
+            MySqlConnection conn = this.conexion.getConexion();
+
+            using (MySqlCommand comando = new MySqlCommand("sp_ficha_empleado", conn))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+
+                comando.Parameters.AddWithValue("@p_id_empleado", idEmpleado);
+
+                conn.Open();
+
+                MySqlDataAdapter da = new MySqlDataAdapter(comando);
+                da.Fill(dt);
+                conn.Close();
+            }
+
+            return dt;
+        }
+
+        public DataTable ObtenerBitacora(string user, string modo)
+        {
+            DataTable dt = new DataTable();
+
+            MySqlConnection conn = this.conexion.getConexion();
+
+            using (MySqlCommand comando = new MySqlCommand("sp_consultar_bitacora", conn))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+
+                comando.Parameters.AddWithValue("@P_NOMBRE_USUARIO", user);
+                comando.Parameters.AddWithValue("@P_MODO", modo);
+
+                conn.Open();
+
+                MySqlDataAdapter da = new MySqlDataAdapter(comando);
+                da.Fill(dt);
+                conn.Close();
+            }
+
+            return dt;
+        }
+
     }
 }

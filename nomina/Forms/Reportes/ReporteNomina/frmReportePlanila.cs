@@ -1,6 +1,7 @@
 ﻿using nomina.Clases.ConexionManager;
 using nomina.Clases.Reportes;
 using nomina.Forms.Main;
+using Org.BouncyCastle.Asn1.Mozilla;
 using Org.BouncyCastle.Utilities;
 using System;
 using System.Collections.Generic;
@@ -21,19 +22,21 @@ namespace nomina.Forms.Reportes.ReporteNomina
         frmMain frmMain;
         public string Codigo {set;get;}
         public DateTime Fecha { set; get; }
-        public frmReportePlanila(Conexion conexion, frmMain frmMain)
+        public string Tipo { set; get; }
+        public frmReportePlanila(Conexion conexion, frmMain frmMain, String tipo)
         {
             InitializeComponent();
             this.conexion = conexion;
             this.frmMain = frmMain;
             CargarComboMeses();
             CargarComboAnios();
+            this.Tipo= tipo;
 
         }
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
-            frmReporteNomina frmReporte = new frmReporteNomina(conexion,(int)(cbMes.SelectedValue), (int)(cbAnio.SelectedValue));
+            frmReporteNomina frmReporte = new frmReporteNomina(conexion,(int)(cbMes.SelectedValue), (int)(cbAnio.SelectedValue), Tipo);
             frmReporte.ShowDialog();
         }
 

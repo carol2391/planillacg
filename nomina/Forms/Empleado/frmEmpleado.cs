@@ -17,6 +17,7 @@ using nomina.Clases.Utilidades;
 using nomina.Clases.PermisosUsuario;
 using nomina.Clases.UsuarioPermisos;
 using System.Runtime.CompilerServices;
+using nomina.Clases.Seguridad;
 
 //revisar las categorias y los departamentos
 //no se puede agregar un empleado si no hay 
@@ -312,7 +313,7 @@ namespace nomina.Forms.Empleado
 
         private void frmEmpleado_Shown(object sender, EventArgs e)
         {
-            if (!SuperUsuario.superUsuario) {
+            if (!Session.superUsuario) {
                 ValidarPermisos();
             }
            

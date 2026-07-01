@@ -4,6 +4,7 @@ using nomina.Forms.Categoria;
 using nomina.Forms.Departamento;
 using nomina.Forms.Empleado;
 using nomina.Forms.Main;
+using nomina.Forms.Usuarios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,36 +23,30 @@ namespace nomina.Forms.Reportes.ReporteNomina
         private string TipoReporte;
         Conexion conexion;
         frmMain frmMain;
+        public string UserName { set; get; }
         public int Id { set; get; }
         public frmFiltro(string tipoReporte, Conexion conexion, frmMain frmMain)
         {
             InitializeComponent();
-            CargarInformacion(tipoReporte);
             this.conexion = conexion;
             this.frmMain = frmMain;
             this.TipoReporte  = tipoReporte;
-        }
-
-        private void CargarInformacion(string tipoReporte) {
-            switch (tipoReporte) { 
-                case "D":
-                    lblTitulo.Text = "Departamento";
-                    this.rbEspecifico.Text = "Departamento específico";
-                    break;
-
-
-                case "C":
-                   lblTitulo.Text = "Categoria";
-                    this.rbEspecifico.Text = "Categoría específico";
-                    break;
-
-                case "L":
-                    lblTitulo.Text = "Labores";
-                    this.rbEspecifico.Text = "Labores específico";
-                    break;
+            if (tipoReporte.Equals("BI"))
+            {
+                lblTitulo.Text = "Buscar Usuario";
+                this.btnBuscar.Visible = true;
+                this.btnBuscar.Text = "Buscar Usuario";
             }
-        
+            else {
+                lblTitulo.Text = "Buscar Empleado";
+                this.btnBuscar.Visible = true;
+                this.btnBuscar.Text = "Buscar Empleado";
+            }
+           
         }
+
+     
+        
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -96,21 +91,44 @@ namespace nomina.Forms.Reportes.ReporteNomina
                         this.DialogResult = DialogResult.OK;
                     }
                     break;
+
+                case "RE":
+                    frmEmpleado frmEmp1 = new frmEmpleado(conexion, frmMain);
+                    frmEmp1.Tag = "buscar";
+                    frmEmp1.ShowDialog();
+
+                    if (frmEmp1.DialogResult == DialogResult.OK)
+                    {
+                        this.Id = frmEmp1.empleado.Id;
+                        this.DialogResult = DialogResult.OK;
+                    }
+                    break;
+
+
+                case "BI":
+                    frmUsuarios frmUsuarios = new frmUsuarios(conexion, frmMain);
+                    frmUsuarios.Tag = "buscar";
+                    frmUsuarios.ShowDialog();
+
+                    if (frmUsuarios.DialogResult == DialogResult.OK)
+                    {
+                        this.UserName = frmUsuarios.user.Usuario;
+                        this.DialogResult = DialogResult.OK;
+                    }
+                    break;
+
             }
         }
 
         private void rbTodos_Click(object sender, EventArgs e)
         {
-            if (this.rbTodos.Checked) {
-                this.Id = 0;
-                this.DialogResult = DialogResult.OK;
-            }
+            
             
         }
 
         private void rbEspecifico_Click(object sender, EventArgs e)
         {
-            this.btnBuscar.Visible = true;
+            
         }
     }
 }

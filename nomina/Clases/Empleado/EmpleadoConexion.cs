@@ -388,12 +388,12 @@ namespace nomina.Clases.Empleado
             cmd.Parameters.AddWithValue("@P_FECHA_INICIO", fechaInicio);
             cmd.Parameters.AddWithValue("@P_TIPO_EMPLEADO", tipoEmpleadoNacionalidad);
 
-            cmd.Parameters.AddWithValue("@P_CUENTA_SUELDO",null);//numeroCuenta
-            cmd.Parameters.AddWithValue("@P_CUENTA_SEGURO_SOCIAL", null); //cuentaSeguroSocial
-            cmd.Parameters.AddWithValue("@P_CUENTA_REGIMEN_ESPECIAL",null ); //cuentaRegimenEspecial
-            cmd.Parameters.AddWithValue("@P_CUENTA_ISR",null );//cuentaISR
-            cmd.Parameters.AddWithValue("@P_OTRA_CUENTA_1",null );//cuenta1
-            cmd.Parameters.AddWithValue("@P_OTRA_CUENTA_2", null);//cuenta2
+            cmd.Parameters.AddWithValue("@P_CUENTA_SUELDO",numeroCuenta);//numeroCuenta
+            cmd.Parameters.AddWithValue("@P_CUENTA_SEGURO_SOCIAL", cuentaSeguroSocial); //cuentaSeguroSocial
+            cmd.Parameters.AddWithValue("@P_CUENTA_REGIMEN_ESPECIAL",cuentaRegimenEspecial ); //cuentaRegimenEspecial
+            cmd.Parameters.AddWithValue("@P_CUENTA_ISR",cuentaISR );//cuentaISR
+            cmd.Parameters.AddWithValue("@P_OTRA_CUENTA_1",cuenta1);//cuenta1
+            cmd.Parameters.AddWithValue("@P_OTRA_CUENTA_2", cuenta2);//cuenta2
             cmd.Parameters.Add("@salida", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;
             cmd.Parameters.AddWithValue("@P_USUARIO", Session.Usuario);
 

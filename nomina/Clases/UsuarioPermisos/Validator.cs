@@ -1,5 +1,6 @@
 ﻿using nomina.Clases.ConexionManager;
 using nomina.Clases.PermisosUsuario;
+using nomina.Clases.Seguridad;
 using nomina.Forms.Main;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace nomina.Clases.UsuarioPermisos
         public static bool ExistePermiso(int idUsuario, int idModulo, int idAccion, Button btn)
         {
             // Si es Súper Usuario, siempre tiene permiso
-            if (SuperUsuario.superUsuario)
+            if (Session.superUsuario)
             {
                 btn.Visible = true;
                 return true;

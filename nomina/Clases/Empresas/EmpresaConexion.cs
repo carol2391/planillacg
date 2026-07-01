@@ -1195,8 +1195,28 @@ namespace nomina.Clases.Empresas
                 }
                 return false;
             }
-            #endregion
+        #endregion
 
 
+        public DataTable ObtenerBitacoraEmpresa(string user, string modo)
+        {
+            DataTable dt = new DataTable();
+
+            using (MySqlCommand comando = new MySqlCommand("sp_consultar_bitacora", this.databaseConnection))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+
+                comando.Parameters.AddWithValue("@P_NOMBRE_USUARIO", user);
+                comando.Parameters.AddWithValue("@P_MODO", modo);
+
+                this.databaseConnection.Open();
+
+                MySqlDataAdapter da = new MySqlDataAdapter(comando);
+                da.Fill(dt);
+                this.databaseConnection.Close();
+            }
+
+            return dt;
         }
+    }
     }
