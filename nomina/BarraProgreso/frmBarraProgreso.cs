@@ -226,8 +226,7 @@ namespace nomina.BarraProgreso
         private void modificarEmpresa()
         {
             if (this.frmEmpresa.bdEmpresa.modificarEmpresaNomina(this.frmEmpresa.empData.Id, this.frmEmpresa.txtCodigo.Text, this.frmEmpresa.txtNombre.Text, this.frmEmpresa.dptFecha.Value.Date,
-                this.frmEmpresa.txtDireccion.Text, this.frmEmpresa.txtRTN.Text, this.frmEmpresa.txtTelefono.Text, this.frmEmpresa.txtCorreo.Text, this.frmEmpresa.codigoAntiguo,
-                this.frmEmpresa.pbImagen.Image, frmEmpresa.frmMain.usuarioName))
+                this.frmEmpresa.txtDireccion.Text, this.frmEmpresa.txtRTN.Text, this.frmEmpresa.txtTelefono.Text, this.frmEmpresa.txtCorreo.Text, this.frmEmpresa.codigoAntiguo, frmEmpresa.frmMain.usuarioName))
             {
                 this.resultado = DialogoResultado.Si;
             }

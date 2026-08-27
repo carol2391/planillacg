@@ -37,7 +37,7 @@ namespace nomina.Forms.Empresas
             this.txtCodigo.Select();
             this.conexion = con;
             this.lblTitulo.BackColor = Color.SkyBlue;
-            this.btnCargar.BackColor = Color.SkyBlue;
+            //this.btnCargar.BackColor = Color.SkyBlue;
             this.btnCancelar.BackColor = Color.Snow;
             btnGuardar.BackColor = Color.SkyBlue;
 
@@ -57,7 +57,7 @@ namespace nomina.Forms.Empresas
             this.codigoAntiguo = empData.Codigo;
             this.cargarInformacion();
             this.lblTitulo.BackColor = Color.SkyBlue;
-            this.btnCargar.BackColor = Color.SkyBlue;
+            //this.btnCargar.BackColor = Color.SkyBlue;
             this.btnCancelar.BackColor = Color.Snow;
             btnGuardar.BackColor = Color.SkyBlue;
         }
@@ -271,7 +271,7 @@ namespace nomina.Forms.Empresas
             else
             {
                 if (this.bdEmpresa.modificarEmpresa(this.empData.Id, this.txtCodigo.Text, this.txtNombre.Text, this.dptFecha.Value.Date, this.txtDireccion.Text, this.txtRTN.Text, this.txtTelefono.Text, this.txtCorreo.Text, this.codigoAntiguo,
-                pbImagen.Image, frmMain.usuarioName))
+                frmMain.usuarioName))
                 {
                     this.limpiarControles();
                     MessageBox.Show("Empresa modificada exitosamente", "Nueva empresa", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -296,7 +296,7 @@ namespace nomina.Forms.Empresas
                 }
             }
 
-            pbImagen.Image = null;
+            //pbImagen.Image = null;
             PathImagen = null;
         }
         #endregion
@@ -310,7 +310,7 @@ namespace nomina.Forms.Empresas
             this.txtRTN.Text = this.empData.RTN;
             this.txtTelefono.Text = this.empData.Telefono;
             this.txtCorreo.Text = this.empData.Correo;
-            this.pbImagen.Image = empData.Image;
+           // this.pbImagen.Image = empData.Image;
             if (this.empData.Fecha.Date.ToString().Substring(0, 10) != "01/01/0001")
             {
                 this.dptFecha.Value = this.empData.Fecha;

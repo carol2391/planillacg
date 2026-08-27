@@ -33,9 +33,6 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.gbEmpresa = new System.Windows.Forms.GroupBox();
-            this.btnCargar = new System.Windows.Forms.Button();
-            this.lblPhoto = new System.Windows.Forms.Label();
-            this.pbImagen = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtCorreo = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -51,7 +48,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.gbEmpresa.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitulo
@@ -61,7 +57,7 @@
             this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.lblTitulo.Location = new System.Drawing.Point(0, 0);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(751, 46);
+            this.lblTitulo.Size = new System.Drawing.Size(479, 46);
             this.lblTitulo.TabIndex = 57;
             this.lblTitulo.Text = "Nueva Empresa";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -108,9 +104,6 @@
             // gbEmpresa
             // 
             this.gbEmpresa.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.gbEmpresa.Controls.Add(this.btnCargar);
-            this.gbEmpresa.Controls.Add(this.lblPhoto);
-            this.gbEmpresa.Controls.Add(this.pbImagen);
             this.gbEmpresa.Controls.Add(this.label7);
             this.gbEmpresa.Controls.Add(this.txtCorreo);
             this.gbEmpresa.Controls.Add(this.label6);
@@ -129,47 +122,9 @@
             this.gbEmpresa.Margin = new System.Windows.Forms.Padding(4);
             this.gbEmpresa.Name = "gbEmpresa";
             this.gbEmpresa.Padding = new System.Windows.Forms.Padding(4);
-            this.gbEmpresa.Size = new System.Drawing.Size(749, 322);
+            this.gbEmpresa.Size = new System.Drawing.Size(467, 322);
             this.gbEmpresa.TabIndex = 66;
             this.gbEmpresa.TabStop = false;
-            // 
-            // btnCargar
-            // 
-            this.btnCargar.BackColor = System.Drawing.Color.SkyBlue;
-            this.btnCargar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCargar.FlatAppearance.BorderSize = 0;
-            this.btnCargar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCargar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.btnCargar.ForeColor = System.Drawing.Color.Black;
-            this.btnCargar.Location = new System.Drawing.Point(457, 250);
-            this.btnCargar.Margin = new System.Windows.Forms.Padding(4);
-            this.btnCargar.Name = "btnCargar";
-            this.btnCargar.Size = new System.Drawing.Size(139, 43);
-            this.btnCargar.TabIndex = 11;
-            this.btnCargar.Text = "Buscar";
-            this.btnCargar.UseVisualStyleBackColor = false;
-            // 
-            // lblPhoto
-            // 
-            this.lblPhoto.AutoSize = true;
-            this.lblPhoto.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhoto.Location = new System.Drawing.Point(531, 15);
-            this.lblPhoto.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPhoto.Name = "lblPhoto";
-            this.lblPhoto.Size = new System.Drawing.Size(50, 22);
-            this.lblPhoto.TabIndex = 93;
-            this.lblPhoto.Text = "Logo";
-            // 
-            // pbImagen
-            // 
-            this.pbImagen.BackColor = System.Drawing.Color.White;
-            this.pbImagen.Location = new System.Drawing.Point(457, 39);
-            this.pbImagen.Margin = new System.Windows.Forms.Padding(4);
-            this.pbImagen.Name = "pbImagen";
-            this.pbImagen.Size = new System.Drawing.Size(253, 203);
-            this.pbImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbImagen.TabIndex = 92;
-            this.pbImagen.TabStop = false;
             // 
             // label7
             // 
@@ -311,7 +266,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(195)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(751, 448);
+            this.ClientSize = new System.Drawing.Size(479, 438);
             this.Controls.Add(this.gbEmpresa);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.btnGuardar);
@@ -324,7 +279,6 @@
             this.Text = "Nueva Empresa";
             this.gbEmpresa.ResumeLayout(false);
             this.gbEmpresa.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -336,9 +290,6 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.GroupBox gbEmpresa;
-        private System.Windows.Forms.Button btnCargar;
-        private System.Windows.Forms.Label lblPhoto;
-        public System.Windows.Forms.PictureBox pbImagen;
         private System.Windows.Forms.Label label7;
         public System.Windows.Forms.TextBox txtCorreo;
         private System.Windows.Forms.Label label6;

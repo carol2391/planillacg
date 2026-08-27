@@ -547,9 +547,9 @@ namespace nomina.Clases.Empresas
                     this.databaseConnection = new MySqlConnection(connectionString);
 
 
-                    byte[] avatar = null;
-                    if (filePathImagen != null)
-                        avatar = convertirAvatarAByte(filePathImagen);
+                    //byte[] avatar = null;
+                    //if (filePathImagen != null)
+                    //    avatar = convertirAvatarAByte(filePathImagen);
                     MySqlCommand cmd = new MySqlCommand("insertar_empresa", this.databaseConnection);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@P_CODIGO", codigo);
@@ -561,7 +561,7 @@ namespace nomina.Clases.Empresas
                     cmd.Parameters.AddWithValue("@P_CORREO", correo);
                     cmd.Parameters.AddWithValue("@P_MODULO", "NOMINA");
                     cmd.Parameters.AddWithValue("@P_USUARIO", usuarioCreador);
-                    cmd.Parameters.AddWithValue("@P_IMAGEN", avatar);
+                    //cmd.Parameters.AddWithValue("@P_IMAGEN", avatar);
 
 
                     cmd.Parameters.Add("@P_SALIDA", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;
@@ -735,7 +735,7 @@ namespace nomina.Clases.Empresas
 
             #region modificar empresa y crea la bd retenciones, cuando ya hay una empresa creada
             public bool modificarEmpresaNomina(int id, string codigo, string nombre, DateTime fecha, string direccion,
-                string RTN, string telefono, string correo, string codigoAntiguo, Image imagen, string usuarioCreador)
+                string RTN, string telefono, string correo, string codigoAntiguo, string usuarioCreador)
             {
                 bool result;
                 try
@@ -746,9 +746,9 @@ namespace nomina.Clases.Empresas
                         crearTablasProcedimientoEnEmpresas(Properties.Resources.procedimientos__almacenados_empresas);
                         //crearTablasProcedimientoEnEmpresas(Properties.Resources.triguers_empresas);
                     }
-                    byte[] avatar = null;
-                    if (imagen != null)
-                        avatar = convertirImageAByte(imagen);
+                    //byte[] avatar = null;
+                    //if (imagen != null)
+                    //    avatar = convertirImageAByte(imagen);
                     MySqlCommand cmd = new MySqlCommand("modificar_empresa", this.databaseConnection);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@P_CODIGO", codigo);
@@ -759,7 +759,7 @@ namespace nomina.Clases.Empresas
                     cmd.Parameters.AddWithValue("@P_TELEFONO", telefono);
                     cmd.Parameters.AddWithValue("@P_CORREO", correo);
                     cmd.Parameters.AddWithValue("@P_EMPRESA_ID", id);
-                    cmd.Parameters.AddWithValue("@P_IMAGEN", avatar);
+                    //cmd.Parameters.AddWithValue("@P_IMAGEN", avatar);
                     cmd.Parameters.AddWithValue("@P_USUARIO", usuarioCreador);
                     cmd.Parameters.Add("@P_SALIDA", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;
                     this.databaseConnection.Open();
@@ -799,15 +799,15 @@ namespace nomina.Clases.Empresas
 
             #region modificar empresa
             public bool modificarEmpresa(int id, string codigo, string nombre, DateTime fecha, string direccion,
-                string RTN, string telefono, string correo, string codigoAntiguo, Image imagen, string usuarioCreador)
+                string RTN, string telefono, string correo, string codigoAntiguo,string usuarioCreador)
             {
                 bool result;
                 try
                 {
 
-                    byte[] avatar = null;
-                    if (imagen != null)
-                        avatar = convertirImageAByte(imagen);
+                    //byte[] avatar = null;
+                    //if (imagen != null)
+                    //    avatar = convertirImageAByte(imagen);
                     MySqlCommand cmd = new MySqlCommand("modificar_empresa", this.databaseConnection);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@P_CODIGO", codigo);
@@ -818,7 +818,7 @@ namespace nomina.Clases.Empresas
                     cmd.Parameters.AddWithValue("@P_TELEFONO", telefono);
                     cmd.Parameters.AddWithValue("@P_CORREO", correo);
                     cmd.Parameters.AddWithValue("@P_EMPRESA_ID", id);
-                    cmd.Parameters.AddWithValue("@P_IMAGEN", avatar);
+                   // cmd.Parameters.AddWithValue("@P_IMAGEN", avatar);
                     cmd.Parameters.AddWithValue("@P_USUARIO", usuarioCreador);
 
                     cmd.Parameters.Add("@P_SALIDA", MySqlDbType.Int32, 20).Direction = ParameterDirection.Output;

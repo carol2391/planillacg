@@ -16,6 +16,22 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\ccaro\Desktop\PLANILLAS CG\ejecutable nomina\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,6 +51,18 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>018C4BA7EC874DE844CEE02C7E400234BB0C9FDF</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>nomina_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.3.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
@@ -480,12 +508,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>bdPlanilla.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Reportes\frmReportePlanilla.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Reportes\frmReportePlanilla.Designer.cs">
-      <DependentUpon>frmReportePlanilla.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Reportes\ReporteNomina\frmFiltro.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -542,12 +564,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Forms\Reportes\rptPlanilla.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>rptPlanilla.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <EmbeddedResource Include="BarraProgreso\frmBarraProgreso.resx">
       <DependentUpon>frmBarraProgreso.cs</DependentUpon>
@@ -651,9 +667,6 @@
     <EmbeddedResource Include="Forms\Planilla\frmPlanilla.resx">
       <DependentUpon>frmPlanilla.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Reportes\frmReportePlanilla.resx">
-      <DependentUpon>frmReportePlanilla.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Reportes\ReporteNomina\frmFiltro.resx">
       <DependentUpon>frmFiltro.cs</DependentUpon>
     </EmbeddedResource>
@@ -705,10 +718,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Forms\Reportes\rptPlanilla.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>rptPlanilla.cs</LastGenOutput>
-    </EmbeddedResource>
     <None Include="Forms\Reportes\bdPlanilla.xsc">
       <DependentUpon>bdPlanilla.xsd</DependentUpon>
     </None>
@@ -720,6 +729,7 @@
     <None Include="Forms\Reportes\bdPlanilla.xss">
       <DependentUpon>bdPlanilla.xsd</DependentUpon>
     </None>
+    <None Include="nomina_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -770,7 +780,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

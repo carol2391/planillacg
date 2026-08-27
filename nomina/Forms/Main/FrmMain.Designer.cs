@@ -59,12 +59,12 @@
             this.sueldosPorDepartamentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sueldosPorCategoriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resumenDeLaboresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sueldosNegativosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.prestamosToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.liquidaciónToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ausenciasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.fichaDeEmpleadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.constanciaLaboralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.retenciónAsalariadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.empleadiosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,17 +82,6 @@
             this.prestamosToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.descriptivoPorEmpleadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resumenPorEmpleadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reportesPatronalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.iHSSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rAPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.iSRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sindicatoDeTrabajadoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.iPPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bitacoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ultimoAccesoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.detalleDeAccesosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.últimaModificaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.empresasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.empresasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -101,7 +90,6 @@
             this.asignarEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.parametrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.retenciónAsalariadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -256,9 +244,7 @@
             this.reportesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nominaOPlanillaToolStripMenuItem,
             this.analisisToolStripMenuItem,
-            this.listadosToolStripMenuItem,
-            this.reportesPatronalesToolStripMenuItem,
-            this.sToolStripMenuItem});
+            this.listadosToolStripMenuItem});
             this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
             this.reportesToolStripMenuItem.Size = new System.Drawing.Size(82, 24);
             this.reportesToolStripMenuItem.Text = "Reportes";
@@ -280,7 +266,7 @@
             this.primeraQuincenaToolStripMenuItem,
             this.segundaQuincenaToolStripMenuItem});
             this.quincenalToolStripMenuItem.Name = "quincenalToolStripMenuItem";
-            this.quincenalToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
+            this.quincenalToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.quincenalToolStripMenuItem.Text = "Quincenal";
             // 
             // primeraQuincenaToolStripMenuItem
@@ -303,7 +289,7 @@
             this.anticipoToolStripMenuItem,
             this.mensualToolStripMenuItem1});
             this.mensualToolStripMenuItem.Name = "mensualToolStripMenuItem";
-            this.mensualToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
+            this.mensualToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.mensualToolStripMenuItem.Text = "Mensual";
             // 
             // anticipoToolStripMenuItem
@@ -323,7 +309,7 @@
             // libroDeSalariosToolStripMenuItem
             // 
             this.libroDeSalariosToolStripMenuItem.Name = "libroDeSalariosToolStripMenuItem";
-            this.libroDeSalariosToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
+            this.libroDeSalariosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.libroDeSalariosToolStripMenuItem.Text = "Libro de Salarios";
             this.libroDeSalariosToolStripMenuItem.Click += new System.EventHandler(this.libroDeSalariosToolStripMenuItem_Click);
             // 
@@ -333,7 +319,6 @@
             this.sueldosPorDepartamentoToolStripMenuItem,
             this.sueldosPorCategoriaToolStripMenuItem,
             this.resumenDeLaboresToolStripMenuItem,
-            this.sueldosNegativosToolStripMenuItem,
             this.prestamosToolStripMenuItem2,
             this.liquidaciónToolStripMenuItem1,
             this.ausenciasToolStripMenuItem1,
@@ -364,12 +349,6 @@
             this.resumenDeLaboresToolStripMenuItem.Size = new System.Drawing.Size(270, 26);
             this.resumenDeLaboresToolStripMenuItem.Text = "Resumen de labores";
             this.resumenDeLaboresToolStripMenuItem.Click += new System.EventHandler(this.resumenDeLaboresToolStripMenuItem_Click);
-            // 
-            // sueldosNegativosToolStripMenuItem
-            // 
-            this.sueldosNegativosToolStripMenuItem.Name = "sueldosNegativosToolStripMenuItem";
-            this.sueldosNegativosToolStripMenuItem.Size = new System.Drawing.Size(270, 26);
-            this.sueldosNegativosToolStripMenuItem.Text = "Sueldos negativos";
             // 
             // prestamosToolStripMenuItem2
             // 
@@ -403,6 +382,13 @@
             this.constanciaLaboralToolStripMenuItem.Size = new System.Drawing.Size(270, 26);
             this.constanciaLaboralToolStripMenuItem.Text = "Constancia laboral";
             this.constanciaLaboralToolStripMenuItem.Click += new System.EventHandler(this.constanciaLaboralToolStripMenuItem_Click);
+            // 
+            // retenciónAsalariadosToolStripMenuItem
+            // 
+            this.retenciónAsalariadosToolStripMenuItem.Name = "retenciónAsalariadosToolStripMenuItem";
+            this.retenciónAsalariadosToolStripMenuItem.Size = new System.Drawing.Size(270, 26);
+            this.retenciónAsalariadosToolStripMenuItem.Text = "Retención Asalariados";
+            this.retenciónAsalariadosToolStripMenuItem.Click += new System.EventHandler(this.retenciónAsalariadosToolStripMenuItem_Click);
             // 
             // listadosToolStripMenuItem
             // 
@@ -540,87 +526,6 @@
             this.resumenPorEmpleadoToolStripMenuItem.Text = "Resumen por empleado";
             this.resumenPorEmpleadoToolStripMenuItem.Click += new System.EventHandler(this.resumenPorEmpleadoToolStripMenuItem_Click);
             // 
-            // reportesPatronalesToolStripMenuItem
-            // 
-            this.reportesPatronalesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.iHSSToolStripMenuItem,
-            this.rAPToolStripMenuItem,
-            this.iSRToolStripMenuItem,
-            this.sindicatoDeTrabajadoresToolStripMenuItem,
-            this.iPPToolStripMenuItem});
-            this.reportesPatronalesToolStripMenuItem.Name = "reportesPatronalesToolStripMenuItem";
-            this.reportesPatronalesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.reportesPatronalesToolStripMenuItem.Text = "Reportes Patronales";
-            // 
-            // iHSSToolStripMenuItem
-            // 
-            this.iHSSToolStripMenuItem.Name = "iHSSToolStripMenuItem";
-            this.iHSSToolStripMenuItem.Size = new System.Drawing.Size(263, 26);
-            this.iHSSToolStripMenuItem.Text = "IHSS";
-            // 
-            // rAPToolStripMenuItem
-            // 
-            this.rAPToolStripMenuItem.Name = "rAPToolStripMenuItem";
-            this.rAPToolStripMenuItem.Size = new System.Drawing.Size(263, 26);
-            this.rAPToolStripMenuItem.Text = "RAP";
-            // 
-            // iSRToolStripMenuItem
-            // 
-            this.iSRToolStripMenuItem.Name = "iSRToolStripMenuItem";
-            this.iSRToolStripMenuItem.Size = new System.Drawing.Size(263, 26);
-            this.iSRToolStripMenuItem.Text = "ISR";
-            // 
-            // sindicatoDeTrabajadoresToolStripMenuItem
-            // 
-            this.sindicatoDeTrabajadoresToolStripMenuItem.Name = "sindicatoDeTrabajadoresToolStripMenuItem";
-            this.sindicatoDeTrabajadoresToolStripMenuItem.Size = new System.Drawing.Size(263, 26);
-            this.sindicatoDeTrabajadoresToolStripMenuItem.Text = "Sindicato de trabajadores";
-            // 
-            // iPPToolStripMenuItem
-            // 
-            this.iPPToolStripMenuItem.Name = "iPPToolStripMenuItem";
-            this.iPPToolStripMenuItem.Size = new System.Drawing.Size(263, 26);
-            this.iPPToolStripMenuItem.Text = "I.P.P";
-            // 
-            // sToolStripMenuItem
-            // 
-            this.sToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bitacoraToolStripMenuItem});
-            this.sToolStripMenuItem.Name = "sToolStripMenuItem";
-            this.sToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.sToolStripMenuItem.Text = "Supervisor";
-            // 
-            // bitacoraToolStripMenuItem
-            // 
-            this.bitacoraToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ultimoAccesoToolStripMenuItem,
-            this.detalleDeAccesosToolStripMenuItem,
-            this.últimaModificaciónToolStripMenuItem});
-            this.bitacoraToolStripMenuItem.Name = "bitacoraToolStripMenuItem";
-            this.bitacoraToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.bitacoraToolStripMenuItem.Text = "Bitacora";
-            // 
-            // ultimoAccesoToolStripMenuItem
-            // 
-            this.ultimoAccesoToolStripMenuItem.Name = "ultimoAccesoToolStripMenuItem";
-            this.ultimoAccesoToolStripMenuItem.Size = new System.Drawing.Size(227, 26);
-            this.ultimoAccesoToolStripMenuItem.Text = "Ultimo acceso";
-            this.ultimoAccesoToolStripMenuItem.Click += new System.EventHandler(this.ultimoAccesoToolStripMenuItem_Click);
-            // 
-            // detalleDeAccesosToolStripMenuItem
-            // 
-            this.detalleDeAccesosToolStripMenuItem.Name = "detalleDeAccesosToolStripMenuItem";
-            this.detalleDeAccesosToolStripMenuItem.Size = new System.Drawing.Size(227, 26);
-            this.detalleDeAccesosToolStripMenuItem.Text = "Detalle de accesos";
-            this.detalleDeAccesosToolStripMenuItem.Click += new System.EventHandler(this.detalleDeAccesosToolStripMenuItem_Click);
-            // 
-            // últimaModificaciónToolStripMenuItem
-            // 
-            this.últimaModificaciónToolStripMenuItem.Name = "últimaModificaciónToolStripMenuItem";
-            this.últimaModificaciónToolStripMenuItem.Size = new System.Drawing.Size(227, 26);
-            this.últimaModificaciónToolStripMenuItem.Text = "Última modificación";
-            this.últimaModificaciónToolStripMenuItem.Click += new System.EventHandler(this.últimaModificaciónToolStripMenuItem_Click);
-            // 
             // empresasToolStripMenuItem
             // 
             this.empresasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -652,21 +557,21 @@
             // usuariosToolStripMenuItem1
             // 
             this.usuariosToolStripMenuItem1.Name = "usuariosToolStripMenuItem1";
-            this.usuariosToolStripMenuItem1.Size = new System.Drawing.Size(204, 26);
+            this.usuariosToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.usuariosToolStripMenuItem1.Text = "Usuarios";
             this.usuariosToolStripMenuItem1.Click += new System.EventHandler(this.UsuariosToolStripMenuItem1_Click);
             // 
             // asignarPermisosToolStripMenuItem
             // 
             this.asignarPermisosToolStripMenuItem.Name = "asignarPermisosToolStripMenuItem";
-            this.asignarPermisosToolStripMenuItem.Size = new System.Drawing.Size(204, 26);
+            this.asignarPermisosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.asignarPermisosToolStripMenuItem.Text = "Asignar Permisos";
             this.asignarPermisosToolStripMenuItem.Click += new System.EventHandler(this.AsignarPermisosToolStripMenuItem_Click);
             // 
             // asignarEmpresaToolStripMenuItem
             // 
             this.asignarEmpresaToolStripMenuItem.Name = "asignarEmpresaToolStripMenuItem";
-            this.asignarEmpresaToolStripMenuItem.Size = new System.Drawing.Size(204, 26);
+            this.asignarEmpresaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.asignarEmpresaToolStripMenuItem.Text = "Asignar Empresa";
             this.asignarEmpresaToolStripMenuItem.Click += new System.EventHandler(this.AsignarEmpresaToolStripMenuItem_Click);
             // 
@@ -683,13 +588,6 @@
             this.salirToolStripMenuItem.Size = new System.Drawing.Size(52, 24);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
-            // 
-            // retenciónAsalariadosToolStripMenuItem
-            // 
-            this.retenciónAsalariadosToolStripMenuItem.Name = "retenciónAsalariadosToolStripMenuItem";
-            this.retenciónAsalariadosToolStripMenuItem.Size = new System.Drawing.Size(270, 26);
-            this.retenciónAsalariadosToolStripMenuItem.Text = "Retención Asalariados";
-            this.retenciónAsalariadosToolStripMenuItem.Click += new System.EventHandler(this.retenciónAsalariadosToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -752,7 +650,6 @@
         private System.Windows.Forms.ToolStripMenuItem analisisToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sueldosPorDepartamentoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sueldosPorCategoriaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sueldosNegativosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem prestamosToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem liquidaciónToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem ausenciasToolStripMenuItem1;
@@ -775,17 +672,6 @@
         private System.Windows.Forms.ToolStripMenuItem categoríasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deduccionesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem laboresToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem reportesPatronalesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem iHSSToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rAPToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem iSRToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sindicatoDeTrabajadoresToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem iPPToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem bitacoraToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ultimoAccesoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem detalleDeAccesosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem últimaModificaciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resumenDeLaboresToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem retenciónAsalariadosToolStripMenuItem;
     }
