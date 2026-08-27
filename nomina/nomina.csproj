@@ -666,6 +666,7 @@
     <EmbeddedResource Include="Forms\Reportes\ReporteNomina\frmReporteVarios.resx">
       <DependentUpon>frmReporteVarios.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\rpContanciaEmpleado.rdlc" />
     <EmbeddedResource Include="Forms\Reportes\rpBitacora.rdlc" />
     <EmbeddedResource Include="Forms\Reportes\rpCategoria.rdlc" />
     <EmbeddedResource Include="Forms\Reportes\rpDepartamentordlc.rdlc" />
@@ -678,6 +679,7 @@
     <EmbeddedResource Include="Forms\Reportes\rpReporteGeneralEmpleados.rdlc" />
     <EmbeddedResource Include="Forms\Reportes\rpReporteLiquidacion.rdlc" />
     <EmbeddedResource Include="Forms\Reportes\rpResumenPrestamoEmpleado.rdlc" />
+    <EmbeddedResource Include="Forms\Reportes\rpRetencionImpuestos.rdlc" />
     <EmbeddedResource Include="Forms\Servidor\frmServidor.resx">
       <DependentUpon>frmServidor.cs</DependentUpon>
     </EmbeddedResource>

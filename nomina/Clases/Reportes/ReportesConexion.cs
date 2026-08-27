@@ -42,7 +42,31 @@ namespace nomina.Clases.Reportes
         
         }
 
-      public DataTable ObtenerReportes(string nombreReporte, int? filtro)
+        public DataTable ObtenerReportesAsalariados(string nombreReporte, int mes, int anio)
+        {
+            DataTable dt = new DataTable();
+
+            MySqlConnection conn = this.conexion.getConexion();
+
+            using (MySqlCommand comando = new MySqlCommand(nombreReporte, conn))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+
+                comando.Parameters.AddWithValue("@P_MES", mes);
+                comando.Parameters.AddWithValue("@P_ANIO", anio);
+
+                conn.Open();
+
+                MySqlDataAdapter da = new MySqlDataAdapter(comando);
+                da.Fill(dt);
+                conn.Close();
+            }
+
+            return dt;
+
+        }
+
+        public DataTable ObtenerReportes(string nombreReporte, int? filtro)
         {
             DataTable dt = new DataTable();
 

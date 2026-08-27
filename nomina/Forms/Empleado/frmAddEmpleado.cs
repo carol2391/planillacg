@@ -724,14 +724,14 @@ namespace nomina.Forms.Empleado
 
             this.dtpFechaIngreso.Value = empleado.FechaIngreso;
             this.dtpFechaInicio.Value = empleado.FechaInicio;
-            this.txtNumeroCuenta.Text = empleado.NumeroCuenta.ToString();
+            this.txtNumeroCuenta.Text = empleado.NumeroCuenta?.ToString();
 
-            this.txtCuentaSueldo.Text = empleado.CuentaSueldo.ToString();
-            this.txtOtraCuenta1.Text = empleado.OtraCuent1.ToString();
-            this.txtOtraCuenta2.Text = empleado.OtraCuenta2.ToString();
-            this.txtCuentaSeguroSocial.Text = empleado.CuentaSeguroSocial.ToString();
-            this.txtCuentaRegimen.Text = empleado.CuentaRegimenEspecial.ToString();
-            this.txtCuentaISR.Text = empleado.CuentaISR.ToString();
+            this.txtCuentaSueldo.Text = empleado.CuentaSueldo?.ToString();
+            this.txtOtraCuenta1.Text = empleado.OtraCuent1?.ToString();
+            this.txtOtraCuenta2.Text = empleado.OtraCuenta2?.ToString();
+            this.txtCuentaSeguroSocial.Text = empleado.CuentaSeguroSocial?.ToString();
+            this.txtCuentaRegimen.Text = empleado.CuentaRegimenEspecial?.ToString();
+            this.txtCuentaISR.Text = empleado.CuentaISR?.ToString();
         }
         #endregion
 
@@ -948,37 +948,37 @@ namespace nomina.Forms.Empleado
 
         private void txtCuentaSueldo_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Utilidad.aceptaSoloNumerosDecimales(e);
+            //Utilidad.aceptaSoloNumeros(e);
             Utilidad.cambiarControlEnter(e);
         }
 
         private void txtCuentaSeguroSocial_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Utilidad.aceptaSoloNumerosDecimales(e);
+            //Utilidad.aceptaSoloNumeros(e);
             Utilidad.cambiarControlEnter(e);
         }
 
         private void txtCuentaRegimen_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Utilidad.aceptaSoloNumerosDecimales(e);
+            //Utilidad.aceptaSoloNumeros(e);
             Utilidad.cambiarControlEnter(e);
         }
 
         private void txtCuentaISR_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Utilidad.aceptaSoloNumerosDecimales(e);
+            //Utilidad.aceptaSoloNumeros(e);
             Utilidad.cambiarControlEnter(e);
         }
 
         private void txtOtraCuenta1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Utilidad.aceptaSoloNumerosDecimales(e);
+            //Utilidad.aceptaSoloNumeros(e);
             Utilidad.cambiarControlEnter(e);
         }
 
         private void txtOtraCuenta2_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Utilidad.aceptaSoloNumerosDecimales(e);
+            //Utilidad.aceptaSoloNumeros(e);
             Utilidad.cambiarControlEnter(e);
         }
 

@@ -31,19 +31,23 @@
             this.gpEmpleados = new System.Windows.Forms.GroupBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.dtpFecha = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
             this.gpEmpleados.SuspendLayout();
             this.SuspendLayout();
             // 
             // gpEmpleados
             // 
             this.gpEmpleados.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(214)))), ((int)(((byte)(241)))));
+            this.gpEmpleados.Controls.Add(this.label1);
+            this.gpEmpleados.Controls.Add(this.dtpFecha);
             this.gpEmpleados.Controls.Add(this.btnBuscar);
             this.gpEmpleados.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gpEmpleados.Location = new System.Drawing.Point(4, 60);
             this.gpEmpleados.Margin = new System.Windows.Forms.Padding(4);
             this.gpEmpleados.Name = "gpEmpleados";
             this.gpEmpleados.Padding = new System.Windows.Forms.Padding(4);
-            this.gpEmpleados.Size = new System.Drawing.Size(363, 94);
+            this.gpEmpleados.Size = new System.Drawing.Size(329, 144);
             this.gpEmpleados.TabIndex = 70;
             this.gpEmpleados.TabStop = false;
             // 
@@ -52,7 +56,7 @@
             this.btnBuscar.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscar.Location = new System.Drawing.Point(9, 27);
+            this.btnBuscar.Location = new System.Drawing.Point(9, 87);
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(4);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(156, 39);
@@ -68,17 +72,34 @@
             this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.lblTitulo.Location = new System.Drawing.Point(0, 0);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(380, 47);
+            this.lblTitulo.Size = new System.Drawing.Size(350, 47);
             this.lblTitulo.TabIndex = 72;
             this.lblTitulo.Text = "Agregar Aumento";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dtpFecha
+            // 
+            this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFecha.Location = new System.Drawing.Point(8, 44);
+            this.dtpFecha.Name = "dtpFecha";
+            this.dtpFecha.Size = new System.Drawing.Size(156, 26);
+            this.dtpFecha.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(8, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(166, 25);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Ingrese la fecha:";
             // 
             // frmFiltro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(195)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(380, 172);
+            this.ClientSize = new System.Drawing.Size(350, 218);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.gpEmpleados);
             this.ForeColor = System.Drawing.Color.Black;
@@ -87,6 +108,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmFiltro";
             this.gpEmpleados.ResumeLayout(false);
+            this.gpEmpleados.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -96,5 +118,7 @@
         private System.Windows.Forms.GroupBox gpEmpleados;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.DateTimePicker dtpFecha;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -1,6 +1,7 @@
+
 use sistema_nomina;
 
-CREATE  FUNCTION `existe_aumento`(
+CREATE DEFINER=`root`@`localhost` FUNCTION `existe_aumento`(
   P_AUMENTOS_ID INT,
    P_ID_EMPLEADO INT,
    P_FEC_AUM DATE,
@@ -19,10 +20,7 @@ BEGIN
 RETURN v_salida;
 END ;
 
-
-
-
-CREATE  FUNCTION `existe_departamento`(
+CREATE DEFINER=`root`@`localhost` FUNCTION `existe_departamento`(
    P_ID INT,
    P_COD_DEP VARCHAR(30),
    P_NOM_DEP VARCHAR(100)
@@ -38,9 +36,7 @@ BEGIN
 RETURN v_salida;
 END ;
 
-
-
-CREATE  FUNCTION `existe_prestamo`(
+CREATE DEFINER=`root`@`localhost` FUNCTION `existe_prestamo`(
     P_PRESTAMOS_ID INT, 
     P_ID_EMPLEADO INT,
     P_FECHA DATE
@@ -64,9 +60,7 @@ BEGIN
     RETURN v_salida;
 END ;
 
-
-
-CREATE  FUNCTION `existe_rango_fecha_ausencia`(
+CREATE DEFINER=`root`@`localhost` FUNCTION `existe_rango_fecha_ausencia`(
   P_AUSENCIAS_ID INT,
   P_ID_EMPLEADO INT,
   P_ID_NOMINA VARCHAR(8),
@@ -88,10 +82,361 @@ BEGIN
     );
 RETURN salida;
 END ;
+CREATE DEFINER=`root`@`localhost` FUNCTION `fn_calcular_ihss`(
+    p_salario DECIMAL(10,2)
+    , p_anio INT
+) RETURNS decimal(10,2)
+    DETERMINISTIC
+BEGIN
+
+    -- Variables
+    DECLARE v_techo_ihss DECIMAL(12,2) DEFAULT 11290.180;
+
+    DECLARE v_base_calculo DECIMAL(12,2);
+
+    DECLARE v_ihss_empleado DECIMAL(12,2);
+    DECLARE v_ihss_patrono DECIMAL(12,2);
+
+    DECLARE v_total_ihss DECIMAL(12,2);
+
+    -- ============================================
+    -- BASE DE CÁLCULO
+    -- Se usa el salario o el techo máximo
+    -- ============================================
+    SELECT p.VALOR_TECHO_IHSS INTO v_techo_ihss 
+    FROM PARAMETRO P
+    WHERE  p.periodo = p_anio;
+    
+    IF p_salario > v_techo_ihss THEN
+        SET v_base_calculo = v_techo_ihss;
+    ELSE
+        SET v_base_calculo = p_salario;
+    END IF;
+
+    -- ============================================
+    -- CÁLCULO IHSS
+    -- ============================================
+
+    -- Empleado 2.5%
+    SET v_ihss_empleado = v_base_calculo * 0.0250;
 
 
+    RETURN ROUND(v_ihss_empleado, 2);
 
-CREATE  FUNCTION `f_obtener_sueldo`(
+END;
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `fn_calcular_rap`(
+    p_salario DECIMAL(10,2),
+    p_anio INT
+) RETURNS decimal(10,2)
+    DETERMINISTIC
+BEGIN
+
+    -- Variables
+    DECLARE v_techo_reserva DECIMAL(12,2) DEFAULT 57896.160;
+
+    DECLARE v_reserva_laboral DECIMAL(12,2) DEFAULT 0.00;
+    DECLARE v_piso  DECIMAL(12,2) DEFAULT 0;
+    DECLARE v_foviif DECIMAL(12,2) DEFAULT 0;
+    DECLARE v_total_rap DECIMAL(12,2) DEFAULT 0;
+
+    -- ============================================
+    -- FONDO DE RESERVA LABORAL
+    -- 4% patronal con techo de 3 salarios mínimos
+    -- ============================================
+    SELECT p.RESERVA_LAB_RAP INTO v_techo_reserva 
+    FROM PARAMETRO P
+    WHERE  p.periodo = p_anio;
+
+      IF p_salario > v_techo_reserva THEN
+        SET v_reserva_laboral = v_techo_reserva * 0.040;
+    ELSE
+        SET v_reserva_laboral = p_salario * 0.040;
+    END IF;
+
+  
+ 
+    -- ============================================
+    -- FOVIIF
+    -- 1.5% empleado + 1.5% patrono
+    -- SOLO sobre excedente de L 11,903.13
+    -- ============================================
+SELECT p.VALOR_PISO_RAP INTO v_piso 
+    FROM PARAMETRO P
+    WHERE  p.periodo = p_anio;
+    
+    IF p_salario > v_piso THEN
+        SET v_foviif = (p_salario - v_piso) * 0.015;
+    END IF;
+
+    -- Total RAP
+    SET v_total_rap = v_reserva_laboral + v_foviif;
+
+    RETURN ROUND(v_total_rap,2);
+
+END ;
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `fn_isr`(
+    p_salario_mensual DECIMAL(12,2),
+    p_anio INT,
+    p_edad INT
+) RETURNS decimal(12,2)
+    DETERMINISTIC
+BEGIN
+    DECLARE v_renta_neta DECIMAL(12,2);
+    DECLARE v_isr DECIMAL(12,2) DEFAULT 0.00;
+	DECLARE v_valor_ipp DECIMAL(17,2); 
+	DECLARE v_afecta_isr VARCHAR(1);
+    -- Variables para los límites de los tramos
+    DECLARE v_excento DECIMAL(12,2);
+    DECLARE v_final15 DECIMAL(12,2);
+    DECLARE v_final20 DECIMAL(12,2);
+
+    DECLARE v_rap DECIMAL(12,2) default 0.00;
+    DECLARE v_ihss DECIMAL(12,2) default 0.00;
+
+
+    DECLARE v_ioa DECIMAL(12,2);          -- Ingresos Ordinarios Anuales
+    DECLARE v_pa DECIMAL(12,2);           -- Prestaciones Adicionales (Aguinaldo + 14vo)
+    DECLARE v_exento_pa DECIMAL(12,2);    -- Techo exento de prestaciones (10 salarios mínimos)
+    DECLARE v_iag DECIMAL(12,2);          -- Ingreso Adicional Gravable
+    DECLARE v_igt DECIMAL(12,2);          -- Ingreso Gravable Total
+    DECLARE v_deducciones DECIMAL(12,2);  -- Deducciones por edad / gastos médicos
+    DECLARE v_rng DECIMAL(12,2);          -- Renta Neta Gravable
+    DECLARE v_salario_minimo_promedio DECIMAL(12,2);    -- salario minimo promedio
+    
+    
+    
+    -- 1. Cargar los parámetros reales de la tabla
+    SELECT p.EXCENTO, p.RANGO_FINAL15, p.RANGO_FINAL20, p.salario_minimo_promedio, IFNULL(ipp, 0.00)
+    INTO v_excento, v_final15, v_final20, v_salario_minimo_promedio,v_valor_ipp
+    FROM PARAMETRO p
+    WHERE p.periodo = p_anio;
+
+
+    -- 1. Cálculos Iniciales de Ingresos
+    SET v_ioa = p_salario_mensual * 12;
+    SET v_pa = p_salario_mensual * 2;
+    SET v_exento_pa = v_salario_minimo_promedio * 10;
+    
+    -- Aplicar regla de los 10 salarios mínimos (max(0, PA - Exento))
+    IF v_pa > v_exento_pa THEN
+        SET v_iag = v_pa - v_exento_pa;
+    ELSE
+        SET v_iag = 0;
+    END IF;
+    SET v_igt = v_ioa + v_iag;
+    
+    
+    IF p_edad >= 60 AND v_igt <= 350000.00 THEN
+        RETURN 0.00;
+    END IF;
+    
+    -- ============================================================
+    -- REGLA DE LOS 65 AÑOS: EXONERACIÓN CONDICIONADA
+    -- Si tiene 65 o más y su renta bruta anual no supera L. 350,000, no paga nada.
+    -- ============================================================
+    IF p_edad >= 65  THEN
+        SET v_deducciones = 80000.00;
+    ELSE
+        SET v_deducciones = 40000.00; -- Menores de 60 años
+    END IF;
+
+    -- 2. Convertir deducciones mensuales a proyección anual (Incluye Reserva Laboral + FOVIIF)
+     SET v_rap = fn_calcular_rap(p_salario_mensual, p_anio) * 12;
+    SET v_ihss = fn_calcular_ihss(p_salario_mensual, p_anio) * 12;
+
+    -- 3. Deducción de Renta Neta Gravable
+    #SET v_renta_neta = p_ingreso_anual - 40000.00 - v_rap - v_ihss;
+	SET v_rng = v_igt - v_deducciones - v_rap - v_ihss - v_valor_ipp;
+    
+    -- Si no alcanza la base imponible exenta, el impuesto es 0
+	IF v_rng <= v_excento THEN
+        RETURN 0.00;
+    END IF;
+    -- 4. Cálculo exacto por acumulación de tramos progresivos
+    IF v_rng <= v_final15 THEN
+        -- Tramo 2: Cobra 15% sobre lo que excede de la base exenta
+        SET v_isr = (v_rng - v_excento) * 0.15;
+        
+    ELSEIF v_rng <= v_final20 THEN
+        -- Tramo 3: Tramo 2 completo + 20% sobre lo que excede al Tramo 2
+        SET v_isr = ((v_final15 - v_excento) * 0.15) 
+                  + ((v_rng - v_final15) * 0.20);
+        
+    ELSE
+        -- Tramo 4: Tramo 2 completo + Tramo 3 completo + 25% sobre lo que excede al Tramo 3
+        SET v_isr = ((v_final15 - v_excento) * 0.15) 
+                  + ((v_final20 - v_final15) * 0.20) 
+                  + ((v_rng - v_final20) * 0.25);
+    END IF;
+
+    RETURN ROUND(v_isr/12, 2);
+END ;
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `fn_isr_adulto_mayor`(
+    p_ingreso_anual DECIMAL(12,2),
+    p_anio INT,
+    p_edad INT
+) RETURNS decimal(12,2)
+    DETERMINISTIC
+BEGIN
+    DECLARE v_renta_neta DECIMAL(12,2);
+    DECLARE v_isr DECIMAL(12,2) DEFAULT 0.00;
+    DECLARE v_deduccion_edad DECIMAL(12,2) DEFAULT 0.00;
+
+    -- Variables para los límites de los tramos
+    DECLARE v_excento DECIMAL(12,2);
+    DECLARE v_final15 DECIMAL(12,2);
+    DECLARE v_final20 DECIMAL(12,2);
+
+    DECLARE v_rap DECIMAL(12,2);
+    DECLARE v_ihss DECIMAL(12,2);
+
+    -- ============================================================
+    -- REGLA DE LOS 65 AÑOS: EXONERACIÓN CONDICIONADA
+    -- Si tiene 65 o más y su renta bruta anual no supera L. 350,000, no paga nada.
+    -- ============================================================
+    IF p_edad >= 65 AND p_ingreso_anual <= 350000.00 THEN
+        RETURN 0.00;
+    END IF;
+
+    -- ============================================================
+    -- DETERMINACIÓN DE DEDUCCIONES ADICIONALES POR EDAD
+    -- Si tiene 60 o más (incluyendo los de 65+ que superaron los 350k 
+    -- y por ende deben calcular ISR), se les otorga la deducción especial.
+    -- ============================================================
+    IF p_edad >= 60 THEN
+        SET v_deduccion_edad = 80000.00;
+    END IF;
+
+    -- Cargar los parámetros de la tabla de control
+    SELECT p.EXCENTO, p.RANGO_FINAL15, p.RANGO_FINAL20
+    INTO v_excento, v_final15, v_final20
+    FROM PARAMETRO p
+    WHERE p.periodo = p_anio;
+
+    -- Convertir deducciones mensuales a proyección anual (Incluye Reserva + FOVIIF)
+    SET v_rap = fn_calcular_rap((p_ingreso_anual / 12), p_anio) * 12;
+    SET v_ihss = fn_calcular_ihss((p_ingreso_anual / 12), p_anio) * 12;
+
+    -- Deducción de Renta Neta Gravable
+    -- Base = Ingreso - Gastos Médicos (40k) - Deducción Edad (30k si aplica) - RAP - IHSS
+    SET v_renta_neta = p_ingreso_anual - 40000.00 - v_deduccion_edad - v_rap - v_ihss;
+
+    -- Si la renta neta no supera el tramo exento (t1) o es negativa, queda en 0
+    IF v_renta_neta <= v_excento OR v_renta_neta < 0 THEN
+        RETURN 0.00;
+    END IF;
+
+    -- Cálculo acumulativo por tramos progresivos (SAR)
+    IF v_renta_neta <= v_final15 THEN
+        SET v_isr = (v_renta_neta - v_excento) * 0.150;
+        
+    ELSEIF v_renta_neta <= v_final20 THEN
+        SET v_isr = ((v_final15 - v_excento) * 0.150) 
+                  + ((v_renta_neta - v_final15) * 0.2000);
+        
+    ELSE
+        SET v_isr = ((v_final15 - v_excento) * 0.15000) 
+                  + ((v_final20 - v_final15) * 0.2000) 
+                  + ((v_renta_neta - v_final20) * 0.25000);
+    END IF;
+
+    RETURN ROUND(v_isr, 2);
+END ;
+CREATE DEFINER=`root`@`localhost` FUNCTION `fn_numero_a_letras`(p_numero DECIMAL(12,2)) RETURNS varchar(500) CHARSET utf8mb4
+    DETERMINISTIC
+BEGIN
+    DECLARE v_entero BIGINT;
+    DECLARE v_decimales INT;
+    DECLARE v_letras VARCHAR(500) DEFAULT '';
+    DECLARE v_tramo INT;
+    DECLARE v_contador INT DEFAULT 1;
+    DECLARE v_texto_tramo VARCHAR(100);
+    
+    -- Variables para descomponer el tramo
+    DECLARE u, d, c INT;
+
+    SET v_entero = FLOOR(p_numero);
+    SET v_decimales = ROUND((p_numero - v_entero) * 100);
+
+    IF v_entero = 0 THEN
+        SET v_letras = 'CERO';
+    END IF;
+
+    WHILE v_entero > 0 DO
+        SET v_tramo = v_entero % 1000;
+        SET v_texto_tramo = '';
+
+        IF v_tramo > 0 THEN
+            SET c = FLOOR(v_tramo / 100);
+            SET d = FLOOR((v_tramo % 100) / 10);
+            SET u = v_tramo % 10;
+
+            -- Evaluar Centenas
+            IF c = 1 AND (d > 0 OR u > 0) THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'CIENTO ');
+            ELSEIF c = 1 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'CIEN ');
+            ELSEIF c = 2 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'DOSCIENTOS ');
+            ELSEIF c = 3 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'TRESCIENTOS ');
+            ELSEIF c = 4 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'CUATROCIENTOS ');
+            ELSEIF c = 5 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'QUINIENTOS ');
+            ELSEIF c = 6 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'SEISCIENTOS ');
+            ELSEIF c = 7 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'SETECIENTOS ');
+            ELSEIF c = 8 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'OCHOCIENTOS ');
+            ELSEIF c = 9 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'NOVECIENTOS ');
+            END IF;
+
+            -- Evaluar Decenas y Unidades
+            IF d = 1 THEN
+                IF u = 0 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'DIEZ ');
+                ELSEIF u = 1 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'ONCE ');
+                ELSEIF u = 2 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'DOCE ');
+                ELSEIF u = 3 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'TRECE ');
+                ELSEIF u = 4 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'CATORCE ');
+                ELSEIF u = 5 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'QUINCE ');
+                ELSE SET v_texto_tramo = CONCAT(v_texto_tramo, 'DIECI', ELT(u, 'UNO', 'DOS', 'TRES', 'CUATRO', 'CINCO', 'SEIS', 'SIETE', 'OCHO', 'NUEVE'), ' ');
+                END IF;
+            ELSEIF d = 2 THEN
+                IF u = 0 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'VEINTE ');
+                ELSE SET v_texto_tramo = CONCAT(v_texto_tramo, 'VEINTI', ELT(u, 'UNO', 'DOS', 'TRES', 'CUATRO', 'CINCO', 'SEIS', 'SIETE', 'OCHO', 'NUEVE'), ' ');
+                END IF;
+            ELSE
+                IF d = 3 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'TREINTA');
+                ELSEIF d = 4 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'CUARENTA');
+                ELSEIF d = 5 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'CINCUENTA');
+                ELSEIF d = 6 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'SESENTA');
+                ELSEIF d = 7 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'SETENTA');
+                ELSEIF d = 8 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'OCHENTA');
+                ELSEIF d = 9 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, 'NOVENTA');
+                END IF;
+                
+                IF d > 2 AND u > 0 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, ' Y '); END IF;
+                IF u > 0 THEN SET v_texto_tramo = CONCAT(v_texto_tramo, ELT(u, 'UNO', 'DOS', 'TRES', 'CUATRO', 'CINCO', 'SEIS', 'SIETE', 'OCHO', 'NUEVE'), ' '); END IF;
+            END IF;
+
+            IF v_contador = 2 THEN 
+                IF v_tramo = 1 THEN SET v_texto_tramo = 'MIL '; ELSE SET v_texto_tramo = CONCAT(v_texto_tramo, 'MIL '); END IF;
+            ELSEIF v_contador = 3 THEN 
+                IF v_tramo = 1 THEN SET v_texto_tramo = 'UN MILLON '; ELSE SET v_texto_tramo = CONCAT(v_texto_tramo, 'MILLONES '); END IF;
+            END IF;
+
+            SET v_letras = CONCAT(v_texto_tramo, v_letras);
+        END IF;
+
+        SET v_contador = v_contador + 1;
+        SET v_entero = FLOOR(v_entero / 1000);
+    END WHILE;
+
+    -- MODIFICACIÓN AQUÍ: Evaluamos si tiene o no centavos
+    IF v_decimales > 0 THEN
+        RETURN TRIM(CONCAT(v_letras, ' CON ', LPAD(v_decimales, 2, '0'), '/100'));
+    ELSE
+        RETURN TRIM(v_letras); -- O puedes usar: RETURN CONCAT(TRIM(v_letras), ' EXACTOS');
+    END IF;
+END ;
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `f_obtener_sueldo`(
   V_ID_EMPLEADO INT
 ) RETURNS decimal(17,2)
     DETERMINISTIC
@@ -102,9 +447,7 @@ begin
 RETURN v_sueldo;
 END ;
 
-
-
-CREATE  FUNCTION `obtener_sueldo_empleado_ausencia`(
+CREATE DEFINER=`root`@`localhost` FUNCTION `obtener_sueldo_empleado_ausencia`(
   P_ID_EMPLEADO INT,
   P_NUMERO_DIAS_TRABAJADOS INT
 ) RETURNS decimal(15,2)
@@ -118,9 +461,7 @@ BEGIN
 RETURN suel;
 END ;
 
-
-
-CREATE PROCEDURE `acciones_antecedente`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `acciones_antecedente`(
     IN P_ID_ANTECEDENTE  INT,
 	 IN P_NUMERO_ANTECEDENTE INT(32),
 	 IN P_FECHA_EMISION DATE,
@@ -130,10 +471,11 @@ CREATE PROCEDURE `acciones_antecedente`(
      IN P_TIPO_ANTECEDENTE VARCHAR(2),
 	 IN P_ACCION VARCHAR(1),
      IN P_ID_EMPLEADO INT,
+     IN P_USUARIO VARCHAR(500),
 	 OUT P_SALIDA int
 )
 BEGIN
-
+ 
   DECLARE MSG VARCHAR(100);
   DECLARE code CHAR(5) DEFAULT '00000';
   DECLARE v_nombre_columna text;
@@ -143,26 +485,32 @@ BEGIN
   DECLARE V_ACTUAL DECIMAL;
   DECLARE V_CREDITO DECIMAL;
   DECLARE V_ANTERIOR DECIMAL;
- 
-    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+  DECLARE V_CODIGO_EMPLEADO VARCHAR(500);
+
+
+/*DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
 
     BEGIN
       GET DIAGNOSTICS CONDITION 1
         code = RETURNED_SQLSTATE, msg = MESSAGE_TEXT,v_nombre_columna = column_name;
-    END;
+    END;*/
     
+    select cod_trb into v_codigo_empleado 
+    from empleado
+    where id_trb = p_id_empleado;
+    
+     SET @usuario_actual = P_USUARIO;
     CASE P_ACCION
 		 WHEN "N" THEN
 
 				 INSERT INTO ANTECEDENTES(NUMERO_ANTECEDENTE, FECHA_EMISION,
 					FECHA_VENCIMIENTO,VIGENCIA, LUGAR_ORIGEN , ID_EMPLEADO,TIPO_ANTECEDENTE
 				  )
-			     VALUES(P_NUMERO_ANTECEDENTE, P_FECHA_EMISION,
-					P_FECHA_VENCIMIENTO,P_VIGENCIA, P_LUGAR_ORIGEN , P_ID_EMPLEADO, P_TIPO_ANTECEDENTE);
-				
+			     VALUES(P_NUMERO_ANTECEDENTE, P_FECHA_EMISION, P_FECHA_VENCIMIENTO,P_VIGENCIA, P_LUGAR_ORIGEN , P_ID_EMPLEADO, P_TIPO_ANTECEDENTE);
+				 CALL sp_registrar_bitacora(p_usuario, 'NUEVO', 'ANTECEDENTES', CONCAT('Se registro un antecedente para el empleado con código: ',  cod_trb));
 		   SET P_SALIDA = 1;
-     
-      WHEN "M" THEN
+           
+       WHEN "M" THEN
            UPDATE  ANTECEDENTES
 	   SET 
            NUMERO_ANTECEDENTE=P_NUMERO_ANTECEDENTE,
@@ -172,7 +520,7 @@ BEGIN
            LUGAR_ORIGEN  =P_LUGAR_ORIGEN,
            TIPO_ANTECEDENTE = P_TIPO_ANTECEDENTE
 		  WHERE ID_ANTECEDENTE = P_ID_ANTECEDENTE;
-		
+	
 	WHEN "E" THEN
            DELETE FROM ANTECEDENTES WHERE ID_ANTECEDENTE = P_ID_ANTECEDENTE; 
    END CASE; 
@@ -184,15 +532,16 @@ BEGIN
 	else
 		set P_salida =1;
     END IF;
-END;
+END ;
 
-CREATE  PROCEDURE `acciones_categoria`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `acciones_categoria`(
    IN P_ACCION VARCHAR(1),
   IN P_ID_CATEGORIA INT,
   IN P_COD_CAT VARCHAR(3),
   IN P_NOM_CAT VARCHAR(30),
   IN P_SAL_INI DECIMAL(17,2),
   IN P_SAL_FIN DECIMAL(17,2),
+  IN P_USUARIO VARCHAR(500),
   OUT salida INT
 )
 BEGIN
@@ -206,6 +555,7 @@ BEGIN
         code = RETURNED_SQLSTATE, msg = MESSAGE_TEXT,v_nombre_columna = column_name;
     END;
     
+    SET @usuario_actual = P_USUARIO;
     CASE P_ACCION
 		 WHEN "N" THEN
 				IF P_ID_CATEGORIA = -1 THEN
@@ -213,16 +563,17 @@ BEGIN
 				END IF;
 					INSERT INTO categoria (COD_CAT, NOM_CAT,SAL_INI,SAL_FIN)
 					VALUES(P_COD_CAT,P_NOM_CAT,P_SAL_INI,P_SAL_FIN);
-	
+		CALL sp_registrar_bitacora(p_usuario, 'NUEVO', 'CATEGORIAS', CONCAT('Se registro una categoria para con el código: ', P_COD_CAT ));
    WHEN "M" THEN
 		IF P_ID_CATEGORIA = -1 THEN
 			SET P_ID_CATEGORIA= NULL;
 		END IF;
 		UPDATE categoria
-			SET  COD_CAT =P_COD_CAT, 
-			NOM_CAT = P_NOM_CAT, 
-			SAL_INI = P_SAL_INI ,
-			SAL_FIN=P_SAL_FIN  
+			SET  
+				COD_CAT =P_COD_CAT, 
+				NOM_CAT = P_NOM_CAT, 
+				SAL_INI = P_SAL_INI ,
+				SAL_FIN=P_SAL_FIN  
         WHERE ID_CAT = P_ID_CATEGORIA;
 		
   WHEN "E" THEN
@@ -239,15 +590,14 @@ BEGIN
     
 END ;
 
-
-
-CREATE  PROCEDURE `acciones_departamento`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `acciones_departamento`(
    IN P_ACCION VARCHAR(1),
    IN P_COD_DEP VARCHAR(3),
    IN P_NOM_DEP VARCHAR(30),
    IN P_ID_EMPLEADO int,
    IN P_ID_CUENTA INT,
    IN P_ID_DEP INT,
+   IN P_USUARIO VARCHAR(500),
    OUT SALIDA INT
 )
 BEGIN 
@@ -262,7 +612,7 @@ BEGIN
 		GET DIAGNOSTICS CONDITION 1
 		code = RETURNED_SQLSTATE, msg = MESSAGE_TEXT, v_nombre_columna = column_name;
     END;
-
+     SET @usuario_actual = P_USUARIO;
 	CASE P_ACCION
 		 WHEN "N" THEN
 				IF P_ID_EMPLEADO = -1 THEN
@@ -281,7 +631,9 @@ BEGIN
 					INSERT INTO departamento (COD_DEP, NOM_DEP, ID_CUENTA, ID_EMPLEADO)
 					VALUES (P_COD_DEP, P_NOM_DEP, P_ID_CUENTA, P_ID_EMPLEADO);
                 END IF;
-				
+		
+        CALL sp_registrar_bitacora(p_usuario, 'NUEVO', 'DEPARTAMENTO', CONCAT('Se registro un departamento con código: ', P_COD_DEP ));
+		 
 		 WHEN "M" THEN
 				IF P_ID_EMPLEADO = -1 THEN
 				   SET P_ID_EMPLEADO = NULL;
@@ -320,9 +672,7 @@ BEGIN
     END IF;
 END ;
 
-
-
-CREATE  PROCEDURE `acciones_descuento`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `acciones_descuento`(
    IN P_COD_DEC VARCHAR(3), 
    IN P_NOM_DEC VARCHAR(30), 
    IN P_VAL_DEC DECIMAL(17,2), 
@@ -332,6 +682,7 @@ CREATE  PROCEDURE `acciones_descuento`(
    IN P_ID_COD_CUE VARCHAR(8),
    IN P_ACCION VARCHAR(1),
    IN P_ID_DEC INT,
+   IN P_USUARIO VARCHAR(500),
    OUT salida INT
 )
 BEGIN
@@ -346,7 +697,7 @@ BEGIN
 		GET DIAGNOSTICS CONDITION 1
 		code = RETURNED_SQLSTATE, msg = MESSAGE_TEXT, v_nombre_columna = column_name;
     END;
-    
+    SET @usuario_actual = P_USUARIO;
 	CASE P_ACCION
 		 WHEN "N" THEN
 				-- Validar si ya existe un descuento con el mismo CÓDIGO o NOMBRE
@@ -361,7 +712,8 @@ BEGIN
 					INSERT INTO descuento (COD_DEC, NOM_DEC, VAL_DEC, FAC_DEC, ID_TIPO_JORNADA, ID_TIPO_PAGO, ID_COD_CUE)
 					VALUES (P_COD_DEC, P_NOM_DEC, P_VAL_DEC, P_FAC_DEC, P_ID_TIPO_JORNADA, P_ID_TIPO_PAGO, P_ID_COD_CUE);
 				END IF;
-
+			CALL sp_registrar_bitacora(p_usuario, 'NUEVO', 'DESCUENTOS', CONCAT('Se registro  descuento con código: ', P_COD_DEC ));
+		  
          WHEN "M" THEN
 				-- Validar si el código o el nombre ya existen en OTRO registro diferente al que se edita
 				SELECT COUNT(*) INTO V_EXISTE_COD 
@@ -397,9 +749,7 @@ BEGIN
     END IF;
 END ;
 
-
-
-CREATE  PROCEDURE `acciones_empleado`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `acciones_empleado`(
 	 IN P_COD_TRB VARCHAR(5),
 	 IN P_NOM_TRB VARCHAR(50), 
 	 IN P_FEC_NAC DATE, 
@@ -432,12 +782,13 @@ CREATE  PROCEDURE `acciones_empleado`(
 	 IN P_ACCION VARCHAR(1),
      IN P_FECHA_INICIO DATE,
      IN P_TIPO_EMPLEADO VARCHAR(1),
-     IN P_CUENTA_SUELDO DECIMAL(17,2),
-     IN P_CUENTA_SEGURO_SOCIAL DECIMAL(17,2),
-     IN P_CUENTA_REGIMEN_ESPECIAL DECIMAL(17,2),
-     IN P_CUENTA_ISR DECIMAL(17,2),
-     IN P_OTRA_CUENTA_1  DECIMAL(17,2),
-     IN P_OTRA_CUENTA_2  DECIMAL(17,2),
+     IN P_CUENTA_SUELDO VARCHAR(30),
+     IN P_CUENTA_SEGURO_SOCIAL VARCHAR(30),
+     IN P_CUENTA_REGIMEN_ESPECIAL VARCHAR(30),
+     IN P_CUENTA_ISR VARCHAR(30),
+     IN P_OTRA_CUENTA_1  VARCHAR(30),
+     IN P_OTRA_CUENTA_2 VARCHAR(30),
+     IN P_USUARIO VARCHAR(500),
 	 OUT salida int
 )
 BEGIN
@@ -452,7 +803,7 @@ BEGIN
        GET DIAGNOSTICS CONDITION 1
        code = RETURNED_SQLSTATE, msg = MESSAGE_TEXT, v_nombre_columna = column_name;
     END;
-    
+     SET @usuario_actual = P_USUARIO;
     CASE P_ACCION
 		 WHEN "N" THEN
 			 INSERT INTO empleado (COD_TRB,NOM_TRB, FEC_NAC, IDEN_TRB , EST_TRB,
@@ -462,7 +813,7 @@ BEGIN
                  ID_TIPO_PAGO,BANCOS,NCUENTA,
 				CELULAR,RESIDENCIA,LICENCIA,FECHA_INICIO,TIPO_EMPLEADO,
                 CUENTA_SUELDO,CUENTA_SEGURO_SOCIAL,CUENTA_REGIMEN_ESPECIAL,
-                CUENTA_ISR,OTRA_CUENTA_1,OTRA_CUENTA_2, FECHA_CONTRATACION
+                CUENTA_ISR,OTRA_CUENTA_1,OTRA_CUENTA_2, FECHA_CONTRATACION, ESTADO
               )
 		   VALUES(P_COD_TRB,P_NOM_TRB, P_FEC_NAC, P_IDEN_TRB , P_EST_TRB,
 					P_PAST_TRB, P_RTN_TRB,P_ANT_TRB, P_IHS_TRB, P_DIR_TRB,
@@ -471,13 +822,16 @@ BEGIN
 					P_BANCOS,P_NCUENTA,P_CELULAR_TRB,P_RESIDENCIA_TRB,
 					P_LICENCIA_TRB,P_FECHA_INICIO,P_TIPO_EMPLEADO,P_CUENTA_SUELDO,
                     P_CUENTA_SEGURO_SOCIAL,P_CUENTA_REGIMEN_ESPECIAL,
-                    P_CUENTA_ISR,P_OTRA_CUENTA_1,P_OTRA_CUENTA_2,P_FEC_DEF
+                    P_CUENTA_ISR,P_OTRA_CUENTA_1,P_OTRA_CUENTA_2,P_FEC_DEF, 'A'
                     );
 			
              IF code = '00000' THEN
 				 SET V_ID_EMPLEADO = LAST_INSERT_ID();
 
 				 CALL llenar_tabla_historial_sueldo_empleado(V_ID_EMPLEADO, P_FEC_DEF);
+                               
+			CALL sp_registrar_bitacora(p_usuario, 'NUEVO', 'EMPLEADO', CONCAT('Se registro un empleado con código: ', P_COD_TRB ));
+		  
              END IF;
 	  
 		 WHEN "M" THEN
@@ -508,9 +862,7 @@ BEGIN
     END IF;
 END ;
 
-
-
-CREATE  PROCEDURE `acciones_labor`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `acciones_labor`(
 	 IN P_ID_LAB INT,
      IN P_COD_LAB VARCHAR(3),
 	 IN P_NOM_LAB VARCHAR(30),
@@ -520,6 +872,7 @@ CREATE  PROCEDURE `acciones_labor`(
 	 IN P_ID_TIPO_PAGO INT, 
 	 IN P_ID_CUENTA INT(8),
      IN P_ACCION VARCHAR(1),
+     IN P_USUARIO VARCHAR(500),
      OUT salida int
 )
 BEGIN
@@ -533,13 +886,16 @@ BEGIN
       GET DIAGNOSTICS CONDITION 1
         code = RETURNED_SQLSTATE, msg = MESSAGE_TEXT,v_nombre_columna = column_name;
     END;
-    
+     SET @usuario_actual = P_USUARIO;
     CASE P_ACCION
 		 WHEN "N" THEN
             INSERT INTO labores(COD_LAB,NOM_LAB,ID_TIPO_JORNADA,
               VAL_LAB,FAC_LAB,ID_TIPO_PAGO,ID_CUENTA)
            VALUES (P_COD_LAB , P_NOM_LAB, P_TIPO_JORNADA,
                 P_VAL_LAB, P_FAC_LAB, P_ID_TIPO_PAGO , P_ID_CUENTA);
+                              
+			CALL sp_registrar_bitacora(p_usuario, 'NUEVO', 'LABORES', CONCAT('Se registro una labor con código: ', P_COD_LAB ));
+		  
          WHEN "M" THEN
 			UPDATE labores SET
             COD_LAB = P_COD_LAB , 
@@ -564,10 +920,8 @@ BEGIN
     END IF;
     
  END ;
-
-
-
-CREATE  PROCEDURE `acciones_maumentos`(
+ 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `acciones_maumentos`(
  IN P_ACCION VARCHAR(1),
  IN P_ID_AUMENTO INT,
  IN P_ID_EMPLEADO INT,
@@ -580,6 +934,7 @@ CREATE  PROCEDURE `acciones_maumentos`(
  IN P_MONTO DECIMAL(17,2),
  IN P_TOTAL_MONTO DECIMAL(17,2),
  IN P_DESCRIPCION VARCHAR(30),
+ IN P_USUARIO VARCHAR(150),
  OUT P_SALIDA INT
 )
 BEGIN
@@ -588,7 +943,7 @@ BEGIN
 	DECLARE v_nombre_columna text;
 	DECLARE v_valor_campo text;
 	DECLARE V_ID_EMPLEADO INT;
-    
+    DECLARE V_FECHA_ANTIGUA DATE;
     DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
 
     BEGIN
@@ -596,7 +951,7 @@ BEGIN
         code = RETURNED_SQLSTATE, msg = MESSAGE_TEXT,v_nombre_columna = column_name;
     END;
     
-    
+    SET @usuario_actual = P_USUARIO;
      CASE P_ACCION
 		 WHEN "N" THEN
 			if existe_aumento( NULL,P_ID_EMPLEADO,P_FECHA,P_ID_CATEGORIA ) = 0 THEN
@@ -615,15 +970,22 @@ BEGIN
 				 INSERT INTO historial_aumento (ID_EMPLEADO,FECHA,SUELDO_ANTERIOR,SUELDO_ACTUAL,MONTO, ID_CAT)
 							VALUES(P_ID_EMPLEADO,P_FECHA, P_SUELDO_ANTERIOR,P_SUELDO_ACTUAL,P_MONTO, P_ID_CATEGORIA);
 							
-				 CALL llenar_tabla_historial_sueldo_empleado(P_ID_EMPLEADO,P_FECHA);			
+				 CALL llenar_tabla_historial_sueldo_empleado(P_ID_EMPLEADO,P_FECHA);
+			    CALL sp_registrar_bitacora(p_usuario, 'NUEVO', 'AUMENTOS', CONCAT('Se registro un aumento para el empleado con el id: ',  P_ID_EMPLEADO));
+	
 				   SET P_SALIDA = 1;
 	    ELSE 
 			SET P_SALIDA = 0;
 	    END IF;
          
          WHEN "M" THEN
-         if existe_aumento( P_ID_AUMENTO,P_ID_EMPLEADO,P_FECHA,P_ID_CATEGORIA ) = 0 THEN
-			 UPDATE AUMENTOS
+             SELECT FECHA INTO V_FECHA_ANTIGUA
+             FROM HISTORIAL_AUMENTO
+             WHERE ID_EMPLEADO = P_ID_EMPLEADO
+                   AND ID_CAT= P_ID_CATEGORIA
+			ORDER BY FECHA DESC LIMIT 1;
+            
+			UPDATE AUMENTOS
               SET
 			  ID_EMPLEADO=P_ID_EMPLEADO, 
 			  FECHA=P_FECHA, 
@@ -644,11 +1006,10 @@ BEGIN
 					 MONTO =P_MONTO
 			    WHERE ID_EMPLEADO = P_ID_EMPLEADO
                    AND ID_CAT= P_ID_CATEGORIA
-                   AND FECHA = P_FECHA_ANTIGUA;
+                   AND FECHA = V_FECHA_ANTIGUA;
           SET P_SALIDA = 1;
-        ELSE
-          SET P_SALIDA= 0;
-		END IF;
+      
+	
         
          
          WHEN "E" THEN
@@ -665,9 +1026,7 @@ BEGIN
     END IF;
 END ;
 
-
-
-CREATE  PROCEDURE `acciones_mausencias`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `acciones_mausencias`(
    IN P_ACCION VARCHAR(1),
    IN P_ID_AUSENCIA INT,
    IN P_ID_EMPLEADO INT,
@@ -677,6 +1036,7 @@ CREATE  PROCEDURE `acciones_mausencias`(
    IN P_ID_NOMINA VARCHAR(8),
    IN P_SEPTIMO VARCHAR(1),
    IN P_MONTO DECIMAL(17,2),
+   IN P_USUARIO VARCHAR(200),
    OUT salida INT
 )
 BEGIN
@@ -697,7 +1057,7 @@ BEGIN
     END;
      set salida = 0;
  
-    
+     SET @usuario_actual = P_USUARIO;
      CASE P_ACCION
 		 WHEN "N" THEN
 			IF(P_FEC_FINAL_AU = '1/1/0001') THEN
@@ -722,6 +1082,9 @@ BEGIN
 						 P_ID_NOMINA,
 						 P_SEPTIMO
                          );
+                         
+			CALL sp_registrar_bitacora(p_usuario, 'NUEVO', 'AUSENCIAS', CONCAT('Se registro una ausencia para el empleado con id: ', P_ID_EMPLEADO ));
+		  
 			  set salida = 1;
 		  ELSEIF(existe_rango_fecha_ausencia(NULL,P_ID_EMPLEADO,P_ID_NOMINA,P_FEC_INICIAL_AU,P_FEC_FINAL_AU) = 0) THEN
 			  
@@ -729,23 +1092,24 @@ BEGIN
 			  SET dias_faltados = dias_faltados+1;
 			  set sueldo = obtener_sueldo_empleado_ausencia(P_ID_EMPLEADO,dias_faltados);
 			  INSERT INTO ausencias (
-				 ID_EMPLEADO,
-			     ID_TIPO_AUSENCIA,
-				  FECHA_INICIAL,
-		          FECHA_FINAL,
-			     NUMERO_DIAS_TRABAJADOS,
-			    MONTO,
-			    ID_NOMINA,
-		        SEPTIMO
+					ID_EMPLEADO,
+					ID_TIPO_AUSENCIA,
+					FECHA_INICIAL,
+					FECHA_FINAL,
+					NUMERO_DIAS_TRABAJADOS,
+					MONTO,
+					ID_NOMINA,
+					SEPTIMO
               ) VALUES(
-					  P_ID_EMPLEADO,
-					  P_ID_TIPO_AUSENCIA,
-					 P_FEC_INICIAL_AU,
-					 P_FEC_FINAL_AU,
-					 dias_faltados,
-					 sueldo,
-					 P_ID_NOMINA,
-					 P_SEPTIMO);
+					P_ID_EMPLEADO,
+					P_ID_TIPO_AUSENCIA,
+					P_FEC_INICIAL_AU,
+					P_FEC_FINAL_AU,
+					dias_faltados,
+					sueldo,
+					P_ID_NOMINA,
+					P_SEPTIMO);
+			CALL sp_registrar_bitacora(p_usuario, 'NUEVO', 'AUSENCIAS', CONCAT('Se registro una ausencia para el empleado con id: ', P_ID_EMPLEADO ));
 			set salida = 1;
          END IF;
       
@@ -792,7 +1156,7 @@ BEGIN
          DELETE FROM AUSENCIAS WHERE AUSENCIAS_ID = P_ID_AUSENCIA;
      END CASE;    
        
-    IF code <> '00000' THEN  
+   IF code <> '00000' THEN  
 	  INSERT INTO error_log (MENSAJE,TABLA,CODIGO_ERROR,FECHA_ERROR,NOMBRE_COLUMNA,VALOR_CAMPO) 
       values( MSG,'AUSENCIA',code,NOW(),v_nombre_columna,v_valor_campo);
       SET SALIDA = -1;
@@ -801,9 +1165,7 @@ BEGIN
     END IF;
 END ;
 
-
-
-CREATE  PROCEDURE `acciones_mdescuentos`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `acciones_mdescuentos`(
   IN P_ID_MDESCUENTOS INT,
   IN P_ID_EMPLEADO INT,
    IN P_ID_DESCUENTO INT,
@@ -815,6 +1177,7 @@ CREATE  PROCEDURE `acciones_mdescuentos`(
    #IN P_ID_NOMINA INT,
    IN P_ACCION VARCHAR(1),
    IN  P_ID_TIPO_PAGO INT,
+   IN P_USUARIO VARCHAR(200),
    OUT p_salida int
 )
 BEGIN
@@ -830,7 +1193,7 @@ BEGIN
       GET DIAGNOSTICS CONDITION 1
         code = RETURNED_SQLSTATE, msg = MESSAGE_TEXT,v_nombre_columna = column_name;
     END;
-    
+     SET @usuario_actual = P_USUARIO;
     CASE P_ACCION
 		 WHEN "N" THEN
 			INSERT INTO MDESCUENTOS (
@@ -850,6 +1213,8 @@ BEGIN
 				 P_MON_DESCUENTO,
 				 P_ID_CUENTA,
 				 P_ID_TIPO_PAGO);
+		                
+			CALL sp_registrar_bitacora(p_usuario, 'NUEVO', 'MDESCUENTOS', CONCAT('Se registro un movimiento de descuento para el empleado con id: ', P_ID_EMPLEADO ));
 		  
       WHEN "M" THEN
 		UPDATE MDESCUENTOS
@@ -876,9 +1241,7 @@ BEGIN
     END IF;
 END ;
 
-
-
-CREATE  PROCEDURE `acciones_mlabores`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `acciones_mlabores`(
    IN P_ID_M_LABORES  INT,
    IN P_ID_EMPLEADO INT,
    IN P_ID_LABOR INT,
@@ -891,6 +1254,7 @@ CREATE  PROCEDURE `acciones_mlabores`(
    #IN P_ID_NOMINA INT,
    IN P_ISR VARCHAR(1),
    IN P_ACCION VARCHAR(1),
+   IN P_USUARIO VARCHAR(500),
    OUT p_salida int
 )
 BEGIN
@@ -906,7 +1270,7 @@ BEGIN
       GET DIAGNOSTICS CONDITION 1
         code = RETURNED_SQLSTATE, msg = MESSAGE_TEXT,v_nombre_columna = column_name;
     END;
-    
+    SET @usuario_actual = P_USUARIO;
     CASE P_ACCION
 		 WHEN "N" THEN
 			INSERT INTO mlabores (ID_EMPLEADO,
@@ -922,7 +1286,9 @@ BEGIN
 				 P_DESC_LAB,P_TIPO_LAB,P_CANT_LAB,
 				 P_FEC_LAB,P_MON_LAB,P_ID_CUENTA,
 				 P_ISR);
-		  
+		              
+			CALL sp_registrar_bitacora(p_usuario, 'NUEVO', 'MLABORES', CONCAT('Se registro un Movimiento descuento para el empleado con id: ', P_ID_EMPLEADO ));
+		    
       WHEN "M" THEN
       SELECT FECHA_LABOR INTO P_FEC_ANTIGUA 
       FROM MLABORES  
@@ -965,9 +1331,7 @@ BEGIN
     END IF;
 END ;
 
-
-
-CREATE  PROCEDURE `acciones_mprestamo`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `acciones_mprestamo`(
   IN P_ACCION VARCHAR(1),
   IN P_ID_PRESTAMO INT,
   IN P_CODIGO VARCHAR(5),
@@ -1005,26 +1369,26 @@ BEGIN
     CASE P_ACCION
 		 WHEN "N" THEN
               SET V_DEBITO = P_MONTO;
-			  SET V_ACTUAL = V_ANTERIOR + V_DEBITO - V_CREDITO;
+			  #SET V_ACTUAL = V_ANTERIOR + V_DEBITO - V_CREDITO;
               
               -- Evaluamos la función. Al ser nuevo, P_ID_PRESTAMO vendrá en 0
-              IF existe_prestamo(P_ID_PRESTAMO, P_ID_EMPLEADO, P_FECHA) = 0 THEN
+              #IF existe_prestamo(P_ID_PRESTAMO, P_ID_EMPLEADO, P_FECHA) = 0 THEN
                   -- CORREGIDO: Se agregó la columna FECHA y su valor P_FECHA
 				  INSERT INTO PRESTAMO(CODIGO, ID_EMPLEADO, FECHA, DESCRIPCION, MONTO, ESTADO, CUOTA_MES, ID_TIPO_PAGO, P_DEB, P_ACT, TIEMPO)
-				  VALUES(P_CODIGO, P_ID_EMPLEADO, P_FECHA, P_DESCRIPCION, P_MONTO, 'A', P_CUOTA_MES, P_ID_TIPO_PAGO, P_MONTO, V_ACTUAL, P_TIEMPO);
+				  VALUES(P_CODIGO, P_ID_EMPLEADO, P_FECHA, P_DESCRIPCION, P_MONTO, 'A', P_CUOTA_MES, P_ID_TIPO_PAGO, P_MONTO, P_MONTO, P_TIEMPO);
                   
                   SET P_SALIDA = 1; -- Éxito
-			  ELSE
-                  SET code = '45000'; -- Forzamos código de error personalizado para detener el flujo exitoso
+			  #ELSE
+               /*   SET code = '45000'; -- Forzamos código de error personalizado para detener el flujo exitoso
                   SET MSG = 'El empleado ya tiene un préstamo registrado en la fecha seleccionada.';
-                  SET P_SALIDA = -2;  -- Código -2: Ya existe un préstamo en esa fecha
-			  END IF;
+                  SET P_SALIDA = -2;  -- Código -2: Ya existe un préstamo en esa fecha*/
+			  #END IF;
 			
 		 WHEN "M" THEN
 			  SET V_DEBITO = P_MONTO;
 			  SET V_ACTUAL = V_ANTERIOR + V_DEBITO - V_CREDITO;
 			
-			  IF existe_prestamo(P_ID_PRESTAMO, P_ID_EMPLEADO, P_FECHA) = 0 THEN
+			  #IF existe_prestamo(P_ID_PRESTAMO, P_ID_EMPLEADO, P_FECHA) = 0 THEN
 				  UPDATE PRESTAMO
 				  SET CODIGO = P_CODIGO,
 					  FECHA = P_FECHA,
@@ -1035,15 +1399,15 @@ BEGIN
 					  ID_TIPO_PAGO = P_ID_TIPO_PAGO,
 					  TIEMPO = P_TIEMPO,
 					  P_DEB = P_MONTO,
-					  P_ACT = V_ACTUAL
+					  P_ACT = P_MONTO
 				  WHERE ID_PRESTAMO = P_ID_PRESTAMO;
                   
 				  SET P_SALIDA = 1; -- Éxito
-			  ELSE
-                  SET code = '45000';
+			  #ELSE
+               /*   SET code = '45000';
                   SET MSG = 'No se puede modificar. El nuevo día elegido genera duplicidad de préstamos.';
 				  SET P_SALIDA = -2; -- Código -2: Conflicto de fechas con otro préstamo
-			  END IF;
+			  END IF;***/
               
 		 WHEN "E" THEN
               -- Nota: Corregí el nombre de la columna a ID_PRESTAMO de acuerdo a tu UPDATE
@@ -1063,112 +1427,89 @@ BEGIN
 	END IF;
 END ;
 
-
-
-CREATE  PROCEDURE `acciones_parametro`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `acciones_parametro`(
 
 	 IN P_ACCION VARCHAR(1),
-
      IN P_ID_PARAMETRO INT,
-
 	 IN P_PERIODO INT,
-
 	 IN P_EXCENTO DECIMAL(17,2),
-
      IN P_RANGO_INICIAL15 DECIMAL(17,2),
-
      IN P_RANGO_FINAL15 DECIMAL(17,2),
-
      IN P_RANGO_INICIAL20 DECIMAL(17,2),
-
      IN P_RANGO_FINAL20 DECIMAL(17,2),
-
      IN P_RANGO_INICIAL25 DECIMAL(17,2),
-
-      IN P_SUELDO_PROMEDIO DECIMAL(17,2),
-
-	  IN P_USUARIO VARCHAR(100),
-
-      OUT P_SALIDA int
-
+     IN P_RANGO_FINAL25 DECIMAL(17,2),
+	 IN P_SUELDO_PROMEDIO DECIMAL(17,2),
+	 IN P_USUARIO VARCHAR(100),
+     IN P_RESERVA_LABORAL_RAP DECIMAL(17,2),
+     IN P_VALOR_PISO_RAP DECIMAL(17,2),
+     IN P_SALARIO_MINIMO_PROMEDIO DECIMAL(17,2),
+     IN P_VALOR_TECHO_IHSS DECIMAL(17,2),
+     IN P_VALOR_SINDICATO DECIMAL(17,2),
+     IN P_VALOR_IPP DECIMAL(17,2),
+	 OUT P_SALIDA int
 )
 BEGIN
 
  SET @USUARIO = P_USUARIO;
 
    SET P_SALIDA =0;
-
-CASE P_ACCION
+   SET @usuario_actual = P_USUARIO;
+   
+	CASE P_ACCION
 
 		 WHEN "N" THEN
-
 	       INSERT INTO parametro (PERIODO,EXCENTO , RANGO_INICIAL15 , RANGO_FINAL15,
-
-                   RANGO_INICIAL20 , RANGO_FINAL20 , RANGO_INICIAL25,SUELDO_PROMEDIO )
-
+                   RANGO_INICIAL20 , RANGO_FINAL20 , RANGO_INICIAL25, RANGO_FINAL25,SUELDO_PROMEDIO, 
+                   RESERVA_LAB_RAP,
+                   VALOR_PISO_RAP, VALOR_TECHO_IHSS, SALARIO_MINIMO_PROMEDIO,
+                   SINDICATO, IPP
+                   )
                    VALUES(P_PERIODO , P_EXCENTO , P_RANGO_INICIAL15,
-
                    P_RANGO_FINAL15 ,
-
-                   P_RANGO_INICIAL20 , P_RANGO_FINAL20 , P_RANGO_INICIAL25 ,
-
-                   P_SUELDO_PROMEDIO);
-
+                   P_RANGO_INICIAL20 , 
+                   P_RANGO_FINAL20 ,
+                   P_RANGO_INICIAL25 ,
+                   P_RANGO_FINAL25 ,
+                   P_SUELDO_PROMEDIO,
+                   P_RESERVA_LABORAL_RAP,
+                   P_VALOR_PISO_RAP,
+                   P_VALOR_TECHO_IHSS,
+                   P_SALARIO_MINIMO_PROMEDIO,
+                   P_VALOR_SINDICATO,
+                   P_VALOR_IPP
+                   );
+                   CALL sp_registrar_bitacora(p_usuario, 'NUEVO', 'PARAMETRO', CONCAT('Se registro un parámetro para el periodo: ', P_PERIODO ));
+		  
                    SET P_SALIDA = 1;
-
-    
-
-	  
-
       WHEN "M" THEN
 
            UPDATE parametro SET
-
 			   PERIODO = P_PERIODO , 
-
 			   EXCENTO = P_EXCENTO ,
-
 			   RANGO_INICIAL15 = P_RANGO_INICIAL15 , 
-
 			   RANGO_FINAL15  = P_RANGO_FINAL15,
-
 			   RANGO_INICIAL20 = P_RANGO_INICIAL20 ,
-
 			   RANGO_FINAL20= P_RANGO_FINAL20 , 
-
 			   RANGO_INICIAL25 = P_RANGO_INICIAL25 , 
-
-			 
-
-			   SUELDO_PROMEDIO = P_SUELDO_PROMEDIO
-
-      WHERE
-
-      PARAMETRO_ID = P_ID_PARAMETRO;
-
-        
-
-              SET P_SALIDA = 1;
-
-           
+			   SUELDO_PROMEDIO = P_SUELDO_PROMEDIO,
+               RESERVA_LAB_RAP = P_RESERVA_LABORAL_RAP,
+               VALOR_PISO_RAP = P_VALOR_PISO_RAP,
+               VALOR_TECHO_IHSS = P_VALOR_TECHO_IHSS,
+               SALARIO_MINIMO_PROMEDIO = P_SALARIO_MINIMO_PROMEDIO,
+               SINDICATO = P_VALOR_SINDICATO,
+               IPP =P_VALOR_IPP
+         WHERE PARAMETRO_ID = P_ID_PARAMETRO;
+		 
+         SET P_SALIDA = 1;
 
 	WHEN "E" THEN
-
-          DELETE FROM PARAMETRO WHERE PARAMETRO_ID = P_ID_PARAMETRO;
-
-            SET P_SALIDA = 1;
-
+		DELETE FROM PARAMETRO WHERE PARAMETRO_ID = P_ID_PARAMETRO;
+         SET P_SALIDA = 1;
    END CASE; 
-
-   
-
-    
-
 END ;
 
-
-
-CREATE  PROCEDURE `buscar_antecedente`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_antecedente`(
   IN  P_VALOR VARCHAR(30),
   IN P_CAMPO VARCHAR(7)
   )
@@ -1190,9 +1531,7 @@ BEGIN
 
 END ;
 
-
-
-CREATE  PROCEDURE `buscar_antecedentes`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_antecedentes`(
   IN  P_FECHA_VENCIMIENTO_INICIAL DATE,
   IN P_FECHA_VENCIMIENTO_FINAL DATE,
   IN P_TIPO_ANTECEDENTE VARCHAR(2)
@@ -1218,9 +1557,7 @@ BEGIN
 
 END ;
 
-
-
-CREATE  PROCEDURE `buscar_aumentos_en_historial`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_aumentos_en_historial`(
   IN P_ID_EMPLEADO VARCHAR(5),
   IN P_FECI DATETIME,
   IN P_FECF DATETIME
@@ -1261,9 +1598,7 @@ BEGIN
   END IF;
 END ;
 
-
-
-CREATE  PROCEDURE `buscar_categoria`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_categoria`(
   IN  P_VALOR VARCHAR(30),
   IN P_CAMPO VARCHAR(7)
   )
@@ -1285,9 +1620,7 @@ BEGIN
 
 END ;
 
-
-
-CREATE  PROCEDURE `buscar_departamento`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_departamento`(
   IN  P_VALOR VARCHAR(30),
   IN P_CAMPO VARCHAR(7)
   )
@@ -1311,9 +1644,7 @@ BEGIN
 
 END ;
 
-
-
-CREATE  PROCEDURE `buscar_descuento`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_descuento`(
 	 IN  P_VALOR VARCHAR(30),
      IN P_CAMPO VARCHAR(7)
 )
@@ -1344,9 +1675,7 @@ BEGIN
     DEALLOCATE PREPARE STMT;
 END ;
 
-
-
-CREATE  PROCEDURE `buscar_empleado`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_empleado`(
    	 IN P_VALOR VARCHAR(30),
      IN P_CAMPO VARCHAR(7)
 )
@@ -1404,9 +1733,7 @@ BEGIN
 
 END ;
 
-
-
-CREATE  PROCEDURE `buscar_labor`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_labor`(
 	 IN  P_VALOR VARCHAR(30),
      IN P_CAMPO VARCHAR(7)
 )
@@ -1435,9 +1762,7 @@ BEGIN
 
 END ;
 
-
-
-CREATE  PROCEDURE `buscar_maumentos`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_maumentos`(
 	IN P_ID_EMPLEADO INT,
     IN P_FECHA_INICIAL DATE,
     IN P_FECHA_FINAL DATE
@@ -1498,10 +1823,8 @@ BEGIN
            AND FECHA BETWEEN P_FECHA_INICIAL AND P_FECHA_FINAL;
       END IF;
    end ;
-
-
-
-CREATE  PROCEDURE `buscar_mausencias`(
+   
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_mausencias`(
   IN P_COD_TRB VARCHAR(5),
   IN P_FECHA_INICIAL DATE,
   IN P_FECHA_FINAL DATE
@@ -1555,9 +1878,7 @@ BEGIN
   END IF;
 END ;
 
-
-
-CREATE  PROCEDURE `buscar_mdescuentos`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_mdescuentos`(
   IN P_COD_EMPLEADO VARCHAR(14),
   IN P_FEC_DEC_INICIAL DATE,
   IN P_FEC_DEC_FINAL DATE
@@ -1642,10 +1963,7 @@ BEGIN
         ;
   END IF;
 END ;
-
-
-
-CREATE  PROCEDURE `buscar_mlabores`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_mlabores`(
   IN P_COD_EMPLEADO VARCHAR(5),
   IN P_FEC_LAB_INICIAL DATETIME,
   IN P_FEC_LAB_FINAL DATETIME
@@ -1720,9 +2038,7 @@ BEGIN
 END IF;
 END ;
 
-
-
-CREATE  PROCEDURE `buscar_mprestamo`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_mprestamo`(
   IN P_ID_EMPLEADO INT,
     IN P_FECHA_INICIAL DATE,
     IN P_FECHA_FINAL DATE
@@ -1776,9 +2092,7 @@ BEGIN
   END IF;
 END ;
 
-
-
-CREATE  PROCEDURE `buscar_mprestamos`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_mprestamos`(
   IN P_ID_EMPLEADO INT,
     IN P_FECHA_INICIAL DATE,
     IN P_FECHA_FINAL DATE
@@ -1837,40 +2151,31 @@ BEGIN
   END IF;
 END ;
 
-
-
-CREATE  PROCEDURE `buscar_parametro`(
-
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_parametro`(
   IN P_PERIODO INT
-
 )
 BEGIN
 
    SELECT  PARAMETRO_ID ,
-
 	  PERIODO ,
-
 	 EXCENTO,
-
 	 RANGO_INICIAL15,
-
      RANGO_FINAL15 ,
-
      RANGO_INICIAL20,
-
      RANGO_FINAL20 ,
-
      RANGO_INICIAL25,
-
-      SUELDO_PROMEDIO
-
+     RANGO_FINAL25,
+	 SUELDO_PROMEDIO,
+	 RESERVA_LAB_RAP,
+	 VALOR_PISO_RAP, 
+     VALOR_TECHO_IHSS, 
+     SALARIO_MINIMO_PROMEDIO
      FROM parametro
-
      WHERE PERIODO = P_PERIODO;
 
 END ;
 
-CREATE  PROCEDURE `eliminar_mlabores`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminar_mlabores`(
 	IN P_ID_MLABORES INT,
     IN P_ID_LABOR INT,
     IN P_FEC_LAB INT
@@ -1883,7 +2188,7 @@ BEGIN
      AND FECHA_LABOR = P_FEC_LAB;
 END ;
 
-CREATE  PROCEDURE `llenar_tabla_historial_sueldo`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `llenar_tabla_historial_sueldo`(
   IN P_ID_EMPLEADO INT,
   IN P_FECHA DATE
 )
@@ -2141,8 +2446,7 @@ BEGIN
      #END WHILE;
 END ;
 
-
-CREATE  PROCEDURE `llenar_tabla_historial_sueldo_empleado`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `llenar_tabla_historial_sueldo_empleado`(
   IN P_ID_EMPLEADO INT,
   IN P_FECHA DATE
 )
@@ -2298,8 +2602,7 @@ BEGIN
     END IF;
 END ;
 
-
-CREATE  PROCEDURE `obtener_antecedente`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_antecedente`(
 IN P_ID INT,
 IN P_ID_EMPLEADO INT,
 IN P_TIPO_ANTECEDENTE VARCHAR(2)
@@ -2312,9 +2615,7 @@ SELECT ID_ANTECEDENTE,NUMERO_ANTECEDENTE, FECHA_EMISION,
 		AND ID_EMPLEADO = P_ID_EMPLEADO
 		AND TIPO_ANTECEDENTE=P_TIPO_ANTECEDENTE;
 END ;
-
-
-CREATE  PROCEDURE `obtener_antecedentes`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_antecedentes`(
   IN P_TIPO_ANTECEDENTE VARCHAR(2),
   IN P_ID_EMPLEADO INT
   
@@ -2330,15 +2631,12 @@ BEGIN
 
 END ;
 
-
-CREATE  PROCEDURE `obtener_categorias`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_categorias`()
 BEGIN
   SELECT ID_CAT,COD_CAT,NOM_CAT,SAL_INI,SAL_FIN
   FROM categoria;
 END ;
-
-
-CREATE  PROCEDURE `obtener_departamentos`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_departamentos`()
 BEGIN
   SELECT  D.ID_DEP,D.COD_DEP,D.NOM_DEP,e.COD_CUE,E.ID_TRB, E.NOM_TRB
   FROM departamento AS D
@@ -2347,9 +2645,7 @@ BEGIN
   ORDER BY COD_DEP DESC ;
 END ;
 
-
-
-CREATE  PROCEDURE `obtener_descuento`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_descuento`(
 	 IN P_ID_DEC INT
 )
 BEGIN
@@ -2369,9 +2665,7 @@ BEGIN
  WHERE ID_DESCUENTO= P_ID_DEC;
 END ;
 
-
-
-CREATE  PROCEDURE `obtener_descuentos`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_descuentos`()
 BEGIN
  SELECT ID_DESCUENTO,
      COD_DEC,
@@ -2388,10 +2682,7 @@ BEGIN
  INNER JOIN TIPO_PAGO AS TP ON D.ID_TIPO_PAGO = TP.ID_TIPO_PAGO;
  
 END ;
-
-
-
-CREATE  PROCEDURE `obtener_descuento_por_codigo`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_descuento_por_codigo`(
 	IN P_CODIGO VARCHAR(3)
 )
 BEGIN
@@ -2408,9 +2699,7 @@ BEGIN
     
 END ;
 
-
-
-CREATE  PROCEDURE `obtener_empleado`( IN P_ID INT
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_empleado`( IN P_ID INT
 
 )
 BEGIN
@@ -2473,7 +2762,7 @@ BEGIN
       WHERE ID_TRB = P_ID;
 END ;
 
-CREATE  PROCEDURE `obtener_empleados`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_empleados`()
 BEGIN
   SELECT ID_TRB, 
 	  e.COD_TRB, 
@@ -2522,7 +2811,7 @@ BEGIN
       ON  E.ID_TIPO_EMPLEADO = TE.ID_TIPO_EMPLEADO; 
 END ;
 
-CREATE  PROCEDURE `obtener_empleado_codigo`( IN P_CODIGO varchar(10)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_empleado_codigo`( IN P_CODIGO varchar(10)
 
 )
 BEGIN
@@ -2580,8 +2869,7 @@ BEGIN
       WHERE COD_TRB = P_CODIGO;
 
 END ;
-
-CREATE  PROCEDURE `obtener_empleado_id`( IN P_ID INT
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_empleado_id`( IN P_ID INT
 
 )
 BEGIN
@@ -2638,8 +2926,7 @@ BEGIN
 
 END ;
 
-
-CREATE  PROCEDURE `obtener_labor`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_labor`(
   IN P_ID_LAB INT
 )
 BEGIN
@@ -2660,7 +2947,7 @@ BEGIN
 END ;
 
 
-CREATE  PROCEDURE `obtener_labores`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_labores`()
 BEGIN
  SELECT ID_LAB,
      COD_LAB,
@@ -2677,8 +2964,7 @@ BEGIN
   INNER JOIN TIPO_PAGO AS TP ON L.ID_TIPO_PAGO = TP.ID_TIPO_PAGO;
 END ;
 
-
-CREATE  PROCEDURE `obtener_maumento`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_maumento`(
 	IN P_AUMENTO_ID INT
 )
 BEGIN
@@ -2710,8 +2996,7 @@ BEGIN
    WHERE AUMENTOS_ID = P_AUMENTO_ID;
 END ;
 
-
-CREATE  PROCEDURE `obtener_maumentos`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_maumentos`()
 BEGIN
 
 	SELECT
@@ -2741,7 +3026,7 @@ BEGIN
 
 END ;
 
-CREATE  PROCEDURE `obtener_mausencia`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_mausencia`(
   IN P_COD_TRB VARCHAR(5),
   IN P_FECHA_INICIAL DATE
 )
@@ -2767,7 +3052,7 @@ BEGIN
      ON  E.ID_TRB=A.ID_EMPLEADO;
 END ;
 
-CREATE  PROCEDURE `obtener_mausencias`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_mausencias`(
   
 )
 BEGIN
@@ -2792,8 +3077,7 @@ BEGIN
      ON  E.ID_TRB=A.ID_EMPLEADO;
 END ;
 
-
-CREATE  PROCEDURE `obtener_mdescuento`(IN P_ID INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_mdescuento`(IN P_ID INT)
 BEGIN
 	SELECT   
 			 e.ID_trb,
@@ -2827,8 +3111,7 @@ BEGIN
 		;   
 END ;
 
-
-CREATE  PROCEDURE `obtener_mdescuentos`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_mdescuentos`(
 
 )
 BEGIN
@@ -2857,9 +3140,7 @@ BEGIN
     ;             
 END ;
 
-
-
-CREATE  PROCEDURE `obtener_mLabor`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_mLabor`(
   IN P_ID_EMPLEADO VARCHAR(5),
   IN P_ID_LABOR VARCHAR(3),
   IN P_FEC_LAB DATE
@@ -2888,12 +3169,10 @@ BEGIN
 		AND FECHA_LABOR = P_FEC_LAB;
 END ;
 
-
-
-CREATE  PROCEDURE `obtener_mLabores`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_mLabores`()
 BEGIN
 SELECT  
-		 ML.ID_EMPLEADO,
+		 ID_EMPLEADO,
 		 ID_LABOR,
 		 DESCRIPCION_LAB,
 		 TP.DESCRIPCION,
@@ -2914,9 +3193,7 @@ SELECT
       ;
 END ;
 
-
-
-CREATE  PROCEDURE `obtener_mprestamo`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_mprestamo`(
 	IN P_ID_PRESTAMO INT
 )
 BEGIN
@@ -2943,9 +3220,7 @@ BEGIN
    WHERE ID_PRESTAMO = P_ID_PRESTAMO;
 END ;
 
-
-
-CREATE  PROCEDURE `obtener_mprestamos`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_mprestamos`(
 	
 )
 BEGIN
@@ -2973,4 +3248,1129 @@ BEGIN
            ON TP.ID_TIPO_PAGO_PRESTAMO = P.ID_TIPO_PAGO;
 END ;
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_parametro`(
+  IN P_PARAMETRO_ID INT
+)
+BEGIN
 
+   SELECT  PARAMETRO_ID ,
+	  PERIODO ,
+	 EXCENTO,
+	 RANGO_INICIAL15,
+     RANGO_FINAL15 ,
+     RANGO_INICIAL20,
+     RANGO_FINAL20 ,
+     RANGO_INICIAL25,
+     RANGO_FINAL25,
+	 SUELDO_PROMEDIO,
+	 RESERVA_LAB_RAP,
+	 VALOR_PISO_RAP, 
+     VALOR_TECHO_IHSS, 
+     SALARIO_MINIMO_PROMEDIO
+     FROM parametro
+     WHERE PARAMETRO_ID = P_PARAMETRO_ID;
+
+END ;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_constancia_empleado`(
+    IN p_Filtro INT
+)
+BEGIN
+
+
+    SELECT 
+        e.`NOM_TRB` as NOMBRE,
+		e.`FECHA_INICIO` AS FECHA_ING,
+		e.`PUESTO_TRABAJO` AS PUESTO_TRABAJO,
+	    e.`SUELDO`,
+        e.`IDEN_TRB` as IDENTIDAD,
+        tp.descripcion as TIPO_EMPLEADO,
+        fn_numero_a_letras(e.`SUELDO`) AS SUELDO_LETRAS
+    FROM `empleado` e
+    JOIN tipo_empleado TP on e.ID_TIPO_EMPLEADO = TP.ID_TIPO_EMPLEADO
+    WHERE e.`ID_TRB` = p_Filtro;
+END ;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultar_bitacora`(
+    IN P_MODO VARCHAR(30), -- 'ULTIMO_ACCESO', 'DETALLE_ACCESOS' o 'ULTIMA_MODIFICACION'
+    IN P_NOMBRE_USUARIO VARCHAR(250)
+)
+BEGIN
+    
+  
+    -- =========================================================================
+    -- CASO 2: Historial detallado de todos los accesos (LOGINS) del usuario
+    -- =========================================================================
+    IF p_modo = 'DETALLE_ACCESOS' THEN
+        SELECT 
+            `id_bitacora` AS ID,
+            `nombre_usuario`,
+            `accion`,
+            `descripcion` AS DESCRIPCION_DETALLAADA,
+            `fecha_registro` AS FECHA_HORA
+        FROM `bitacora`
+        WHERE`nombre_usuario` = P_NOMBRE_USUARIO 
+          AND `accion` = 'LOGIN'
+        ORDER BY `fecha_registro` DESC;
+
+    -- =========================================================================
+    -- CASO 3: Última modificación de datos realizada por el usuario (DML)
+    -- =========================================================================
+    ELSEIF p_modo = 'ULTIMA_MODIFICACION' THEN
+        SELECT 
+            `id_bitacora` AS ID,
+            `nombre_usuario`,
+            `accion`,
+            `tabla_afectada`,
+            REPLACE(`descripcion`, ': ,', ': ') AS DESCRIPCION_DETALLADA,
+            `fecha_registro` AS FECHA_HORA
+        FROM `bitacora`
+        WHERE `nombre_usuario` = P_NOMBRE_USUARIO 
+          AND `accion` IN ('NUEVO', 'MODIFICAR', 'DELETE')
+        ORDER BY `fecha_registro` DESC
+        LIMIT 1;
+        
+    END IF;
+
+END ;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_ficha_empleado`(
+    IN p_id_empleado INT
+)
+BEGIN
+
+    SELECT 
+        e.`COD_TRB`, 
+        e.`NOM_TRB`,
+		(SELECT d.`NOM_DEP` FROM `departamento` d WHERE d.`ID_DEP` = e.`ID_DEP`) AS DEPTO,
+        e.`DIRECCION`,
+        e.`FEC_NAC` AS FECHA_NAC,
+        e.`SEXO`,
+        e.`RTN`,
+        e.`FECHA_INICIO` AS FECHA_ING,
+		e.`PUESTO_TRABAJO` AS PUESTO_TRABAJO,
+        (SELECT d.`NOM_CAT` FROM `categoria` d WHERE d.`ID_CAT` = e.`ID_CAT`) AS CATEGORIA,
+        e.`CELULAR` AS TELEFONO,
+        e.`IDEN_TRB` AS IDENTIDAD,
+        e.`EST_TRB` AS ESTADO_CIVIL,
+        e.`PASAPORTE`,
+        e.`IHS` AS CARNET_IHSS,
+	    e.`SUELDO`
+    FROM `empleado` e
+    WHERE e.`ID_TRB` = p_id_empleado;
+END ;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_generar_planilla`(
+    IN p_cod_planilla VARCHAR(10),
+    IN p_fecha DATE,
+    IN p_anio INT,
+    IN p_tipo_planilla VARCHAR(150),
+    OUT P_SALIDA INT
+)
+main_procedure: BEGIN
+    -- =========================================================================
+    -- BLOQUE 1: DECLARACIÓN DE VARIABLES COMUNES
+    -- =========================================================================
+    DECLARE msg VARCHAR(100);
+    DECLARE code CHAR(5) DEFAULT '00000';
+    DECLARE v_nombre_columna TEXT;
+    DECLARE v_valor_campo TEXT;
+    DECLARE v_fin_cursor INT DEFAULT 0;
+    
+    -- Variables de datos del empleado
+    DECLARE v_id_empleado INT;
+    DECLARE v_sueldo_base DECIMAL(17,2);
+    DECLARE v_fecha_nac DATE;
+    DECLARE v_edad INT;
+    
+    -- Banderas de afectación de impuestos
+    DECLARE v_afecta_ihs VARCHAR(1);
+    DECLARE v_afecta_fsv VARCHAR(1); 
+    DECLARE v_afecta_isr VARCHAR(1);
+	DECLARE v_afecta_sindicato VARCHAR(1);
+     
+    -- Variables para cálculos y acumulados
+    DECLARE v_diario DECIMAL(17,2);
+    DECLARE v_total_labores DECIMAL(17,2);
+    DECLARE v_total_ausencias DECIMAL(17,2);
+    DECLARE v_cuota_prestamos DECIMAL(17,2);
+    DECLARE v_total_descuentos DECIMAL(17,2);
+    
+    -- VARIABLES PARA CONTROL DE PRÉSTAMOS
+    DECLARE v_id_prestamo INT;
+    DECLARE v_p_deb DECIMAL(17,2);
+    DECLARE v_p_cred DECIMAL(17,2);
+    DECLARE v_saldo_actual DECIMAL(17,2);
+    DECLARE v_cuota_mes DECIMAL(17,2);
+    DECLARE v_id_tipo_pago INT;
+    DECLARE v_fin_cursor_pres INT DEFAULT 0;
+    DECLARE v_aplicar_prestamo INT;
+    
+    -- Retenciones de leyes sociales
+    DECLARE v_ihss_calc DECIMAL(17,2);
+    DECLARE v_rap_calc DECIMAL(17,2);
+    DECLARE v_isr_calc DECIMAL(17,2);
+    declare V_VALOR_SINDICATO decimal(17,2);
+	declare V_VALOR_IPP decimal(17,2);
+	DECLARE v_sindicato_empleado DECIMAL(17,2);
+    
+    -- Totales agrupados requeridos por la tabla planilla
+    DECLARE v_total_deducciones DECIMAL(17,2);
+    DECLARE v_salario_bruto DECIMAL(17,2);
+    DECLARE v_salario_neto DECIMAL(17,2);
+    
+    
+    DECLARE v_fecha_inicio DATE;
+    DECLARE v_fecha_fin DATE;
+    
+    -- Variables de control de fechas
+    DECLARE v_dia_pago INT;
+    DECLARE v_es_quincena_1 INT DEFAULT 0;
+
+	DECLARE V_ANTICIPO VARCHAR(150);
+    DECLARE V_EXISTE_ANTICIPO INT;
+  
+    -- =========================================================================
+    -- BLOQUE 2: DECLARACIÓN DE CURSORES
+    -- =========================================================================
+    DECLARE cur_empleados CURSOR FOR 
+        SELECT ID_TRB, SUELDO, FEC_NAC, AFECTA_IHS, AFECTA_FSV, AFECTA_ISR, afecta_sin
+        FROM empleado 
+        WHERE EST_TRB = 'S';
+
+
+    -- =========================================================================
+    -- BLOQUE 3: DECLARACIÓN DE HANDLERS
+    -- =========================================================================
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+    BEGIN
+        GET DIAGNOSTICS CONDITION 1
+        code = RETURNED_SQLSTATE, msg = MESSAGE_TEXT, v_nombre_columna = column_name;
+    END;
+
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_fin_cursor = 1;
+
+    -- =========================================================================
+    -- LÓGICA DE PROCESAMIENTO
+    -- =========================================================================
+      
+    SELECT IFNULL(sindicato, 0.00), 
+    IFNULL(ipp, 0.00)
+    INTO  V_VALOR_SINDICATO, V_VALOR_IPP
+    FROM PARAMETRO p
+    WHERE p.periodo = p_anio;
+    
+    SET V_VALOR_SINDICATO = COALESCE(V_VALOR_SINDICATO, 0.00);
+    SET V_VALOR_IPP       = COALESCE(V_VALOR_IPP, 0.00);
+   
+  IF P_TIPO_PLANILLA = 'ANTICIPO' THEN
+        -- Validamos si ya existe un anticipo para este mes/año
+        SELECT COUNT(*) INTO V_EXISTE_ANTICIPO
+        FROM PLANILLA 
+        WHERE TIPO_PLANILLA = 'ANTICIPO'
+          AND YEAR(FECHA) = YEAR(p_fecha)
+          AND MONTH(FECHA) = MONTH(p_fecha);
+
+        IF V_EXISTE_ANTICIPO > 0 THEN
+            SET P_SALIDA = -2; 
+            LEAVE main_procedure; 
+        END IF;
+        
+        SET P_TIPO_PLANILLA = 'MENSUAL';
+        SET V_ANTICIPO = 'ANTICIPO'; 
+    END IF;
+    
+    SET v_dia_pago = DAY(p_fecha);
+    IF v_dia_pago <= 15 THEN
+        SET v_es_quincena_1 = 1;
+    END IF;
+
+    IF p_tipo_planilla = 'MENSUAL' AND v_es_quincena_1 = 0 THEN
+        SET v_fecha_inicio = DATE_FORMAT(p_fecha, '%Y-%m-01');
+        SET v_fecha_fin = LAST_DAY(p_fecha);
+    ELSE
+        IF v_es_quincena_1 = 1 THEN
+            SET v_fecha_inicio = DATE_FORMAT(p_fecha, '%Y-%m-01');
+            SET v_fecha_fin = DATE_FORMAT(p_fecha, '%Y-%m-15');
+        ELSE
+            SET v_fecha_inicio = DATE_FORMAT(p_fecha, '%Y-%m-16');
+            SET v_fecha_fin = LAST_DAY(p_fecha);
+        END IF;
+    END IF;
+    
+    SET SQL_SAFE_UPDATES = 0;
+    
+    DELETE FROM planilla WHERE COD_PLANILLA = p_cod_planilla AND FECHA = p_fecha;
+    
+    START TRANSACTION;
+    OPEN cur_empleados;
+
+    read_loop: LOOP
+        FETCH cur_empleados INTO 
+            v_id_empleado, 
+            v_sueldo_base, 
+            v_fecha_nac, 
+            v_afecta_ihs, 
+            v_afecta_fsv, 
+            v_afecta_isr,
+            v_afecta_sindicato;
+        
+        IF v_fin_cursor = 1 THEN
+            LEAVE read_loop;
+        END IF;
+
+        SET v_edad = YEAR(p_fecha) - YEAR(v_fecha_nac) - (DATE_FORMAT(p_fecha,'%m%d') < DATE_FORMAT(v_fecha_nac,'%m%d'));
+        SET v_diario = ROUND(v_sueldo_base / 30, 2);
+        SET v_total_labores = 0.00;
+        SET v_total_ausencias = 0.00;
+        SET v_cuota_prestamos = 0.00; 
+        SET v_total_descuentos = 0.00;
+        SET v_ihss_calc = 0.00;
+        SET v_rap_calc = 0.00;
+        SET v_isr_calc = 0.00;
+
+        IF p_tipo_planilla = 'QUINCENAL' OR (p_tipo_planilla = 'MENSUAL' AND v_es_quincena_1 = 1) THEN
+            SET v_sueldo_base = ROUND(v_sueldo_base / 2, 2);
+        END IF;
+
+        BEGIN
+            DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_total_labores = 0.00;
+            SELECT IFNULL(SUM(IF(MONTO_LABOR = 0, CANTIDAD_LAB, CANTIDAD_LAB * MONTO_LABOR)), 0.00) 
+            INTO v_total_labores FROM mlabores WHERE ID_EMPLEADO = v_id_empleado 
+             AND fecha_labor BETWEEN v_fecha_inicio AND v_fecha_fin;
+        END;
+
+        IF NOT (p_tipo_planilla = 'MENSUAL' AND v_es_quincena_1 = 1) THEN
+
+            BEGIN
+                DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_total_ausencias = 0.00;
+                SELECT IFNULL(SUM(MONTO), 0.00) 
+                INTO v_total_ausencias FROM ausencias WHERE ID_EMPLEADO = v_id_empleado 
+                AND fecha_inicial <= v_fecha_fin AND fecha_final >= v_fecha_inicio;
+            END;
+
+            BEGIN
+                DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_total_descuentos = 0.00;
+                SELECT IFNULL(SUM(IF(CANT_DESCUENTO = 0, MON_DESCUENTO, CANT_DESCUENTO * MON_DESCUENTO)), 0.00) 
+                INTO v_total_descuentos FROM mdescuentos WHERE ID_EMPLEADO = v_id_empleado 
+                AND fecha_descuento BETWEEN v_fecha_inicio AND v_fecha_fin;
+            END;
+
+            BEGIN
+                DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_ihss_calc = 0.00;
+                IF COALESCE(v_afecta_ihs, 'N') = 'S' THEN
+                    SET v_ihss_calc = IFNULL(fn_calcular_ihss(v_sueldo_base, p_anio), 0.00);
+                END IF;
+            END;
+
+            BEGIN
+                DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_rap_calc = 0.00;
+                IF COALESCE(v_afecta_fsv, 'N') = 'S' THEN
+                    SET v_rap_calc = IFNULL(fn_calcular_rap(v_sueldo_base, p_anio), 0.00);
+                END IF;
+            END;
+
+           
+            BEGIN
+                DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_isr_calc = 0.00;
+                IF COALESCE(v_afecta_isr, 'N') = 'S' THEN
+                    SET v_isr_calc = IFNULL(fn_isr(v_sueldo_base , p_anio, v_edad), 0.00);
+                END IF;
+            END;
+        END IF;
+        
+		IF COALESCE(v_afecta_sindicato, 'N') = 'S' THEN
+			SET v_sindicato_empleado = V_VALOR_SINDICATO;
+		ELSE
+			SET v_sindicato_empleado = 0.00;
+		END IF;
+        
+        BEGIN 
+            DECLARE cur_prestamos CURSOR FOR 
+                SELECT ID_PRESTAMO, P_DEB, P_CRED, P_ACT, CUOTA_MES, ID_TIPO_PAGO 
+                FROM prestamo 
+                WHERE ID_EMPLEADO = v_id_empleado AND ESTADO = 'A'
+                AND fecha <= v_fecha_fin;
+                
+            DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_fin_cursor_pres = 1;
+            
+            SET v_fin_cursor_pres = 0;
+            OPEN cur_prestamos;
+            
+            loop_prestamos: LOOP
+        
+                FETCH cur_prestamos INTO v_id_prestamo, v_p_deb, v_p_cred, v_saldo_actual, v_cuota_mes, v_id_tipo_pago;
+                
+                IF v_fin_cursor_pres = 1 THEN
+                    LEAVE loop_prestamos;
+                END IF;
+                
+                SET v_p_cred = IFNULL(v_p_cred, 0.00);
+                SET v_p_deb  = IFNULL(v_p_deb, 0.00);
+                SET v_saldo_actual = IFNULL(v_saldo_actual, (v_p_deb - v_p_cred));
+                
+                SET v_aplicar_prestamo = 0; 
+                
+                IF p_tipo_planilla = 'MENSUAL' THEN
+                    IF v_es_quincena_1 = 1 AND v_id_tipo_pago IN (1) THEN
+                        SET v_cuota_mes = ROUND(v_cuota_mes / 2, 2);
+                        SET v_aplicar_prestamo = 1;
+                    ELSEIF v_es_quincena_1 = 0 THEN
+                        IF v_id_tipo_pago = 2 THEN
+                            SET v_aplicar_prestamo = 1;
+                        ELSEIF v_id_tipo_pago = 1 THEN
+                            SET v_cuota_mes = ROUND(v_cuota_mes / 2, 2);
+                            SET v_aplicar_prestamo = 1;
+                        END IF;
+                    END IF;
+                ELSEIF p_tipo_planilla = 'QUINCENAL' THEN
+                    IF v_id_tipo_pago = 1 THEN
+                        SET v_cuota_mes = ROUND(v_cuota_mes / 2, 2);
+                        SET v_aplicar_prestamo = 1;
+                    ELSEIF v_id_tipo_pago = 2 AND v_es_quincena_1 = 0 THEN
+                        SET v_aplicar_prestamo = 1;
+                    END IF;
+                END IF;
+                
+                IF v_aplicar_prestamo = 1 AND v_saldo_actual > 0 AND v_p_cred < v_p_deb THEN
+                    IF v_saldo_actual < v_cuota_mes THEN
+                        SET v_cuota_mes = v_saldo_actual;
+                    END IF;
+                    
+                    SET v_cuota_prestamos = v_cuota_prestamos + v_cuota_mes;
+                    
+                    UPDATE prestamo 
+                    SET P_CRED = v_p_cred + v_cuota_mes,
+                        p_Act  = v_p_deb - (v_p_cred + v_cuota_mes),
+                        ESTADO = IF((v_p_cred + v_cuota_mes) >= v_p_deb, 'P', 'A')
+                    WHERE ID_PRESTAMO = v_id_prestamo;
+                END IF;
+                
+            END LOOP loop_prestamos;
+            CLOSE cur_prestamos;
+        END;
+
+        SET v_salario_bruto = v_sueldo_base + v_total_labores;
+       SET v_total_deducciones = COALESCE(v_ihss_calc, 0.00) 
+                        + COALESCE(v_rap_calc, 0.00) 
+                        + COALESCE(v_isr_calc, 0.00) 
+                        + COALESCE(v_total_ausencias, 0.00) 
+                        + COALESCE(v_cuota_prestamos, 0.00) 
+                        + COALESCE(v_total_descuentos, 0.00) 
+                        + COALESCE(v_sindicato_empleado, 0.00) 
+                        + COALESCE(V_VALOR_IPP, 0.00);
+       SET v_salario_neto = v_salario_bruto - v_total_deducciones;
+
+        IF EXISTS(
+            SELECT 1 FROM planilla
+            WHERE COD_PLANILLA = p_cod_planilla AND FECHA = p_fecha AND ID_EMPLEADO = v_id_empleado
+        ) THEN
+            ITERATE read_loop;
+        END IF;
+
+        
+        INSERT INTO planilla (
+            COD_PLANILLA, FECHA, ID_EMPLEADO, SUELDO, DIARIO, 
+            LABORES, AUMENTO, SALARIO, IHSS, RAP, 
+            ISR, AUSENCIAS, SEPTIMO, DEDUCCIONES, CUOTA_PRESTAMO, 
+            DESCUENTOS, SALARIO_NETO, TIPO_PLANILLA
+        ) VALUES (
+            p_cod_planilla, p_fecha, v_id_empleado, v_sueldo_base, v_diario,
+            v_total_labores, 0.00, v_salario_bruto, v_ihss_calc, v_rap_calc,
+            v_isr_calc, v_total_ausencias, 0.00, v_total_deducciones,
+            v_cuota_prestamos,
+            v_total_descuentos, v_salario_neto, IFNULL(V_ANTICIPO, P_TIPO_PLANILLA)
+        );
+
+    END LOOP read_loop;
+
+    CLOSE cur_empleados;
+    COMMIT;
+    SET SQL_SAFE_UPDATES = 1;
+
+   IF code <> '00000' THEN  
+        INSERT INTO error_log (MENSAJE, TABLA, CODIGO_ERROR, FECHA_ERROR, NOMBRE_COLUMNA, VALOR_CAMPO) 
+        VALUES (msg, 'PLANILLA', code, NOW(), v_nombre_columna, v_valor_campo);
+        SET P_SALIDA = -1; 
+    ELSE
+        SET P_SALIDA = 1;
+    END IF;
+    
+    
+END ;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_generar_planilla_prueba`(
+    IN p_cod_planilla VARCHAR(10),
+    IN p_fecha DATE,
+    IN p_anio INT,
+    IN p_tipo_planilla VARCHAR(1) -- 'M' = Mensual, 'Q' = Quincenal
+)
+BEGIN
+    -- ========================================================================
+    -- 1. DECLARACIÓN DE VARIABLES Y HANDLERS
+    -- ========================================================================
+    DECLARE v_fin_cursor INT DEFAULT 0;
+    
+    -- Variables de empleado
+    DECLARE v_id_empleado INT;
+    DECLARE v_sueldo_mensual_completo DECIMAL(17,2);
+    DECLARE v_fecha_nac DATE;
+    DECLARE v_edad INT;
+    DECLARE v_afecta_ihs VARCHAR(1);
+    DECLARE v_afecta_fsv VARCHAR(1);
+    DECLARE v_afecta_isr VARCHAR(1);
+    
+    -- Variables de cálculo
+    DECLARE v_factor_prorrateo DECIMAL(5,2);      -- 0.5 o 1
+    DECLARE v_sueldo_periodo DECIMAL(17,2);
+    DECLARE v_diario DECIMAL(17,2);
+    DECLARE v_total_labores DECIMAL(17,2);
+    DECLARE v_total_ausencias DECIMAL(17,2);
+    DECLARE v_total_descuentos DECIMAL(17,2);
+    DECLARE v_cuota_prestamos DECIMAL(17,2);
+    DECLARE v_ihss_calc DECIMAL(17,2);
+    DECLARE v_rap_calc DECIMAL(17,2);
+    DECLARE v_isr_calc DECIMAL(17,2);
+    DECLARE v_salario_bruto DECIMAL(17,2);
+    DECLARE v_total_deducciones DECIMAL(17,2);
+    DECLARE v_salario_neto DECIMAL(17,2);
+    
+    -- Fechas del período
+    DECLARE v_fecha_inicio DATE;
+    DECLARE v_fecha_fin DATE;
+    DECLARE v_es_primera_quincena INT DEFAULT 0;
+    
+    -- Para restaurar safe_updates
+    DECLARE v_original_safe_updates INT;
+    
+    -- Cursor principal
+    DECLARE cur_empleados CURSOR FOR 
+        SELECT ID_TRB, SUELDO, FEC_NAC, AFECTA_IHS, AFECTA_FSV, AFECTA_ISR
+        FROM empleado 
+        WHERE EST_TRB = 'S';
+    
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_fin_cursor = 1;
+    
+    -- Handler para restaurar safe_updates en caso de error
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        SET SQL_SAFE_UPDATES = v_original_safe_updates;
+        RESIGNAL;
+    END;
+    
+    -- ========================================================================
+    -- 2. CONFIGURACIÓN INICIAL Y LIMPIEZA
+    -- ========================================================================
+    -- Guardar estado original de SQL_SAFE_UPDATES
+    SELECT @@SQL_SAFE_UPDATES INTO v_original_safe_updates;
+    SET SQL_SAFE_UPDATES = 0;
+    
+    -- Eliminar registros previos de la misma planilla (forma simple y eficiente)
+    DELETE FROM planilla WHERE COD_PLANILLA = p_cod_planilla AND FECHA = p_fecha;
+    
+    -- Determinar si es primera quincena (día 15 o anterior)
+    SET v_es_primera_quincena = IF(DAY(p_fecha) <= 15, 1, 0);
+    
+    -- Calcular factor de prorrateo
+    -- Mensual y es fin de mes (último día o día 15? Según lógica original: solo fin de mes completo)
+    -- Para mensual: si es anticipo (15) -> factor 0.5; si es fin de mes -> factor 1
+    -- Para quincenal: siempre factor 0.5
+    IF p_tipo_planilla = 'M' THEN
+        IF v_es_primera_quincena = 1 THEN
+            SET v_factor_prorrateo = 0.5;   -- Anticipo del 15
+        ELSE
+            SET v_factor_prorrateo = 1.0;   -- Liquidación mensual completa
+        END IF;
+    ELSE -- 'Q'
+        SET v_factor_prorrateo = 0.5;
+    END IF;
+    
+    -- Calcular fechas de inicio y fin del período según tipo y fecha de pago
+    IF p_tipo_planilla = 'M' AND v_es_primera_quincena = 0 THEN
+        -- Mensual completo: desde 1ro hasta último día del mes
+        SET v_fecha_inicio = DATE_FORMAT(p_fecha, '%Y-%m-01');
+        SET v_fecha_fin = LAST_DAY(p_fecha);
+    ELSE
+        -- Quincena o anticipo mensual
+        IF v_es_primera_quincena = 1 THEN
+            SET v_fecha_inicio = DATE_FORMAT(p_fecha, '%Y-%m-01');
+            SET v_fecha_fin = DATE_FORMAT(p_fecha, '%Y-%m-15');
+        ELSE
+            SET v_fecha_inicio = DATE_FORMAT(p_fecha, '%Y-%m-16');
+            SET v_fecha_fin = LAST_DAY(p_fecha);
+        END IF;
+    END IF;
+    
+    -- ========================================================================
+    -- 3. PRECÁLCULO DE PRÉSTAMOS (elimina cursor anidado)
+    -- ========================================================================
+    DROP TEMPORARY TABLE IF EXISTS tmp_prestamo_empleado;
+    CREATE TEMPORARY TABLE tmp_prestamo_empleado (
+        ID_EMPLEADO INT PRIMARY KEY,
+        TOTAL_CUOTA DECIMAL(17,2) NOT NULL DEFAULT 0.00
+    ) ENGINE=MEMORY;
+    
+    -- Insertar el total a descontar por empleado en esta planilla
+    INSERT INTO tmp_prestamo_empleado (ID_EMPLEADO, TOTAL_CUOTA)
+    SELECT 
+        p.ID_EMPLEADO,
+        SUM(
+            CASE
+                -- Lógica de cobro según tipo de planilla, tipo de préstamo y quincena
+                WHEN p_tipo_planilla = 'M' AND v_es_primera_quincena = 1 AND p.ID_TIPO_PAGO = 1 THEN ROUND(p.CUOTA_MES / 2, 2)
+                WHEN p_tipo_planilla = 'M' AND v_es_primera_quincena = 0 AND p.ID_TIPO_PAGO = 2 THEN p.CUOTA_MES
+                WHEN p_tipo_planilla = 'M' AND v_es_primera_quincena = 0 AND p.ID_TIPO_PAGO = 1 THEN ROUND(p.CUOTA_MES / 2, 2)
+                WHEN p_tipo_planilla = 'Q' AND p.ID_TIPO_PAGO = 1 THEN ROUND(p.CUOTA_MES / 2, 2)
+                WHEN p_tipo_planilla = 'Q' AND p.ID_TIPO_PAGO = 2 AND v_es_primera_quincena = 0 THEN p.CUOTA_MES
+                ELSE 0
+            END
+        ) AS cuota_a_deducir
+    FROM prestamo p
+    WHERE p.ESTADO = 'A'
+      AND IFNULL(p.P_ACT, (p.P_DEB - IFNULL(p.P_CRED,0))) > 0
+      AND IFNULL(p.P_CRED,0) < p.P_DEB
+    GROUP BY p.ID_EMPLEADO;
+    
+    -- Actualizar la tabla prestamo: sumar el abono y recalcular estado
+    -- (Se hace en una sola sentencia usando la tabla temporal)
+    UPDATE prestamo p
+    JOIN (
+        SELECT 
+            ID_PRESTAMO,
+            ID_EMPLEADO,
+            ID_TIPO_PAGO,
+            CUOTA_MES,
+            P_DEB,
+            P_CRED,
+            CASE
+                WHEN p_tipo_planilla = 'M' AND v_es_primera_quincena = 1 AND ID_TIPO_PAGO = 1 THEN ROUND(CUOTA_MES / 2, 2)
+                WHEN p_tipo_planilla = 'M' AND v_es_primera_quincena = 0 AND ID_TIPO_PAGO = 2 THEN CUOTA_MES
+                WHEN p_tipo_planilla = 'M' AND v_es_primera_quincena = 0 AND ID_TIPO_PAGO = 1 THEN ROUND(CUOTA_MES / 2, 2)
+                WHEN p_tipo_planilla = 'Q' AND ID_TIPO_PAGO = 1 THEN ROUND(CUOTA_MES / 2, 2)
+                WHEN p_tipo_planilla = 'Q' AND ID_TIPO_PAGO = 2 AND v_es_primera_quincena = 0 THEN CUOTA_MES
+                ELSE 0
+            END AS cuota_real
+        FROM prestamo
+        WHERE ESTADO = 'A'
+    ) AS cuotas ON p.ID_PRESTAMO = cuotas.ID_PRESTAMO
+    SET 
+        p.P_CRED = IFNULL(p.P_CRED,0) + cuotas.cuota_real,
+        p.P_ACT  = p.P_DEB - (IFNULL(p.P_CRED,0) + cuotas.cuota_real),
+        p.ESTADO = IF((IFNULL(p.P_CRED,0) + cuotas.cuota_real) >= p.P_DEB, 'I', 'A')
+    WHERE cuotas.cuota_real > 0;
+    
+    -- ========================================================================
+    -- 4. BUCLE PRINCIPAL DE EMPLEADOS (con consultas optimizadas por rango)
+    -- ========================================================================
+    OPEN cur_empleados;
+    
+    read_loop: LOOP
+        FETCH cur_empleados INTO 
+            v_id_empleado, 
+            v_sueldo_mensual_completo, 
+            v_fecha_nac, 
+            v_afecta_ihs, 
+            v_afecta_fsv, 
+            v_afecta_isr;
+        
+        IF v_fin_cursor = 1 THEN
+            LEAVE read_loop;
+        END IF;
+        
+        -- Edad al momento del pago
+        SET v_edad = TIMESTAMPDIFF(YEAR, v_fecha_nac, p_fecha);
+        
+        -- Sueldo del período (aplicando factor de prorrateo)
+        SET v_sueldo_periodo = ROUND(v_sueldo_mensual_completo * v_factor_prorrateo, 2);
+        SET v_diario = ROUND(v_sueldo_mensual_completo / 30, 2);
+        
+        -- ================================================================
+        -- 4.1 Labores (bonificaciones, horas extras) dentro del período
+        -- ================================================================
+        SELECT IFNULL(SUM(IF(CANTIDAD_LAB = 0, MONTO_LABOR, CANTIDAD_LAB * MONTO_LABOR)), 0.00)
+        INTO v_total_labores
+        FROM mlabores
+        WHERE ID_EMPLEADO = v_id_empleado
+          AND fecha_labor BETWEEN v_fecha_inicio AND v_fecha_fin;
+        
+        -- ================================================================
+        -- 4.2 Ausencias en el período (ya viene como monto por ausencia)
+        -- ================================================================
+        SELECT IFNULL(SUM(MONTO), 0.00)
+        INTO v_total_ausencias
+        FROM ausencias
+        WHERE ID_EMPLEADO = v_id_empleado
+          AND fecha_inicial <= v_fecha_fin
+          AND fecha_final >= v_fecha_inicio;
+        
+        -- ================================================================
+        -- 4.3 Descuentos comerciales varios en el período
+        -- ================================================================
+        SELECT IFNULL(SUM(IF(CANT_DESCUENTO = 0, MON_DESCUENTO, CANT_DESCUENTO * MON_DESCUENTO)), 0.00)
+        INTO v_total_descuentos
+        FROM mdescuentos
+        WHERE ID_EMPLEADO = v_id_empleado
+          AND fecha_descuento BETWEEN v_fecha_inicio AND v_fecha_fin;
+        
+        -- ================================================================
+        -- 4.4 Leyes sociales e ISR (SIEMPRE sobre sueldo mensual completo)
+        -- ================================================================
+        -- Solo se calculan en planilla mensual (fin de mes) o quincenal (ambas fases)
+        -- En anticipo mensual (M + primera quincena) NO se aplican
+        IF NOT (p_tipo_planilla = 'M' AND v_es_primera_quincena = 1) THEN
+            IF v_afecta_ihs = 'S' THEN
+                SET v_ihss_calc = IFNULL(fn_calcular_ihss(v_sueldo_mensual_completo, p_anio), 0.00);
+            END IF;
+            IF v_afecta_fsv = 'S' THEN
+                SET v_rap_calc = IFNULL(fn_calcular_rap(v_sueldo_mensual_completo, p_anio), 0.00);
+            END IF;
+            IF v_afecta_isr = 'S' THEN
+                SET v_isr_calc = IFNULL(fn_isr(v_sueldo_mensual_completo, p_anio, v_edad), 0.00);
+            END IF;
+            
+            -- Aplicar factor de prorrateo a los resultados
+            SET v_ihss_calc = ROUND(v_ihss_calc * v_factor_prorrateo, 2);
+            SET v_rap_calc  = ROUND(v_rap_calc  * v_factor_prorrateo, 2);
+            SET v_isr_calc  = ROUND(v_isr_calc  * v_factor_prorrateo, 2);
+        ELSE
+            SET v_ihss_calc = 0.00;
+            SET v_rap_calc  = 0.00;
+            SET v_isr_calc  = 0.00;
+        END IF;
+        
+        -- ================================================================
+        -- 4.5 Cuota de préstamos (desde tabla temporal precalculada)
+        -- ================================================================
+        SELECT IFNULL(TOTAL_CUOTA, 0.00) INTO v_cuota_prestamos
+        FROM tmp_prestamo_empleado
+        WHERE ID_EMPLEADO = v_id_empleado;
+        
+        -- ================================================================
+        -- 4.6 Totales finales e inserción
+        -- ================================================================
+        SET v_salario_bruto = v_sueldo_periodo + v_total_labores;
+        SET v_total_deducciones = v_ihss_calc + v_rap_calc + v_isr_calc 
+                                + v_total_ausencias + v_cuota_prestamos + v_total_descuentos;
+        SET v_salario_neto = v_salario_bruto - v_total_deducciones;
+        
+        INSERT INTO planilla (
+            COD_PLANILLA, FECHA, ID_EMPLEADO, SUELDO, DIARIO, 
+            LABORES, AUMENTO, SALARIO, IHSS, RAP, 
+            ISR, AUSENCIAS, SEPTIMO, DEDUCCIONES, CUOTA_PRESTAMO, 
+            DESCUENTOS, SALARIO_NETO, TIPO_PLANILLA
+        ) VALUES (
+            p_cod_planilla, p_fecha, v_id_empleado, v_sueldo_periodo, v_diario,
+            v_total_labores, 0.00, v_salario_bruto, v_ihss_calc, v_rap_calc,
+            v_isr_calc, v_total_ausencias, 0.00, v_total_deducciones, v_cuota_prestamos,
+            v_total_descuentos, v_salario_neto, 
+            IF(p_tipo_planilla = 'M', 'MENSUAL', 'QUINCENAL')
+        );
+        
+    END LOOP read_loop;
+    
+    CLOSE cur_empleados;
+    
+    -- ========================================================================
+    -- 5. LIMPIEZA Y RESULTADO
+    -- ========================================================================
+    DROP TEMPORARY TABLE IF EXISTS tmp_prestamo_empleado;
+    SET SQL_SAFE_UPDATES = v_original_safe_updates;
+    
+    SELECT * FROM planilla WHERE COD_PLANILLA = p_cod_planilla AND FECHA = p_fecha;
+    
+END ;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_obtener_retenciones_mensuales`(
+    IN p_anio INT,
+    IN p_mes INT
+)
+BEGIN
+    SELECT 
+        e.RTN AS RTN,
+        (SUM(p.SALARIO) * 12) AS Ingresos_Brutos_Anuales,
+        (SUM(p.SALARIO) - SUM(p.IHSS + p.RAP)) AS Importe_Mensual_Retencion,
+        
+        -- AGREGADO SUM() AQUI:
+        SUM(p.DEDUCCIONES) AS Deducciones_Mensuales,
+        
+        -- AGREGADO SUM() AQUI:
+        SUM(p.ISR) AS Retenido
+
+    FROM planilla p
+    INNER JOIN empleado e ON p.ID_EMPLEADO = e.ID_TRB
+    WHERE YEAR(p.FECHA) = p_anio 
+      AND MONTH(p.FECHA) = p_mes
+    GROUP BY 
+        e.RTN, 
+        e.NOM_TRB, 
+        YEAR(p.FECHA), 
+        MONTH(p.FECHA)
+    ORDER BY 
+        e.NOM_TRB ASC;
+END ;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_prestamos_descriptivos_empleado`(IN p_filtro int)
+BEGIN
+  SELECT 
+    E.COD_TRB AS 'CODIGO_EMPLEADO',
+    E.NOM_TRB AS 'NOMBRE_EMPLEADO',
+    P.CODIGO AS 'NUMERO_PRESTAMO',
+    P.FECHA AS 'FECHA_OTORGADO',
+    P.DESCRIPCION AS 'DESCRIPCION_PRESTAMO',
+    P.MONTO AS 'MONTO_ORIGINAL',
+    P.CUOTA_MES AS 'MONTO_CUOTA',
+    P.TIEMPO AS 'PLAZO_MESES',
+    IFNULL(P.P_ANT, 0.00) AS 'SALDO_ANTERIOR',
+    IFNULL(P.P_DEB, 0.00) AS 'TOTAL_DEBITADO',
+    IFNULL(P.P_CRED, 0.00) AS 'TOTAL_PAGADO_CREDITOS',
+    IFNULL(P.P_ACT, 0.00) AS 'SALDO_ACTUAL',
+    CASE P.ESTADO 
+        WHEN 'A' THEN 'ACTIVO' 
+        WHEN 'P' THEN 'PAGADO' 
+        ELSE 'CANCELADO' 
+    END AS 'ESTADO'
+	FROM prestamo P
+		INNER JOIN empleado E ON P.ID_EMPLEADO = p_filtro
+		WHERE e.ID_TRB = p_filtro
+		ORDER BY NOM_TRB ASC, P.FECHA DESC;
+END ;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_bitacora`(
+    IN p_usuario VARCHAR(10),
+    IN p_accion VARCHAR(50),
+    IN p_tabla_afectada VARCHAR(100),
+    IN p_descripcion TEXT,
+    IN p_codigo_usuario varchar(150)
+)
+BEGIN
+    -- Declaramos una variable interna para recuperar el nombre completo del usuario
+    DECLARE v_nombre_usuario VARCHAR(150);
+    
+    -- Insertamos el registro completo en la tabla de auditoría
+    INSERT INTO bitacora (
+        nombre_usuario,
+        accion,
+        tabla_afectada,
+        descripcion,
+        fecha_registro
+    )
+    VALUES (
+        p_usuario,
+        UPPER(p_accion), -- Guardamos la acción siempre en mayúsculas (INSERT, UPDATE, DELETE)
+        p_tabla_afectada,
+        p_descripcion,
+        NOW() 
+    );
+
+END ;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_reporte_categoria`(
+    IN p_filtro int
+)
+BEGIN
+    SELECT 
+      d.NOM_CAT AS `DEPARTAMENTO`,
+      e.ID_TRB AS `CODIGO EMPLEADO`,
+	  e.NOM_TRB AS `NOMBRE EMPLEADO`, 
+      e.fecha_inicio  AS `FECHA DE INGRESO`,
+      e.puesto_trabajo  AS `PUESTO DE TRABAJO`,
+       e.sueldo  AS `SUELDO ASIGNADO`
+    FROM empleado e
+    INNER JOIN categoria d ON e.ID_CAT= d.ID_CAT
+    where (p_filtro IS NULL OR d.ID_CAT = p_filtro)
+    ORDER BY d.NOM_CAT ASC, e.NOM_TRB ASC;
+END ;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_reporte_departamento`(
+    IN p_filtro  int
+)
+BEGIN
+    SELECT 
+      d.NOM_DEP AS `DEPARTAMENTO`,
+      e.ID_TRB AS `CODIGO EMPLEADO`,
+	  e.NOM_TRB AS `NOMBRE EMPLEADO`, 
+      e.fecha_inicio  AS `FECHA DE INGRESO`,
+      e.puesto_trabajo  AS `PUESTO DE TRABAJO`,
+       e.sueldo  AS `SUELDO ASIGNADO`
+    FROM empleado e
+    INNER JOIN departamento d ON e.ID_DEP= d.ID_DEP
+    where (p_filtro IS NULL OR d.ID_DEP = p_filtro)
+    ORDER BY d.NOM_DEP ASC, e.NOM_TRB ASC;
+END ;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_reporte_general_categorias`()
+BEGIN
+	SELECT 
+		c.COD_CAT AS 'CODIGO',
+		c.NOM_CAT AS 'CATEGORIA',
+		c.SAL_INI AS 'SALARIO_MINIMO',
+		c.SAL_FIN AS 'SALARIO_MAXIMO',
+		(c.SAL_FIN - c.SAL_INI) AS 'AMPLITUD',
+		COUNT(e.ID_TRB) AS 'TOTAL_EMPLEADOS',
+		IFNULL(ROUND(AVG(e.SUELDO), 2), 0.00) AS 'SUELDO_PROMEDIO_REAL'
+	FROM n1.categoria c
+	LEFT JOIN n1.empleado e ON c.ID_CAT = e.ID_CAT AND e.ESTADO= 'A'
+	GROUP BY c.ID_CAT, c.COD_CAT, c.NOM_CAT, c.SAL_INI, c.SAL_FIN
+	ORDER BY c.SAL_INI ASC;
+END ;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_reporte_general_deducciones`( IN P_FILTRO int)
+BEGIN
+SELECT 
+    p.COD_PLANILLA AS 'CODPLANILLA',
+    p.FECHA AS 'FECHA_EMISION',
+    e.COD_TRB AS 'CODIGO_EMPLEADO',
+    e.NOM_TRB AS 'NOMBRE_EMPLEADO',
+    IFNULL(p.IHSS, 0.00) AS 'IHSS',
+    IFNULL(p.RAP, 0.00) AS 'RAP',
+    IFNULL(p.ISR, 0.00) AS 'ISR',
+    IFNULL(p.AUSENCIAS, 0.00) AS 'AUSENCIAS',
+    IFNULL(p.CUOTA_PRESTAMO, 0.00) AS 'PRESTAMOS',
+    IFNULL(p.DESCUENTOS, 0.00) AS 'OTROS_DESCUENTOS',
+    IFNULL(p.DEDUCCIONES, 0.00) AS 'TOTAL_DEDUCCIONES',
+    IFNULL(p.SUELDO, 0.00) AS 'SUELDO_BRUTO',
+    IFNULL(p.SALARIO_NETO, 0.00) AS 'SUELDO_NETO',
+    p.TIPO_PLANILLA AS 'TIPO_PLANILLA'
+FROM planilla p
+INNER JOIN empleado e ON p.ID_EMPLEADO = e.ID_TRB
+where (P_FILTRO IS NULL OR P_FILTRO = 0 OR e.ID_TRB = P_FILTRO)
+ORDER BY p.FECHA DESC, e.NOM_TRB ASC;
+END ;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_reporte_general_empleados`()
+BEGIN
+	SELECT 
+		E.COD_TRB AS 'CODIGO',
+		E.NOM_TRB AS 'EMPLEADO',
+		E.IDEN_TRB AS 'IDENTIDAD',
+		E.RTN AS 'RTN',
+		E.PUESTO_TRABAJO AS 'PUESTO',
+		D.NOM_DEP AS 'DEPARTAMENTO',        
+		TE.DESCRIPCION AS 'TIPO_EMPLEADO',         
+		FP.DESCRIPCION AS 'FORMA_DE_PAGO',     
+		E.FECHA_CONTRATACION AS 'F_CONTRATACION',
+		E.SUELDO AS 'SUELDO_BASE',
+		E.BANCOS AS 'BANCO',
+		E.NCUENTA AS 'NO_CUENTA',
+		CASE E.ESTADO WHEN 'A' THEN 'ACTIVO' ELSE 'INACTIVO' END AS 'ESTADO'
+	FROM N1.EMPLEADO E
+	LEFT JOIN N1.DEPARTAMENTO D ON E.ID_DEP = D.ID_DEP
+	LEFT JOIN N1.TIPO_EMPLEADO TE ON E.ID_TIPO_EMPLEADO = TE.ID_TIPO_EMPLEADO
+	LEFT JOIN N1.FORMA_PAGO FP ON E.ID_TIPO_PAGO = FP.ID_TIPO_PAGO
+	WHERE E.ESTADO = 'A';
+END ;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_reporte_labores`(
+    IN p_filtro int
+)
+BEGIN
+    SELECT 
+      e.ID_TRB AS `CODIGO_EMPLEADO`,
+	  e.NOM_TRB AS `NOMBRE_EMPLEADO`,
+	  CASE tp.descripcion 
+            WHEN 'D' THEN 'Definido por el usuario'
+            WHEN 'F' THEN 'Por Factor'
+            WHEN 'H' THEN 'Por Hora'
+            WHEN 'V' THEN 'Por Valor'
+            ELSE tp.descripcion -- Por si acaso viene un valor diferente ya registrado
+        END AS `TIPO_LABOR`,
+	  d.monto_labor as  `VALOR_LABOR`,
+      d.cantidad_lab as  `CANTIDAD_EJECUTADA`,
+	  d.fecha_labor  AS `FECHA_LABOR`,
+      IFNULL((IF(MONTO_LABOR = 0, CANTIDAD_LAB, CANTIDAD_LAB * MONTO_LABOR)), 0.00) as `MONTO_LABOR`
+    FROM empleado e
+    INNER JOIN mlabores d ON e.ID_TRB= d.ID_EMPLEADO
+    INNER JOIN tipo_pago tp on tp.id_tipo_pago = d.id_tipo_pago
+    where (P_FILTRO IS NULL OR P_FILTRO = 0 OR e.ID_TRB = p_filtro)
+    ORDER BY  e.NOM_TRB ASC;
+END ;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_reporte_liquidacion_detallado`(
+    IN p_id_empleado INT,
+    IN p_fecha_fin DATE
+)
+BEGIN
+    -- Declaramos una variable interna para capturar la fecha en que inició el trabajador
+    DECLARE v_fecha_ingreso DATE;
+    
+    -- Buscamos la fecha de contratación del empleado
+    SELECT `FECHA_CONTRATACION` INTO v_fecha_ingreso
+    FROM `empleado`
+    WHERE `ID_TRB` = p_id_empleado;
+
+    -- Si por algún motivo no tiene fecha de contratación, usamos una por defecto para evitar errores
+    IF v_fecha_ingreso IS NULL THEN
+        SET v_fecha_ingreso = '2000-01-01';
+    END IF;
+
+
+    -- =========================================================================
+    -- 1. SECCIÓN DE INGRESOS: Salario Base
+    -- =========================================================================
+    SELECT 
+        e.`COD_TRB`, 
+        e.`NOM_TRB`,
+        e.`PUESTO_TRABAJO` AS PUESTO_TRABAJO,
+        (SELECT d.`NOM_DEP` FROM `departamento` d WHERE d.`ID_DEP` = e.`ID_DEP`) AS DEPTO,
+		(SELECT d.`COD_DEP` FROM `departamento` d WHERE d.`ID_DEP` = e.`ID_DEP`) AS COD_DEPTO,
+       e.`SUELDO`,
+        'SAL-01' AS CODIGO,
+        'SALARIO BASE' AS NOMBRE_MOVIMIENTO,
+        'SALARIO' AS TIPO_MOVIMIENTO,
+        p_fecha_fin AS FECHA,
+        e.`SUELDO` AS MONTO
+    FROM `empleado` e
+    WHERE e.`ID_TRB` = p_id_empleado
+
+    UNION ALL
+
+    -- =========================================================================
+    -- 2. SECCIÓN DE DEDUCCIONES: Préstamos Activos
+    -- =========================================================================
+    SELECT 
+        e.`COD_TRB`, e.`NOM_TRB`, e.`PUESTO_TRABAJO`, NULL,NULL, e.`SUELDO`,
+        p.`CODIGO` AS CODIGO,
+        p.`DESCRIPCION` AS NOMBRE_MOVIMIENTO,
+        'DEDUCCION' AS TIPO_MOVIMIENTO,
+        p.`FECHA` AS FECHA,
+        p.`CUOTA_MES` AS MONTO
+    FROM `prestamo` p
+    INNER JOIN `empleado` e ON p.`ID_EMPLEADO` = e.`ID_TRB`
+    WHERE p.`ID_EMPLEADO` = p_id_empleado 
+      AND p.`ESTADO` = 'A'
+      -- Filtra los préstamos desde que inició hasta la fecha de corte
+      AND p.`FECHA` BETWEEN v_fecha_ingreso AND p_fecha_fin
+
+    UNION ALL
+
+    -- =========================================================================
+    -- 3. SECCIÓN DE DEDUCCIONES: Descuentos Comerciales
+    -- =========================================================================
+    SELECT 
+        e.`COD_TRB`, e.`NOM_TRB`, e.`PUESTO_TRABAJO`, NULL, NULL,e.`SUELDO`,
+        CAST(m.`ID_DESCUENTO` AS CHAR) AS CODIGO,
+        m.`DESCRIPCION_DESCUENTO` AS NOMBRE_MOVIMIENTO,
+        'DEDUCCION' AS TIPO_MOVIMIENTO,
+        m.`FECHA_DESCUENTO` AS FECHA,
+        IF(m.`CANT_DESCUENTO` = 0, m.`MON_DESCUENTO`, m.`CANT_DESCUENTO` * m.`MON_DESCUENTO`) AS MONTO
+    FROM `mdescuentos` m
+    INNER JOIN `empleado` e ON m.`ID_EMPLEADO` = e.`ID_TRB`
+    WHERE m.`ID_EMPLEADO` = p_id_empleado
+      -- Rango automático usando la fecha interna del trabajador
+      AND m.`FECHA_DESCUENTO` BETWEEN v_fecha_ingreso AND p_fecha_fin
+
+    UNION ALL
+
+    -- =========================================================================
+    -- 4. SECCIÓN DE DEDUCCIONES: Ausencias
+    -- =========================================================================
+    SELECT 
+        e.`COD_TRB`, e.`NOM_TRB`, e.`PUESTO_TRABAJO`, NULL,NULL, e.`SUELDO`,
+        CAST(a.`ID_TIPO_AUSENCIA` AS CHAR) AS CODIGO,
+        'DEDUCCION POR AUSENCIA' AS NOMBRE_MOVIMIENTO,
+        'DEDUCCION' AS TIPO_MOVIMIENTO,
+        a.`FECHA_INICIAL` AS FECHA,
+        a.`MONTO` AS MONTO
+    FROM `ausencias` a
+    INNER JOIN `empleado` e ON a.`ID_EMPLEADO` = e.`ID_TRB`
+    WHERE a.`ID_EMPLEADO` = p_id_empleado
+      AND a.`FECHA_INICIAL` <= p_fecha_fin 
+      AND a.`FECHA_FINAL` >= v_fecha_ingreso;
+
+END ;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_reporte_nomina_categoria`(
+    IN P_FILTRO int
+)
+BEGIN
+    SELECT 
+      d.NOM_CAT AS `CATEGORIA`,
+      e.ID_TRB AS `CODIGO_EMPLEADO`,
+	  e.NOM_TRB AS `NOMBRE_EMPLEADO`, 
+      e.fecha_inicio  AS `FECHA_DE_INGRESO`,
+      e.puesto_trabajo  AS `PUESTO_DE_TRABAJO`,
+       e.sueldo  AS `SUELDO_ASIGNADO`
+    FROM empleado e
+    INNER JOIN categoria d ON e.ID_DEP= d.ID_CAT
+    where (P_FILTRO IS NULL OR P_FILTRO = 0 OR d.ID_CAT = P_FILTRO)
+    ORDER BY d.NOM_CAT ASC, e.NOM_TRB ASC;
+END ;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_reporte_nomina_departamento`(
+    IN P_FILTRO  int
+)
+BEGIN
+    SELECT 
+      d.NOM_DEP AS `DEPARTAMENTO`,
+      e.ID_TRB AS `CODIGO_EMPLEADO`,
+	  e.NOM_TRB AS `NOMBRE_EMPLEADO`, 
+      e.fecha_inicio  AS `FECHA_DE_INGRESO`,
+      e.puesto_trabajo  AS `PUESTO_DE_TRABAJO`,
+       e.sueldo  AS `SUELDO_ASIGNADO`
+    FROM empleado e
+    INNER JOIN departamento d ON e.ID_DEP= d.ID_DEP
+   WHERE (P_FILTRO IS NULL OR P_FILTRO = 0 OR d.ID_DEP = P_FILTRO)
+    ORDER BY d.NOM_DEP ASC, e.NOM_TRB ASC;
+END ;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_reporte_nomina_libro_salarios`( IN p_anio int, IN p_mes int, IN p_tipo varchar(150) )
+BEGIN
+   SELECT
+		e.ID_TRB AS `CODIGO_EMPLEADO`,
+		e.NOM_TRB AS `NOMBRE_EMPLEADO`,
+		e.sueldo AS `SUELDO_NOMINAL`,
+		p.LABORES AS `OTROS`,
+		 p.SALARIO AS `TOTAL_PERCIBIDO`,
+	-- 3. Días No Trabajados (Ausencias divididas por quincena según la fecha de la planilla)
+		(
+			SELECT IFNULL(SUM(a.NUMERO_DIAS_TRABAJADOS), 0) 
+			FROM ausencias a 
+			WHERE a.ID_EMPLEADO = e.ID_TRB  
+			  AND YEAR(a.FECHA_INICIAL) = p_anio
+			  AND MONTH(a.FECHA_INICIAL) = p_mes
+			  AND a.FECHA_INICIAL <= p.FECHA -- La ausencia tuvo que pasar antes o el mismo día de la planilla
+			  AND a.FECHA_INICIAL > CASE 
+										WHEN DAY(p.FECHA) <= 15 THEN DATE_FORMAT(p.FECHA, '%Y-%m-01') -- Si es anticipo, desde el día 1
+										ELSE DATE_FORMAT(p.FECHA, '%Y-%m-15') -- Si es fin de mes, solo del 16 en adelante
+									END
+		) AS `DIAS`,
+		p.AUSENCIAS AS `MONTO`,
+
+		-- 4. Deducciones de Ley y Retenciones
+		p.IHSS AS `IHSS`,
+		p.RAP AS `RAP`,
+		p.ISR AS `ISR`,
+		-- 5. Otras Deducciones (Suma de Descuentos + Préstamos)
+		(p.DESCUENTOS + p.CUOTA_PRESTAMO) AS `OTRAS_DEDUCCIONES`,
+
+		( p.IHSS+ p.RAP+ p.ISR +p.DESCUENTOS + p.CUOTA_PRESTAMO ) AS `TOTAL_DEDUCCIONES`,
+		-- 6. Neto Líquido
+		p.SALARIO_NETO AS `NETO_A_RECIBIR`
+		FROM planilla p
+		INNER JOIN empleado e ON p.ID_EMPLEADO = e.ID_TRB
+		WHERE YEAR(p.FECHA) = p_anio 
+		AND MONTH(p.FECHA) = p_mes
+        AND (
+            (p_tipo = 'PQUINCENA' AND DAY(P.FECHA) <= 15 AND P.TIPO_PLANILLA LIKE '%QUINCENA%') OR
+            (p_tipo = 'SQUINCENA' AND DAY(P.FECHA) > 15  AND P.TIPO_PLANILLA LIKE '%QUINCENA%') OR
+            (p_tipo = 'ANTICIPO'  AND DAY(P.FECHA) <= 15 AND P.TIPO_PLANILLA LIKE '%ANTICIPO%') OR
+            (p_tipo = 'MENSUAL'   AND  P.TIPO_PLANILLA LIKE '%MENSUAL%') 
+          );
+
+END ;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_resumen_prestamos_empleados`(IN p_filtro int)
+BEGIN
+	SELECT 
+		E.COD_TRB AS 'CODIGO_EMPLEADO',
+		E.NOM_TRB AS 'NOMBRE_EMPLEADO',
+		COUNT(P.ID_PRESTAMO) AS 'CANTIDAD_PRESTAMOS_TOTALES',
+		SUM(CASE WHEN P.ESTADO = 'A' THEN 1 ELSE 0 END) AS 'PRESTAMOS_ACTIVOS',
+		SUM(P.MONTO) AS 'TOTAL_PRESTADO_HISTORICO',
+		SUM(IFNULL(P.P_CRED, 0.00)) AS 'TOTAL_PAGADO_A_LA_FECHA',
+		SUM(IFNULL(P.P_ACT, 0.00)) AS 'DEUDA_TOTAL_PENDIENTE',
+		SUM(CASE WHEN P.ESTADO = 'A' THEN IFNULL(P.CUOTA_mes, 0.00) ELSE 0.00 END) AS 'RETENCION_MENSUAL_REQUERIDA'
+	FROM empleado E
+	INNER JOIN prestamo P ON E.ID_TRB = P.ID_EMPLEADO 
+	WHERE ID_TRB = p_filtro
+	GROUP BY E.ID_TRB, E.COD_TRB, E.NOM_TRB
+	HAVING DEUDA_TOTAL_PENDIENTE > 0 
+	ORDER BY E.NOM_TRB ASC;
+END ;

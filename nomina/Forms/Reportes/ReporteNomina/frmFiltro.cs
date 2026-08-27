@@ -25,6 +25,8 @@ namespace nomina.Forms.Reportes.ReporteNomina
         frmMain frmMain;
         public string UserName { set; get; }
         public int Id { set; get; }
+
+        public DateTimePicker Fecha { set; get; }
         public frmFiltro(string tipoReporte, Conexion conexion, frmMain frmMain)
         {
             InitializeComponent();
@@ -113,6 +115,19 @@ namespace nomina.Forms.Reportes.ReporteNomina
                     if (frmUsuarios.DialogResult == DialogResult.OK)
                     {
                         this.UserName = frmUsuarios.user.Usuario;
+                        this.DialogResult = DialogResult.OK;
+                    }
+                    break;
+
+                case "E":
+                    frmEmpleado frmE= new frmEmpleado(conexion, frmMain);
+                    frmE.Tag = "buscar";
+                    frmE.ShowDialog();
+
+                    if (frmE.DialogResult == DialogResult.OK)
+                    {
+                        this.Id = frmE.empleado.Id;
+                        this.Fecha =this.dtpFecha;
                         this.DialogResult = DialogResult.OK;
                     }
                     break;

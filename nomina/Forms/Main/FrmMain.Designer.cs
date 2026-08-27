@@ -101,6 +101,7 @@
             this.asignarEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.parametrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.retenciónAsalariadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -337,7 +338,8 @@
             this.liquidaciónToolStripMenuItem1,
             this.ausenciasToolStripMenuItem1,
             this.fichaDeEmpleadoToolStripMenuItem,
-            this.constanciaLaboralToolStripMenuItem});
+            this.constanciaLaboralToolStripMenuItem,
+            this.retenciónAsalariadosToolStripMenuItem});
             this.analisisToolStripMenuItem.Name = "analisisToolStripMenuItem";
             this.analisisToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.analisisToolStripMenuItem.Text = "Analisis";
@@ -400,6 +402,7 @@
             this.constanciaLaboralToolStripMenuItem.Name = "constanciaLaboralToolStripMenuItem";
             this.constanciaLaboralToolStripMenuItem.Size = new System.Drawing.Size(270, 26);
             this.constanciaLaboralToolStripMenuItem.Text = "Constancia laboral";
+            this.constanciaLaboralToolStripMenuItem.Click += new System.EventHandler(this.constanciaLaboralToolStripMenuItem_Click);
             // 
             // listadosToolStripMenuItem
             // 
@@ -681,6 +684,13 @@
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
+            // retenciónAsalariadosToolStripMenuItem
+            // 
+            this.retenciónAsalariadosToolStripMenuItem.Name = "retenciónAsalariadosToolStripMenuItem";
+            this.retenciónAsalariadosToolStripMenuItem.Size = new System.Drawing.Size(270, 26);
+            this.retenciónAsalariadosToolStripMenuItem.Text = "Retención Asalariados";
+            this.retenciónAsalariadosToolStripMenuItem.Click += new System.EventHandler(this.retenciónAsalariadosToolStripMenuItem_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -777,5 +787,6 @@
         private System.Windows.Forms.ToolStripMenuItem detalleDeAccesosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem últimaModificaciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resumenDeLaboresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem retenciónAsalariadosToolStripMenuItem;
     }
 }

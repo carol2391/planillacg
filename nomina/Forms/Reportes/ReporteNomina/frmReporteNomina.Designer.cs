@@ -44,10 +44,11 @@
             // 
             // reportViewer2
             // 
+            this.reportViewer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.reportViewer2.Location = new System.Drawing.Point(0, 0);
             this.reportViewer2.Name = "reportViewer2";
             this.reportViewer2.ServerReport.BearerToken = null;
-            this.reportViewer2.Size = new System.Drawing.Size(1284, 550);
+            this.reportViewer2.Size = new System.Drawing.Size(1620, 718);
             this.reportViewer2.TabIndex = 1;
             // 
             // frmReporteNomina

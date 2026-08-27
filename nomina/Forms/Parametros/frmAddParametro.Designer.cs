@@ -58,6 +58,10 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.nudSindicato = new System.Windows.Forms.NumericUpDown();
+            this.label16 = new System.Windows.Forms.Label();
             this.pnLabor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudValorTechoIHSS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudValorPisoRAP)).BeginInit();
@@ -72,12 +76,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudInicial15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudExcento)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPeriodo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSindicato)).BeginInit();
             this.SuspendLayout();
             // 
             // pnLabor
             // 
             this.pnLabor.AutoSize = true;
             this.pnLabor.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.pnLabor.Controls.Add(this.nudSindicato);
+            this.pnLabor.Controls.Add(this.label16);
+            this.pnLabor.Controls.Add(this.numericUpDown1);
+            this.pnLabor.Controls.Add(this.label3);
             this.pnLabor.Controls.Add(this.nudValorTechoIHSS);
             this.pnLabor.Controls.Add(this.label15);
             this.pnLabor.Controls.Add(this.nudValorPisoRAP);
@@ -107,7 +117,7 @@
             this.pnLabor.Location = new System.Drawing.Point(4, 57);
             this.pnLabor.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.pnLabor.Name = "pnLabor";
-            this.pnLabor.Size = new System.Drawing.Size(576, 450);
+            this.pnLabor.Size = new System.Drawing.Size(576, 468);
             this.pnLabor.TabIndex = 47;
             // 
             // nudValorTechoIHSS
@@ -484,6 +494,54 @@
             this.lblTitulo.Text = "Nuevo Parametro";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.DecimalPlaces = 2;
+            this.numericUpDown1.Location = new System.Drawing.Point(17, 433);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            1316134911,
+            2328,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(228, 22);
+            this.numericUpDown1.TabIndex = 16;
+            this.numericUpDown1.ThousandsSeparator = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(17, 413);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(37, 16);
+            this.label3.TabIndex = 51;
+            this.label3.Text = "I.P.P:";
+            // 
+            // nudSindicato
+            // 
+            this.nudSindicato.DecimalPlaces = 2;
+            this.nudSindicato.Location = new System.Drawing.Point(316, 433);
+            this.nudSindicato.Margin = new System.Windows.Forms.Padding(4);
+            this.nudSindicato.Maximum = new decimal(new int[] {
+            1316134911,
+            2328,
+            0,
+            0});
+            this.nudSindicato.Name = "nudSindicato";
+            this.nudSindicato.Size = new System.Drawing.Size(228, 22);
+            this.nudSindicato.TabIndex = 17;
+            this.nudSindicato.ThousandsSeparator = true;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(316, 413);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(66, 16);
+            this.label16.TabIndex = 17;
+            this.label16.Text = "Sindicato:";
+            // 
             // frmAddParametro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -516,6 +574,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudInicial15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudExcento)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPeriodo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSindicato)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -553,5 +613,9 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.NumericUpDown nudReservaLaboralRAP;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown nudSindicato;
+        private System.Windows.Forms.Label label16;
     }
 }

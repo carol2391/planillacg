@@ -121,13 +121,13 @@ namespace nomina.Clases.Empleado
         public DateTime FechaInicio { set; get; }
         public string TipoEmpleadoNacionalidad { set; get; }
 
-        public decimal CuentaSueldo{ set; get; }
-        public decimal CuentaSeguroSocial { set; get; }
-        public decimal CuentaRegimenEspecial { set; get; }
-        public decimal CuentaISR { set; get; }
-        public decimal OtraCuent1 { set; get; }
-        public decimal OtraCuenta2 { set; get; }
-        public decimal NumeroCuenta { set; get; }
+        public string CuentaSueldo{ set; get; }
+        public string CuentaSeguroSocial { set; get; }
+        public string CuentaRegimenEspecial { set; get; }
+        public string CuentaISR { set; get; }
+        public string OtraCuent1 { set; get; }
+        public string OtraCuenta2 { set; get; }
+        public string NumeroCuenta { set; get; }
         
     }
 }

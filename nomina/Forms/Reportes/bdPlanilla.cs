@@ -7,6 +7,14 @@ namespace nomina.Forms.Reportes
 
     partial class dsPlanilla
     {
+        partial class PlantillaRetencionImpuestosDataTable
+        {
+        }
+
+        partial class ConstanciaEmpleadoDataTable
+        {
+        }
+
         partial class BITACORADataTable
         {
         }
@@ -14,7 +22,6 @@ namespace nomina.Forms.Reportes
         partial class ReporteLiquidacionDataTable
         {
         }
-
         partial class ReporteResumenPrestamoEmpleadoDataTable
         {
         }

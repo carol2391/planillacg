@@ -23,7 +23,9 @@ namespace nomina.Forms.Reportes.ReporteNomina
         public string Codigo {set;get;}
         public DateTime Fecha { set; get; }
         public string Tipo { set; get; }
-        public frmReportePlanila(Conexion conexion, frmMain frmMain, String tipo)
+
+        public string Reporte { set; get; }
+        public frmReportePlanila(Conexion conexion, frmMain frmMain, String tipo, string Reporte)
         {
             InitializeComponent();
             this.conexion = conexion;
@@ -31,12 +33,24 @@ namespace nomina.Forms.Reportes.ReporteNomina
             CargarComboMeses();
             CargarComboAnios();
             this.Tipo= tipo;
+            this.Reporte = Reporte;
+
+        }
+
+        public frmReportePlanila(Conexion conexion, frmMain frmMain, string Reporte)
+        {
+            InitializeComponent();
+            this.conexion = conexion;
+            this.frmMain = frmMain;
+            CargarComboMeses();
+            CargarComboAnios();
+            this.Reporte = Reporte;
 
         }
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
-            frmReporteNomina frmReporte = new frmReporteNomina(conexion,(int)(cbMes.SelectedValue), (int)(cbAnio.SelectedValue), Tipo);
+            frmReporteNomina frmReporte = new frmReporteNomina(conexion,(int)(cbMes.SelectedValue), (int)(cbAnio.SelectedValue), Tipo, Reporte);
             frmReporte.ShowDialog();
         }
 

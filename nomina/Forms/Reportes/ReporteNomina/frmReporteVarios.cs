@@ -23,6 +23,8 @@ namespace nomina.Forms.Reportes.ReporteNomina
         string Tipo;
         string User;
         string Modo;
+        string NombreEmpresa;
+        public DateTimePicker Fecha { set; get; }
         public frmReporteVarios(Conexion conexion, string nombreReporte, string tipo,string user ,string modo)
         {
             InitializeComponent();
@@ -40,6 +42,17 @@ namespace nomina.Forms.Reportes.ReporteNomina
             NombreReporte = nombreReporte;
             this.Id = id;
             this.Tipo = tipo;
+        }
+
+        public frmReporteVarios(Conexion conexion, string nombreReporte, int id, DateTimePicker fecha, string tipo, string nombreEmpresa)
+        {
+            InitializeComponent();
+            this.conexion = conexion;
+            NombreReporte = nombreReporte;
+            this.Id = id;
+            this.Fecha = fecha;
+            this.Tipo = tipo;
+            this.NombreEmpresa = nombreEmpresa;
         }
         public frmReporteVarios(Conexion conexion, string nombreReporte)
         {
@@ -176,6 +189,42 @@ namespace nomina.Forms.Reportes.ReporteNomina
                     reportViewer1.RefreshReport();
                     break;
 
+                case "E":
+                    reportesConexion = new ReportesConexion(conexion);
+                    DataTable dt14 = reportesConexion.ObtenerReportes(NombreReporte, Id);
+                    reportViewer1.LocalReport.DataSources.Clear();
+                    reportViewer1.LocalReport.ReportEmbeddedResource = "nomina.Forms.Reportes.rpContanciaEmpleado.rdlc";
+
+                    string fechaFormateada = $"{this.Fecha.Value.Day} días del mes de {this.Fecha.Value.ToString("MMMM", System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"))} del {this.Fecha.Value.Year}";
+
+                    ReportParameter paramFecha = new ReportParameter("FechaEmisionTexto", fechaFormateada);
+                    reportViewer1.LocalReport.SetParameters(new ReportParameter[] { paramFecha });
+
+                    ReportParameter paramEmpresa = new ReportParameter("NombreEmpresa", NombreEmpresa);
+                    reportViewer1.LocalReport.SetParameters(new ReportParameter[] { paramEmpresa });
+
+                    reportViewer1.LocalReport.DataSources.Add(
+                        new ReportDataSource("ConstanciaEmpleado", dt14)
+                    );
+                    if (dt14.Rows.Count > 0)
+                    {
+                        string nombreEmpleado = dt14.Rows[0]["NOMBRE"].ToString();
+
+                        reportViewer1.LocalReport.DisplayName = $"Constancia Empleado {nombreEmpleado}";
+                    }
+
+                    reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("ConstanciaEmpleado", dt14));
+                    reportViewer1.RefreshReport();
+
+                    foreach (RenderingExtension extension in reportViewer1.LocalReport.ListRenderingExtensions())
+                    {
+                        // WORDOPENXML es el formato para .docx
+                        if (extension.Name == "WORD" || extension.Name == "WORDOPENXML")
+                        {
+                            
+                        }
+                    }
+                    break;
                 case "BI":
                     reportesConexion = new ReportesConexion(conexion);
                     DataTable dt12 = reportesConexion.ObtenerBitacora(User, Modo);

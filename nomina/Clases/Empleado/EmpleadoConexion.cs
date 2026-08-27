@@ -86,6 +86,7 @@ namespace nomina.Clases.Empleado
             List<EmpleadoData> empleados = new List<EmpleadoData>();
             MySqlCommand comando = new MySqlCommand("obtener_empleados", this.conexion.getConexion());
             comando.CommandType = System.Data.CommandType.StoredProcedure;
+            
             this.conexion.getConexion().Open();
 
             MySqlDataReader lector = comando.ExecuteReader();
@@ -199,12 +200,12 @@ namespace nomina.Clases.Empleado
                 //empleado.OtraCuent1 = lector.GetDecimal(42);
                 //empleado.OtraCuenta2 = lector.GetDecimal(43);
                 empleado.TipoPago = new LOpciones(lector.GetInt32(22), lector.GetString(32));
-                empleado.CuentaSueldo = lector.IsDBNull(38) ? 0m : lector.GetDecimal(38);
-                empleado.CuentaSeguroSocial = lector.IsDBNull(39) ? 0m : lector.GetDecimal(39);
-                empleado.CuentaRegimenEspecial = lector.IsDBNull(40) ? 0m : lector.GetDecimal(40);
-                empleado.CuentaISR = lector.IsDBNull(41) ? 0m : lector.GetDecimal(41);
-                empleado.OtraCuent1 = lector.IsDBNull(42) ? 0m : lector.GetDecimal(42);
-                empleado.OtraCuenta2 = lector.IsDBNull(43) ? 0m : lector.GetDecimal(43);
+                empleado.CuentaSueldo = lector.IsDBNull(38) ? "" : lector.GetString(38);
+                empleado.CuentaSeguroSocial = lector.IsDBNull(39) ?"":lector?.GetString(39);
+                empleado.CuentaRegimenEspecial = lector.IsDBNull(40) ? "" : lector?.GetString(40);
+                empleado.CuentaISR = lector.IsDBNull(41) ? "" : lector?.GetString(41);
+                empleado.OtraCuent1 = lector.IsDBNull(42) ? "" : lector?.GetString(42);
+                empleado.OtraCuenta2 = lector.IsDBNull(43) ? "" : lector?.GetString(43);
             }
             this.conexion.getConexion().Close();
             return empleado;

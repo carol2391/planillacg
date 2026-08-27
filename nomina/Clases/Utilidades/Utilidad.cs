@@ -108,6 +108,17 @@ namespace nomina.Clases.Utilidades
                 }
             }
         }
+
+
+
+         public static void aceptaSoloNumeros(KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+               
+                e.Handled = true;
+            }
+        }
         public static void esDouble(KeyPressEventArgs e)
         {
             if (char.IsDigit(e.KeyChar) || e.KeyChar == '.')

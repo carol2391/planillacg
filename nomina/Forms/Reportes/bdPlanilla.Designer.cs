@@ -48,6 +48,10 @@ namespace nomina.Forms.Reportes {
         
         private BITACORADataTable tableBITACORA;
         
+        private ConstanciaEmpleadoDataTable tableConstanciaEmpleado;
+        
+        private PlantillaRetencionImpuestosDataTable tablePlantillaRetencionImpuestos;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -111,6 +115,12 @@ namespace nomina.Forms.Reportes {
                 }
                 if ((ds.Tables["BITACORA"] != null)) {
                     base.Tables.Add(new BITACORADataTable(ds.Tables["BITACORA"]));
+                }
+                if ((ds.Tables["ConstanciaEmpleado"] != null)) {
+                    base.Tables.Add(new ConstanciaEmpleadoDataTable(ds.Tables["ConstanciaEmpleado"]));
+                }
+                if ((ds.Tables["PlantillaRetencionImpuestos"] != null)) {
+                    base.Tables.Add(new PlantillaRetencionImpuestosDataTable(ds.Tables["PlantillaRetencionImpuestos"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -252,6 +262,26 @@ namespace nomina.Forms.Reportes {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public ConstanciaEmpleadoDataTable ConstanciaEmpleado {
+            get {
+                return this.tableConstanciaEmpleado;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public PlantillaRetencionImpuestosDataTable PlantillaRetencionImpuestos {
+            get {
+                return this.tablePlantillaRetencionImpuestos;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -352,6 +382,12 @@ namespace nomina.Forms.Reportes {
                 }
                 if ((ds.Tables["BITACORA"] != null)) {
                     base.Tables.Add(new BITACORADataTable(ds.Tables["BITACORA"]));
+                }
+                if ((ds.Tables["ConstanciaEmpleado"] != null)) {
+                    base.Tables.Add(new ConstanciaEmpleadoDataTable(ds.Tables["ConstanciaEmpleado"]));
+                }
+                if ((ds.Tables["PlantillaRetencionImpuestos"] != null)) {
+                    base.Tables.Add(new PlantillaRetencionImpuestosDataTable(ds.Tables["PlantillaRetencionImpuestos"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -458,6 +494,18 @@ namespace nomina.Forms.Reportes {
                     this.tableBITACORA.InitVars();
                 }
             }
+            this.tableConstanciaEmpleado = ((ConstanciaEmpleadoDataTable)(base.Tables["ConstanciaEmpleado"]));
+            if ((initTable == true)) {
+                if ((this.tableConstanciaEmpleado != null)) {
+                    this.tableConstanciaEmpleado.InitVars();
+                }
+            }
+            this.tablePlantillaRetencionImpuestos = ((PlantillaRetencionImpuestosDataTable)(base.Tables["PlantillaRetencionImpuestos"]));
+            if ((initTable == true)) {
+                if ((this.tablePlantillaRetencionImpuestos != null)) {
+                    this.tablePlantillaRetencionImpuestos.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -492,6 +540,10 @@ namespace nomina.Forms.Reportes {
             base.Tables.Add(this.tableFichaEmpleado);
             this.tableBITACORA = new BITACORADataTable();
             base.Tables.Add(this.tableBITACORA);
+            this.tableConstanciaEmpleado = new ConstanciaEmpleadoDataTable();
+            base.Tables.Add(this.tableConstanciaEmpleado);
+            this.tablePlantillaRetencionImpuestos = new PlantillaRetencionImpuestosDataTable();
+            base.Tables.Add(this.tablePlantillaRetencionImpuestos);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -563,6 +615,18 @@ namespace nomina.Forms.Reportes {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private bool ShouldSerializeBITACORA() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializeConstanciaEmpleado() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializePlantillaRetencionImpuestos() {
             return false;
         }
         
@@ -656,6 +720,12 @@ namespace nomina.Forms.Reportes {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void BITACORARowChangeEventHandler(object sender, BITACORARowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void ConstanciaEmpleadoRowChangeEventHandler(object sender, ConstanciaEmpleadoRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void PlantillaRetencionImpuestosRowChangeEventHandler(object sender, PlantillaRetencionImpuestosRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -5206,6 +5276,640 @@ namespace nomina.Forms.Reportes {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class ConstanciaEmpleadoDataTable : global::System.Data.TypedTableBase<ConstanciaEmpleadoRow> {
+            
+            private global::System.Data.DataColumn columnNOMBRE;
+            
+            private global::System.Data.DataColumn columnFECHA_ING;
+            
+            private global::System.Data.DataColumn columnPUESTO_TRABAJO;
+            
+            private global::System.Data.DataColumn columnSUELDO;
+            
+            private global::System.Data.DataColumn columnIDENTIDAD;
+            
+            private global::System.Data.DataColumn columnSUELDO_LETRAS;
+            
+            private global::System.Data.DataColumn columnTIPO_EMPLEADO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public ConstanciaEmpleadoDataTable() {
+                this.TableName = "ConstanciaEmpleado";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal ConstanciaEmpleadoDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected ConstanciaEmpleadoDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn NOMBREColumn {
+                get {
+                    return this.columnNOMBRE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn FECHA_INGColumn {
+                get {
+                    return this.columnFECHA_ING;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn PUESTO_TRABAJOColumn {
+                get {
+                    return this.columnPUESTO_TRABAJO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn SUELDOColumn {
+                get {
+                    return this.columnSUELDO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn IDENTIDADColumn {
+                get {
+                    return this.columnIDENTIDAD;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn SUELDO_LETRASColumn {
+                get {
+                    return this.columnSUELDO_LETRAS;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn TIPO_EMPLEADOColumn {
+                get {
+                    return this.columnTIPO_EMPLEADO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public ConstanciaEmpleadoRow this[int index] {
+                get {
+                    return ((ConstanciaEmpleadoRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event ConstanciaEmpleadoRowChangeEventHandler ConstanciaEmpleadoRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event ConstanciaEmpleadoRowChangeEventHandler ConstanciaEmpleadoRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event ConstanciaEmpleadoRowChangeEventHandler ConstanciaEmpleadoRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event ConstanciaEmpleadoRowChangeEventHandler ConstanciaEmpleadoRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddConstanciaEmpleadoRow(ConstanciaEmpleadoRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public ConstanciaEmpleadoRow AddConstanciaEmpleadoRow(string NOMBRE, string FECHA_ING, string PUESTO_TRABAJO, string SUELDO, string IDENTIDAD, string SUELDO_LETRAS, string TIPO_EMPLEADO) {
+                ConstanciaEmpleadoRow rowConstanciaEmpleadoRow = ((ConstanciaEmpleadoRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        NOMBRE,
+                        FECHA_ING,
+                        PUESTO_TRABAJO,
+                        SUELDO,
+                        IDENTIDAD,
+                        SUELDO_LETRAS,
+                        TIPO_EMPLEADO};
+                rowConstanciaEmpleadoRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowConstanciaEmpleadoRow);
+                return rowConstanciaEmpleadoRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                ConstanciaEmpleadoDataTable cln = ((ConstanciaEmpleadoDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new ConstanciaEmpleadoDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columnNOMBRE = base.Columns["NOMBRE"];
+                this.columnFECHA_ING = base.Columns["FECHA_ING"];
+                this.columnPUESTO_TRABAJO = base.Columns["PUESTO_TRABAJO"];
+                this.columnSUELDO = base.Columns["SUELDO"];
+                this.columnIDENTIDAD = base.Columns["IDENTIDAD"];
+                this.columnSUELDO_LETRAS = base.Columns["SUELDO_LETRAS"];
+                this.columnTIPO_EMPLEADO = base.Columns["TIPO_EMPLEADO"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columnNOMBRE = new global::System.Data.DataColumn("NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNOMBRE);
+                this.columnFECHA_ING = new global::System.Data.DataColumn("FECHA_ING", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFECHA_ING);
+                this.columnPUESTO_TRABAJO = new global::System.Data.DataColumn("PUESTO_TRABAJO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPUESTO_TRABAJO);
+                this.columnSUELDO = new global::System.Data.DataColumn("SUELDO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSUELDO);
+                this.columnIDENTIDAD = new global::System.Data.DataColumn("IDENTIDAD", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDENTIDAD);
+                this.columnSUELDO_LETRAS = new global::System.Data.DataColumn("SUELDO_LETRAS", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSUELDO_LETRAS);
+                this.columnTIPO_EMPLEADO = new global::System.Data.DataColumn("TIPO_EMPLEADO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTIPO_EMPLEADO);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public ConstanciaEmpleadoRow NewConstanciaEmpleadoRow() {
+                return ((ConstanciaEmpleadoRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new ConstanciaEmpleadoRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(ConstanciaEmpleadoRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.ConstanciaEmpleadoRowChanged != null)) {
+                    this.ConstanciaEmpleadoRowChanged(this, new ConstanciaEmpleadoRowChangeEvent(((ConstanciaEmpleadoRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.ConstanciaEmpleadoRowChanging != null)) {
+                    this.ConstanciaEmpleadoRowChanging(this, new ConstanciaEmpleadoRowChangeEvent(((ConstanciaEmpleadoRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.ConstanciaEmpleadoRowDeleted != null)) {
+                    this.ConstanciaEmpleadoRowDeleted(this, new ConstanciaEmpleadoRowChangeEvent(((ConstanciaEmpleadoRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.ConstanciaEmpleadoRowDeleting != null)) {
+                    this.ConstanciaEmpleadoRowDeleting(this, new ConstanciaEmpleadoRowChangeEvent(((ConstanciaEmpleadoRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemoveConstanciaEmpleadoRow(ConstanciaEmpleadoRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsPlanilla ds = new dsPlanilla();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "ConstanciaEmpleadoDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class PlantillaRetencionImpuestosDataTable : global::System.Data.TypedTableBase<PlantillaRetencionImpuestosRow> {
+            
+            private global::System.Data.DataColumn columnRTN;
+            
+            private global::System.Data.DataColumn columnIngresos_Brutos_Anuales;
+            
+            private global::System.Data.DataColumn columnImporte_Mensual_Retencion;
+            
+            private global::System.Data.DataColumn columnDeducciones_Mensuales;
+            
+            private global::System.Data.DataColumn columnRetenido;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public PlantillaRetencionImpuestosDataTable() {
+                this.TableName = "PlantillaRetencionImpuestos";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal PlantillaRetencionImpuestosDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected PlantillaRetencionImpuestosDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn RTNColumn {
+                get {
+                    return this.columnRTN;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn Ingresos_Brutos_AnualesColumn {
+                get {
+                    return this.columnIngresos_Brutos_Anuales;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn Importe_Mensual_RetencionColumn {
+                get {
+                    return this.columnImporte_Mensual_Retencion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn Deducciones_MensualesColumn {
+                get {
+                    return this.columnDeducciones_Mensuales;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn RetenidoColumn {
+                get {
+                    return this.columnRetenido;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public PlantillaRetencionImpuestosRow this[int index] {
+                get {
+                    return ((PlantillaRetencionImpuestosRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event PlantillaRetencionImpuestosRowChangeEventHandler PlantillaRetencionImpuestosRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event PlantillaRetencionImpuestosRowChangeEventHandler PlantillaRetencionImpuestosRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event PlantillaRetencionImpuestosRowChangeEventHandler PlantillaRetencionImpuestosRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event PlantillaRetencionImpuestosRowChangeEventHandler PlantillaRetencionImpuestosRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddPlantillaRetencionImpuestosRow(PlantillaRetencionImpuestosRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public PlantillaRetencionImpuestosRow AddPlantillaRetencionImpuestosRow(string RTN, string Ingresos_Brutos_Anuales, string Importe_Mensual_Retencion, string Deducciones_Mensuales, string Retenido) {
+                PlantillaRetencionImpuestosRow rowPlantillaRetencionImpuestosRow = ((PlantillaRetencionImpuestosRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        RTN,
+                        Ingresos_Brutos_Anuales,
+                        Importe_Mensual_Retencion,
+                        Deducciones_Mensuales,
+                        Retenido};
+                rowPlantillaRetencionImpuestosRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowPlantillaRetencionImpuestosRow);
+                return rowPlantillaRetencionImpuestosRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                PlantillaRetencionImpuestosDataTable cln = ((PlantillaRetencionImpuestosDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new PlantillaRetencionImpuestosDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columnRTN = base.Columns["RTN"];
+                this.columnIngresos_Brutos_Anuales = base.Columns["Ingresos_Brutos_Anuales"];
+                this.columnImporte_Mensual_Retencion = base.Columns["Importe_Mensual_Retencion"];
+                this.columnDeducciones_Mensuales = base.Columns["Deducciones_Mensuales"];
+                this.columnRetenido = base.Columns["Retenido"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columnRTN = new global::System.Data.DataColumn("RTN", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRTN);
+                this.columnIngresos_Brutos_Anuales = new global::System.Data.DataColumn("Ingresos_Brutos_Anuales", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIngresos_Brutos_Anuales);
+                this.columnImporte_Mensual_Retencion = new global::System.Data.DataColumn("Importe_Mensual_Retencion", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnImporte_Mensual_Retencion);
+                this.columnDeducciones_Mensuales = new global::System.Data.DataColumn("Deducciones_Mensuales", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDeducciones_Mensuales);
+                this.columnRetenido = new global::System.Data.DataColumn("Retenido", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRetenido);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public PlantillaRetencionImpuestosRow NewPlantillaRetencionImpuestosRow() {
+                return ((PlantillaRetencionImpuestosRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new PlantillaRetencionImpuestosRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(PlantillaRetencionImpuestosRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.PlantillaRetencionImpuestosRowChanged != null)) {
+                    this.PlantillaRetencionImpuestosRowChanged(this, new PlantillaRetencionImpuestosRowChangeEvent(((PlantillaRetencionImpuestosRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.PlantillaRetencionImpuestosRowChanging != null)) {
+                    this.PlantillaRetencionImpuestosRowChanging(this, new PlantillaRetencionImpuestosRowChangeEvent(((PlantillaRetencionImpuestosRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.PlantillaRetencionImpuestosRowDeleted != null)) {
+                    this.PlantillaRetencionImpuestosRowDeleted(this, new PlantillaRetencionImpuestosRowChangeEvent(((PlantillaRetencionImpuestosRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.PlantillaRetencionImpuestosRowDeleting != null)) {
+                    this.PlantillaRetencionImpuestosRowDeleting(this, new PlantillaRetencionImpuestosRowChangeEvent(((PlantillaRetencionImpuestosRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemovePlantillaRetencionImpuestosRow(PlantillaRetencionImpuestosRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsPlanilla ds = new dsPlanilla();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "PlantillaRetencionImpuestosDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class planillaRow : global::System.Data.DataRow {
@@ -8881,6 +9585,380 @@ namespace nomina.Forms.Reportes {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class ConstanciaEmpleadoRow : global::System.Data.DataRow {
+            
+            private ConstanciaEmpleadoDataTable tableConstanciaEmpleado;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal ConstanciaEmpleadoRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableConstanciaEmpleado = ((ConstanciaEmpleadoDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string NOMBRE {
+                get {
+                    try {
+                        return ((string)(this[this.tableConstanciaEmpleado.NOMBREColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'NOMBRE\' de la tabla \'ConstanciaEmpleado\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableConstanciaEmpleado.NOMBREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string FECHA_ING {
+                get {
+                    try {
+                        return ((string)(this[this.tableConstanciaEmpleado.FECHA_INGColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'FECHA_ING\' de la tabla \'ConstanciaEmpleado\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableConstanciaEmpleado.FECHA_INGColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string PUESTO_TRABAJO {
+                get {
+                    try {
+                        return ((string)(this[this.tableConstanciaEmpleado.PUESTO_TRABAJOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'PUESTO_TRABAJO\' de la tabla \'ConstanciaEmpleado\' es DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tableConstanciaEmpleado.PUESTO_TRABAJOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string SUELDO {
+                get {
+                    try {
+                        return ((string)(this[this.tableConstanciaEmpleado.SUELDOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'SUELDO\' de la tabla \'ConstanciaEmpleado\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableConstanciaEmpleado.SUELDOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string IDENTIDAD {
+                get {
+                    try {
+                        return ((string)(this[this.tableConstanciaEmpleado.IDENTIDADColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'IDENTIDAD\' de la tabla \'ConstanciaEmpleado\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableConstanciaEmpleado.IDENTIDADColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string SUELDO_LETRAS {
+                get {
+                    try {
+                        return ((string)(this[this.tableConstanciaEmpleado.SUELDO_LETRASColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'SUELDO_LETRAS\' de la tabla \'ConstanciaEmpleado\' es DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tableConstanciaEmpleado.SUELDO_LETRASColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string TIPO_EMPLEADO {
+                get {
+                    try {
+                        return ((string)(this[this.tableConstanciaEmpleado.TIPO_EMPLEADOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'TIPO_EMPLEADO\' de la tabla \'ConstanciaEmpleado\' es DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tableConstanciaEmpleado.TIPO_EMPLEADOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsNOMBRENull() {
+                return this.IsNull(this.tableConstanciaEmpleado.NOMBREColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetNOMBRENull() {
+                this[this.tableConstanciaEmpleado.NOMBREColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsFECHA_INGNull() {
+                return this.IsNull(this.tableConstanciaEmpleado.FECHA_INGColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetFECHA_INGNull() {
+                this[this.tableConstanciaEmpleado.FECHA_INGColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsPUESTO_TRABAJONull() {
+                return this.IsNull(this.tableConstanciaEmpleado.PUESTO_TRABAJOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetPUESTO_TRABAJONull() {
+                this[this.tableConstanciaEmpleado.PUESTO_TRABAJOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsSUELDONull() {
+                return this.IsNull(this.tableConstanciaEmpleado.SUELDOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetSUELDONull() {
+                this[this.tableConstanciaEmpleado.SUELDOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsIDENTIDADNull() {
+                return this.IsNull(this.tableConstanciaEmpleado.IDENTIDADColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetIDENTIDADNull() {
+                this[this.tableConstanciaEmpleado.IDENTIDADColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsSUELDO_LETRASNull() {
+                return this.IsNull(this.tableConstanciaEmpleado.SUELDO_LETRASColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetSUELDO_LETRASNull() {
+                this[this.tableConstanciaEmpleado.SUELDO_LETRASColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsTIPO_EMPLEADONull() {
+                return this.IsNull(this.tableConstanciaEmpleado.TIPO_EMPLEADOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetTIPO_EMPLEADONull() {
+                this[this.tableConstanciaEmpleado.TIPO_EMPLEADOColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class PlantillaRetencionImpuestosRow : global::System.Data.DataRow {
+            
+            private PlantillaRetencionImpuestosDataTable tablePlantillaRetencionImpuestos;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal PlantillaRetencionImpuestosRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tablePlantillaRetencionImpuestos = ((PlantillaRetencionImpuestosDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string RTN {
+                get {
+                    try {
+                        return ((string)(this[this.tablePlantillaRetencionImpuestos.RTNColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'RTN\' de la tabla \'PlantillaRetencionImpuestos\' es DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tablePlantillaRetencionImpuestos.RTNColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Ingresos_Brutos_Anuales {
+                get {
+                    try {
+                        return ((string)(this[this.tablePlantillaRetencionImpuestos.Ingresos_Brutos_AnualesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Ingresos_Brutos_Anuales\' de la tabla \'PlantillaRetencionI" +
+                                "mpuestos\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePlantillaRetencionImpuestos.Ingresos_Brutos_AnualesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Importe_Mensual_Retencion {
+                get {
+                    try {
+                        return ((string)(this[this.tablePlantillaRetencionImpuestos.Importe_Mensual_RetencionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Importe_Mensual_Retencion\' de la tabla \'PlantillaRetencio" +
+                                "nImpuestos\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePlantillaRetencionImpuestos.Importe_Mensual_RetencionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Deducciones_Mensuales {
+                get {
+                    try {
+                        return ((string)(this[this.tablePlantillaRetencionImpuestos.Deducciones_MensualesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Deducciones_Mensuales\' de la tabla \'PlantillaRetencionImp" +
+                                "uestos\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePlantillaRetencionImpuestos.Deducciones_MensualesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Retenido {
+                get {
+                    try {
+                        return ((string)(this[this.tablePlantillaRetencionImpuestos.RetenidoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Retenido\' de la tabla \'PlantillaRetencionImpuestos\' es DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tablePlantillaRetencionImpuestos.RetenidoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsRTNNull() {
+                return this.IsNull(this.tablePlantillaRetencionImpuestos.RTNColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetRTNNull() {
+                this[this.tablePlantillaRetencionImpuestos.RTNColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsIngresos_Brutos_AnualesNull() {
+                return this.IsNull(this.tablePlantillaRetencionImpuestos.Ingresos_Brutos_AnualesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetIngresos_Brutos_AnualesNull() {
+                this[this.tablePlantillaRetencionImpuestos.Ingresos_Brutos_AnualesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsImporte_Mensual_RetencionNull() {
+                return this.IsNull(this.tablePlantillaRetencionImpuestos.Importe_Mensual_RetencionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetImporte_Mensual_RetencionNull() {
+                this[this.tablePlantillaRetencionImpuestos.Importe_Mensual_RetencionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDeducciones_MensualesNull() {
+                return this.IsNull(this.tablePlantillaRetencionImpuestos.Deducciones_MensualesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDeducciones_MensualesNull() {
+                this[this.tablePlantillaRetencionImpuestos.Deducciones_MensualesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsRetenidoNull() {
+                return this.IsNull(this.tablePlantillaRetencionImpuestos.RetenidoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetRetenidoNull() {
+                this[this.tablePlantillaRetencionImpuestos.RetenidoColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -9274,6 +10352,74 @@ namespace nomina.Forms.Reportes {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public BITACORARow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class ConstanciaEmpleadoRowChangeEvent : global::System.EventArgs {
+            
+            private ConstanciaEmpleadoRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public ConstanciaEmpleadoRowChangeEvent(ConstanciaEmpleadoRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public ConstanciaEmpleadoRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class PlantillaRetencionImpuestosRowChangeEvent : global::System.EventArgs {
+            
+            private PlantillaRetencionImpuestosRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public PlantillaRetencionImpuestosRowChangeEvent(PlantillaRetencionImpuestosRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public PlantillaRetencionImpuestosRow Row {
                 get {
                     return this.eventRow;
                 }
